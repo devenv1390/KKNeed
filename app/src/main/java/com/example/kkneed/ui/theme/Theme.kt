@@ -103,6 +103,6 @@ fun KKNeedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
 
     MaterialTheme(
         colorScheme = colors,
-        content = content
+        content = content,
     )
 }

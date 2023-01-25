@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KKNeed</string>
+    <string name="title_activity_custom_circular_progress">CustomCircularProgress</string>
 </resources>

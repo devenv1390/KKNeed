@@ -45,8 +45,14 @@ android {
         }
     }
 }
-
 dependencies {
+    //viewpage
+    implementation "com.google.accompanist:accompanist-pager:0.28.0"
+    //viewpage指示器
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.28.0"
+    //许可
+    implementation "com.google.accompanist:accompanist-permissions:0.28.0"
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
