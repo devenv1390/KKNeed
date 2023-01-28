@@ -1,4 +1,4 @@
-package com.example.kkneed
+package com.example.kkneed.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,9 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.kkneed.navigation.BottomItemScreen
 
 @Composable
-fun BottomBarView(navController: NavController) {//第二种设计方案，采用BottomAppBar与BottomNavigationItem结合的方式，解决了选项卡按下后没有外观变化的缺点，但动画和按键的布局范围比较难控制
+fun MyBottomNavigation(navController: NavController) {//第二种设计方案，采用BottomAppBar与BottomNavigationItem结合的方式，解决了选项卡按下后没有外观变化的缺点，但动画和按键的布局范围比较难控制
 //    var selectedItem by remember { mutableStateOf(0) }
     val themeString = MaterialTheme.colorScheme
     val navItems = listOf(
@@ -126,6 +127,4 @@ fun BottomBarView(navController: NavController) {//第二种设计方案，采�
             )
         }
     }
-
-
 }

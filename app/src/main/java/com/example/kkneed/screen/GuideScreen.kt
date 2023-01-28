@@ -1,4 +1,4 @@
-package com.example.kkneed
+package com.example.kkneed.screen
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
@@ -12,9 +12,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.kkneed.ui.theme.KKNeedTheme
+import androidx.navigation.NavController
+import com.example.kkneed.R
+import com.example.kkneed.model.GuideScreenItemData
+import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.ui.CustomProgress
+import com.example.kkneed.ui.IndicatorHorizontal
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -34,7 +38,7 @@ fun Indicator(size: Int, index: Int) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GuideScreen() {
+fun GuideScreen(navController: NavController) {
     val items = listOf<GuideScreenItemData>(
         GuideScreenItemData(
             R.drawable.frame1,
@@ -77,7 +81,9 @@ fun GuideScreen() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             FloatingActionButton(
-                onClick = { },
+                onClick = {
+                          navController.navigate(AllScreen.Main.route)
+                },
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(width.value)
             ) {
@@ -89,10 +95,4 @@ fun GuideScreen() {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    KKNeedTheme { }
 }

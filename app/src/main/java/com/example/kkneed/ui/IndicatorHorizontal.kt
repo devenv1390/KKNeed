@@ -1,4 +1,4 @@
-package com.example.kkneed
+package com.example.kkneed.ui
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
