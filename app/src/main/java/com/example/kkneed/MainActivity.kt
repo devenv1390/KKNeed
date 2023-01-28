@@ -4,27 +4,20 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.ui.theme.*
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -51,65 +44,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KKNeedTheme {
-                val state = rememberPagerState(initialPage = 0)
-                // A surface container using the 'background' color from the theme
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    HorizontalPager(count = 3,state = state) {
-                        CustomProgress(items[it])
-                    }
-                    Indicator(size = items.size, index = state.currentPage)
-
-                    val width = animateDpAsState(
-                        targetValue = if(state.currentPage.inc() == items.size) 60.dp else 0.dp,
-                        animationSpec = if(state.currentPage.inc() == items.size)
-                            spring(dampingRatio = Spring.DampingRatioHighBouncy)
-                        else
-                            spring(dampingRatio = Spring.DampingRatioMediumBouncy)
-                    )
-
-                    Row(
-                        modifier = Modifier.height(100.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        FloatingActionButton(
-                            onClick = { },
-                            backgroundColor = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(width.value)
-                        ){
-                            Icon(
-                                Icons.Default.ArrowForward,
-                                contentDescription = "",
-                                tint = MaterialTheme.colorScheme.onPrimary
-                            )
-                        }
-                    }
-                }
+                GuideScreen()
 //                Sample()
             }
-        }
-    }
-}
-
-data class Item(
-    val index: Int,
-    val name: String,
-    val icon: ImageVector,
-)
-
-@Composable
-fun Indicator(size: Int, index: Int) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        repeat(size) {
-            IndicatorHorizontal(isSelected = it == index)
         }
     }
 }
@@ -255,28 +192,6 @@ fun Sample() {
 @Composable
 fun DefaultPreview() {
     KKNeedTheme {
-//        Sample()
-        val items = listOf<ItemData>(
-            ItemData(
-                R.drawable.frame1,
-                "找寻食品信息",
-                "科学评判你能买到的预包装食品，准确记录食品信息，健康生活暖宝宝。"
-            ),
-            ItemData(
-                R.drawable.frame2,
-                "找寻食品信息",
-                "科学评判你能买到的预包装食品，准确记录食品信息，健康生活暖宝宝。"
-            ),
-            ItemData(
-                R.drawable.frame3,
-                "找寻食品信息",
-                "科学评判你能买到的预包装食品，准确记录食品信息，健康生活暖宝宝。"
-            )
-        )
-        CustomProgress(items[1])
-        // A surface container using the 'background' color from the theme
-//        HorizontalPager(count = 0) {
-//            CustomProgress(items[it])
-//        }
+        Sample()
     }
 }
