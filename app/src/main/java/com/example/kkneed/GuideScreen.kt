@@ -35,18 +35,18 @@ fun Indicator(size: Int, index: Int) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun GuideScreen() {
-    val items = listOf<ItemData>(
-        ItemData(
+    val items = listOf<GuideScreenItemData>(
+        GuideScreenItemData(
             R.drawable.frame1,
             "找寻食品信息",
             "科学评判你能买到的预包装食品，准确记录食品信息，健康生活暖宝宝。"
         ),
-        ItemData(
+        GuideScreenItemData(
             R.drawable.frame2,
             "计划健康生活",
             "每天打开一俩次，健康生活一辈子。在这找到属于你的饮食计划，规划你的健康生活。"
         ),
-        ItemData(
+        GuideScreenItemData(
             R.drawable.frame3,
             "发现养生好物",
             "选择我们，就是选择健康。商城养生好物，等待你的加购。健康生活知识，等待你的发现。"

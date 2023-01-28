@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 @Composable
-fun CustomProgress(itemData: ItemData) {
+fun CustomProgress(itemData: GuideScreenItemData) {
     Column(
         modifier = Modifier
             .height(700.dp)
