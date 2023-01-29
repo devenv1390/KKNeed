@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -31,7 +32,7 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
     val currentRoute = navBackStackEntry?.destination?.route
     Surface(
         shape = RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp),
-//        color = themeString.secondaryContainer,
+        color = Color.Transparent,
         modifier = Modifier
             .shadow(
                 elevation = 10.dp,

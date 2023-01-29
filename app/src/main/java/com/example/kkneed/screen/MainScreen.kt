@@ -10,11 +10,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.kkneed.navigation.DATA_ROUTE
-import com.example.kkneed.navigation.HOME_ROUTE
-import com.example.kkneed.navigation.PERSONAL_ROUTE
-import com.example.kkneed.navigation.SHOP_ROUTE
-import com.example.kkneed.screen.personal.PersonalScreen
+import com.example.kkneed.navigation.*
+import com.example.kkneed.screen.personal.ProfileScreen
 import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
@@ -56,8 +53,8 @@ fun MainScreen(navController: NavController) {
             composable(DATA_ROUTE){
                 DataScreen(navController)
             }
-            composable(PERSONAL_ROUTE){
-                PersonalScreen(navController)
+            composable(PROFILE_ROUTE){
+                ProfileScreen(navController)
             }
         }
     }
