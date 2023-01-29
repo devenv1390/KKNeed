@@ -52,6 +52,10 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager-indicators:0.28.0"
     //许可
     implementation "com.google.accompanist:accompanist-permissions:0.28.0"
+    //沉浸式状态栏
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+    //设置padding 等
+    implementation 'com.google.accompanist:accompanist-insets:0.28.0'
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

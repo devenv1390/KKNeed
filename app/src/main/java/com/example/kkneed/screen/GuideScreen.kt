@@ -77,7 +77,7 @@ fun GuideScreen(navController: NavController) {
         )
 
         Row(
-            modifier = Modifier.height(100.dp),
+            modifier = Modifier.fillMaxHeight(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             FloatingActionButton(

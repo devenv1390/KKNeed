@@ -14,6 +14,7 @@ import com.example.kkneed.navigation.DATA_ROUTE
 import com.example.kkneed.navigation.HOME_ROUTE
 import com.example.kkneed.navigation.PERSONAL_ROUTE
 import com.example.kkneed.navigation.SHOP_ROUTE
+import com.example.kkneed.screen.personal.PersonalScreen
 import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 

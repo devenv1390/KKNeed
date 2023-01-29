@@ -2,8 +2,8 @@ package com.example.kkneed.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
@@ -31,18 +31,18 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
     val currentRoute = navBackStackEntry?.destination?.route
     Surface(
         shape = RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp),
-        color = themeString.secondaryContainer,
+//        color = themeString.secondaryContainer,
         modifier = Modifier
             .shadow(
-                elevation = 20.dp,
+                elevation = 10.dp,
             )
             .fillMaxWidth()
-            .size(412.dp, 60.dp)
     ) {
         BottomAppBar(
             cutoutShape = RoundedCornerShape(50),
             contentPadding = PaddingValues(5.dp, 5.dp),
             backgroundColor = themeString.background,
+            modifier = Modifier.navigationBarsPadding()
         ) {
 //        items.forEachIndexed{index, item ->
 //            BottomNavigationItem(
