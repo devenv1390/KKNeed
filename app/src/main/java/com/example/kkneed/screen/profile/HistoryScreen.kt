@@ -1,4 +1,4 @@
-package com.example.kkneed.screen.personal
+package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

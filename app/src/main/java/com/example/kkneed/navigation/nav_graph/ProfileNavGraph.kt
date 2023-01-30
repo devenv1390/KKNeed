@@ -6,8 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.PROFILE_ROUTE
-import com.example.kkneed.screen.personal.HistoryScreen
-import com.example.kkneed.screen.personal.ProfileScreen
+import com.example.kkneed.screen.profile.HistoryScreen
+import com.example.kkneed.screen.profile.ProfileScreen
 
 fun NavGraphBuilder.PersonalNavGraph(navController: NavController) {
     navigation(

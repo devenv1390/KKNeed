@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.*
-import com.example.kkneed.screen.personal.ProfileScreen
+import com.example.kkneed.screen.profile.ProfileScreen
 import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
