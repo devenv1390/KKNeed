@@ -172,6 +172,7 @@ fun MyVerticalList(navController: NavController) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Icon(item.image, null)
+                            Spacer(modifier = Modifier.padding(vertical = 2.dp))
                             Text(item.title, style = MaterialTheme.typography.bodySmall)
                         }
                     }
