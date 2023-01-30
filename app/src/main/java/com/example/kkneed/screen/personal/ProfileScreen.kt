@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.sharp.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -21,8 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.model.ButtonItemData
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 
@@ -67,7 +70,6 @@ fun MyAccInfo() {
                         .size(95.dp),
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.TopCenter,
-
                 )
                 androidx.compose.material3.IconButton(
                     onClick = {},
@@ -75,10 +77,16 @@ fun MyAccInfo() {
                         .align(Alignment.BottomEnd)
                 ){
                     Surface(
-                        color = Color.Gray,
-                        shape = RoundedCornerShape(100)
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier
+                            .size(30.dp)
                     ) {
-                        Icon(Icons.Default.Settings,null, tint = Color.White)
+                        Box(modifier = Modifier.size(20.dp), contentAlignment = Alignment.Center)
+                        {
+                            Icon(Icons.Sharp.Settings,null, tint = MaterialTheme.colorScheme.onBackground)
+                        }
+
                     }
                 }
             }
@@ -138,8 +146,8 @@ fun MyAccInfo() {
 
 @Composable
 fun MyVerticalList(navController: NavController) {
-    val buttomItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "我的记录", ""),
+    val buttonItems = listOf<ButtonItemData>(
+        ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.History.route),
         ButtonItemData(Icons.Default.Menu, "我的订单", ""),
         ButtonItemData(Icons.Default.Favorite, "我的收藏", "")
     )
@@ -153,12 +161,12 @@ fun MyVerticalList(navController: NavController) {
             contentAlignment = Alignment.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                buttomItems.forEachIndexed { _, item ->
+                buttonItems.forEachIndexed { _, item ->
                     IconButton(
                         onClick = {
                             navController.navigate(item.route)
                         },
-                        modifier = Modifier.padding(horizontal = 30.dp)
+                        modifier = Modifier.padding(horizontal = 35.dp)
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -257,7 +265,8 @@ fun MyHorizonList(navController: NavController) {
 @Composable
 fun Temp() {
     KKNeedTheme {
-        MyAccInfo()
+        val navController = rememberNavController()
+        ProfileScreen(navController)
     }
 
 }

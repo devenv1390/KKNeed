@@ -14,6 +14,6 @@ sealed class AllScreen(val route: String){
     object Shop:AllScreen("shop_screen")
     object Data:AllScreen("data_screen")
     object Profile:AllScreen("profile_screen")
-
     object Main:AllScreen("main_screen")
+    object History:AllScreen("history_screen")
 }
