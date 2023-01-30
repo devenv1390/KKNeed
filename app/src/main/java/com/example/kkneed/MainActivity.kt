@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,7 +20,6 @@ import com.example.kkneed.navigation.WELCOME_ROUTE
 import com.example.kkneed.navigation.nav_graph.*
 import com.example.kkneed.screen.MainScreen
 import com.example.kkneed.ui.theme.*
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -34,8 +32,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             KKNeedTheme {
                 rememberSystemUiController().setStatusBarColor(Color.Transparent, darkIcons = androidx.compose.material.MaterialTheme.colors.isLight)
-//                GuideScreen()
-//                BottomBarView()
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
                     NavHost(
@@ -55,13 +51,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    KKNeedTheme {
     }
 }
