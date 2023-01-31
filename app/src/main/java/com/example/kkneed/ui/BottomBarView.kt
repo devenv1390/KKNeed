@@ -26,7 +26,7 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
         BottomItemScreen.Home,
         BottomItemScreen.Shop,
         BottomItemScreen.Data,
-        BottomItemScreen.Personal
+        BottomItemScreen.Profile
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
