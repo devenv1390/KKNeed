@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         HomeNavGraph(navController)
                         ShopNavGraph(navController)
                         DataNavGraph(navController)
-                        PersonalNavGraph(navController)
+                        ProfileNavGraph(navController)
                     }
                 }
             }

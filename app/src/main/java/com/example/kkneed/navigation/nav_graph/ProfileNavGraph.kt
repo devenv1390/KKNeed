@@ -9,7 +9,7 @@ import com.example.kkneed.navigation.PROFILE_ROUTE
 import com.example.kkneed.screen.profile.HistoryScreen
 import com.example.kkneed.screen.profile.ProfileScreen
 
-fun NavGraphBuilder.PersonalNavGraph(navController: NavController) {
+fun NavGraphBuilder.ProfileNavGraph(navController: NavController) {
     navigation(
         startDestination = AllScreen.Profile.route,
         route = PROFILE_ROUTE,
