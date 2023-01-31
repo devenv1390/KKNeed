@@ -21,6 +21,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
@@ -95,6 +96,111 @@ fun SmallInfoCard() {
         }
 
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard(){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ){
+        Column( modifier = Modifier.padding(start = 16.dp)){
+            Spacer(Modifier.size(0.dp, 16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically,modifier = Modifier.padding(start = 16.dp, end = 16.dp)){
+                Box(
+                    contentAlignment = Alignment.CenterStart
+
+                ) {
+                    Text(
+                    "订单号：12345678910111213",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.outline
+                )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                Text(
+                    "待支付",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error
+                )
+                }
+            }
+            Spacer(Modifier.size(0.dp, 16.dp))
+            SmallOrderInfoCard()
+            Spacer(Modifier.size(0.dp, 16.dp))
+
+
+        }
+
+    }
+}
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun SmallOrderInfoCard(){Card(
+    modifier = Modifier
+        .fillMaxWidth()
+        .clip(RoundedCornerShape(12.dp))
+        .height(72.dp)
+        .clickable { },
+
+    // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+    // 将无法显示波纹效果
+    onClick = {},
+    backgroundColor = MaterialTheme.colorScheme.background,
+    elevation = 0.dp // 设置阴影
+){
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 16.dp)) {
+        Box(
+            modifier = Modifier
+                .size(56.dp, 56.dp)
+        ) {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(56.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+        }
+        Column() {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 16.dp)){
+                Text(
+                    "可口可乐",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    "x3",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+            }
+            Text(
+                "规格：250ml",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.outline
+            )
+        }
+    }
+
+
+}
+
 }
 
 @Composable

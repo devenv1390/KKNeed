@@ -148,7 +148,7 @@ fun MyAccInfo() {
 fun MyVerticalList(navController: NavController) {
     val buttonItems = listOf<ButtonItemData>(
         ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.History.route),
-        ButtonItemData(Icons.Default.Menu, "我的订单", ""),
+        ButtonItemData(Icons.Default.Menu, "我的订单", AllScreen.Order.route),
         ButtonItemData(Icons.Default.Favorite, "我的收藏", "")
     )
     Surface(
