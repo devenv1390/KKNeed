@@ -54,8 +54,29 @@ fun MyTopAppBar(content: @Composable () -> Unit) {
 
 @Composable
 fun NormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
-    //标题栏高度
+                    //标题栏高度
+    Row(
+        modifier = Modifier
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        MaterialTheme.colorScheme.secondaryContainer, // 这里可以加无数个
+                        MaterialTheme.colorScheme.background,
+                    ),
+                )
+            )
+            .fillMaxWidth()
+            .height(appBarHeight),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        content()
+    }
+}
 
+@Composable
+fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
+    //标题栏高度
     //状态栏高度
     val statusBarHeightDp = LocalDensity.current.run {
         WindowInsets.statusBars.getTop(this).toDp()

@@ -61,7 +61,7 @@ fun ProfileScreen(navController: NavController) {
 fun MyAccInfo() {
     Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
         Row(modifier = Modifier.padding(top = 40.dp)) {
-            Box(modifier = Modifier.size(110.dp)){
+            Box(modifier = Modifier.size(110.dp)) {
                 Image(
                     painter = painterResource(R.drawable.head),
                     contentDescription = "",
@@ -75,7 +75,7 @@ fun MyAccInfo() {
                     onClick = {},
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                ){
+                ) {
                     Surface(
                         color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(50),
@@ -84,7 +84,7 @@ fun MyAccInfo() {
                     ) {
                         Box(modifier = Modifier.size(20.dp), contentAlignment = Alignment.Center)
                         {
-                            Icon(Icons.Sharp.Settings,null, tint = MaterialTheme.colorScheme.onBackground)
+                            Icon(Icons.Sharp.Settings, null, tint = MaterialTheme.colorScheme.onBackground)
                         }
 
                     }
@@ -137,11 +137,9 @@ fun MyAccInfo() {
                         }
                     }
                 }
-
             }
         }
     }
-
 }
 
 @Composable
@@ -232,12 +230,12 @@ fun MyHorizonList(navController: NavController) {
         Surface(
             color = MaterialTheme.colorScheme.background,
             shape = RoundedCornerShape(20.dp),
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .size(360.dp, 56.dp),
                 contentAlignment = Alignment.CenterStart
-            ){
+            ) {
                 Button(
                     onClick = {
                         navController.navigate("")
