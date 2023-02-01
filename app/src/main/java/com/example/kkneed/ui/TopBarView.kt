@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.*
@@ -213,6 +214,30 @@ fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String
     }
 }
 
+//商城的顶部栏
+@Composable
+fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
+    NormalTopAppBar(appBarHeight) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            SearchBar()
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Default.Menu,null)
+            }
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Default.Menu,null)
+            }
+        }
+    }
+}
 
 @Preview
 @Composable

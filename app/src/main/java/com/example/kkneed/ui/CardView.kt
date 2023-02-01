@@ -382,3 +382,87 @@ fun TestCard() {
         }
     }
 }
+
+//商城界面主卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShopScreenMainCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .height(160.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+
+        )
+    {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(start = 0.dp)
+        )
+        {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12))
+                    .size(160.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp)
+                    .height(131.dp)
+                    .width(197.dp)
+                    .fillMaxHeight()
+            ) {
+                Text(
+                    "麦维他全麦粗粮酥性消化饼原味400g",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(Modifier.height(9.dp))
+                Image(
+                    painter = painterResource(R.drawable.head),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12))
+                        .size(45.dp),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.TopCenter,
+                )
+                Spacer(Modifier.height(9.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .width(197.dp)
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .height(28.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+
+                    ) {
+                    Text(
+                        "￥34.6",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    Text(
+                        "已售1.6w+",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+        }
+    }
+}
