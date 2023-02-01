@@ -107,7 +107,7 @@ fun MyAccInfo() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(
-                        onClick = {},
+                        onClick = {AllScreen.Watch.route},
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -117,13 +117,13 @@ fun MyAccInfo() {
                         }
                     }
                     TextButton(
-                        onClick = {},
+                        onClick = {AllScreen.Fan.route},
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text("7", style = MaterialTheme.typography.labelMedium)
-                            Text("关注", style = MaterialTheme.typography.labelSmall)
+                            Text("粉丝", style = MaterialTheme.typography.labelSmall)
                         }
                     }
                     TextButton(
@@ -133,7 +133,7 @@ fun MyAccInfo() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text("7", style = MaterialTheme.typography.labelMedium)
-                            Text("关注", style = MaterialTheme.typography.labelSmall)
+                            Text("获赞", style = MaterialTheme.typography.labelSmall)
                         }
                     }
                 }
@@ -145,7 +145,7 @@ fun MyAccInfo() {
 @Composable
 fun MyVerticalList(navController: NavController) {
     val buttonItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.History.route),
+        ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.Record.route),
         ButtonItemData(Icons.Default.Menu, "我的订单", AllScreen.Order.route),
         ButtonItemData(Icons.Default.Favorite, "我的收藏", "")
     )
@@ -183,9 +183,9 @@ fun MyVerticalList(navController: NavController) {
 @Composable
 fun MyHorizonList(navController: NavController) {
     val buttomItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "我的记录", ""),
-        ButtonItemData(Icons.Default.Menu, "我的订单", ""),
-        ButtonItemData(Icons.Default.Favorite, "我的收藏", ""),
+        ButtonItemData(Icons.Default.CheckCircle, "个人信息", ""),
+        ButtonItemData(Icons.Default.Menu, "我的创作", ""),
+        ButtonItemData(Icons.Default.Favorite, "我的足迹", AllScreen.History.route),
         ButtonItemData(Icons.Default.Phone, "联系客服", "")
     )
     val buttonColor = ButtonDefaults.buttonColors(

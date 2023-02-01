@@ -1,15 +1,14 @@
 package com.example.kkneed.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -98,12 +97,16 @@ fun SmallInfoCard() {
     }
 }
 
+//订单状态卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun OrderInfoCard(){
+fun OrderInfoCard(
+    orderNumber:String,
+    state: String
+){
     Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .padding(start = 16.dp,end=16.dp)
             .clip(RoundedCornerShape(12.dp))
             .height(392.dp)
             .clickable { },
@@ -114,15 +117,18 @@ fun OrderInfoCard(){
         backgroundColor = MaterialTheme.colorScheme.background,
         elevation = 0.dp // 设置阴影
     ){
-        Column( modifier = Modifier.padding(start = 16.dp)){
-            Spacer(Modifier.size(0.dp, 16.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,modifier = Modifier.padding(start = 16.dp, end = 16.dp)){
+        Column( ){
+            Row( verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)){
                 Box(
-                    contentAlignment = Alignment.CenterStart
+                    contentAlignment = Alignment.CenterStart,
 
                 ) {
                     Text(
-                    "订单号：12345678910111213",
+                    "订单号：$orderNumber",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.outline
                 )
@@ -132,24 +138,86 @@ fun OrderInfoCard(){
 
                 ) {
                 Text(
-                    "待支付",
+                    text = state,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.error
                 )
                 }
             }
-            Spacer(Modifier.size(0.dp, 16.dp))
-            SmallOrderInfoCard()
-            Spacer(Modifier.size(0.dp, 16.dp))
+            SmallOrderInfoCard("可口可乐",3,"规格:250ml","￥3.50")
+            SmallOrderInfoCard("可口可乐",3,"规格:250ml","￥3.50")
+            SmallOrderInfoCard("可口可乐",3,"规格:250ml","￥3.50")
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ){
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                onClick = { /*TODO*/ }
+            ) {
+                Icon(Icons.Default.MoreVert, null)
+            }
+            }
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ){
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Bottom)
+                    {
+                        Text(
+                            text = "订单将于9分钟后关闭",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.outline
+                        )
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                               containerColor = MaterialTheme.colorScheme.error.copy(alpha=0.9f)
+                            ),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "立即支付",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onError,
+                            )
+                        }
+                    }
+                }
+
+            }
 
 
         }
 
     }
 }
+//商品小卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SmallOrderInfoCard(){Card(
+fun SmallOrderInfoCard(
+    title:String,
+    number:Int,
+    configuration:String,
+    price:String
+){Card(
     modifier = Modifier
         .fillMaxWidth()
         .clip(RoundedCornerShape(12.dp))
@@ -162,7 +230,13 @@ fun SmallOrderInfoCard(){Card(
     backgroundColor = MaterialTheme.colorScheme.background,
     elevation = 0.dp // 设置阴影
 ){
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 16.dp)) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ){
         Box(
             modifier = Modifier
                 .size(56.dp, 56.dp)
@@ -176,24 +250,43 @@ fun SmallOrderInfoCard(){Card(
                 alignment = Alignment.TopCenter,
             )
         }
-        Column() {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 16.dp)){
-                Text(
-                    "可口可乐",
+        Column(
+            modifier = Modifier.size(188.dp,56.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .size(188.dp, 24.dp)
+            ){
+                Box(){
+                    Text(
+                    text=title,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(
-                    "x3",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Box() {
+                    Text(
+                        text = "x$number",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
             Text(
-                "规格：250ml",
+                text=configuration,
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.outline
+            )
+        }
+        Box(modifier = Modifier.size(64.dp,56.dp), contentAlignment = Alignment.CenterEnd){
+            Text(
+                text=price,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }
     }

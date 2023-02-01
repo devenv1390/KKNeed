@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
@@ -40,8 +41,9 @@ fun TabBar() {
     }
 
     TabRow(
-        modifier = Modifier.height(50.dp)
-        .padding(top = 0.dp),
+        modifier = Modifier
+            .height(50.dp)
+            .padding(top = 0.dp),
         backgroundColor = MaterialTheme.colorScheme.onPrimary,
         selectedTabIndex = pagerState.currentPage,
         indicator = indicator
@@ -62,9 +64,21 @@ fun TabBar() {
         count = pages.size,
         state = pagerState,
     ) { page ->
-        Box(Modifier.fillMaxSize()) {
-            OrderInfoCard()
+        Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+            LazyColumn(
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 8.dp)
+                )
+            {
+                item { OrderInfoCard("12345678910111213","待支付") }
+                item{ Spacer(modifier =Modifier.height(8.dp))}
+                item { OrderInfoCard("12345678910111213","待支付") }
+
+
+            }
         }
+
     }
 }
 

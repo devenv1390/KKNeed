@@ -6,9 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.PROFILE_ROUTE
-import com.example.kkneed.screen.profile.HistoryScreen
-import com.example.kkneed.screen.profile.OrderScreen
-import com.example.kkneed.screen.profile.ProfileScreen
+import com.example.kkneed.screen.profile.*
 
 fun NavGraphBuilder.ProfileNavGraph(navController: NavController) {
     navigation(
@@ -23,6 +21,15 @@ fun NavGraphBuilder.ProfileNavGraph(navController: NavController) {
         }
         composable(AllScreen.Order.route){
             OrderScreen(navController)
+        }
+        composable(AllScreen.Record.route){
+            RecordScreen(navController)
+        }
+        composable(AllScreen.Watch.route){
+            WatchScreen(navController)
+        }
+        composable(AllScreen.Fan.route){
+            FanScreen(navController)
         }
     }
 }
