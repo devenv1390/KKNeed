@@ -8,6 +8,7 @@ import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.WELCOME_ROUTE
 import com.example.kkneed.screen.GuideScreen
 import com.example.kkneed.screen.WelcomeScreen
+import com.example.kkneed.screen.login.*
 
 fun NavGraphBuilder.WelcomeNavGraph(navController: NavController) {
     navigation(
@@ -19,6 +20,21 @@ fun NavGraphBuilder.WelcomeNavGraph(navController: NavController) {
         }
         composable(AllScreen.Guide.route) {
             GuideScreen(navController)
+        }
+        composable(AllScreen.SignUp.route){
+            SignUpScreen(navController)
+        }
+        composable(AllScreen.SignIn.route){
+            SignInScreen(navController)
+        }
+        composable(AllScreen.SignInfo.route){
+            InfoScreen(navController)
+        }
+        composable(AllScreen.Label.route){
+            LabelScreen(navController)
+        }
+        composable(AllScreen.Success.route){
+            SuccessScreen(navController)
         }
     }
 }

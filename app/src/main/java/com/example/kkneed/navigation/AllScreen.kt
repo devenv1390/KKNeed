@@ -25,4 +25,5 @@ sealed class AllScreen(val route: String){
     object SignIn:AllScreen("signin_screen")
     object SignInfo:AllScreen("signinfo_screen")
     object Label:AllScreen("label_screen")
+    object Success:AllScreen("label_screen")
 }

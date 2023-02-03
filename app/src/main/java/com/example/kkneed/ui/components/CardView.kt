@@ -4,12 +4,17 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.FilterChip
+import androidx.compose.material.Chip
+import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
@@ -20,8 +25,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
 
@@ -106,7 +111,7 @@ fun OrderInfoCard(
 ){
     Card(
         modifier = Modifier
-            .padding(start = 16.dp,end=16.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
             .height(392.dp)
             .clickable { },
@@ -381,4 +386,270 @@ fun TestCard() {
             }
         }
     }
+}
+//商城界面主卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShopScreenMainCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .height(160.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+
+        )
+    {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(start = 0.dp)
+        )
+        {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12))
+                    .size(160.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp)
+                    .height(131.dp)
+                    .width(197.dp)
+                    .fillMaxHeight()
+            ) {
+                androidx.compose.material3.Text(
+                    "麦维他全麦粗粮酥性消化饼原味400g",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(Modifier.height(9.dp))
+                Image(
+                    painter = painterResource(R.drawable.head),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12))
+                        .size(45.dp),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.TopCenter,
+                )
+                Spacer(Modifier.height(9.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .width(197.dp)
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .height(28.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+
+                    ) {
+                    androidx.compose.material3.Text(
+                        "￥34.6",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    androidx.compose.material3.Text(
+                        "已售1.6w+",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+        }
+    }
+}
+
+//基础病卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LabelCard1(){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .size(184.dp, 266.dp),
+        backgroundColor = Color(0xFFFFFF),
+        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(16.dp)
+    ){
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+            painter = painterResource(R.drawable.jichubing),
+            contentDescription = "",
+            modifier = Modifier
+                .size(184.dp, 134.dp),
+            contentScale = ContentScale.Fit,
+            alignment = Alignment.TopCenter,
+        )
+            Row(
+            verticalAlignment = Alignment.CenterVertically){
+                Text(
+                    "基础疾病",
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+            Row(){
+                QuestionChip(state = false, title ="糖尿病" )
+                Spacer(modifier = Modifier.width(4.dp))
+                QuestionChip(state = true, title ="高血压" )
+            }
+            Row(){
+                QuestionChip(state = true, title ="血脂异常" )
+                Spacer(modifier = Modifier.width(4.dp))
+                QuestionChip(state = true, title ="痛风" )
+            }
+
+
+        }
+    }
+}
+//减肥卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LabelCard2(){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .size(184.dp, 210.dp),
+        backgroundColor = Color(0xFFFFFF),
+        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(16.dp)
+    ){
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.jianfei),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(184.dp, 124.dp),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.TopCenter,
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically){
+                Text(
+                    "营养诉求",
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+            Row(){
+                QuestionChip(state = false, title ="减脂" )
+                Spacer(modifier = Modifier.width(4.dp))
+                QuestionChip(state = false, title ="健身" )
+            }
+        }
+    }
+}
+//女性关键期卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LabelCard3(){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .size(184.dp, 210.dp),
+        backgroundColor = Color(0xFFFFFF),
+        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(16.dp)
+    ){
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.nvxing),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(184.dp, 124.dp),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.TopCenter,
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "女性关键期",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+            Row() {
+                QuestionChip(state = true, title = "备孕/孕期")
+                Spacer(modifier = Modifier.width(4.dp))
+                QuestionChip(state = false, title = "哺乳期")
+            }
+
+        }
+    }
+}
+
+@Composable
+fun LabelCard4(){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .size(184.dp, 266.dp),
+        backgroundColor = Color(0xFFFFFF),
+        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(16.dp)
+    ){
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.other),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(184.dp, 134.dp),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.TopCenter,
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically){
+                Text(
+                    "其他诉求",
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+            Row(){
+                QuestionChip(state = true, title ="过敏" )
+                Spacer(modifier = Modifier.width(4.dp))
+                QuestionChip(state = false, title ="睡眠问题" )
+            }
+            Row(){
+                QuestionChip(state = false, title ="肠道健康" )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun QuestionChip(state:Boolean,title: String){
+    var selected by remember { mutableStateOf(state) }
+    FilterChip(
+        selected = selected,
+        onClick = { selected = !selected },
+        label = { Text(title,
+        color=if(selected) Color.White else Color.Black) },
+        colors = FilterChipDefaults.filterChipColors(
+           containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
+            selectedContainerColor =MaterialTheme.colorScheme.primary,
+
+        ),
+
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+    )
 }

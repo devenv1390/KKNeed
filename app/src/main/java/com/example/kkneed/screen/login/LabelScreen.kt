@@ -16,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.ui.*
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +47,35 @@ fun LabelScreen(navController: NavController) {
             text = "请选择一个或多个大标签",
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleMedium )
-}
+        Spacer(modifier = Modifier.height(50.dp))
+
+        Row(modifier= Modifier
+            .fillMaxSize()
+            .padding(start = 8.dp, end = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween){
+            Column(){
+            LabelCard1()
+            Spacer(modifier = Modifier.height(30.dp))
+            LabelCard3()
+        }
+            Column(){
+                LabelCard2()
+                Spacer(modifier = Modifier.height(30.dp))
+                LabelCard4()
+            }}
+        Spacer(modifier = Modifier.height(40.dp))
+        Row(modifier = Modifier.fillMaxSize(),
+        horizontalArrangement = Arrangement.Center){
+            GradientButton(modifier = Modifier
+                .height(56.dp)
+                .fillMaxWidth(0.8f),
+                textId = "下一步", onClick = {
+                navController.navigate(AllScreen.Success.route)
+                }
+            )
+
+        }
+    }
 }
 @Composable
 @Preview

@@ -155,8 +155,7 @@ fun SignUpScreen(navController: NavController) {
             .fillMaxWidth(0.8f),
             textId = "注册账号", onClick = {
                 navController.navigate(AllScreen.SignInfo.route)
-                println("Onclick Email $email")
-                println("Onclick Passwod $password")}
+                }
         )
 
 
