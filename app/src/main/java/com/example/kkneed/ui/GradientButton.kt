@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -38,7 +39,7 @@ fun GradientButton(
         color = Color.Transparent,
         cornerRadius = 50.dp,
         textId = textId,
-        contentTextStyle = MaterialTheme.typography.labelLarge
+        contentTextStyle = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
     )
 
 }

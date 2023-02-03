@@ -35,7 +35,7 @@ fun CustomButton(
         onClick = onClick,
         shape = RoundedCornerShape(cornerRadius),
         modifier = modifier,
-        contentPadding = PaddingValues(vertical = 5.dp),
+        contentPadding = PaddingValues(vertical = 0.dp),
         border = BorderStroke(borderWidth, color = borderColor),
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
@@ -49,10 +49,10 @@ fun CustomButton(
 
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .background(brush = gradient, shape =  RoundedCornerShape(cornerRadius))
                     .clip(RoundedCornerShape(cornerRadius))
-                    .then(modifier.padding(vertical = 5.dp)), contentAlignment = Alignment.Center
+                    , contentAlignment = Alignment.Center
             )
             {
                 Text(

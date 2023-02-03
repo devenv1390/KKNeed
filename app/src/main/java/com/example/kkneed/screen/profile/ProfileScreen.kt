@@ -46,7 +46,7 @@ fun ProfileScreen(navController: NavController) {
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
-                MyAccInfo()
+                MyAccInfo(navController)
                 Spacer(Modifier.size(0.dp, 24.dp))
                 MyVerticalList(navController)
                 Spacer(Modifier.size(0.dp, 24.dp))
@@ -58,7 +58,7 @@ fun ProfileScreen(navController: NavController) {
 }
 
 @Composable
-fun MyAccInfo() {
+fun MyAccInfo(navController: NavController) {
     Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
         Row(modifier = Modifier.padding(top = 40.dp)) {
             Box(modifier = Modifier.size(110.dp)) {
@@ -107,7 +107,7 @@ fun MyAccInfo() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(
-                        onClick = {AllScreen.Watch.route},
+                        onClick = {navController.navigate(AllScreen.Watch.route)},
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -117,7 +117,8 @@ fun MyAccInfo() {
                         }
                     }
                     TextButton(
-                        onClick = {AllScreen.Fan.route},
+                        onClick = {navController.navigate(AllScreen.Fan.route)
+                            },
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally

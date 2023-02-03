@@ -106,7 +106,7 @@ fun OrderInfoCard(
 ){
     Card(
         modifier = Modifier
-            .padding(start = 16.dp,end=16.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
             .height(392.dp)
             .clickable { },
@@ -379,6 +379,24 @@ fun TestCard() {
                     )
                 }
             }
+        }
+    }
+}
+@Composable
+fun LabelCard(){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .fillMaxWidth()
+            .size(184.dp, 266.dp),
+        backgroundColor = Color(0xFFFFFF),
+        border = BorderStroke(1.dp, color = Color(0x25FFFFFF)),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(16.dp)
+    ){
+        Column() {
+
+
         }
     }
 }

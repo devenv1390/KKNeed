@@ -84,7 +84,7 @@ fun GuideScreen(navController: NavController) {
                 onClick = {
                           navController.navigate(AllScreen.Main.route)
                 },
-                backgroundColor = MaterialTheme.colorScheme.primary,
+                backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
                 modifier = Modifier.size(width.value)
             ) {
                 Icon(

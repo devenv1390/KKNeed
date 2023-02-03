@@ -95,7 +95,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
             .height(appBarHeight + statusBarHeightDp)
             .padding(top = statusBarHeightDp),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.Top
+        verticalAlignment = Alignment.Bottom
     ) {
         content()
     }
@@ -103,7 +103,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
 
 @Composable
 fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
-    NormalTopAppBar(appBarHeight) {    //标题栏高度
+    NotNormalTopAppBar(appBarHeight) {    //标题栏高度
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(
@@ -111,16 +111,20 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
                 ) {
                     Icon(Icons.Outlined.ArrowBack, null)
                 }
-                Spacer(Modifier.padding(60.dp, 0.dp))
+                Spacer(Modifier.padding(56.dp, 0.dp))
                 Text("我的足迹")
-                Spacer(Modifier.padding(60.dp, 0.dp))
+                Spacer(Modifier.padding(56.dp, 0.dp))
                 IconButton(
                     onClick = {}
                 ) {
                     Icon(Icons.Outlined.MoreVert, null)
                 }
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+
+                modifier = Modifier.padding(bottom = 20.dp),
+                verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "今天",
                     style = MaterialTheme.typography.titleLarge,
@@ -138,7 +142,7 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
 //订单页顶部栏
 @Composable
 fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -164,11 +168,11 @@ fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
 //我的记录顶部栏
 @Composable
 fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier=Modifier
-                .size(412.dp,64.dp)
-                .padding(start = 4.dp,end=4.dp)
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -189,11 +193,11 @@ fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
 }
 @Composable
 fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String){
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier=Modifier
-                .size(412.dp,64.dp)
-                .padding(start = 4.dp,end=4.dp)
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
