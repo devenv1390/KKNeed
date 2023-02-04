@@ -2,18 +2,21 @@ package com.example.kkneed.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.MoreVert
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MovableContentState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -95,7 +98,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
             .height(appBarHeight + statusBarHeightDp)
             .padding(top = statusBarHeightDp),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Bottom
     ) {
         content()
     }
@@ -103,7 +106,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
 
 @Composable
 fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
-    NormalTopAppBar(appBarHeight) {    //标题栏高度
+    NotNormalTopAppBar(appBarHeight) {    //标题栏高度
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(
@@ -111,16 +114,20 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
                 ) {
                     Icon(Icons.Outlined.ArrowBack, null)
                 }
-                Spacer(Modifier.padding(60.dp, 0.dp))
+                Spacer(Modifier.padding(56.dp, 0.dp))
                 Text("我的足迹")
-                Spacer(Modifier.padding(60.dp, 0.dp))
+                Spacer(Modifier.padding(56.dp, 0.dp))
                 IconButton(
                     onClick = {}
                 ) {
                     Icon(Icons.Outlined.MoreVert, null)
                 }
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+
+                modifier = Modifier.padding(bottom = 20.dp),
+                verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "今天",
                     style = MaterialTheme.typography.titleLarge,
@@ -135,10 +142,10 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
         }
     }
 }
-
+//订单页顶部栏
 @Composable
 fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -157,6 +164,82 @@ fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
                 onClick = {}
             ) {
                 Icon(Icons.Default.Call, null)
+            }
+        }
+    }
+}
+//我的记录顶部栏
+@Composable
+fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { navController.navigate(PROFILE_ROUTE) }
+            ) {
+                Icon(Icons.Outlined.ArrowBack, null)
+            }
+            Text("我的记录")
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.MoreVert, null)
+            }
+        }
+    }
+}
+@Composable
+fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { navController.navigate(PROFILE_ROUTE) }
+            ) {
+                Icon(Icons.Outlined.ArrowBack, null)
+            }
+            Text(title)
+            IconButton(
+                onClick = {}
+            ) {
+
+            }
+        }
+    }
+}
+
+//商城的顶部栏
+@Composable
+fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
+    NormalTopAppBar(appBarHeight) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            SearchBar()
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.ShoppingCart,null)
+            }
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.Face,null)
             }
         }
     }
