@@ -8,7 +8,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MovableContentState
@@ -232,12 +234,12 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Default.Menu,null)
+                Icon(Icons.Outlined.ShoppingCart,null)
             }
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Default.Menu,null)
+                Icon(Icons.Outlined.Face,null)
             }
         }
     }

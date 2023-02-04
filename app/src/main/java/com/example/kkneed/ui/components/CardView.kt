@@ -397,16 +397,15 @@ fun ShopScreenMainCard() {
             .padding(16.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surface)
             .height(160.dp),
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
 
-        elevation = 0.dp, // 设置阴影
+        elevation = 1.dp, // 设置阴影
         onClick = {},
-
-        )
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    )
     {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -440,7 +439,8 @@ fun ShopScreenMainCard() {
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12))
-                        .size(45.dp),
+                        .height(45.dp)
+                        .width(84.dp),
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.TopCenter,
                 )
