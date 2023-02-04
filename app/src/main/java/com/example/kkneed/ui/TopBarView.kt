@@ -2,28 +2,24 @@ package com.example.kkneed.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.ShoppingCart
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MovableContentState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.kkneed.navigation.PROFILE_ROUTE
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 
@@ -109,11 +105,7 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {    //标题栏高度
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(
-                    onClick = { navController.navigate(PROFILE_ROUTE) }
-                ) {
-                    Icon(Icons.Outlined.ArrowBack, null)
-                }
+                BackButton(navController)
                 Spacer(Modifier.padding(56.dp, 0.dp))
                 Text("我的足迹")
                 Spacer(Modifier.padding(56.dp, 0.dp))
@@ -144,7 +136,7 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
 }
 //订单页顶部栏
 @Composable
-fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
+fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -152,13 +144,7 @@ fun SecondProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            IconButton(
-                onClick = {
-                    navController.navigate(PROFILE_ROUTE)
-                }
-            ) {
-                Icon(Icons.Default.ArrowBack, null)
-            }
+            BackButton(navController)
             SearchBar()
             IconButton(
                 onClick = {}
@@ -180,11 +166,7 @@ fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(
-                onClick = { navController.navigate(PROFILE_ROUTE) }
-            ) {
-                Icon(Icons.Outlined.ArrowBack, null)
-            }
+            BackButton(navController)
             Text("我的记录")
             IconButton(
                 onClick = {}
@@ -205,11 +187,7 @@ fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(
-                onClick = { navController.navigate(PROFILE_ROUTE) }
-            ) {
-                Icon(Icons.Outlined.ArrowBack, null)
-            }
+            BackButton(navController)
             Text(title)
             IconButton(
                 onClick = {}
