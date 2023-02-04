@@ -11,6 +11,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
@@ -21,9 +22,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.screen.login.SignInScreen
+import com.example.kkneed.ui.theme.KKNeedTheme
 import com.google.accompanist.pager.*
 
 @OptIn(ExperimentalPagerApi::class)
@@ -124,4 +129,72 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
             )
             .zIndex(1f)
     )
+}
+
+//商城搜索结果界面的
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun ShopSearchTabBar() {
+    val pagerState = rememberPagerState()
+    val pages = listOf("综合","评分","价格","销量")
+    val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
+        TabRowDefaults.Indicator(
+            Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+        )
+    }
+    val indicator = @Composable { tabPositions: List<TabPosition> ->
+        CustomIndicator(tabPositions, pagerState)
+    }
+
+    TabRow(
+        modifier = Modifier
+            .height(50.dp)
+            .padding(top = 0.dp),
+        backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        selectedTabIndex = pagerState.currentPage,
+        indicator = indicator
+    ) {
+        pages.forEachIndexed { index, title ->
+            Tab(
+                modifier = Modifier.zIndex(4f),
+                text = { Text(text = title) },
+                selected = pagerState.currentPage == index,
+                onClick = { /* TODO */ },
+            )
+        }
+    }
+
+    //设置页面内容
+    HorizontalPager(
+        modifier = Modifier.fillMaxSize(),
+        count = pages.size,
+        state = pagerState,
+    ) { page ->
+        Surface(color = MaterialTheme.colorScheme.background) {
+            LazyColumn(
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 8.dp)
+            )
+            {
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+            }
+        }
+
+    }
+}
+
+
+@Composable
+@Preview
+fun SignUpScreenPreview() {
+    KKNeedTheme {
+        ShopSearchTabBar()
+    }
 }

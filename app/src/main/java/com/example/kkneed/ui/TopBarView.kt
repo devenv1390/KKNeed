@@ -4,13 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.ShoppingCart
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -218,6 +216,30 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
                 onClick = {}
             ) {
                 Icon(Icons.Outlined.Face,null)
+            }
+        }
+    }
+}
+
+//商城搜索顶部
+@Composable
+fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
+    NormalTopAppBar(appBarHeight) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.ArrowBack,null)
+            }
+            SearchBar()
+
+            TextButton(onClick = {}) {
+                Text("搜索")
             }
         }
     }

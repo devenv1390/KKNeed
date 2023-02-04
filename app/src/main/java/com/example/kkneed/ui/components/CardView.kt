@@ -394,7 +394,7 @@ fun ShopScreenMainCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp) // 外边距
+            .padding(start = 16.dp,end=16.dp, bottom = 8.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(160.dp),

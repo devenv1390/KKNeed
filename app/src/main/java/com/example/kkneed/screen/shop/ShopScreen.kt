@@ -65,6 +65,7 @@ fun ShopScreen(navController: NavController) {
                 ) {
                     QuickClassifyButton()
                 }
+                Spacer(modifier = Modifier.height(16.dp))
                 LazyColumn() {
                     item { ShopScreenMainCard() }
                     item { ShopScreenMainCard() }
