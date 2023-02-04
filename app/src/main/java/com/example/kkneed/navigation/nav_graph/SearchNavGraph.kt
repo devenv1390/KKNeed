@@ -14,7 +14,7 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         route = SCANNER_ROUTE,
     ) {
         composable(AllScreen.Scanner.route) {
-            BCScannerScreen()
+            BCScannerScreen(navController)
         }
     }
 }

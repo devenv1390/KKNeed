@@ -9,10 +9,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -25,7 +22,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import com.example.kkneed.model.BCAnalyzer
+import com.example.kkneed.ui.BackButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.common.util.concurrent.ListenableFuture
@@ -34,7 +33,7 @@ import java.util.concurrent.Executors
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun BCScannerScreen() {
+fun BCScannerScreen(navController: NavController) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -43,13 +42,17 @@ fun BCScannerScreen() {
 
             val cameraPermissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
 
-            Button(
-                onClick = {
-                    cameraPermissionState.launchPermissionRequest()
+            Row {
+                BackButton(navController)
+                Button(
+                    onClick = {
+                        cameraPermissionState.launchPermissionRequest()
+                    }
+                ) {
+                    Text(text = "Camera Permission")
                 }
-            ) {
-                Text(text = "Camera Permission")
             }
+
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -77,6 +80,7 @@ fun CameraPreview() {
                 implementationMode = PreviewView.ImplementationMode.COMPATIBLE
             }
         },
+
         modifier = Modifier
             .fillMaxSize()
     ) { previewView ->
