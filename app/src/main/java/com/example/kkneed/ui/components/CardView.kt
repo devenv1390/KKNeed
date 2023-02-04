@@ -653,3 +653,23 @@ fun QuestionChip(state:Boolean,title: String){
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+//第二个问卷页chip
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SmallChip(state:Boolean,title: String,modifier: Modifier){
+    var selected by remember { mutableStateOf(state) }
+    FilterChip(
+        modifier=modifier,
+        selected = selected,
+        onClick = { selected = !selected },
+        label = { Text(title,
+            color=if(selected) Color.White else Color.Black) },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
+            selectedContainerColor =MaterialTheme.colorScheme.primary,
+
+            ),
+
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+    )
+}

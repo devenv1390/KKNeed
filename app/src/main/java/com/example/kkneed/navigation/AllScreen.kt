@@ -8,7 +8,6 @@ const val DATA_ROUTE = "data"
 const val PROFILE_ROUTE = "profile"
 const val SCANNER_ROUTE = "scanner"
 const val ROOT_ROUTE = "root"
-const val LOGIN_ROUTE = "login"
 sealed class AllScreen(val route: String){
     object Welcome:AllScreen("welcome_screen")
     object Guide:AllScreen("guide_screen")
@@ -26,6 +25,8 @@ sealed class AllScreen(val route: String){
     object SignIn:AllScreen("signin_screen")
     object SignInfo:AllScreen("signinfo_screen")
     object Label:AllScreen("label_screen")
-    object Success:AllScreen("label_screen")
+    object Success:AllScreen("success_screen")
+    object Chip:AllScreen("chip_screen")
+    object PersonInfo:AllScreen("personinfo_screen")
     object Scanner:AllScreen("scanner_screen")
 }

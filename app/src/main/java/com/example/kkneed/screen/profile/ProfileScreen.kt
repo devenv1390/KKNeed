@@ -184,7 +184,7 @@ fun MyVerticalList(navController: NavController) {
 @Composable
 fun MyHorizonList(navController: NavController) {
     val buttomItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "个人信息", ""),
+        ButtonItemData(Icons.Default.CheckCircle, "个人信息", AllScreen.PersonInfo.route),
         ButtonItemData(Icons.Default.Menu, "我的创作", ""),
         ButtonItemData(Icons.Default.Favorite, "我的足迹", AllScreen.History.route),
         ButtonItemData(Icons.Default.Phone, "联系客服", "")

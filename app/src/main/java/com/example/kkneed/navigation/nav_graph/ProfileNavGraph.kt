@@ -31,5 +31,8 @@ fun NavGraphBuilder.ProfileNavGraph(navController: NavController) {
         composable(AllScreen.Fan.route){
             FanScreen(navController)
         }
+        composable(AllScreen.PersonInfo.route){
+            PersonInfoScreen(navController)
+        }
     }
 }

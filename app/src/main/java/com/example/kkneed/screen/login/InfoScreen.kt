@@ -1,6 +1,8 @@
 package com.example.kkneed.screen.login
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.widget.DatePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -21,14 +24,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
+import com.example.kkneed.ui.components.BirthTextField
 import com.example.kkneed.ui.components.IconTextField
 import com.example.kkneed.ui.components.TextFieldDemo
 import com.example.kkneed.ui.components.TextFieldDemo1
 import com.example.kkneed.ui.theme.KKNeedTheme
+import java.util.*
 
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun InfoScreen(navController:NavController) {
@@ -90,7 +93,7 @@ fun InfoScreen(navController:NavController) {
             )
         }
 
-        IconTextField(title = "生日")
+        BirthTextField(title = "生日")
         Spacer(modifier = Modifier.height(12.dp))
         TextFieldDemo1("身高","CM")
         Spacer(modifier = Modifier.height(12.dp))

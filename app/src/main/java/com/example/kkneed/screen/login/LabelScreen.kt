@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,11 +21,27 @@ import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.*
 import com.example.kkneed.ui.theme.KKNeedTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LabelScreen(navController: NavController) {
-    Column(
+    Scaffold(
+        bottomBar = {
+            Column {
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center){
+                    GradientButton(modifier = Modifier
+                        .height(56.dp)
+                        .fillMaxWidth(0.8f),
+                        textId = "下一步 >", onClick = {
+                            navController.navigate(AllScreen.Chip.route)
+
+                        }
+                    )}
+                Spacer(modifier = Modifier.height(40.dp))
+            }
+        }
+    ){
+        Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxSize()
@@ -66,16 +83,10 @@ fun LabelScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(40.dp))
         Row(modifier = Modifier.fillMaxSize(),
         horizontalArrangement = Arrangement.Center){
-            GradientButton(modifier = Modifier
-                .height(56.dp)
-                .fillMaxWidth(0.8f),
-                textId = "下一步", onClick = {
-                navController.navigate(AllScreen.Success.route)
-                }
-            )
 
         }
     }
+}
 }
 @Composable
 @Preview

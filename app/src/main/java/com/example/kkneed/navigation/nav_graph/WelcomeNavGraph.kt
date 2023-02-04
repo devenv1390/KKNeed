@@ -36,5 +36,8 @@ fun NavGraphBuilder.WelcomeNavGraph(navController: NavController) {
         composable(AllScreen.Success.route){
             SuccessScreen(navController)
         }
+        composable(AllScreen.Chip.route){
+            ChipScreen(navController)
+        }
     }
 }
