@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.*
 import com.example.kkneed.screen.profile.ProfileScreen
 import com.example.kkneed.ui.MyBottomNavigation
-import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -35,7 +33,9 @@ fun MainScreen(navController: NavController) {
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {  },
+                onClick = {
+                    navController.navigate(SCANNER_ROUTE)
+                },
                 backgroundColor = md_theme_dark_primary
             ) {
                 Icon(Icons.Default.Build, null, tint = Color.White)
@@ -45,17 +45,17 @@ fun MainScreen(navController: NavController) {
         NavHost(
             navController = navMainController,
             startDestination = HOME_ROUTE
-        ){
-            composable(HOME_ROUTE){
+        ) {
+            composable(HOME_ROUTE) {
                 HomeScreen(navController)
             }
-            composable(SHOP_ROUTE){
+            composable(SHOP_ROUTE) {
                 ShopScreen(navController)
             }
-            composable(DATA_ROUTE){
+            composable(DATA_ROUTE) {
                 DataScreen(navController)
             }
-            composable(PROFILE_ROUTE){
+            composable(PROFILE_ROUTE) {
                 ProfileScreen(navController)
             }
         }

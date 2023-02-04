@@ -6,6 +6,7 @@ const val HOME_ROUTE = "home"
 const val SHOP_ROUTE = "shop"
 const val DATA_ROUTE = "data"
 const val PROFILE_ROUTE = "profile"
+const val SCANNER_ROUTE = "scanner"
 const val ROOT_ROUTE = "root"
 sealed class AllScreen(val route: String){
     object Welcome:AllScreen("welcome_screen")
@@ -17,4 +18,5 @@ sealed class AllScreen(val route: String){
     object Main:AllScreen("main_screen")
     object History:AllScreen("history_screen")
     object Order:AllScreen("order_screen")
+    object Scanner:AllScreen("scanner_screen")
 }
