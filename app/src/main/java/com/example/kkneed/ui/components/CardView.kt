@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
+import com.example.kkneed.ui.components.QuestionChip
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -635,41 +636,3 @@ fun LabelCard4(){
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun QuestionChip(state:Boolean,title: String){
-    var selected by remember { mutableStateOf(state) }
-    FilterChip(
-        selected = selected,
-        onClick = { selected = !selected },
-        label = { Text(title,
-        color=if(selected) Color.White else Color.Black) },
-        colors = FilterChipDefaults.filterChipColors(
-           containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-            selectedContainerColor =MaterialTheme.colorScheme.primary,
-
-        ),
-
-        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-    )
-}
-//第二个问卷页chip
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SmallChip(state:Boolean,title: String,modifier: Modifier){
-    var selected by remember { mutableStateOf(state) }
-    FilterChip(
-        modifier=modifier,
-        selected = selected,
-        onClick = { selected = !selected },
-        label = { Text(title,
-            color=if(selected) Color.White else Color.Black) },
-        colors = FilterChipDefaults.filterChipColors(
-            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-            selectedContainerColor =MaterialTheme.colorScheme.primary,
-
-            ),
-
-        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-    )
-}
