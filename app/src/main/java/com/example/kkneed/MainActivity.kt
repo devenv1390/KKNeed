@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,8 +28,9 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setDecorFitsSystemWindows(false)
-
+        window?.run{
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+        }
         setContent {
             KKNeedTheme {
                 rememberSystemUiController().setStatusBarColor(Color.Transparent, darkIcons = androidx.compose.material.MaterialTheme.colors.isLight)
