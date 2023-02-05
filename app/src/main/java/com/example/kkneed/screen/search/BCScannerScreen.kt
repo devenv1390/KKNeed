@@ -1,6 +1,7 @@
-package com.example.kkneed.screen
+package com.example.kkneed.screen.search
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Toast
@@ -24,6 +25,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.kkneed.model.BCAnalyzer
+import com.example.kkneed.navigation.ScannerDirection
 import com.example.kkneed.ui.BackButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -56,14 +58,15 @@ fun BCScannerScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            CameraPreview()
+            CameraPreview(navController)
         }
     }
 }
 
 
+@SuppressLint("RestrictedApi")
 @Composable
-fun CameraPreview() {
+fun CameraPreview(navController: NavController) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     var preview by remember { mutableStateOf<Preview?>(null) }
@@ -101,7 +104,8 @@ fun CameraPreview() {
                     barcode.rawValue?.let { barcodeValue ->
                         barCodeVal.value = barcodeValue
                         Toast.makeText(context, barcodeValue, Toast.LENGTH_SHORT).show()
-                        Log.i("barcode-value", barcodeValue)
+                        navController.navigate(ScannerDirection.actionMaintoNew(barCodeVal.value,"BC"))
+                        cameraProvider.shutdown()
                     }
                 }
             }
