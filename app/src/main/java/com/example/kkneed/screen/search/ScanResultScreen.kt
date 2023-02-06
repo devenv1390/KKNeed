@@ -9,17 +9,22 @@ import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.kkneed.ui.DetailAppBar
-import com.example.kkneed.ui.DetailList
-import com.example.kkneed.ui.DetailTabBar
+import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.ui.*
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.KKNeedTheme
 
@@ -29,7 +34,10 @@ fun ScanResultScreen(navController: NavController,code:String,codeType:String) {
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController =navController)
-        }
+        },
+    bottomBar = {
+        DetailBottomBar()
+    }
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

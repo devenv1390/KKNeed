@@ -147,11 +147,14 @@ fun DetailList(title:String,company:String){
                         .size(80.dp,50.dp),
                     contentScale = ContentScale.Fit
                 )
-                Icon(
-                    painter = painterResource(id = R.drawable.detail),
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp)
-                )
+                IconButton(onClick = {  }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.detail),
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+
             }
 
         },
@@ -176,7 +179,8 @@ fun VantageList(title:String,color:Color){
             style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onBackground) },
         leadingContent = {
-                         Box(modifier = Modifier.clip(CircleShape)
+                         Box(modifier = Modifier
+                             .clip(CircleShape)
                              .background(color)
                              .size(40.dp)){}
         },

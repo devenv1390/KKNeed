@@ -203,7 +203,7 @@ fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String
 //商城的顶部栏
 @Composable
 fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,

@@ -8,15 +8,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
-import androidx.compose.material3.TabPosition
 import androidx.compose.material.TabRowDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -83,8 +80,78 @@ fun DetailTabBar() {
                     {
                         DisadContent()
                         AdContent()
+                        Row(modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically){
+                            Row(verticalAlignment = Alignment.CenterVertically){
+                                Text("用户评价",
+                                    modifier = Modifier.padding(start=16.dp),
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.onBackground)
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("4.37分",
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.primary)
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("1024条",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary)
+                            }
+                            TextButton(onClick = { /*TODO*/ }) {
+                                Text("全部评论 >>",
+                                    modifier = Modifier.padding(end=16.dp),
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary)
+                            }
+                        }
+                        CommentCard()
+                        Row(modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween){
+
+                                Text("康康商城",
+                                    modifier = Modifier.padding(start=16.dp),
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.onBackground)
+
+                            TextButton(onClick = { /*TODO*/ }) {
+                                Text("进入商城 >>",
+                                    modifier = Modifier.padding(end=16.dp),
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary)
+                            }
+
+                        }
+                        DetailShopCard()
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Row(modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween){
+
+                            Text("同类优选商品",
+                                modifier = Modifier.padding(start=16.dp),
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onBackground)
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        LazyRow(modifier = Modifier.padding(start=16.dp)
+                        ){
+
+                            item{ProductCard("百事无糖可乐")}
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item{ProductCard("百事无糖可乐")}
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item{ProductCard("百事无糖可乐")}
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item{ProductCard("百事无糖可乐")}
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item{ProductCard("百事无糖可乐")}
+                        }
+                        Spacer(modifier = Modifier.height(80.dp))
+
                     }
                 }
+
             }
         }
 

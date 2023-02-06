@@ -34,7 +34,7 @@ fun ShopScreen(navController: NavController) {
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
-            ShopTopAppBar(appBarHeight = 116.dp, navController = navController)
+            ShopTopAppBar(appBarHeight = 64.dp, navController = navController)
         }
     ) {
         Box(
