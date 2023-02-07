@@ -29,5 +29,6 @@ sealed class AllScreen(val route: String){
     object Chip:AllScreen("chip_screen")
     object PersonInfo:AllScreen("personinfo_screen")
     object Scanner:AllScreen("scanner_screen")
+    object Comment:AllScreen("comment_screen")
     object ScanResult:AllScreen(ScannerDirection.route)
 }

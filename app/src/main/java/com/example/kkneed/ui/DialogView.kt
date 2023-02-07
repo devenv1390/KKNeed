@@ -24,7 +24,15 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 fun DetailDialog(){
 
 
-    val openDialog = remember { mutableStateOf(true) }
+    var openDialog = remember { mutableStateOf(false) }
+
+    IconButton(onClick = { openDialog.value=true}) {
+        Icon(
+            painter = painterResource(id = R.drawable.detail),
+            contentDescription = null,
+            modifier = Modifier.size(48.dp)
+        )
+    }
 
     if (openDialog.value) {
         AlertDialog(

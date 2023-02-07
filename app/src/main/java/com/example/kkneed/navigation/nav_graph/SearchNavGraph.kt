@@ -25,5 +25,8 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
             val (code,codeType) = ScannerDirection.parseArgumernts(it)
             ScanResultScreen(navController,code,codeType)
         }
+        composable(AllScreen.Comment.route) {
+            com.example.kkneed.screen.search.CommentScreen(navController)
+        }
     }
 }

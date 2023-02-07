@@ -153,6 +153,18 @@ fun DetailTabBar() {
                 }
 
             }
+            1->{Surface(color = MaterialTheme.colorScheme.onPrimary){
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    NutritionCard()
+                    Spacer(modifier = Modifier.height(12.dp))
+                    ComponentCard()
+                }
+            }
+
+
+
+            }
         }
 
 

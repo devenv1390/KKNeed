@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,8 +24,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import com.example.kkneed.R
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.LevelA
 import com.example.kkneed.ui.theme.LevelE
 
 //关注列表
@@ -147,13 +150,7 @@ fun DetailList(title:String,company:String){
                         .size(80.dp,50.dp),
                     contentScale = ContentScale.Fit
                 )
-                IconButton(onClick = {  }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.detail),
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
+                DetailDialog()
 
             }
 
@@ -211,11 +208,51 @@ fun VantageList2(title:String){
         },
     )
 }
+//我的记录列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecordList(title:String,color:Color){
+    ListItem(
+        colors = ListItemDefaults.colors(
+        containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        headlineText = {
+                Text(title+"等级食品",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary)
+                       },
+        leadingContent = {
+            Box(modifier = Modifier
+                .clip(CircleShape)
+                .background(color)
+                .size(40.dp)){
+                Text(title,
+                    modifier=Modifier.align(Alignment.Center),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimary)
+            }
+        },
+
+        trailingContent = {
+            Row(){
+                Text("21",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.outline)
+                Icon(
+                    Icons.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+
+        },
+    )
+}
 @Preview
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        VantageList2("查看剩余3缺点")
+        RecordList("A", LevelA)
 
     }
 }
