@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,10 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.R
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 
@@ -244,11 +248,34 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+@Composable
+fun DetailAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            BackButton(navController)
+            Text("")
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(painter = painterResource(R.drawable.share),null)
+
+            }
+        }
+    }
+}
 
 @Preview
 @Composable
 fun PreviewTopAppBar() {
     KKNeedTheme {
-
+        val navController= rememberNavController()
+        ShopTopAppBar(64.dp,navController)
     }
 }

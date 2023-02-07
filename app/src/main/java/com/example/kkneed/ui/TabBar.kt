@@ -15,10 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,12 +27,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.screen.login.SignInScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.google.accompanist.pager.*
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun TabBar() {
     val pagerState = rememberPagerState()
     val pages = listOf("全部","待付款","待发货","待收货","待评价")
+    val coroutineScope= rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -58,7 +57,8 @@ fun TabBar() {
                 modifier = Modifier.zIndex(5f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = { /* TODO */ },
+                onClick = {coroutineScope.launch {
+                    pagerState.animateScrollToPage(index) } },
             )
         }
     }

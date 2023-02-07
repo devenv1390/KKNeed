@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
-import com.example.kkneed.ui.SmallChip
+import com.example.kkneed.ui.components.SmallChip
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")

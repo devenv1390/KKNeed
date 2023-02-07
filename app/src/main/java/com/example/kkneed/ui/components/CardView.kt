@@ -13,6 +13,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,8 +29,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
+import com.example.kkneed.screen.login.RandomPosition
+import com.example.kkneed.ui.components.QuestionChip
+import com.example.kkneed.ui.theme.KKNeedTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -394,7 +400,7 @@ fun ShopScreenMainCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp,end=16.dp, bottom = 8.dp) // 外边距
+            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(160.dp),
@@ -435,13 +441,13 @@ fun ShopScreenMainCard() {
                 )
                 Spacer(Modifier.height(9.dp))
                 Image(
-                    painter = painterResource(R.drawable.head),
+                    painter = painterResource(R.drawable.alevel),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12))
                         .height(45.dp)
                         .width(84.dp),
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Fit,
                     alignment = Alignment.TopCenter,
                 )
                 Spacer(Modifier.height(9.dp))
@@ -594,7 +600,7 @@ fun LabelCard3(){
         }
     }
 }
-
+//其他诉求卡片
 @Composable
 fun LabelCard4(){
     Card(
@@ -634,42 +640,219 @@ fun LabelCard4(){
         }
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
+//用户评价卡片
 @Composable
-fun QuestionChip(state:Boolean,title: String){
-    var selected by remember { mutableStateOf(state) }
-    FilterChip(
-        selected = selected,
-        onClick = { selected = !selected },
-        label = { Text(title,
-        color=if(selected) Color.White else Color.Black) },
-        colors = FilterChipDefaults.filterChipColors(
-           containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-            selectedContainerColor =MaterialTheme.colorScheme.primary,
+fun CommentCard(){
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 98.dp)
+            .clickable { },
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        elevation =1.dp,
+        shape = RoundedCornerShape(12.dp)
+    ){
+        Row(modifier = Modifier.padding(12.dp)) {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(40.dp, 40.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)){
+                Row(modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween){
+                    Text(
+                        "康康need",
+                        color=MaterialTheme.colorScheme.onBackground,
+                        style=MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        "29八月",
+                        color=MaterialTheme.colorScheme.outline,
+                        style=MaterialTheme.typography.titleSmall
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(){
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.outlinestar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("好喝是好喝，就是减肥期还是要少喝，真的会长胖的，无糖版本的或许对减肥人士更友好一些，超出的文字……",
+                    maxLines =2,
+                    color=MaterialTheme.colorScheme.onSecondaryContainer,
+                    style=MaterialTheme.typography.bodySmall
+                )
 
-        ),
 
-        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-    )
+
+            }
+        }
+    }
 }
-//第二个问卷页chip
-@OptIn(ExperimentalMaterial3Api::class)
+//详情页商城卡片
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SmallChip(state:Boolean,title: String,modifier: Modifier){
-    var selected by remember { mutableStateOf(state) }
-    FilterChip(
-        modifier=modifier,
-        selected = selected,
-        onClick = { selected = !selected },
-        label = { Text(title,
-            color=if(selected) Color.White else Color.Black) },
-        colors = FilterChipDefaults.filterChipColors(
-            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-            selectedContainerColor =MaterialTheme.colorScheme.primary,
+fun DetailShopCard() {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 98.dp)
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp)),
 
-            ),
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
 
-        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
     )
+    {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(start = 16.dp, top = 8.dp,end=16.dp)
+        )
+        {
+            Image(
+                painter = painterResource(R.drawable.cola),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12))
+                    .size(64.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
+            Column(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp)
+            ) {
+
+                    androidx.compose.material3.Text(
+                        "麦维他全麦粗粮酥性消化饼原味400g",
+                        modifier = Modifier.width(200.dp),
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 2
+                    )
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.material3.Text(
+                    "￥34.6",
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+
+
+                Column(
+                    modifier = Modifier
+                        .width(45.dp)
+                        .fillMaxWidth(),
+                    ) {
+
+                    Image(
+                        painter = painterResource(R.drawable.alevel),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(45.dp,26.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    androidx.compose.material.Surface(shape = RoundedCornerShape(12),
+                    modifier = Modifier.size(36.dp)) {
+                        IconButton(
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = Color.White),
+                            onClick = { /*TODO*/ }) {
+                            Icon(painter = painterResource(id = R.drawable.shoppingcart),null,
+                                tint=MaterialTheme.colorScheme.primary)
+                        }
+                    }
+
+                }
+
+        }
+    }
 }
+//同类商品卡片
+@Composable
+fun ProductCard(title: String){
+    Card(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .size(148.dp, 170.dp),
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(12.dp)
+    ){
+        Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(R.drawable.baishi),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(132.dp, 102.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.TopCenter,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                title,
+                color=MaterialTheme.colorScheme.onBackground,
+                style=MaterialTheme.typography.titleSmall
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(modifier = Modifier.padding(start = 8.dp,end=8.dp)
+                .fillMaxWidth()
+                ,verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween)
+            {
+                Image(
+                    painter = painterResource(R.drawable.alevel),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(43.dp, 24.dp),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.TopCenter,
+                )
+                GradientButton(modifier = Modifier
+                    .height(24.dp)
+                    .fillMaxWidth(0.6f),
+                    textId = "对比", onClick = {
+
+                    }
+                )
+            }
+        }
+    }
+}
+@Preview
+@Composable
+fun CardScreen() {
+    KKNeedTheme {
+
+        ProductCard("百事无糖可乐")
+    }
+}
+
