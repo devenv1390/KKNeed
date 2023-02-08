@@ -12,6 +12,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.*
@@ -23,6 +27,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.model.ButtonItemData
+import com.example.kkneed.model.DetailItemData
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.BottomItemScreen.Data.title
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.theme.*
@@ -173,27 +181,40 @@ fun DetailTabBar() {
 //缺点内容
 @Composable
 fun DisadContent(){
+    val navController = rememberNavController()
+    val DisadItems = listOf<DetailItemData>(
+        DetailItemData(AllScreen.Detail.route, "脂肪含量偏高 10.6%",  LevelE),
+        DetailItemData("", "糖含量10.6%", LevelD),
+        DetailItemData("", "中升糖指数（63）", LevelC)
+    )
     Spacer(modifier = Modifier.height(12.dp))
     Text(text="缺点",
         modifier = Modifier.padding(start=16.dp),
         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
         color = MaterialTheme.colorScheme.onBackground)
-    VantageList(title = "卡路里值偏高 10.6%", LevelE)
-    VantageList(title = "糖含量10.6%", LevelD)
-    VantageList(title = "中升糖指数（63）", LevelC)
+    DisadItems.forEachIndexed { index, item ->
+        VantageList(item.title, item.color,navController,item.route)
+    }
+
     VantageList2("查看剩余3缺点")
 }
 //优点内容
 @Composable
 fun AdContent(){
+    val navController = rememberNavController()
+    val DisadItems = listOf<DetailItemData>(
+        DetailItemData("", "不含脂肪或饱和脂肪", LevelA),
+        DetailItemData("", "不含钠", LevelA),
+        DetailItemData("", "2种添加剂", LevelB)
+    )
     Spacer(modifier = Modifier.height(12.dp))
     Text(text="优点",
         modifier = Modifier.padding(start=16.dp),
         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
         color = MaterialTheme.colorScheme.onBackground)
-    VantageList(title = "不含脂肪或饱和脂肪", LevelA)
-    VantageList(title = "不含钠", LevelA)
-    VantageList(title = "2种添加剂", LevelB)
+    DisadItems.forEachIndexed { index, item ->
+        VantageList(item.title, item.color,navController,item.route)
+    }
     VantageList2("查看剩余2优点")
 }
 

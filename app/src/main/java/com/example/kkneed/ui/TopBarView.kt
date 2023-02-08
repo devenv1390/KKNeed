@@ -2,6 +2,7 @@ package com.example.kkneed.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -92,6 +94,26 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
                     ),
                 )
             )
+            .fillMaxWidth()
+            .height(appBarHeight + statusBarHeightDp)
+            .padding(top = statusBarHeightDp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.Bottom
+    ) {
+        content()
+    }
+}
+@Composable
+fun NormalTopAppBar2(appBarHeight: Dp, content: @Composable () -> Unit) {
+    //标题栏高度
+    //状态栏高度
+    val statusBarHeightDp = LocalDensity.current.run {
+        WindowInsets.statusBars.getTop(this).toDp()
+    }
+    Row(
+        modifier = Modifier
+            .background(Color.Transparent)
+
             .fillMaxWidth()
             .height(appBarHeight + statusBarHeightDp)
             .padding(top = statusBarHeightDp),
@@ -241,10 +263,44 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
                 Icon(Icons.Outlined.ArrowBack,null)
             }
             SearchBar()
-
             TextButton(onClick = {}) {
                 Text("搜索")
             }
+
+        }
+    }
+}
+//搜索页面顶部栏
+@Composable
+fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
+    NormalTopAppBar2(appBarHeight) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Surface(shape = RoundedCornerShape(12),
+                modifier = Modifier.size(40.dp)) {
+                IconButton(
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.White),
+                    onClick = { /*TODO*/ }) {
+                    Icon(Icons.Outlined.ArrowBack,null)
+                }
+            }
+            SearchBar()
+            Surface(shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.size(40.dp)) {
+                IconButton(
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.White),
+                    onClick = { /*TODO*/ }) {
+                    Icon(painter = painterResource(id = R.drawable.history),null)
+                }
+            }
+
+
         }
     }
 }

@@ -13,3 +13,4 @@ sealed class BottomItemScreen(val route: String,val title: String, val icon: Ima
     object Data: BottomItemScreen(DATA_ROUTE,"定制",Icons.Default.DateRange)
     object Profile: BottomItemScreen(PROFILE_ROUTE,"个人",Icons.Default.Person)
 }
+

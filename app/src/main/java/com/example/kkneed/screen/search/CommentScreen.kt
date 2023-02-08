@@ -10,10 +10,17 @@ import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import com.example.kkneed.ui.ShopScreenMainCard
 import com.example.kkneed.ui.components.ChipGroupCompose
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 
+@OptIn(ExperimentalPagerApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CommentScreen(navController: NavController) {
@@ -21,8 +28,12 @@ fun CommentScreen(navController: NavController) {
         topBar = {
             MostUseTopAppBar(appBarHeight = 64.dp, navController =navController, "全部评论") })
     {
+        val pagerState = rememberPagerState()
         ChipGroupCompose()
         //progressBar()
+
+
+
 
     }
 }

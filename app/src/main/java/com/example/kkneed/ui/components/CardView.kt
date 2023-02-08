@@ -710,6 +710,162 @@ fun CommentCard(){
         }
     }
 }
+//用户评价带图卡片
+@Composable
+fun ImageCommentCard(){
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 206.dp)
+            .clickable { },
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        elevation =1.dp,
+        shape = RoundedCornerShape(12.dp)
+    ){
+        Row(modifier = Modifier.padding(12.dp)) {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(40.dp, 40.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)){
+                Row(modifier = Modifier
+                    .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween){
+                    Text(
+                        "康康need",
+                        color=MaterialTheme.colorScheme.onBackground,
+                        style=MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        "29八月",
+                        color=MaterialTheme.colorScheme.outline,
+                        style=MaterialTheme.typography.titleSmall
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(){
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.fillstar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                    Icon(painter = painterResource(id = R.drawable.outlinestar),null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp))
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("好喝是好喝，就是减肥期还是要少喝，真的会长胖的，无糖版本的或许对减肥人士更友好一些，超出的文字……",
+                    maxLines =2,
+                    color=MaterialTheme.colorScheme.onSecondaryContainer,
+                    style=MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("展开v",
+                    maxLines =2,
+                    color=MaterialTheme.colorScheme.primary,
+                    style=MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)){
+                    Image(
+                        painter = painterResource(R.drawable.cola),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(80.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center,
+                    )
+                    Image(
+                        painter = painterResource(R.drawable.cola),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(80.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center,
+                    )
+                    Image(
+                        painter = painterResource(R.drawable.cola),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(80.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center,
+                    )
+                }
+
+
+
+            }
+        }
+    }
+}
+//康康有话说卡片
+@Composable
+fun DetailCard(title: String,description:String){
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 127.dp),
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        elevation =1.dp,
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp,brush = Brush.verticalGradient(
+            listOf(
+                MaterialTheme.colorScheme.primary, // 这里可以加无数个
+                MaterialTheme.colorScheme.secondaryContainer,
+            )
+        ))
+    ){
+        Column(modifier = Modifier.padding(start = 16.dp,top=8.dp),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(
+                title,
+                color=MaterialTheme.colorScheme.onBackground,
+                style=MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+            )
+            Row() {
+                Image(
+                    painter = painterResource(R.drawable.dog),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(48.dp, 48.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.CenterStart,
+                )
+
+                Surface(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 16.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                color = Color.White){
+                    Text(
+                        description,
+                        modifier = Modifier.padding(8.dp),
+                        color=MaterialTheme.colorScheme.onBackground,
+                        style=MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
+        }
+        }
+    }
+
 //详情页商城卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -806,7 +962,8 @@ fun ProductCard(title: String){
         elevation = 0.dp,
         shape = RoundedCornerShape(12.dp)
     ){
-        Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painterResource(R.drawable.baishi),
                 contentDescription = "",
@@ -1095,12 +1252,157 @@ fun ComponentCard(){
     }
 
 }
+//产品对比卡片
+@Composable
+fun CompareCard(title: String){
+    Card(
+        modifier = Modifier
+            //.padding(start = 16.dp, end = 16.dp)
+            .size(176.dp,300.dp),
+        backgroundColor =Color.White,
+        elevation =0.dp,
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(0.dp, color = Color.Transparent)
+    ){
+        Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween) {
+            Image(
+                painter = painterResource(R.drawable.baishi),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(160.dp, 160.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 8.dp),
+            horizontalArrangement = Arrangement.Center){
+                Text(
+                    title,
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                , horizontalArrangement = Arrangement.Center)
+            {
+                Image(
+                    painter = painterResource(R.drawable.alevel),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(94.dp, 53.dp),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.TopCenter,
+                )
+            }
+        }
+    }
+}
+//营养元素对比卡片
+@Composable
+fun NutriCompareCard(){
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 330.dp),
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        elevation =1.dp,
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp,brush = Brush.verticalGradient(
+            listOf(
+                MaterialTheme.colorScheme.primary, // 这里可以加无数个
+                MaterialTheme.colorScheme.secondaryContainer,
+            )
+        ))
+    ){
+        Column(modifier = Modifier.padding(start = 16.dp,top=8.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically){
+                Divider(modifier = Modifier.width(66.dp),
+                color = MaterialTheme.colorScheme.primary)
+                Text(
+                    "营养元素对比",
+                    modifier=Modifier.padding(start=4.dp,end=4.dp),
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                )
+                Divider(modifier = Modifier.width(66.dp),
+                    color = MaterialTheme.colorScheme.primary)
+
+            }
+
+        }
+    }
+}
+//成分表对比卡片
+@Composable
+fun ComponentCompareCard(){
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .size(380.dp, 330.dp),
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        elevation =1.dp,
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp,brush = Brush.verticalGradient(
+            listOf(
+                MaterialTheme.colorScheme.primary, // 这里可以加无数个
+                MaterialTheme.colorScheme.secondaryContainer,
+            )
+        ))
+    ){
+        Column(modifier = Modifier.padding(start = 16.dp,top=8.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically){
+                Divider(modifier = Modifier.width(66.dp),
+                    color = MaterialTheme.colorScheme.primary)
+                Text(
+                    "成分表对比",
+                    modifier=Modifier.padding(start=4.dp,end=4.dp),
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                )
+                Divider(modifier = Modifier.width(66.dp),
+                    color = MaterialTheme.colorScheme.primary)
+            }
+            Row(){
+                Text(
+                    "20种",
+                    color=MaterialTheme.colorScheme.onSurface,
+                    style=MaterialTheme.typography.bodyLarge
+                )
+                Text(
+                    "成分表对比",
+                    color=MaterialTheme.colorScheme.onBackground,
+                    style=MaterialTheme.typography.bodyLarge
+                )
+                Text(
+                    "20种",
+                    color=MaterialTheme.colorScheme.onSurface,
+                    style=MaterialTheme.typography.bodyLarge
+                )
+            }
+
+        }
+    }
+}
+
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-
-        ComponentCard()
+        NutriCompareCard()
     }
 }
 
