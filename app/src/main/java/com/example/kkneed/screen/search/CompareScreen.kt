@@ -33,13 +33,20 @@ fun CompareScreen(navController: NavController) {
         topBar = {
             MostUseTopAppBar(appBarHeight = 64.dp, navController =navController, "产品对比") })
     {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp,end=16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween){
-            CompareCard("百事可乐")
-            CompareCard("农夫山泉东方树叶红茶500ml")
+        Column(modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween){
+                CompareCard("百事可乐")
+                CompareCard("农夫山泉东方树叶红茶500ml")
+            }
+            NutriCompareCard()
+            ComponentCompareCard()
         }
+
 
     }
 

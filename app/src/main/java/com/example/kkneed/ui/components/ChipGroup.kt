@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -96,9 +98,12 @@ fun QuestionChip(state:Boolean,title: String){
 }
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun ChipGroupCompose() {
+fun ChipGroupCompose(state:LazyListState) {
     val pagerState = rememberPagerState()
     val coroutineScope= rememberCoroutineScope()
+
+
+
     val chipList: List<String> = listOf(
         "全部",
         "最新",
@@ -146,7 +151,7 @@ fun ChipGroupCompose() {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
                     )
                     {
                         item { CommentCard() }
@@ -165,7 +170,7 @@ fun ChipGroupCompose() {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
                     )
                     {
                         item { CommentCard() }
@@ -182,7 +187,7 @@ fun ChipGroupCompose() {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
                     )
                     {
                         item { ImageCommentCard()}
@@ -250,6 +255,5 @@ fun Chip(
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        ChipGroupCompose()
     }
 }

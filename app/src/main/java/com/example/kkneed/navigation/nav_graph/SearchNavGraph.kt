@@ -37,5 +37,14 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Compare.route) {
             CompareScreen(navController)
         }
+        composable(AllScreen.ScanHistory.route) {
+            ScanHistoryScreen(navController)
+        }
+        composable(AllScreen.Chose.route) {
+            ChoseScreen(navController )
+        }
+        composable(AllScreen.Edit.route) {
+            EditScreen(navController )
+        }
     }
 }
