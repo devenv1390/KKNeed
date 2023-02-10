@@ -36,5 +36,8 @@ sealed class AllScreen(val route: String){
     object Chose:AllScreen("chose_screen")
     object ScanHistory:AllScreen("scanhistory_screen")
     object Edit:AllScreen("edit_screen")
+    object EditProduct:AllScreen("editproduct_screen")
+    object Collect:AllScreen("collect_screen")
+    object RecordDetail:AllScreen("recorddetail_screen")
     object ScanResult:AllScreen(ScannerDirection.route)
 }

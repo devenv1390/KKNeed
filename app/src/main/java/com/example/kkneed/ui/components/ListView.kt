@@ -9,10 +9,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -270,7 +267,7 @@ fun VantageList2(title:String){
 //我的记录列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecordList(title:String,color:Color){
+fun RecordList(title:String,color:Color,navController: NavController,route:String){
     ListItem(
         colors = ListItemDefaults.colors(
         containerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -297,13 +294,81 @@ fun RecordList(title:String,color:Color){
                 Text("21",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.outline)
-                Icon(
-                    Icons.Filled.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                )
+                IconButton(onClick = { navController.navigate(route)}) {
+                    Icon(
+                        Icons.Filled.KeyboardArrowRight,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                    )
+                }
+
+            }
+        }
+    )
+}
+//记录详情页列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecordDetailList(title:String){
+    ListItem(
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        headlineText = {
+            Column(){
+                Text(title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground)
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(){
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.outlinestar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                }
             }
 
+        },
+        leadingContent = {
+            Image(
+                painter = painterResource(R.drawable.biscuit),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(56.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
+        },
+
+        trailingContent = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        Icons.Filled.MoreVert,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                    )
+            }
         },
     )
 }
@@ -311,7 +376,6 @@ fun RecordList(title:String,color:Color){
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        RecordList("A", LevelA)
-
+        RecordDetailList("麦维他纤维饼干")
     }
 }

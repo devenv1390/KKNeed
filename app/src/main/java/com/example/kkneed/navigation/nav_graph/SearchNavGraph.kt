@@ -46,5 +46,8 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Edit.route) {
             EditScreen(navController )
         }
+        composable(AllScreen.EditProduct.route) {
+            EditProductScreen(navController )
+        }
     }
 }

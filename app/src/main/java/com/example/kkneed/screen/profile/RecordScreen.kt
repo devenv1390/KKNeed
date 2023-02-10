@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.navigation.AllScreen
 import kotlin.math.PI
 import kotlin.math.atan
 import kotlin.math.atan2
@@ -103,11 +104,11 @@ fun RecordScreen(navController: NavController) {
                         .align(Alignment.BottomStart)
                 )
             }
-            RecordList("A", LevelA)
-            RecordList("B", LevelB)
-            RecordList("C", LevelC)
-            RecordList("D", LevelD)
-            RecordList("E", LevelE)
+            RecordList("A", LevelA,navController,AllScreen.RecordDetail.route)
+            RecordList("B", LevelB,navController,"")
+            RecordList("C", LevelC,navController,"")
+            RecordList("D", LevelD,navController,"")
+            RecordList("E", LevelE,navController,"")
             Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start){
                 Text(
