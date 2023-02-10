@@ -34,5 +34,11 @@ fun NavGraphBuilder.ProfileNavGraph(navController: NavController) {
         composable(AllScreen.PersonInfo.route){
             PersonInfoScreen(navController)
         }
+        composable(AllScreen.Collect.route){
+            CollectScreen(navController)
+        }
+        composable(AllScreen.RecordDetail.route){
+            RecordDetailScreen(navController)
+        }
     }
 }

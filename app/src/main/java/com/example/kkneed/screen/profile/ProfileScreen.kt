@@ -2,6 +2,7 @@ package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -13,6 +14,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,18 +28,25 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.model.ButtonItemData
 import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.ui.ChangeBottomSheet
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(navController: NavController) {
+    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val scope = rememberCoroutineScope()
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
         topBar = {
             MyTopAppBar {}
         }
     ) {
+        ChangeBottomSheet(state,scope)
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -46,7 +55,7 @@ fun ProfileScreen(navController: NavController) {
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
-                MyAccInfo(navController)
+                MyAccInfo(navController,state,scope)
                 Spacer(Modifier.size(0.dp, 24.dp))
                 MyVerticalList(navController)
                 Spacer(Modifier.size(0.dp, 24.dp))
@@ -57,11 +66,14 @@ fun ProfileScreen(navController: NavController) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MyAccInfo(navController: NavController) {
+fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: CoroutineScope) {
     Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
         Row(modifier = Modifier.padding(top = 40.dp)) {
-            Box(modifier = Modifier.size(110.dp)) {
+            Box(modifier = Modifier.size(110.dp)
+                .clickable{scope.launch { state.show() }}
+            ) {
                 Image(
                     painter = painterResource(R.drawable.head),
                     contentDescription = "",
