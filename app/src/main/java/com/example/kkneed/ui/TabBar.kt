@@ -189,8 +189,88 @@ fun ShopSearchTabBar() {
 
     }
 }
+//我的收藏tab栏
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun CollectTabBar() {
+    val pagerState = rememberPagerState()
+    val pages = listOf("产品","帖子")
+    val coroutineScope= rememberCoroutineScope()
+    val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
+        TabRowDefaults.Indicator(
+            Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+        )
+    }
+    val indicator = @Composable { tabPositions: List<TabPosition> ->
+        CustomIndicator(tabPositions, pagerState)
+    }
+
+    TabRow(
+        modifier = Modifier
+            .height(50.dp)
+            .padding(top = 0.dp),
+        backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        selectedTabIndex = pagerState.currentPage,
+        indicator = indicator
+    ) {
+        pages.forEachIndexed { index, title ->
+            Tab(
+                modifier = Modifier.zIndex(2f),
+                text = { Text(text = title) },
+                selected = pagerState.currentPage == index,
+                onClick = {coroutineScope.launch {
+                    pagerState.animateScrollToPage(index) } },
+            )
+        }
+    }
+
+    //设置页面内容
+    HorizontalPager(
+        modifier = Modifier.fillMaxSize(),
+        count = pages.size,
+        state = pagerState,
+    ) { page ->
+        when(page){
+            0->{
+                Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp)
+                    )
+                    {
+                        item{ShopScreenMainCard()}
+                        item{ShopScreenMainCard()}
+                        item{ShopScreenMainCard()}
+                        item{ShopScreenMainCard()}
+                        item{ShopScreenMainCard()}
+                        item{ShopScreenMainCard()}
+                    }
+                }
+            }
+            1->{Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                LazyColumn(Modifier
+                    .fillMaxSize()
+                    .padding(top = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)){
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                    item { SmallInfoCard() }
+                }
+            }
+            }
+        }
 
 
+    }
+}
 @Composable
 @Preview
 fun SignUpScreenPreview() {

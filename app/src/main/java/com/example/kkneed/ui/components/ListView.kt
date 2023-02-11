@@ -9,12 +9,10 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,8 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.example.kkneed.R
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.LevelA
 import com.example.kkneed.ui.theme.LevelE
 
 //关注列表
@@ -147,13 +148,46 @@ fun DetailList(title:String,company:String){
                         .size(80.dp,50.dp),
                     contentScale = ContentScale.Fit
                 )
-                IconButton(onClick = {  }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.detail),
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
+                DetailDialog()
+
+            }
+
+        },
+        leadingContent = {
+            Image(
+                painter = painterResource(R.drawable.cola),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .size(56.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
+    )
+}
+//搜索页顶部列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScanTopList(title:String,company:String){
+    ListItem(
+        headlineText = {
+            androidx.compose.material3.Text(
+                title,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+            )
+        },
+        supportingText = { androidx.compose.material3.Text(company,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.outline) },
+        trailingContent = {
+            Row(){
+                Image(
+                    painter = painterResource(R.drawable.alevel),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(80.dp,50.dp),
+                    contentScale = ContentScale.Fit
+                )
 
             }
 
@@ -173,7 +207,7 @@ fun DetailList(title:String,company:String){
 //详情页优缺点列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VantageList(title:String,color:Color){
+fun VantageList(title:String,color:Color,navController: NavController,route:String){
     ListItem(
         headlineText = { Text(title,
             style = MaterialTheme.typography.bodyMedium,
@@ -185,15 +219,34 @@ fun VantageList(title:String,color:Color){
                              .size(40.dp)){}
         },
         trailingContent = {
+            IconButton(onClick = { navController.navigate(route) }) {
                 Icon(
                     Icons.Filled.KeyboardArrowRight,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp),
                 )
+            }
+
         },
     )
 }
-//详情页优缺点列表2
+//点击优缺点后详情页顶部列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailList(title:String,color:Color){
+    ListItem(
+        headlineText = { Text(title,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground) },
+        leadingContent = {
+            Box(modifier = Modifier
+                .clip(CircleShape)
+                .background(color)
+                .size(40.dp)){}
+        }
+    )
+}
+//详情页优缺点展开列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VantageList2(title:String){
@@ -211,11 +264,118 @@ fun VantageList2(title:String){
         },
     )
 }
+//我的记录列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecordList(title:String,color:Color,navController: NavController,route:String){
+    ListItem(
+        colors = ListItemDefaults.colors(
+        containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        headlineText = {
+                Text(title+"等级食品",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary)
+                       },
+        leadingContent = {
+            Box(modifier = Modifier
+                .clip(CircleShape)
+                .background(color)
+                .size(40.dp)){
+                Text(title,
+                    modifier=Modifier.align(Alignment.Center),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onPrimary)
+            }
+        },
+
+        trailingContent = {
+            Row(){
+                Text("21",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.outline)
+                IconButton(onClick = { navController.navigate(route)}) {
+                    Icon(
+                        Icons.Filled.KeyboardArrowRight,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                    )
+                }
+
+            }
+        }
+    )
+}
+//记录详情页列表
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecordDetailList(title:String){
+    ListItem(
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        headlineText = {
+            Column(){
+                Text(title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground)
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(){
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.fillstar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.outlinestar), null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(12.dp)
+                    )
+                }
+            }
+
+        },
+        leadingContent = {
+            Image(
+                painter = painterResource(R.drawable.biscuit),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(56.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
+        },
+
+        trailingContent = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        Icons.Filled.MoreVert,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                    )
+            }
+        },
+    )
+}
 @Preview
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        VantageList2("查看剩余3缺点")
-
+        RecordDetailList("麦维他纤维饼干")
     }
 }
