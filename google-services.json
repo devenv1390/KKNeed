@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353354923119",
+    "project_id": "kkneed",
+    "storage_bucket": "kkneed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353354923119:android:0e4e374b3523574282219a",
+        "android_client_info": {
+          "package_name": "com.example.kkneed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353354923119-75l5ds427e6hcm01b8qg1bh6hi1ceua7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFyoNrW1K_tJI3xHFAxw6p-gRVSCTJ2EA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353354923119-75l5ds427e6hcm01b8qg1bh6hi1ceua7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
