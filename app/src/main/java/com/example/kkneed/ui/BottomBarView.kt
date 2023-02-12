@@ -6,13 +6,19 @@ import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -20,6 +26,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.BottomItemScreen
+import com.example.kkneed.ui.theme.KKNeedTheme
 
 @Composable
 fun MyBottomNavigation(navController: NavController) {//第二种设计方案，采用BottomAppBar与BottomNavigationItem结合的方式，解决了选项卡按下后没有外观变化的缺点，但动画和按键的布局范围比较难控制
@@ -123,8 +130,9 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
         )
     }
 }
+
 @Composable
-fun DetailBottomBar(){
+fun DetailBottomBar() {
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
         tonalElevation = 0.dp,
@@ -198,3 +206,110 @@ fun DetailBottomBar(){
         }
     )
 }
+
+//购物车
+@Composable
+fun ShopCartBottomBar() {
+    val checkedState = remember {
+        mutableStateOf(true)
+    }
+    androidx.compose.material3.BottomAppBar(
+        containerColor = MaterialTheme.colorScheme.onPrimary,
+        tonalElevation = 0.dp,
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+        actions = {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Checkbox(
+                    checked = checkedState.value,
+                    onCheckedChange = { checkedState.value = it },
+                    modifier = Modifier.padding(0.dp),
+                )
+            }
+
+        },
+        floatingActionButton = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "总计",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Text(
+                    "￥34.6",
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.error
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                GradientButton(
+                    modifier = Modifier
+                        .height(40.dp)
+                        .fillMaxWidth(0.4f),
+                    textId = "结算",
+                    onClick = {
+                    },
+                )
+            }
+        }
+    )
+}
+
+//确认订单
+@Composable
+fun OrderBottomBar() {
+    val checkedState = remember {
+        mutableStateOf(true)
+    }
+    androidx.compose.material3.BottomAppBar(
+        containerColor = MaterialTheme.colorScheme.onPrimary,
+        tonalElevation = 0.dp,
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+        actions = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    "总计",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Text(
+                    "￥34.6",
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+        },
+        floatingActionButton = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                GradientButton(
+                    modifier = Modifier
+                        .height(40.dp)
+                        .fillMaxWidth(0.4f),
+                    textId = "去付款",
+                    onClick = {
+                    },
+                )
+            }
+        }
+    )
+}
+@Preview
+@Composable
+fun BottomBarScreen() {
+    KKNeedTheme {
+        OrderBottomBar()
+    }
+}
+
