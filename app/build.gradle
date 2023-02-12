@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.gms.google-services'
 }
 
 android {
@@ -69,18 +68,6 @@ dependencies {
 
     //Camera Permission
     implementation "com.google.accompanist:accompanist-permissions:0.19.0"
-
-    // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:31.2.0')
-
-
-    // TODO: Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-
-
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
