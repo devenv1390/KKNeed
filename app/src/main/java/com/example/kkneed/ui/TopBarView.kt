@@ -266,7 +266,6 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
             TextButton(onClick = {}) {
                 Text("搜索")
             }
-
         }
     }
 }
@@ -327,11 +326,37 @@ fun DetailAppBar(appBarHeight: Dp, navController: NavController){
     }
 }
 
+//首页（只有文字部分）
+@Composable
+fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+//            BackButton(navController)
+            IconButton(
+                onClick = {}
+            ) {
+            }
+            Text("首页")
+            IconButton(
+                onClick = {}
+            ) {
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PreviewTopAppBar() {
     KKNeedTheme {
         val navController= rememberNavController()
-        ShopTopAppBar(64.dp,navController)
+        HomeTopAppBar(64.dp,navController)
     }
 }

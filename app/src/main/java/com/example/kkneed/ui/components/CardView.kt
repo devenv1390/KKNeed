@@ -1803,7 +1803,7 @@ fun ShopCartCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(end=4.dp)
+                .padding(end = 4.dp)
                 .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceAround
         )
@@ -1874,11 +1874,126 @@ fun ShopCartCard() {
     }
 }
 
+//首页社区卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HomeCommunityCard() {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .height(289.dp)
+            .width(250.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 1.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Column() {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12))
+                    .width(250.dp)
+                    .height(125.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(
+                modifier = Modifier
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 16.dp,
+                        bottom = 12.dp
+                    )
+                    .fillMaxSize()
+            ) {
+                androidx.compose.material3.Text(
+                    "健康食品知多少？",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.material3.Text(
+                    "你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.outline,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .width(126.dp)
+                        .height(24.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.head),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(24.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.TopCenter,
+                    )
+                    androidx.compose.material3.Text(
+                        "康康Need小顾问",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(24.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End,
+                )
+                {
+                    IconButton(onClick = {  }) {
+                        androidx.compose.material3.Icon(
+                            painter = painterResource(id = R.drawable.tabs),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
+                    androidx.compose.material3.Text(
+                        "300",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    IconButton(onClick = {  }) {
+                        androidx.compose.material3.Icon(
+                            painter = painterResource(id = R.drawable.heart),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
+                    androidx.compose.material3.Text(
+                        "300",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
+                }
+            }
+
+        }
+
+    }
+}
+
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-        ShopCartCard()
+        HomeCommunityCard()
     }
 }
 

@@ -263,9 +263,6 @@ fun ShopCartBottomBar() {
 //确认订单
 @Composable
 fun OrderBottomBar() {
-    val checkedState = remember {
-        mutableStateOf(true)
-    }
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
         tonalElevation = 0.dp,
