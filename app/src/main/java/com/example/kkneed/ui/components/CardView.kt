@@ -37,9 +37,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
 import com.example.kkneed.screen.login.RandomPosition
+import com.example.kkneed.ui.components.PieChart
+import com.example.kkneed.ui.components.PieChartInput
 import com.example.kkneed.ui.components.QuestionChip
-import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.ui.theme.LevelA
+import com.example.kkneed.ui.theme.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -1956,7 +1957,7 @@ fun HomeCommunityCard() {
                     horizontalArrangement = Arrangement.End,
                 )
                 {
-                    IconButton(onClick = {  }) {
+                    IconButton(onClick = { }) {
                         androidx.compose.material3.Icon(
                             painter = painterResource(id = R.drawable.tabs),
                             contentDescription = "Localized description",
@@ -1969,7 +1970,7 @@ fun HomeCommunityCard() {
                         color = MaterialTheme.colorScheme.outline,
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    IconButton(onClick = {  }) {
+                    IconButton(onClick = { }) {
                         androidx.compose.material3.Icon(
                             painter = painterResource(id = R.drawable.heart),
                             contentDescription = "Localized description",
@@ -1983,17 +1984,169 @@ fun HomeCommunityCard() {
                     )
                 }
             }
-
         }
-
     }
+}
+
+//首页推荐食品卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HomeFoodCard() {
+    Card(
+        modifier = Modifier
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .height(200.dp)
+            .width(188.dp),
+        elevation = 1.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(4.dp)
+            ) {
+                androidx.compose.material3.Text(
+                    "麦维他全麦粗粮酥性消化饼原味400g",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    modifier = Modifier
+                        .height(36.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.alevel),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(12))
+                            .height(45.dp)
+                            .width(84.dp),
+                        contentScale = ContentScale.Fit,
+                        alignment = Alignment.TopCenter,
+                    )
+                    IconButton(onClick = { }) {
+                        androidx.compose.material3.Icon(
+                            painter = painterResource(id = R.drawable.heart),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+//首页我的记录饼图卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HomeRecordCard() {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .height(409.dp)
+            .width(380.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 4.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            PieChart(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(269.dp),
+                input = listOf(
+                    PieChartInput(
+                        color = LevelA,
+                        value = 29,
+                        description = "A等级食品"
+                    ),
+                    PieChartInput(
+                        color = LevelB,
+                        value = 21,
+                        description = "B等级食品"
+                    ),
+                    PieChartInput(
+                        color = LevelC,
+                        value = 32,
+                        description = "C等级食品"
+                    ),
+                    PieChartInput(
+                        color = LevelD,
+                        value = 18,
+                        description = "D等级食品"
+                    ),
+                    PieChartInput(
+                        color = LevelE,
+                        value = 37,
+                        description = "E等级食品"
+                    ),
+                ),
+                centerText = "健康评分90分"
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            androidx.compose.material3.Text(
+                "最近饮食很健康。和康康一起选择健康生活！和康康一起选择健康生活！",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline,
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                GradientButton(
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(105.dp),
+                    textId = "结算",
+                    onClick = { }
+                )
+            }
+        }
+    }
+
 }
 
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-        HomeCommunityCard()
+        HomeRecordCard()
     }
 }
 
