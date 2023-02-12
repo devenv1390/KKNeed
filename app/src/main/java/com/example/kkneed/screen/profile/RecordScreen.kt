@@ -117,8 +117,6 @@ fun RecordScreen(navController: NavController) {
                 color = MaterialTheme.colorScheme.outline,
                 modifier = Modifier.padding(top = 12.dp, start = 16.dp))
             }
-
-
     }
 }
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.TextField
 import androidx.compose.material3.*
@@ -20,6 +21,9 @@ import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,6 +48,9 @@ fun SignInScreen(navController: NavController) {
     var password by remember {
         mutableStateOf("")
     }
+    val icon=if(passwordHidden)
+        painterResource(id =R.drawable.visibility )
+    else painterResource(id =R.drawable.visibilityoff )
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,6 +85,8 @@ fun SignInScreen(navController: NavController) {
         }
 
         TextField(value = email,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            singleLine = true,
             textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             modifier = Modifier
                 .height(56.dp)
@@ -105,7 +114,7 @@ fun SignInScreen(navController: NavController) {
             )
         }
         TextField(value = password,
-            textStyle = TextStyle(color =Color.White, fontSize = 15.sp),
+            singleLine = true,
             modifier = Modifier
                 .height(56.dp)
                 .fillMaxWidth(0.8f),
@@ -115,7 +124,6 @@ fun SignInScreen(navController: NavController) {
             onValueChange =
             {
                 password = it
-                println("onValue Change Password $password")
             },
             trailingIcon = {
                 IconButton(
@@ -123,9 +131,11 @@ fun SignInScreen(navController: NavController) {
                         passwordHidden = !passwordHidden
                     }
                 ){
-                    Icon(painterResource(id = R.drawable.visibility), null)
+                    Icon(painter = icon, contentDescription =null )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = if(passwordHidden) VisualTransformation.None else PasswordVisualTransformation()
         )
 
 
