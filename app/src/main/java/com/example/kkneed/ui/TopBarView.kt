@@ -5,11 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.Face
-import androidx.compose.material.icons.outlined.MoreVert
-import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -352,11 +348,35 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
     }
 }
 
+//社区顶部
+@Composable
+fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
+    NormalTopAppBar(appBarHeight) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.ArrowBack,null)
+            }
+            SearchBar()
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.Edit,null)
+            }
+        }
+    }
+}
 @Preview
 @Composable
 fun PreviewTopAppBar() {
     KKNeedTheme {
         val navController= rememberNavController()
-        HomeTopAppBar(64.dp,navController)
+        CommunityTopAppBar(64.dp,navController)
     }
 }

@@ -2048,7 +2048,7 @@ fun HomeFoodCard() {
                         androidx.compose.material3.Icon(
                             painter = painterResource(id = R.drawable.heart),
                             contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                            tint = MaterialTheme.colorScheme.outline
                         )
                     }
                 }
@@ -2133,7 +2133,7 @@ fun HomeRecordCard() {
                     modifier = Modifier
                         .height(40.dp)
                         .width(105.dp),
-                    textId = "结算",
+                    textId = "查看详情",
                     onClick = { }
                 )
             }
@@ -2142,11 +2142,93 @@ fun HomeRecordCard() {
 
 }
 
+//社区卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CommunityCard() {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .height(250.dp)
+            .width(186.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 4.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(R.drawable.head),
+                contentDescription = "",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12))
+                    .height(175.dp)
+                    .fillMaxWidth(),
+                contentScale = ContentScale.Fit,
+                alignment = Alignment.TopCenter,
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                androidx.compose.material3.Text(
+                    "健康食品知多少",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .width(126.dp)
+                            .height(24.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.head),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(24.dp),
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.TopCenter,
+                        )
+                        androidx.compose.material3.Text(
+                            "康康Need小顾问",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.outline,
+                        )
+                    }
+                    IconButton(onClick = { }) {
+                        androidx.compose.material3.Icon(
+                            painter = painterResource(id = R.drawable.heart),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.outline
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-        HomeRecordCard()
+        CommunityCard()
     }
 }
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -33,8 +34,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun TabBar() {
     val pagerState = rememberPagerState()
-    val pages = listOf("全部","待付款","待发货","待收货","待评价")
-    val coroutineScope= rememberCoroutineScope()
+    val pages = listOf("全部", "待付款", "待发货", "待收货", "待评价")
+    val coroutineScope = rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -57,8 +58,11 @@ fun TabBar() {
                 modifier = Modifier.zIndex(5f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = {coroutineScope.launch {
-                    pagerState.animateScrollToPage(index) } },
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                },
             )
         }
     }
@@ -74,11 +78,11 @@ fun TabBar() {
                 Modifier
                     .fillMaxSize()
                     .padding(top = 8.dp)
-                )
+            )
             {
-                item { OrderInfoCard("12345678910111213","待支付") }
-                item{ Spacer(modifier =Modifier.height(8.dp))}
-                item { OrderInfoCard("12345678910111213","待支付") }
+                item { OrderInfoCard("12345678910111213", "待支付") }
+                item { Spacer(modifier = Modifier.height(8.dp)) }
+                item { OrderInfoCard("12345678910111213", "待支付") }
 
 
             }
@@ -136,7 +140,7 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
 @Composable
 fun ShopSearchTabBar() {
     val pagerState = rememberPagerState()
-    val pages = listOf("综合","评分","价格","销量")
+    val pages = listOf("综合", "评分", "价格", "销量")
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -189,13 +193,14 @@ fun ShopSearchTabBar() {
 
     }
 }
+
 //我的收藏tab栏
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CollectTabBar() {
     val pagerState = rememberPagerState()
-    val pages = listOf("产品","帖子")
-    val coroutineScope= rememberCoroutineScope()
+    val pages = listOf("产品", "帖子")
+    val coroutineScope = rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -218,8 +223,11 @@ fun CollectTabBar() {
                 modifier = Modifier.zIndex(2f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = {coroutineScope.launch {
-                    pagerState.animateScrollToPage(index) } },
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                },
             )
         }
     }
@@ -230,8 +238,8 @@ fun CollectTabBar() {
         count = pages.size,
         state = pagerState,
     ) { page ->
-        when(page){
-            0->{
+        when (page) {
+            0 -> {
                 Surface(color = MaterialTheme.colorScheme.onPrimary) {
                     LazyColumn(
                         Modifier
@@ -239,42 +247,130 @@ fun CollectTabBar() {
                             .padding(top = 8.dp)
                     )
                     {
-                        item{ShopScreenMainCard()}
-                        item{ShopScreenMainCard()}
-                        item{ShopScreenMainCard()}
-                        item{ShopScreenMainCard()}
-                        item{ShopScreenMainCard()}
-                        item{ShopScreenMainCard()}
+                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard() }
                     }
                 }
             }
-            1->{Surface(color = MaterialTheme.colorScheme.onPrimary) {
-                LazyColumn(Modifier
-                    .fillMaxSize()
-                    .padding(top = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)){
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
-                    item { SmallInfoCard() }
+            1 -> {
+                Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                        item { SmallInfoCard() }
+                    }
                 }
-            }
             }
         }
 
 
     }
 }
+
+//社区的
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun CommunityTabBar() {
+    val pagerState = rememberPagerState()
+    val pages = listOf("全部", "高赞", "健康", "美食", "知识")
+    val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
+        TabRowDefaults.Indicator(
+            Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+        )
+    }
+    val indicator = @Composable { tabPositions: List<TabPosition> ->
+        CustomIndicator(tabPositions, pagerState)
+    }
+
+    TabRow(
+        modifier = Modifier
+            .height(50.dp)
+            .padding(top = 0.dp),
+        backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        selectedTabIndex = pagerState.currentPage,
+        indicator = indicator
+    ) {
+        pages.forEachIndexed { index, title ->
+            Tab(
+                modifier = Modifier.zIndex(5f),
+                text = { Text(text = title) },
+                selected = pagerState.currentPage == index,
+                onClick = { /* TODO */ },
+            )
+        }
+    }
+
+    //设置页面内容
+    HorizontalPager(
+        modifier = Modifier.fillMaxSize(),
+        count = pages.size,
+        state = pagerState,
+    ) { page ->
+        Surface(color = MaterialTheme.colorScheme.background) {
+            LazyRow(
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+            ) {
+                item {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp)
+                    )
+                    {
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp)
+                    )
+                    {
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                        item { CommunityCard() }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 @Composable
 @Preview
 fun SignUpScreenPreview() {
     KKNeedTheme {
-        ShopSearchTabBar()
+        CommunityTabBar()
     }
 }
