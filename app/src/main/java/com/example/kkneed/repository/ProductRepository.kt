@@ -14,8 +14,8 @@ class ProductRepositoryImp @Inject constructor(
 
     override suspend fun getNewProduct(barcode: String): Product {
         val code = dataSource.getProductCode(barcode).code
-        val name = dataSource.getProductCode(barcode).product.productName
-        val picture = dataSource.getProductCode(barcode).product.imageUrl
+        val name = dataSource.getProductName(barcode).product.productName
+        val picture = dataSource.getProductPic(barcode).product.imageUrl
         val product = Product(code, name, picture)
         return product
     }
