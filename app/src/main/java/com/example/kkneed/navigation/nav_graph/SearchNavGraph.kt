@@ -8,7 +8,6 @@ import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.navigation.ScannerDirection
 import com.example.kkneed.screen.search.*
-import com.example.kkneed.ui.DetailShopCard
 
 fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
     navigation(
@@ -22,7 +21,7 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
             AllScreen.ScanResult.route,
             arguments = ScannerDirection.argumentsList
         ) {
-            val (code,codeType) = ScannerDirection.parseArgumernts(it)
+            val (code,codeType) = ScannerDirection.parseArguments(it)
             ScanResultScreen(navController,code,codeType)
         }
         composable(AllScreen.Comment.route) {
