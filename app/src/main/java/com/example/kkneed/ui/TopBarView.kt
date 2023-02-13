@@ -246,7 +246,7 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
 //商城搜索顶部
 @Composable
 fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -351,7 +351,7 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
 //社区顶部
 @Composable
 fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
-    NormalTopAppBar(appBarHeight) {
+    NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -372,11 +372,35 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+
+//帖子顶部
+@Composable
+fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            BackButton(navController)
+            Text("详情")
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(Icons.Outlined.Share,null)
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PreviewTopAppBar() {
     KKNeedTheme {
         val navController= rememberNavController()
-        CommunityTopAppBar(64.dp,navController)
+        NoteTopAppBar(64.dp,navController)
     }
 }
