@@ -31,7 +31,7 @@ class ScannerDirection {
                 codeType = backStackEntry.arguments?.getString("codeType")?:"BC",
             )
         }
-        fun actionMaintoNew(code: String,codeType: String):String{
+        fun actionScanToResult(code: String, codeType: String):String{
             return "scan_result_screen?code=$code,codeType=$codeType"
         }
     }
