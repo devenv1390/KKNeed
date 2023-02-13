@@ -1,6 +1,7 @@
 package com.example.kkneed.screen.login
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
@@ -66,22 +67,20 @@ fun SignInScreen(navController: NavController) {
         val viewModel = viewModel<MainViewModel>()
         val state = viewModel.state
         val context = LocalContext.current
-        val signInState=viewModel.signInState.value
-
         LaunchedEffect(key1 = context) {
             viewModel.validationEvents.collect { event ->
-
                 when (event) {
                     is MainViewModel.ValidationEvent.Success -> {
-
-                        viewModel.signIn(
-                            email = viewModel.validateEmail.execute(state.email).toString(),
-                            password = viewModel.validateEmail.execute(state.password).toString(),
-                        )
+                        Toast.makeText(
+                            context,
+                            "Signin successful",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
         }
+
 
         Spacer(modifier = Modifier.height(30.dp))
         Spacer(modifier = Modifier.height(36.dp))
@@ -185,7 +184,8 @@ fun SignInScreen(navController: NavController) {
         GradientButton(modifier = Modifier
             .height(56.dp)
             .fillMaxWidth(0.8f),
-            textId = "登录", onClick = {println("Onclick Email $email")
+            textId = "登录", onClick = {
+                println("Onclick Email $email")
                 println("Onclick Passwod $password")}
         )
 

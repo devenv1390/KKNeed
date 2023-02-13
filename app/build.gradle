@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
 }
 
 android {
@@ -82,19 +81,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
-    //BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:30.0.1')
 
-    // Declare the dependency for the Firebase Authentication library
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.firebase:firebase-storage-ktx'
-
-    // Constraint Layout
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
-
-    // Lottie
-    implementation 'com.airbnb.android:lottie-compose:5.1.1'
 
     //测试
     testImplementation 'junit:junit:4.+'

@@ -22,9 +22,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
-import com.example.kkneed.domin.entities.Response
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -48,19 +48,18 @@ fun SignUpScreen(navController: NavController) {
             .verticalScroll(rememberScrollState())
             .background(color = MaterialTheme.colorScheme.onPrimary)
     ) {
-        val viewModel :MainViewModel= hiltViewModel()
+        val viewModel = viewModel<MainViewModel>()
         val state = viewModel.state
         val context = LocalContext.current
-        val signUpState=viewModel.signUpState.value
-
         LaunchedEffect(key1 = context) {
             viewModel.validationEvents.collect { event ->
                 when (event) {
                     is MainViewModel.ValidationEvent.Success -> {
-                        viewModel.signUp(
-                            email = viewModel.validateEmail.execute(state.email).toString(),
-                            password = viewModel.validateEmail.execute(state.password).toString(),
-                        )
+                        Toast.makeText(
+                            context,
+                            "Signup successful",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -235,36 +234,9 @@ fun SignUpScreen(navController: NavController) {
             .fillMaxWidth(0.8f),
             textId = "注册账号", onClick = {
                 viewModel.onEvent(RegistrationFormEvent.Submit)
-                println(signUpState)
                 }
         )
-        if (signUpState == Response.Loading){
-            CircularProgressIndicator(
-                modifier = Modifier.size(60.dp)
-            )
-        }
-        if (signUpState is Response.Success)
-            if (signUpState.data) {
-                LaunchedEffect(true) {
 
-                    Toast.makeText(context, "注册成功", Toast.LENGTH_LONG).show()
-
-                    navController.navigate(AllScreen.SignInfo.route) {
-                        popUpTo(AllScreen.SignIn.route) {
-                            inclusive = true
-                        }
-                    }
-                }
-            }
-
-        if (signUpState is Response.Error) {
-            LaunchedEffect(true) {
-
-                Toast.makeText(context, "注册失败", Toast.LENGTH_LONG).show()
-
-            }
-
-        }
         Spacer(modifier = Modifier.height(35.dp))
 
         Row(
