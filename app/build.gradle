@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -68,6 +70,34 @@ dependencies {
 
     //Camera Permission
     implementation "com.google.accompanist:accompanist-permissions:0.19.0"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+
+    // Room https://developer.android.com/jetpack/androidx/releases/room
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Hilt
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-beta01'
+    implementation "com.google.dagger:hilt-android:2.43.2"
+    kapt "com.google.dagger:hilt-compiler:2.43.2"
+    //解决版本指定不清的bug
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+
+    //测试
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.38.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.1'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

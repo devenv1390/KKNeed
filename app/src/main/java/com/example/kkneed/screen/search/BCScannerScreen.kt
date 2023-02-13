@@ -57,6 +57,7 @@ fun BCScannerScreen(navController: NavController) {
                 Button(
                     onClick = {
                         cameraPermissionState.launchPermissionRequest()
+//                        navController.navigate(AllScreen.ScanResult.route)
                     }
                 ) {
                     Text(text = "Camera Permission")

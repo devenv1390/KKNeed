@@ -25,7 +25,7 @@ class ScannerDirection {
                     defaultValue = "BC"
                 }
             )
-        fun parseArgumernts(backStackEntry: NavBackStackEntry):ScannerComposeArgs{
+        fun parseArguments(backStackEntry: NavBackStackEntry):ScannerComposeArgs{
             return ScannerComposeArgs(
                 code = backStackEntry.arguments?.getString("code")?:"",
                 codeType = backStackEntry.arguments?.getString("codeType")?:"BC",

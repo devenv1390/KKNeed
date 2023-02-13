@@ -22,8 +22,9 @@ import com.example.kkneed.navigation.nav_graph.*
 import com.example.kkneed.screen.MainScreen
 import com.example.kkneed.ui.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {

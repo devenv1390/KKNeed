@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.ProductViewModel
 import com.example.kkneed.ui.DetailAppBar
 import com.example.kkneed.ui.DetailBottomBar
 import com.example.kkneed.ui.DetailList
@@ -23,15 +25,22 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun ScanResultScreen(navController: NavController,code:String,codeType:String) {
+fun ScanResultScreen(
+    navController: NavController,
+    code: String,
+    codeType: String,
+    viewModel: ProductViewModel = hiltViewModel()
+) {
     Scaffold(
         topBar = {
-            DetailAppBar(appBarHeight = 64.dp, navController =navController)
+            DetailAppBar(appBarHeight = 64.dp, navController = navController)
         },
-    bottomBar = {
-        DetailBottomBar()
-    }
-    ){
+        bottomBar = {
+            DetailBottomBar()
+        }
+    ) {
+        //进行查询条码工作
+        viewModel.getProduct("3017624010701")
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -39,19 +48,20 @@ fun ScanResultScreen(navController: NavController,code:String,codeType:String) {
                 .verticalScroll(rememberScrollState())
                 .background(color = MaterialTheme.colorScheme.onPrimary)
         ) {
-            DetailList(title = "可口可乐300ml","可口可乐公司")
-            DetailChip(state = false, title = listOf("超级加工食品","减脂期适量","糖尿病适量"))
+            DetailList(title = "可口可乐300ml", "可口可乐公司")
+            DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
             Spacer(modifier = Modifier.height(12.dp))
             DetailTabBar()
 
         }
     }
 }
+
 @Preview
 @Composable
 fun ScanResultPreview() {
     KKNeedTheme {
         val navController = rememberNavController()
-        ScanResultScreen(navController,"","")
+        ScanResultScreen(navController, "", "")
     }
 }
