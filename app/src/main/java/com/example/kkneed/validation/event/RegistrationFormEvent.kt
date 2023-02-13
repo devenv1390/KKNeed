@@ -1,4 +1,5 @@
-package com.example.kkneed.validation
+package com.example.kkneed.validation.event
+
 
 sealed class RegistrationFormEvent {
     data class EmailChanged(val email: String) : RegistrationFormEvent()
@@ -11,3 +12,4 @@ sealed class RegistrationFormEvent {
 
     object Submit: RegistrationFormEvent()
 }
+

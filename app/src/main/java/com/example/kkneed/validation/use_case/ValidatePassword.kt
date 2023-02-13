@@ -1,11 +1,14 @@
 package com.example.kkneed.validation.use_case
 
+import com.example.kkneed.R
+
 class ValidatePassword {
+
     fun execute(password: String): ValidationResult {
         if(password.length < 8) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "密码长度应大于7位"
+                errorMessage = "The password needs to consist of at least 8 characters"
             )
         }
         val containsLettersAndDigits = password.any { it.isDigit() } &&
@@ -13,7 +16,7 @@ class ValidatePassword {
         if(!containsLettersAndDigits) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "密码需要包含至少一个字母和一个数字"
+                errorMessage = "The password needs to contain at least one letter and digit"
             )
         }
         return ValidationResult(

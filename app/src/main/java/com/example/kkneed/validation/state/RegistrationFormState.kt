@@ -1,4 +1,5 @@
-package com.example.kkneed.validation
+package com.example.kkneed.validation.state
+
 
 data class RegistrationFormState(
     val email: String = "",
