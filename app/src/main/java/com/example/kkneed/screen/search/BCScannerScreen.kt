@@ -160,7 +160,7 @@ fun CameraPreview(navController: NavController) {
                     barcode.rawValue?.let { barcodeValue ->
                         barCodeVal.value = barcodeValue
                         Toast.makeText(context, barcodeValue, Toast.LENGTH_SHORT).show()
-                        navController.navigate(ScannerDirection.actionMaintoNew(barCodeVal.value,"BC"))
+                        navController.navigate(ScannerDirection.actionScanToResult(barCodeVal.value,"BC"))
                         cameraProvider.shutdown()
                     }
                 }
