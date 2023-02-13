@@ -7,7 +7,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
@@ -39,63 +41,79 @@ fun HomeScreen(navController: NavController) {
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = { HomeTopAppBar(64.dp, navController) }
     ) {
-        Box(
+        Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.background)
-                .fillMaxSize(),
-            contentAlignment = Alignment.TopCenter
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .background(MaterialTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
+            Image(
+                painter = painterResource(R.drawable.shopcard),
+                contentDescription = "",
                 modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.shopcard),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(0))
-                        .height(200.dp),
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.TopCenter,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                SubTitleRow()
-                LazyRow(modifier = Modifier.padding(start = 16.dp)){
-                    item { HomeCommunityCard() }
-                    item { HomeCommunityCard() }
-                    item { HomeCommunityCard() }
-                    item { HomeCommunityCard() }
-                    item { HomeCommunityCard() }
+                    .clip(RoundedCornerShape(0))
+                    .height(200.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            SubTitleRow()
+//            Row(modifier = Modifier.padding(start = 16.dp)) {
+//                HomeCommunityCard()
+//                HomeCommunityCard()
+//                HomeCommunityCard()
+//                HomeCommunityCard()
+//            }
+            LazyRow(modifier = Modifier.padding(start = 16.dp)) {
+                item { HomeCommunityCard() }
+                item { HomeCommunityCard() }
+                item { HomeCommunityCard() }
+                item { HomeCommunityCard() }
+                item { HomeCommunityCard() }
+            }
+            SubTitleRow2()
+            HomeRecordCard()
+            SubTitleRow3()
+            Row(modifier = Modifier.fillMaxSize()) {
+                Column {
+                    HomeFoodCard()
+                    HomeFoodCard()
+                    HomeFoodCard()
+                    HomeFoodCard()
+                    HomeFoodCard()
                 }
-                SubTitleRow2()
-                HomeRecordCard()
-                SubTitleRow3()
-                Row(modifier = Modifier.fillMaxSize()) {
-                    LazyColumn(){
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    LazyColumn(){
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                        item { HomeFoodCard() }
-                    }
+//                LazyColumn() {
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Column {
+                    HomeFoodCard()
+                    HomeFoodCard()
+                    HomeFoodCard()
+                    HomeFoodCard()
+
                 }
+//                LazyColumn() {
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                    item { HomeFoodCard() }
+//                }
             }
         }
     }
 }
 
+
 //小标题栏
 @Composable
-fun SubTitleRow(){
+fun SubTitleRow() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -103,7 +121,7 @@ fun SubTitleRow(){
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(onClick = {  }) {
+        IconButton(onClick = { }) {
             Icon(
                 painter = painterResource(id = R.drawable.forum),
                 contentDescription = "Localized description",
@@ -121,8 +139,10 @@ fun SubTitleRow(){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End
         ) {
-            TextButton(onClick = {},
-                modifier = Modifier.offset(x=22.dp)) {
+            TextButton(
+                onClick = {},
+                modifier = Modifier.offset(x = 22.dp)
+            ) {
                 androidx.compose.material3.Text(
                     "查看更多",
                     style = MaterialTheme.typography.labelSmall,
@@ -141,7 +161,7 @@ fun SubTitleRow(){
 }
 
 @Composable
-fun SubTitleRow2(){
+fun SubTitleRow2() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -149,7 +169,7 @@ fun SubTitleRow2(){
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(onClick = {  }) {
+        IconButton(onClick = { }) {
             Icon(
                 painter = painterResource(id = R.drawable.visibility),
                 contentDescription = "Localized description",
@@ -166,7 +186,7 @@ fun SubTitleRow2(){
 }
 
 @Composable
-fun SubTitleRow3(){
+fun SubTitleRow3() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -174,7 +194,7 @@ fun SubTitleRow3(){
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(onClick = {  }) {
+        IconButton(onClick = { }) {
             Icon(
                 painter = painterResource(id = R.drawable.recommend),
                 contentDescription = "Localized description",
@@ -192,8 +212,10 @@ fun SubTitleRow3(){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End
         ) {
-            TextButton(onClick = {},
-                modifier = Modifier.offset(x=22.dp)) {
+            TextButton(
+                onClick = {},
+                modifier = Modifier.offset(x = 22.dp)
+            ) {
                 androidx.compose.material3.Text(
                     "进入商城",
                     style = MaterialTheme.typography.labelSmall,
