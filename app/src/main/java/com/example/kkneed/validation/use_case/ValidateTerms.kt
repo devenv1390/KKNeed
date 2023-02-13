@@ -1,12 +1,15 @@
 package com.example.kkneed.validation.use_case
 
+import com.example.kkneed.R
+
+
 class ValidateTerms {
 
     fun execute(acceptedTerms: Boolean): ValidationResult {
         if(!acceptedTerms) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "接受隐私协议才可使用APP喔"
+                errorMessage = "Please accept the terms"
             )
         }
         return ValidationResult(

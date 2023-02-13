@@ -9,6 +9,7 @@ import com.example.kkneed.navigation.WELCOME_ROUTE
 import com.example.kkneed.screen.GuideScreen
 import com.example.kkneed.screen.WelcomeScreen
 import com.example.kkneed.screen.login.*
+import com.example.kkneed.validation.MainViewModel
 
 fun NavGraphBuilder.WelcomeNavGraph(navController: NavController) {
     navigation(

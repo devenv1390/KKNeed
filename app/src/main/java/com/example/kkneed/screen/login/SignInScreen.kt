@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -27,11 +28,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.validation.MainViewModel
+import com.example.kkneed.validation.event.RegistrationFormEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -59,11 +63,27 @@ fun SignInScreen(navController: NavController) {
             .verticalScroll(rememberScrollState())
             .background(color = MaterialTheme.colorScheme.onPrimary)
     ) {
+        val viewModel = viewModel<MainViewModel>()
+        val state = viewModel.state
+        val context = LocalContext.current
+        val signInState=viewModel.signInState.value
 
+        LaunchedEffect(key1 = context) {
+            viewModel.validationEvents.collect { event ->
+
+                when (event) {
+                    is MainViewModel.ValidationEvent.Success -> {
+
+                        viewModel.signIn(
+                            email = viewModel.validateEmail.execute(state.email).toString(),
+                            password = viewModel.validateEmail.execute(state.password).toString(),
+                        )
+                    }
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(30.dp))
-
-
         Spacer(modifier = Modifier.height(36.dp))
         Text(
             text = "欢迎回到康康星球！",
@@ -84,21 +104,27 @@ fun SignInScreen(navController: NavController) {
             )
         }
 
-        TextField(value = email,
+        TextField(value =state.email,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true,
-            textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             modifier = Modifier
                 .height(56.dp)
                 .fillMaxWidth(0.8f),
             colors = TextFieldDefaults.textFieldColors(
                 unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
+            isError = state.emailError != null,
             onValueChange =
             {
-
-                email = it
-                println("onValue Change Email $email")
+                viewModel.onEvent(RegistrationFormEvent.EmailChanged(it))
             })
+        if (state.emailError != null) {
+            Text(
+                text = state.emailError,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -113,17 +139,17 @@ fun SignInScreen(navController: NavController) {
                 style =MaterialTheme.typography.titleMedium
             )
         }
-        TextField(value = password,
+        TextField(value = state.password,
             singleLine = true,
             modifier = Modifier
                 .height(56.dp)
                 .fillMaxWidth(0.8f),
             colors = TextFieldDefaults.textFieldColors(
                 unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
-
+            isError = state.passwordError != null,
             onValueChange =
             {
-                password = it
+                viewModel.onEvent(RegistrationFormEvent.PasswordChanged(it))
             },
             trailingIcon = {
                 IconButton(
@@ -137,7 +163,14 @@ fun SignInScreen(navController: NavController) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             visualTransformation = if(passwordHidden) VisualTransformation.None else PasswordVisualTransformation()
         )
-
+        if (state.passwordError != null) {
+            Text(
+                text = state.passwordError,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(

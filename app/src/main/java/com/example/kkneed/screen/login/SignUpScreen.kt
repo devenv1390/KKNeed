@@ -2,58 +2,41 @@ package com.example.kkneed.screen.login
 
 import android.annotation.SuppressLint
 import android.widget.Toast
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.TextField
 import androidx.compose.material3.*
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.domin.entities.Response
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.validation.MainViewModel
-import com.example.kkneed.validation.RegistrationFormEvent
+import com.example.kkneed.validation.event.RegistrationFormEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SignUpScreen(navController: NavController) {
-
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
     var passwordHidden by remember{ mutableStateOf(false)}
 
-    var password by remember {
-        mutableStateOf("")
-    }
     val icon=if(passwordHidden)
         painterResource(id =R.drawable.visibility )
     else painterResource(id =R.drawable.visibilityoff )
@@ -65,19 +48,19 @@ fun SignUpScreen(navController: NavController) {
             .verticalScroll(rememberScrollState())
             .background(color = MaterialTheme.colorScheme.onPrimary)
     ) {
-        val viewModel = viewModel<MainViewModel>()
+        val viewModel :MainViewModel= hiltViewModel()
         val state = viewModel.state
         val context = LocalContext.current
+        val signUpState=viewModel.signUpState.value
 
         LaunchedEffect(key1 = context) {
             viewModel.validationEvents.collect { event ->
                 when (event) {
                     is MainViewModel.ValidationEvent.Success -> {
-                        Toast.makeText(
-                            context,
-                            "Registration successful",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        viewModel.signUp(
+                            email = viewModel.validateEmail.execute(state.email).toString(),
+                            password = viewModel.validateEmail.execute(state.password).toString(),
+                        )
                     }
                 }
             }
@@ -222,7 +205,7 @@ fun SignUpScreen(navController: NavController) {
         Row(modifier=Modifier.fillMaxSize(0.8f),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start){
-            val checkedState = remember { mutableStateOf(false) }
+
             Checkbox(
                 checked = state.acceptedTerms,
                 onCheckedChange = { viewModel.onEvent(RegistrationFormEvent.AcceptTerms(it)) }
@@ -252,9 +235,36 @@ fun SignUpScreen(navController: NavController) {
             .fillMaxWidth(0.8f),
             textId = "注册账号", onClick = {
                 viewModel.onEvent(RegistrationFormEvent.Submit)
-                //navController.navigate(AllScreen.SignInfo.route)
+                println(signUpState)
                 }
         )
+        if (signUpState == Response.Loading){
+            CircularProgressIndicator(
+                modifier = Modifier.size(60.dp)
+            )
+        }
+        if (signUpState is Response.Success)
+            if (signUpState.data) {
+                LaunchedEffect(true) {
+
+                    Toast.makeText(context, "注册成功", Toast.LENGTH_LONG).show()
+
+                    navController.navigate(AllScreen.SignInfo.route) {
+                        popUpTo(AllScreen.SignIn.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            }
+
+        if (signUpState is Response.Error) {
+            LaunchedEffect(true) {
+
+                Toast.makeText(context, "注册失败", Toast.LENGTH_LONG).show()
+
+            }
+
+        }
         Spacer(modifier = Modifier.height(35.dp))
 
         Row(
