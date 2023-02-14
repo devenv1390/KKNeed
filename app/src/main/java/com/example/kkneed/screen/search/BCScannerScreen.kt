@@ -29,6 +29,7 @@ import com.example.kkneed.R
 import com.example.kkneed.model.BCAnalyzer
 import com.example.kkneed.navigation.ScannerDirection
 import com.example.kkneed.ui.BackButton
+import com.example.kkneed.ui.ScanBottomSheet
 import com.example.kkneed.ui.ScanTopAppBar
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -44,6 +45,7 @@ fun BCScannerScreen(navController: NavController) {
         backgroundColor = Color.Transparent,
         topBar = { ScanTopAppBar(64.dp, navController) }
     ){
+        ScanBottomSheet()
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(top = 50.dp))

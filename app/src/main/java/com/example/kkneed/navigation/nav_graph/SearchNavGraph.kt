@@ -25,13 +25,10 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
             ScanResultScreen(navController,code,codeType)
         }
         composable(AllScreen.Comment.route) {
-            com.example.kkneed.screen.search.CommentScreen(navController)
+            CommentScreen(navController)
         }
         composable(AllScreen.Detail.route) {
             DetailScreen(navController)
-        }
-        composable(AllScreen.ScannerCom.route) {
-            ScannerComScreen(navController)
         }
         composable(AllScreen.Compare.route) {
             CompareScreen(navController)

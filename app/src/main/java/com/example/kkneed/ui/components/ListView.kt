@@ -1,5 +1,6 @@
 package com.example.kkneed.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -128,7 +129,7 @@ fun FanList(){
 //详情页顶部列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailList(title:String,company:String){
+fun DetailList(title:String,company:String,@StringRes imageId:Int){
     ListItem(
         headlineText = {
             androidx.compose.material3.Text(

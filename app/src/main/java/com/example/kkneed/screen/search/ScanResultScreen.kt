@@ -1,6 +1,7 @@
 package com.example.kkneed.screen.search
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.ProductViewModel
+import com.example.kkneed.R
 import com.example.kkneed.ui.DetailAppBar
 import com.example.kkneed.ui.DetailBottomBar
 import com.example.kkneed.ui.DetailList
@@ -23,7 +25,7 @@ import com.example.kkneed.ui.DetailTabBar
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.KKNeedTheme
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "ResourceType")
 @Composable
 fun ScanResultScreen(
     navController: NavController,
@@ -48,7 +50,7 @@ fun ScanResultScreen(
                 .verticalScroll(rememberScrollState())
                 .background(color = MaterialTheme.colorScheme.onPrimary)
         ) {
-            DetailList(title = "可口可乐300ml", "可口可乐公司")
+            DetailList(title = "可口可乐300ml", "可口可乐公司", R.drawable.alevel)
             DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
             Spacer(modifier = Modifier.height(12.dp))
             DetailTabBar()
@@ -61,7 +63,7 @@ fun ScanResultScreen(
 @Composable
 fun ScanResultPreview() {
     KKNeedTheme {
-        val navController = rememberNavController()
-        ScanResultScreen(navController, "", "")
+        //val navController = rememberNavController()
+        //ScanResultScreen(navController, "", "","","",)
     }
 }
