@@ -280,7 +280,7 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.White),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { navController.popBackStack() }) {
                     Icon(Icons.Outlined.ArrowBack,null)
                 }
             }
@@ -294,8 +294,6 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
                     Icon(painter = painterResource(id = R.drawable.history),null)
                 }
             }
-
-
         }
     }
 }
@@ -401,6 +399,6 @@ fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
 fun PreviewTopAppBar() {
     KKNeedTheme {
         val navController= rememberNavController()
-        NoteTopAppBar(64.dp,navController)
+        ScanTopAppBar(64.dp,navController)
     }
 }

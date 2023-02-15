@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
-import com.example.kkneed.model.ButtonItemData
+import com.example.kkneed.data.ButtonItemData
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.ChangePhotoBottomSheet
 import com.example.kkneed.ui.MyTopAppBar

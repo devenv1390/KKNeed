@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.kkneed.R
-import com.example.kkneed.model.GuideScreenItemData
+import com.example.kkneed.data.GuideScreenItemData
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.CustomProgress
 import com.example.kkneed.ui.IndicatorHorizontal

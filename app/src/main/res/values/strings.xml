@@ -1,4 +1,31 @@
 <resources>
     <string name="app_name">KKNeed</string>
+    <!-- Scan screen -->
+    <string name="scan_message">请扫描二维码或条码</string>
+    <string name="scan_share_value">分享扫描到的结果</string>
+    <string name="scan_value_copied">复制扫描到的结果</string>
 
+    <!-- Scan bottom sheet -->
+    <string name="scan_sheet_web_action">打开网页</string>
+
+    <!-- Camera required dialog -->
+    <string name="camera_required_message">需要打开相机权限</string>
+    <string name="camera_required_continue_btn">继续</string>
+    <string name="camera_required_exit_btn">退出</string>
+
+    <!-- Scan formats -->
+    <string name="scan_format_qr_code">qr_code</string>
+    <string name="scan_format_aztec">aztec</string>
+    <string name="scan_format_data_matrix">data_matrix</string>
+    <string name="scan_format_pdf">pdf</string>
+    <string name="scan_format_barcode">barcode</string>
+    <string name="scan_format_code_128">code_128</string>
+    <string name="scan_format_code_93">code_93</string>
+    <string name="scan_format_code_39">code_39</string>
+    <string name="scan_format_ean_13">ean_13</string>
+    <string name="scan_format_ean_8">ean_8</string>
+    <string name="scan_format_itf">ITF</string>
+    <string name="scan_format_upc_a">UPC-A</string>
+    <string name="scan_format_upc_e">UPC-E</string>
+    <string name="scan_format_unknown">unknown</string>
 </resources>

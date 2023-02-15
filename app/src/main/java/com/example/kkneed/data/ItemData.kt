@@ -1,4 +1,4 @@
-package com.example.kkneed.model
+package com.example.kkneed.data
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector

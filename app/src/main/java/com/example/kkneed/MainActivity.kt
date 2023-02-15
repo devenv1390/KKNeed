@@ -34,6 +34,11 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             KKNeedTheme {
+                val systemUiController = rememberSystemUiController()
+
+                SideEffect {
+                    systemUiController.setSystemBarsColor(Black700, false)
+                }
                 rememberSystemUiController().setStatusBarColor(Color.Transparent, darkIcons = androidx.compose.material.MaterialTheme.colors.isLight)
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
