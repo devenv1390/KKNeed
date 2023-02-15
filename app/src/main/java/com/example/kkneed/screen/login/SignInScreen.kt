@@ -214,12 +214,12 @@ fun SignInScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Row(){
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.weixin),null)
+                Icon(painterResource(id = R.drawable.weixin),null,tint = Color.Unspecified)
 
             }
             Spacer(modifier = Modifier.width(52.dp))
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.qq),null)
+                Icon(painterResource(id = R.drawable.qq),null,tint = Color.Unspecified)
             }
         }
         Spacer(modifier = Modifier.height(25.dp))

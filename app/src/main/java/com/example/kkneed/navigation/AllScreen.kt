@@ -7,6 +7,7 @@ const val SHOP_ROUTE = "shop"
 const val DATA_ROUTE = "data"
 const val PROFILE_ROUTE = "profile"
 const val SCANNER_ROUTE = "scanner"
+const val CUSTOMIZE_ROUTE = "customize"
 const val ROOT_ROUTE = "root"
 sealed class AllScreen(val route: String){
     object Welcome:AllScreen("welcome_screen")
@@ -31,7 +32,7 @@ sealed class AllScreen(val route: String){
     object Scanner:AllScreen("scanner_screen")
     object Comment:AllScreen("comment_screen")
     object Detail:AllScreen("detail_screen")
-    object ScannerCom:AllScreen("scannercom_screen")
+    object Customize:AllScreen("customize_screen")
     object Compare:AllScreen("compare_screen")
     object Chose:AllScreen("chose_screen")
     object ScanHistory:AllScreen("scanhistory_screen")

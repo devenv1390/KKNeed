@@ -1,18 +1,19 @@
 package com.example.kkneed.ui
 
+import android.annotation.SuppressLint
+import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.Card
-import androidx.compose.material.FilterChip
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Star
@@ -20,6 +21,13 @@ import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
 import com.example.kkneed.screen.login.RandomPosition
+import com.example.kkneed.ui.components.CustomizeChip
 import com.example.kkneed.ui.components.PieChart
 import com.example.kkneed.ui.components.PieChartInput
 import com.example.kkneed.ui.components.QuestionChip
@@ -1635,7 +1644,7 @@ fun HistoryCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp) // 外边距
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(136.dp),
@@ -2224,11 +2233,313 @@ fun CommunityCard() {
     }
 }
 
+//定制页标签卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CustmizeCard() {
+    var selected=remember{ mutableStateOf(false)}
+    var visible by remember { mutableStateOf(true) }
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 154.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 20.dp),
+        verticalArrangement = Arrangement.SpaceBetween) {
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .height(50.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                       Text(
+                            "营养诉求",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.secondary,
+                        )
+                        Text(
+                            "健身",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .height(50.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            "疾病分类",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.secondary,
+                        )
+                        Text(
+                            "过敏体质",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .height(50.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            "女性关键期",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.secondary,
+                        )
+                        Text(
+                            "备孕",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .height(50.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            "其他诉求",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.secondary,
+                        )
+                        Text(
+                            "肠道健康",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                }
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+                ,verticalAlignment = Alignment.CenterVertically){
+                GradientButton(modifier = Modifier.size(247.dp,40.dp),
+                    textId = "编辑标签", onClick = {
+                        selected.value=!selected.value})
+                TextButton(onClick = { /*TODO*/ }) {
+                    Text(
+                        "重置全部",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+
+
+
+        }
+    }
+}
+//定制页健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard(title: String,@StringRes iconId:Int,@StringRes imageId:Int,description: String,description2: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically){
+            Column(modifier = Modifier.fillMaxHeight()
+                ,verticalArrangement = Arrangement.SpaceBetween) {
+
+                Row(
+                ) {
+                    Icon(painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary)
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically){
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+            Icon(painter = painterResource(id =imageId ),
+                null,modifier=Modifier.size(52.dp),tint=Color.Unspecified)
+            }
+        }
+    }
+//不带右侧图定制页健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard2(title: String,@StringRes iconId:Int,description: String,description2: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically){
+            Column(modifier = Modifier.fillMaxHeight()
+                ,verticalArrangement = Arrangement.SpaceBetween) {
+
+                Row(
+                ) {
+                    Icon(painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary)
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically){
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+
+        }
+    }
+}
+//身体测量健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard3(title: String,@StringRes iconId:Int,description: String,description2: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically){
+            Column(modifier = Modifier.fillMaxHeight()
+                ,verticalArrangement = Arrangement.SpaceBetween) {
+
+                Row(
+                ) {
+                    Icon(painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary)
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically){
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        "厘米",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        "公斤",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+
+        }
+    }
+}
+@SuppressLint("ResourceType")
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-        CommunityCard()
+        CustmizeCard()
     }
 }
 

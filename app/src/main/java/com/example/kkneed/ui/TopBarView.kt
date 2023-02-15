@@ -345,6 +345,31 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+//首页（只有文字部分）
+@Composable
+fun CustomizeTopAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+//            BackButton(navController)
+            IconButton(
+                onClick = {}
+            ) {
+            }
+            Text("定制")
+            IconButton(
+                onClick = {}
+            ) {
+            }
+        }
+    }
+}
 
 //社区顶部
 @Composable
