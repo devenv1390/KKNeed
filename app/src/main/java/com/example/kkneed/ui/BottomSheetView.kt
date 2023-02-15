@@ -3,6 +3,7 @@ package com.example.kkneed.ui
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
@@ -21,9 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
-import com.example.kkneed.ui.components.CustomizeChip
 import com.example.kkneed.model.Scan
 import com.example.kkneed.model.ScanType
+import com.example.kkneed.ui.components.CustomizeChip
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
