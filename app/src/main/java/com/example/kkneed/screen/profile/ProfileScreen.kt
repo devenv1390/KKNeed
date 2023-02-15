@@ -2,7 +2,6 @@ package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -28,7 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.model.ButtonItemData
 import com.example.kkneed.navigation.AllScreen
-import com.example.kkneed.ui.ChangeBottomSheet
+import com.example.kkneed.ui.ChangePhotoBottomSheet
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 import kotlinx.coroutines.CoroutineScope
@@ -40,40 +39,48 @@ import kotlinx.coroutines.launch
 fun ProfileScreen(navController: NavController) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    Scaffold(
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-        topBar = {
-            MyTopAppBar {}
+    ModalBottomSheetLayout(
+        sheetElevation = 16.dp,
+        sheetState = state,
+        sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        sheetContent = {
+            ChangePhotoBottomSheet(state, scope)
         }
     ) {
-        ChangeBottomSheet(state,scope)
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            Column(
-                horizontalAlignment = Alignment.Start
-            ) {
-                MyAccInfo(navController,state,scope)
-                Spacer(Modifier.size(0.dp, 24.dp))
-                MyVerticalList(navController)
-                Spacer(Modifier.size(0.dp, 24.dp))
-                MyHorizonList(navController)
+        Scaffold(
+            backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+            topBar = {
+                MyTopAppBar {}
             }
-        }
+        ) {
 
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.TopCenter
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    MyAccInfo(navController, state, scope)
+                    Spacer(Modifier.size(0.dp, 24.dp))
+                    MyVerticalList(navController)
+                    Spacer(Modifier.size(0.dp, 24.dp))
+                    MyHorizonList(navController)
+                }
+            }
+
+        }
     }
+
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: CoroutineScope) {
+fun MyAccInfo(navController: NavController, state: ModalBottomSheetState, scope: CoroutineScope) {
     Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
         Row(modifier = Modifier.padding(top = 40.dp)) {
-            Box(modifier = Modifier.size(110.dp)
-                .clickable{scope.launch { state.show() }}
-            ) {
+            Box(modifier = Modifier.size(110.dp)) {
                 Image(
                     painter = painterResource(R.drawable.head),
                     contentDescription = "",
@@ -84,7 +91,7 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     alignment = Alignment.TopCenter,
                 )
                 androidx.compose.material3.IconButton(
-                    onClick = {},
+                    onClick = { scope.launch { state.show() } },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                 ) {
@@ -102,7 +109,6 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     }
                 }
             }
-
             Column {
                 Text(
                     text = "康康NEED",
@@ -119,7 +125,7 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(
-                        onClick = {navController.navigate(AllScreen.Watch.route)},
+                        onClick = { navController.navigate(AllScreen.Watch.route) },
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -129,8 +135,9 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                         }
                     }
                     TextButton(
-                        onClick = {navController.navigate(AllScreen.Fan.route)
-                            },
+                        onClick = {
+                            navController.navigate(AllScreen.Fan.route)
+                        },
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
