@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -260,12 +261,12 @@ fun SignUpScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Row(){
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.weixin),null)
+                Icon(painterResource(id = R.drawable.weixin),null,tint = Color.Unspecified)
 
             }
             Spacer(modifier = Modifier.width(52.dp))
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.qq),null)
+                Icon(painterResource(id = R.drawable.qq),null,tint = Color.Unspecified)
             }
         }
         Spacer(modifier = Modifier.height(25.dp))

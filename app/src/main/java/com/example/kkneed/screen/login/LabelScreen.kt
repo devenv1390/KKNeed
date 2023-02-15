@@ -61,7 +61,7 @@ fun LabelScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(13.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp),
-            text = "请选择一个或多个大标签",
+            text = "请选择大标签中的小标签，无对应需求不勾选即可",
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleMedium )
         Spacer(modifier = Modifier.height(50.dp))

@@ -63,7 +63,6 @@ fun ScanResultScreen(
 @Composable
 fun ScanResultPreview() {
     KKNeedTheme {
-        //val navController = rememberNavController()
-        //ScanResultScreen(navController, "", "","","",)
+
     }
 }

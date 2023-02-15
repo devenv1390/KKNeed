@@ -52,6 +52,23 @@ fun SmallChip(state:Boolean,title: String,modifier: Modifier){
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+//定制页chip
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CustomizeChip(title: String,modifier: Modifier){
+
+    FilterChip(
+        modifier=modifier,
+        selected = true,
+        onClick = {},
+        label = { Text(title,
+            color=MaterialTheme.colorScheme.onBackground) },
+        colors = FilterChipDefaults.filterChipColors(
+            selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+        ),
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+    )
+}
 //产品详情chip组
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,6 +94,29 @@ fun DetailChip(state:Boolean,title:List<String>){
     }
 
     }
+}
+//定制页chip组
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CustomizeChip(state:Boolean,title:String){
+
+    var selected by remember { mutableStateOf(state) }
+    FilterChip(
+        selected = selected,
+        onClick = { selected = !selected },
+        label = { Text(title,
+            color=if(selected) MaterialTheme.colorScheme.onBackground else
+                MaterialTheme.colorScheme.onSurfaceVariant) },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = Color.White,
+            selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+        ),
+        leadingIcon = {
+            if(selected) AnimatedVisibility(visible = true)
+            {Icon(Icons.Default.Check,null)}
+        },
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 1.dp, selectedBorderWidth = 0.dp),
+    )
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -243,7 +283,6 @@ fun Chip(
                     tint = Color.White
                 )
             }
-
             Text(text = title, color = contentColor, fontSize = 16.sp)
 
         }
@@ -255,5 +294,6 @@ fun Chip(
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
+        CustomizeChip(false,"减肥")
     }
 }
