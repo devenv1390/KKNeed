@@ -1,6 +1,7 @@
 package com.example.kkneed.data
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class GuideScreenItemData (//引导页的item数据类
@@ -9,7 +10,7 @@ data class GuideScreenItemData (//引导页的item数据类
     val content: String,
 )
 data class ButtonItemData(
-    val image: ImageVector,
+    val icon: Painter,
     val title: String,
     val route: String
 )

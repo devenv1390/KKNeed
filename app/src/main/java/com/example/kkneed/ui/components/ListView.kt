@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -28,6 +29,8 @@ import com.example.kkneed.R
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.LevelA
 import com.example.kkneed.ui.theme.LevelE
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 //关注列表
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
@@ -308,9 +311,9 @@ fun RecordList(title:String,color:Color,navController: NavController,route:Strin
     )
 }
 //记录详情页列表
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun RecordDetailList(title:String){
+fun RecordDetailList(title:String,state:ModalBottomSheetState,scope: CoroutineScope){
     ListItem(
         colors = ListItemDefaults.colors(
             containerColor = MaterialTheme.colorScheme.onPrimary
@@ -363,7 +366,7 @@ fun RecordDetailList(title:String){
         },
 
         trailingContent = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {scope.launch { state.show() } }) {
                     Icon(
                         Icons.Filled.MoreVert,
                         contentDescription = null,
@@ -377,6 +380,6 @@ fun RecordDetailList(title:String){
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        RecordDetailList("麦维他纤维饼干")
+
     }
 }

@@ -69,7 +69,7 @@ fun ProfileScreen(navController: NavController) {
                 ) {
                     Icon(Icons.Default.Build, null, tint = Color.White)
                 }
-            }
+            },
         ) {
             Box(
                 modifier = Modifier
@@ -182,9 +182,9 @@ fun MyAccInfo(navController: NavController, state: ModalBottomSheetState, scope:
 @Composable
 fun MyVerticalList(navController: NavController) {
     val buttonItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.Record.route),
-        ButtonItemData(Icons.Default.Menu, "我的订单", AllScreen.Order.route),
-        ButtonItemData(Icons.Default.Favorite, "我的收藏", "")
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的记录", AllScreen.Record.route),
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的订单", AllScreen.Order.route),
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的收藏", "")
     )
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -206,7 +206,7 @@ fun MyVerticalList(navController: NavController) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(item.image, null)
+                            Icon(item.icon, null)
                             Spacer(modifier = Modifier.padding(vertical = 2.dp))
                             Text(item.title, style = MaterialTheme.typography.bodySmall)
                         }
@@ -220,10 +220,10 @@ fun MyVerticalList(navController: NavController) {
 @Composable
 fun MyHorizonList(navController: NavController) {
     val buttomItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "个人信息", AllScreen.PersonInfo.route),
-        ButtonItemData(Icons.Default.Menu, "我的创作", ""),
-        ButtonItemData(Icons.Default.Favorite, "我的足迹", AllScreen.History.route),
-        ButtonItemData(Icons.Default.Phone, "联系客服", "")
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "个人信息", AllScreen.PersonInfo.route),
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的创作", ""),
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的足迹", AllScreen.History.route),
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "联系客服", "")
     )
     val buttonColor = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
@@ -252,7 +252,7 @@ fun MyHorizonList(navController: NavController) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(item.image, null)
+                                Icon(item.icon, null)
                                 Spacer(modifier = Modifier.padding(5.dp, 0.dp))
                                 Text(item.title, style = MaterialTheme.typography.bodySmall)
                                 Spacer(modifier = Modifier.padding(100.dp, 0.dp))

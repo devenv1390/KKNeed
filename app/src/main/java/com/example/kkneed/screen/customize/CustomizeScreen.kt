@@ -116,9 +116,12 @@ fun CustomizeScreen(navController: NavController) {
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)){
-                    Icon(painter = painterResource(id = R.drawable.centerfocus),null)
-                    Text(text = "关注标签",style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.padding(start = 8.dp))
+                    Icon(painter = painterResource(id = R.drawable.centerfocus),
+                        null)
+                    Text(text = "关注标签",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(start = 8.dp))
                 }
                 CustmizeCard()
                 Row(modifier = Modifier
@@ -126,12 +129,16 @@ fun CustomizeScreen(navController: NavController) {
                     .padding(start = 16.dp, end = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween){
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Icon(painter = painterResource(id = R.drawable.info),null, modifier = Modifier.size(48.dp))
+                        Icon(painter = painterResource(id = R.drawable.info),null,
+                            modifier = Modifier.size(48.dp))
                         Text(text = "健康档案",style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onBackground,modifier = Modifier.padding(start = 8.dp))
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.padding(start = 8.dp))
                     }
                     IconButton(onClick = { scope.launch { state.show() } }) {
-                        Icon(painter = painterResource(id = R.drawable.modeedit), contentDescription = null, modifier = Modifier.size(48.dp))
+                        Icon(painter = painterResource(id = R.drawable.edit),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp))
                     }
                 }
                 HealthCard("健身记录",R.drawable.fire,R.drawable.sportpie,"177","千卡")
@@ -145,7 +152,8 @@ fun CustomizeScreen(navController: NavController) {
                 Row(verticalAlignment = Alignment.CenterVertically){
                     Icon(painter = painterResource(id = R.drawable.centerfocus),null)
                     Text(text = "推荐食品",style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.padding(start = 8.dp))
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(start = 8.dp))
                 }
                     Row(verticalAlignment = Alignment.CenterVertically){
                         TextButton(onClick = { navController.navigate(AllScreen.Shop.route) }) {
@@ -161,7 +169,7 @@ fun CustomizeScreen(navController: NavController) {
                 HistoryCard()
                 HistoryCard()
                 HistoryCard()
-
+                Spacer(modifier = Modifier.height(80.dp))
             }
 
         }

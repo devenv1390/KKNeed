@@ -25,6 +25,7 @@ import com.example.kkneed.R
 import com.example.kkneed.model.Scan
 import com.example.kkneed.model.ScanType
 import com.example.kkneed.ui.components.CustomizeChip
+import com.example.kkneed.ui.components.CustomizeInfoChip
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
@@ -177,7 +178,57 @@ fun ChangePhotoBottomSheet(state: ModalBottomSheetState, scope: CoroutineScope) 
             )
         }
         Box(
-            modifier = Modifier.height(12.dp)
+            modifier = Modifier
+                .height(12.dp)
+                .background(MaterialTheme.colorScheme.outline.copy(0.7f))
+                .fillMaxWidth()
+        )
+        IconButton(modifier = Modifier.height(40.dp),
+            onClick = { scope.launch { state.hide() } }) {
+            Text(
+                "取消",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+    }
+}
+//编辑产品底部栏
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun EditProductBottomSheet(state: ModalBottomSheetState, scope: CoroutineScope) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            "编辑产品",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.outline,
+            modifier = Modifier.padding(top = 12.dp)
+        )
+
+        Divider()
+        IconButton(modifier = Modifier.height(40.dp),
+            onClick = { /*TODO*/ }) {
+            Text(
+                "修改评价",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+        Divider()
+        IconButton(modifier = Modifier.height(40.dp),
+            onClick = { /*TODO*/ }) {
+            Text(
+                "删除",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
+        Box(
+            modifier = Modifier
+                .height(12.dp)
                 .background(MaterialTheme.colorScheme.outline.copy(0.7f))
                 .fillMaxWidth()
         )
@@ -249,88 +300,56 @@ fun ChoseBottomSheet(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun InfoBottomSheet(
-    //state:ModalBottomSheetState,scope:CoroutineScope
+    sheetState:BottomSheetState,scaffoldState:BottomSheetScaffoldState,scope:CoroutineScope
 ){
-
-    val sheetState = rememberBottomSheetState(
-        initialValue = BottomSheetValue.Collapsed
-    )
-    val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = sheetState
-    )
-    val scope = rememberCoroutineScope()
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
-        sheetContent = {
-            Column(modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 16.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(12.dp)){
-                    Box(modifier = Modifier.fillMaxWidth()){
-                        Text("请选择您的过敏原类型",
-                            style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSecondaryContainer,
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                        TextButton(onClick = { scope.launch { sheetState.collapse() }},
-                            modifier = Modifier.align(Alignment.CenterEnd)) {
-                            Text("完成",
-                                style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                color = MaterialTheme.colorScheme.primary,
-                                )
-                        }
-                }
-                Row(modifier=Modifier.fillMaxWidth()
-                , horizontalArrangement = Arrangement.SpaceBetween){
-                    CustomizeChip(false,"乳制品")
-                    CustomizeChip(false,"麸质")
-                    CustomizeChip(false,"坚果")
-                    CustomizeChip(false,"花生")
-                }
-                Row(modifier=Modifier.fillMaxWidth()
-                    , horizontalArrangement = Arrangement.SpaceBetween){
-                    CustomizeChip(false,"二氧化硫")
-                    CustomizeChip(false,"亚硫酸盐")
-                    CustomizeChip(false,"大豆类制品")
-                }
-                Row(modifier=Modifier.fillMaxWidth()
-                    , horizontalArrangement = Arrangement.SpaceBetween){
-                    CustomizeChip(false,"芥末")
-                    CustomizeChip(false,"芝麻")
-
-                }
-
-            }
-
-        },
-        sheetBackgroundColor = MaterialTheme.colorScheme.onPrimary,
-        sheetPeekHeight = 0.dp
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Button(onClick = {
-                scope.launch {
-                    if(sheetState.isCollapsed) {
-                        sheetState.expand()
-                    } else {
-                        sheetState.collapse()
-                    }
-                }
-            }) {
-                Text(text = "Bottom sheet fraction: ${sheetState.progress.fraction}")
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(12.dp)){
+        Box(modifier = Modifier.fillMaxWidth()){
+            Text("请选择您的过敏原类型",
+                style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier.align(Alignment.Center)
+            )
+            TextButton(onClick = { scope.launch { sheetState.collapse() }},
+                modifier = Modifier.align(Alignment.CenterEnd)) {
+                Text("完成",
+                    style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.primary,
+                )
             }
         }
+        Row(modifier=Modifier.fillMaxWidth()
+            , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+            CustomizeInfoChip(false,"乳制品")
+            CustomizeInfoChip(false,"麸质")
+            CustomizeInfoChip(false,"坚果")
+            CustomizeInfoChip(false,"花生")
+        }
+        Row(modifier=Modifier.fillMaxWidth()
+            , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+            CustomizeInfoChip(false,"二氧化硫")
+            CustomizeInfoChip(false,"亚硫酸盐")
+            CustomizeInfoChip(false,"大豆类制品")
+        }
+        Row(modifier=Modifier.fillMaxWidth()
+            , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+            CustomizeInfoChip(false,"芥末")
+            CustomizeInfoChip(false,"芝麻")
+
+        }
+        Spacer(modifier = Modifier.height(36.dp))
     }
+
+
 
 }
 @Preview
 @Composable
 fun Pre() {
     KKNeedTheme {
-        InfoBottomSheet()
+
     }
 }

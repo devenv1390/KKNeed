@@ -45,10 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
 import com.example.kkneed.screen.login.RandomPosition
-import com.example.kkneed.ui.components.CustomizeChip
-import com.example.kkneed.ui.components.PieChart
-import com.example.kkneed.ui.components.PieChartInput
-import com.example.kkneed.ui.components.QuestionChip
+import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -2237,21 +2234,20 @@ fun CommunityCard() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CustmizeCard() {
-    var selected=remember{ mutableStateOf(false)}
-    var visible by remember { mutableStateOf(true) }
+    var visible by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
-            .size(380.dp, 154.dp),
+            .width(380.dp),
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
 
         elevation = 0.dp, // 设置阴影
         onClick = {},
-        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+        backgroundColor = MaterialTheme.colorScheme.surface,
     ) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -2332,12 +2328,101 @@ fun CustmizeCard() {
                         )
                     }
                 }
-            Row(modifier = Modifier.fillMaxWidth(),
+            AnimatedVisibility(visible=visible){
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top=8.dp),
+                    backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth()
+                        .padding(vertical =8.dp, horizontal = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Column(modifier=Modifier.fillMaxWidth()){
+                            Text(
+                                "营养诉求",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"减肥")
+                                CustomizeInfoChip(true,"健身")
+                                CustomizeInfoChip(false,"增肌")
+                            }
+                        }
+                        Column(modifier=Modifier.fillMaxWidth()){
+                            Text(
+                                "疾病分类",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"糖尿病")
+                                CustomizeInfoChip(true,"高血压")
+                                CustomizeInfoChip(false,"血脂异常")
+                            }
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"痛风")
+                            }
+                        }
+                        Column(modifier=Modifier.fillMaxWidth()){
+                            Text(
+                                "女性关键期",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"备孕")
+                                CustomizeInfoChip(true,"孕期")
+                                CustomizeInfoChip(false,"哺乳期")
+                            }
+                        }
+                        Column(modifier=Modifier.fillMaxWidth()){
+                            Text(
+                                "关注成分",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"乳制品")
+                                CustomizeInfoChip(false,"麸质")
+                                CustomizeInfoChip(false,"坚果")
+                                CustomizeInfoChip(false,"花生")
+                            }
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"二氧化硫")
+                                CustomizeInfoChip(false,"亚硫酸盐")
+                                CustomizeInfoChip(false,"大豆类制品")
+                            }
+                            Row(modifier=Modifier.fillMaxWidth()
+                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                                CustomizeInfoChip(false,"芥末")
+                                CustomizeInfoChip(false,"芝麻")
+
+                            }
+                        }
+                    }
+                }
+            }
+            Row(modifier = Modifier.fillMaxWidth()
+                .padding(top=8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
                 ,verticalAlignment = Alignment.CenterVertically){
                 GradientButton(modifier = Modifier.size(247.dp,40.dp),
-                    textId = "编辑标签", onClick = {
-                        selected.value=!selected.value})
+                    textId = if(visible) "保存编辑" else "编辑标签", onClick = {
+                        visible=!visible
+                    })
                 TextButton(onClick = { /*TODO*/ }) {
                     Text(
                         "重置全部",
@@ -2346,8 +2431,6 @@ fun CustmizeCard() {
                     )
                 }
             }
-
-
 
         }
     }

@@ -52,6 +52,24 @@ fun SmallChip(state:Boolean,title: String,modifier: Modifier){
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+//过敏原chip
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AllergicChip(state:Boolean,title: String,modifier: Modifier,onClick: () -> Unit){
+    var selected by remember { mutableStateOf(state) }
+    FilterChip(
+        modifier=modifier,
+        selected = selected,
+        onClick = { selected = !selected },
+        label = { Text(title,
+            color=if(selected) Color.White else Color.Black) },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
+            selectedContainerColor = MaterialTheme.colorScheme.primary,
+        ),
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+    )
+}
 //定制页chip
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,7 +116,7 @@ fun DetailChip(state:Boolean,title:List<String>){
 //定制页chip组
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomizeChip(state:Boolean,title:String){
+fun CustomizeInfoChip(state:Boolean,title:String){
 
     var selected by remember { mutableStateOf(state) }
     FilterChip(
@@ -111,10 +129,6 @@ fun CustomizeChip(state:Boolean,title:String){
             containerColor = Color.White,
             selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         ),
-        leadingIcon = {
-            if(selected) AnimatedVisibility(visible = true)
-            {Icon(Icons.Default.Check,null)}
-        },
         border = FilterChipDefaults.filterChipBorder(borderWidth = 1.dp, selectedBorderWidth = 0.dp),
     )
 }
@@ -294,6 +308,5 @@ fun Chip(
 @Composable
 fun ChipScreen() {
     KKNeedTheme {
-        CustomizeChip(false,"减肥")
     }
 }
