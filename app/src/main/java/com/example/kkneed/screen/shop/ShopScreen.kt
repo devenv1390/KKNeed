@@ -6,9 +6,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,9 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.SCANNER_ROUTE
+import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.ShopScreenMainCard
 import com.example.kkneed.ui.ShopTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.md_theme_dark_primary
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -35,6 +41,21 @@ fun ShopScreen(navController: NavController) {
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
             ShopTopAppBar(appBarHeight = 64.dp, navController = navController)
+        },
+        bottomBar = {
+            MyBottomNavigation(navController = navController,1)
+        },
+        isFloatingActionButtonDocked = true,
+        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(SCANNER_ROUTE)
+                },
+                backgroundColor = md_theme_dark_primary
+            ) {
+                androidx.compose.material.Icon(Icons.Default.Build, null, tint = Color.White)
+            }
         }
     ) {
         Box(

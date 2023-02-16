@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                         WelcomeNavGraph(navController)
                         HomeNavGraph(navController)
                         ShopNavGraph(navController)
-                        DataNavGraph(navController)
+                        CustomizeNavGraph(navController)
                         ProfileNavGraph(navController)
                         SearchNavGraph(navController)
                     }

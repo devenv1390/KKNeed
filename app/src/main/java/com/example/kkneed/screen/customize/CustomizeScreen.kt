@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,10 +29,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.*
 import com.example.kkneed.ui.components.CustomizeChip
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.md_theme_dark_primary
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -50,7 +53,22 @@ fun CustomizeScreen(navController: NavController) {
     ) {
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.background,
-        topBar = { CustomizeTopAppBar(64.dp, navController) }
+        topBar = { CustomizeTopAppBar(64.dp, navController) },
+        bottomBar = {
+            MyBottomNavigation(navController = navController,2)
+        },
+        isFloatingActionButtonDocked = true,
+        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(SCANNER_ROUTE)
+                },
+                backgroundColor = md_theme_dark_primary
+            ) {
+                androidx.compose.material.Icon(Icons.Default.Build, null, tint = Color.White)
+            }
+        }
     ) {
         ChoseBottomSheet(state,scope)
         Column(

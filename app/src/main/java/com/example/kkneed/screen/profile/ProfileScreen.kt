@@ -27,9 +27,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.data.ButtonItemData
 import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.ui.ChangePhotoBottomSheet
+import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.md_theme_dark_primary
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -51,9 +54,23 @@ fun ProfileScreen(navController: NavController) {
             backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
             topBar = {
                 MyTopAppBar {}
+            },
+            bottomBar = {
+                MyBottomNavigation(navController = navController,3)
+            },
+            isFloatingActionButtonDocked = true,
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(SCANNER_ROUTE)
+                    },
+                    backgroundColor = md_theme_dark_primary
+                ) {
+                    Icon(Icons.Default.Build, null, tint = Color.White)
+                }
             }
         ) {
-
             Box(
                 modifier = Modifier
                     .fillMaxSize(),

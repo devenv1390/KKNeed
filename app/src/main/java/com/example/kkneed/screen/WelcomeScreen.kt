@@ -30,7 +30,7 @@ fun WelcomeScreen(navController: NavController) {
         ){
             Spacer(modifier = Modifier.padding(0.dp, 10.dp))
             Button(onClick = {
-                navController.navigate(AllScreen.Guide.route)
+                navController.navigate(AllScreen.Home.route)
             }){
                 Text("欢迎！")
             }

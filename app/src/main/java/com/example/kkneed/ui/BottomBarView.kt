@@ -9,13 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,18 +20,20 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.kkneed.R
-import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.BottomItemScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 @Composable
-fun MyBottomNavigation(navController: NavController) {//第二种设计方案，采用BottomAppBar与BottomNavigationItem结合的方式，解决了选项卡按下后没有外观变化的缺点，但动画和按键的布局范围比较难控制
-//    var selectedItem by remember { mutableStateOf(0) }
+fun MyBottomNavigation(
+    navController: NavController,
+    index: Int
+) {//第二种设计方案，采用BottomAppBar与BottomNavigationItem结合的方式，解决了选项卡按下后没有外观变化的缺点，但动画和按键的布局范围比较难控制
+    var selectedItem by remember { mutableStateOf(index) }
     val themeString = MaterialTheme.colorScheme
     val navItems = listOf(
         BottomItemScreen.Home,
         BottomItemScreen.Shop,
-        BottomItemScreen.Data,
+        BottomItemScreen.Customize,
         BottomItemScreen.Profile
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -47,17 +45,28 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
         backgroundColor = themeString.background,
         modifier = Modifier.navigationBarsPadding()
     ) {
-//        items.forEachIndexed{index, item ->
+//        navItems.forEachIndexed { index, item ->
 //            BottomNavigationItem(
 //                selected = selectedItem == index,
-//                onClick = {selectedItem = index},
-//                icon = { Icon(item.icon,null)},
+//                onClick = {
+//                    selectedItem = index
+//                    navController.navigate(navItems[index].route) {
+//                        popUpTo(navController.graph.findStartDestination().id) {
+//                            saveState = true
+//                        }
+//                        launchSingleTop = true
+//                        restoreState = true
+//                    }
+//                },
+//                icon = { Icon(item.icon, null) },
 //                alwaysShowLabel = false,
-//                label = { Text(item.name)},
+//                selectedContentColor = MaterialTheme.colorScheme.primary,
+//                unselectedContentColor = MaterialTheme.colorScheme.secondaryContainer,
+//                label = { Text(item.title) },
 //            )
 //        }//不能采用遍历的方式创建导航选项卡，因为选项卡需要单独设置间隔值
         BottomNavigationItem(
-            selected = currentRoute == navItems[0].route,
+            selected = selectedItem == 0,
             onClick = {
                 navController.navigate(navItems[0].route) {
                     popUpTo(navController.graph.findStartDestination().id) {
@@ -72,10 +81,10 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
             unselectedContentColor = MaterialTheme.colorScheme.secondaryContainer,
             alwaysShowLabel = false,
             label = { Text(navItems[0].title) },
-            modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
+            modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp)
         )
         BottomNavigationItem(
-            selected = currentRoute == navItems[1].route,
+            selected = selectedItem == 1,
             onClick = {
                 navController.navigate(navItems[1].route) {
                     popUpTo(navController.graph.findStartDestination().id) {
@@ -93,7 +102,7 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
             modifier = Modifier.padding(0.dp, 0.dp, 40.dp, 0.dp)
         )
         BottomNavigationItem(
-            selected = currentRoute == navItems[2].route,
+            selected = selectedItem == 2,
             onClick = {
                 navController.navigate(navItems[2].route) {
                     popUpTo(navController.graph.findStartDestination().id) {
@@ -111,7 +120,7 @@ fun MyBottomNavigation(navController: NavController) {//第二种设计方案，
             modifier = Modifier.padding(40.dp, 0.dp, 0.dp, 0.dp)
         )
         BottomNavigationItem(
-            selected = currentRoute == navItems[3].route,
+            selected = selectedItem == 3,
             onClick = {
                 navController.navigate(navItems[3].route) {
                     popUpTo(navController.graph.findStartDestination().id) {
@@ -302,6 +311,7 @@ fun OrderBottomBar() {
         }
     )
 }
+
 @Preview
 @Composable
 fun BottomBarScreen() {

@@ -4,7 +4,6 @@ package com.example.kkneed.navigation
 const val WELCOME_ROUTE = "welcome"
 const val HOME_ROUTE = "home"
 const val SHOP_ROUTE = "shop"
-const val DATA_ROUTE = "data"
 const val PROFILE_ROUTE = "profile"
 const val SCANNER_ROUTE = "scanner"
 const val CUSTOMIZE_ROUTE = "customize"

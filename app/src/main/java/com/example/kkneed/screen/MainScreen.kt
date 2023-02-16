@@ -11,8 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.*
+import com.example.kkneed.screen.customize.CustomizeScreen
 import com.example.kkneed.screen.profile.ProfileScreen
-import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -26,9 +26,9 @@ fun MainScreen(navController: NavController) {
         snackbarHost = {
             scaffoldState.snackbarHostState
         },
-        bottomBar = {
-            MyBottomNavigation(navController = navMainController)
-        },
+//        bottomBar = {
+//            MyBottomNavigation(navController = navMainController)
+//        },
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
@@ -52,8 +52,8 @@ fun MainScreen(navController: NavController) {
             composable(SHOP_ROUTE) {
                 ShopScreen(navController)
             }
-            composable(DATA_ROUTE) {
-                DataScreen(navController)
+            composable(CUSTOMIZE_ROUTE) {
+                CustomizeScreen(navController)
             }
             composable(PROFILE_ROUTE) {
                 ProfileScreen(navController)
