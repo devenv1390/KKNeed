@@ -13,13 +13,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.ROOT_ROUTE
 import com.example.kkneed.navigation.WELCOME_ROUTE
 import com.example.kkneed.navigation.nav_graph.*
-import com.example.kkneed.screen.MainScreen
 import com.example.kkneed.ui.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,9 +44,6 @@ class MainActivity : ComponentActivity() {
                         startDestination = WELCOME_ROUTE,
                         route = ROOT_ROUTE
                     ){
-                        composable(AllScreen.Main.route){
-                            MainScreen(navController)
-                        }
                         WelcomeNavGraph(navController)
                         HomeNavGraph(navController)
                         ShopNavGraph(navController)
