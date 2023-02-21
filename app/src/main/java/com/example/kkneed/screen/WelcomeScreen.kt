@@ -28,6 +28,7 @@ fun WelcomeScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
         ){
+
             Spacer(modifier = Modifier.padding(0.dp, 10.dp))
             Button(onClick = {
                 navController.navigate(AllScreen.Home.route)

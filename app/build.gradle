@@ -6,8 +6,18 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\light\\AndroidStudioProjects\\kkneed.jks')
+            storePassword 'scutscut'
+            keyAlias 'key0'
+            keyPassword 'scutscut'
+        }
+    }
     namespace 'com.example.kkneed'
     compileSdk 33
+
+
 
     defaultConfig {
         applicationId "com.example.kkneed"
@@ -15,6 +25,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

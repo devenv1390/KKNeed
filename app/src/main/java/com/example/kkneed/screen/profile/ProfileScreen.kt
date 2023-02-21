@@ -67,7 +67,8 @@ fun ProfileScreen(navController: NavController) {
                     },
                     backgroundColor = md_theme_dark_primary
                 ) {
-                    Icon(Icons.Default.Build, null, tint = Color.White)
+                    Icon(painter = painterResource(id =R.drawable.barcode_scanner), null, tint = Color.White,
+                    modifier = Modifier.height(24.dp))
                 }
             },
         ) {
@@ -79,6 +80,7 @@ fun ProfileScreen(navController: NavController) {
                 Column(
                     horizontalAlignment = Alignment.Start
                 ) {
+
                     MyAccInfo(navController, state, scope)
                     Spacer(Modifier.size(0.dp, 24.dp))
                     MyVerticalList(navController)
@@ -99,7 +101,7 @@ fun MyAccInfo(navController: NavController, state: ModalBottomSheetState, scope:
         Row(modifier = Modifier.padding(top = 40.dp)) {
             Box(modifier = Modifier.size(110.dp)) {
                 Image(
-                    painter = painterResource(R.drawable.head),
+                    painter = painterResource(R.drawable.profile),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(24.dp))
@@ -182,9 +184,9 @@ fun MyAccInfo(navController: NavController, state: ModalBottomSheetState, scope:
 @Composable
 fun MyVerticalList(navController: NavController) {
     val buttonItems = listOf<ButtonItemData>(
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的记录", AllScreen.Record.route),
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的订单", AllScreen.Order.route),
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的收藏", "")
+        ButtonItemData(painterResource(id = R.drawable.record), "我的记录", AllScreen.Record.route),
+        ButtonItemData(painterResource(id = R.drawable.shop), "我的订单", AllScreen.Order.route),
+        ButtonItemData(painterResource(id = R.drawable.collect), "我的收藏", AllScreen.Collect.route)
     )
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -206,8 +208,8 @@ fun MyVerticalList(navController: NavController) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(item.icon, null)
-                            Spacer(modifier = Modifier.padding(vertical = 2.dp))
+                            Icon(item.icon, null, modifier = Modifier.size(24.dp))
+                            Spacer(modifier = Modifier.padding(vertical =4.dp))
                             Text(item.title, style = MaterialTheme.typography.bodySmall)
                         }
                     }
@@ -221,9 +223,9 @@ fun MyVerticalList(navController: NavController) {
 fun MyHorizonList(navController: NavController) {
     val buttomItems = listOf<ButtonItemData>(
         ButtonItemData(painterResource(id = R.drawable.person_circle), "个人信息", AllScreen.PersonInfo.route),
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的创作", ""),
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "我的足迹", AllScreen.History.route),
-        ButtonItemData(painterResource(id = R.drawable.person_circle), "联系客服", "")
+        ButtonItemData(painterResource(id = R.drawable.write), "我的创作", AllScreen.Create.route),
+        ButtonItemData(painterResource(id = R.drawable.history), "我的足迹", AllScreen.History.route),
+        ButtonItemData(painterResource(id = R.drawable.service), "联系客服", "")
     )
     val buttonColor = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
