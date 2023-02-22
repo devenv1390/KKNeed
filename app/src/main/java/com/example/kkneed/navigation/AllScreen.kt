@@ -13,7 +13,6 @@ sealed class AllScreen(val route: String){
     object Guide:AllScreen("guide_screen")
     object Home:AllScreen("home_screen")
     object Shop:AllScreen("shop_screen")
-    object Data:AllScreen("data_screen")
     object Profile:AllScreen("profile_screen")
     object Main:AllScreen("main_screen")
     object History:AllScreen("history_screen")
@@ -47,4 +46,5 @@ sealed class AllScreen(val route: String){
     object SearchCommunity:AllScreen("searchcommunity_screen")
     object Create:AllScreen("create_screen")
     object ScanResult:AllScreen(ScannerDirection.route)
+    object Result:AllScreen("result_screen")
 }

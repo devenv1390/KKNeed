@@ -53,7 +53,7 @@ fun ResultScreen(
                     )
             }
             item {
-                DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
+                DetailChip(state = false, title = product.tracesTags)
             }
             item {
                 Spacer(modifier = Modifier.height(12.dp))

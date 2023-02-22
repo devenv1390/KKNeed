@@ -1,7 +1,6 @@
 package com.example.kkneed.ui
 
 
-import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
@@ -12,21 +11,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.kkneed.screen.login.SignInScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
@@ -86,7 +79,6 @@ fun TabBar() {
                     )
                     {
                         item { OrderInfoCard("12345678910111213", "待支付") }
-
                         item { OrderInfoCard1("12345678910111213", "运输中") }
                         item { OrderInfoCard2("12345678910111213", "已完成") }
                         item { OrderInfoCard3("12345678910111213", "待发货") }
@@ -382,7 +374,6 @@ fun CommunityTabBar(navController: NavController) {
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
         )
     }
-    val coroutineScope = rememberCoroutineScope()
     val indicator = @Composable { tabPositions: List<TabPosition> ->
         CustomIndicator(tabPositions, pagerState)
     }
@@ -426,7 +417,7 @@ fun CommunityTabBar(navController: NavController) {
                             .padding(top = 8.dp)
                     )
                     {
-                        item { CommunityCard(navController  ) }
+                        item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
