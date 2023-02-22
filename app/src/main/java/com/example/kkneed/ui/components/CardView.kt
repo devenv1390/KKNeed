@@ -41,9 +41,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
@@ -243,6 +245,388 @@ fun OrderInfoCard(
     }
 }
 
+
+//订单状态运输中卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard1(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "确认收货",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
+//订单状态已完成卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard2(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "评价",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
+//订单状态已完成卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard3(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.inversePrimary
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "催发货",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
 //商品小卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -2156,11 +2540,11 @@ fun HomeRecordCard() {
 //社区卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommunityCard() {
+fun CommunityCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
-            .clickable { }
+            .clickable {navController.navigate(AllScreen.NoteDetail.route) }
             .clip(RoundedCornerShape(12.dp))
             .height(250.dp)
             .width(186.dp),

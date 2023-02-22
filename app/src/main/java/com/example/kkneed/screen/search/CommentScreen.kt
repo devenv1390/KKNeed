@@ -65,13 +65,8 @@ fun CommentScreen(navController: NavController) {
         }
     })
     {
-
-
         ChipGroupCompose(listState)
         //progressBar()
-
-
-
 
     }
 }

@@ -387,9 +387,9 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
             ) {
                 Icon(Icons.Outlined.ArrowBack,null)
             }
-            SearchBar()
+            CommunitySearchBar(navController)
             IconButton(
-                onClick = {}
+                onClick = {navController.navigate(AllScreen.EditNote.route)}
             ) {
                 Icon(Icons.Outlined.Edit,null)
             }

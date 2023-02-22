@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.BottomItemScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 
@@ -142,6 +143,7 @@ fun MyBottomNavigation(
 
 @Composable
 fun DetailBottomBar() {
+    var selected by remember { mutableStateOf(false) }
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
         tonalElevation = 0.dp,
@@ -162,7 +164,7 @@ fun DetailBottomBar() {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { AllScreen.Compare.route }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.compare),
                         contentDescription = "Localized description",
@@ -176,12 +178,26 @@ fun DetailBottomBar() {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = {
+                        selected=!selected
+                }) {
+                    if(selected)
+                {
                     androidx.compose.material3.Icon(
+
                         painter = painterResource(id = R.drawable.star),
                         contentDescription = "Localized description",
                         tint = MaterialTheme.colorScheme.secondaryContainer
                     )
+                }
+                    else{
+                        androidx.compose.material3.Icon(
+
+                            painter = painterResource(id = R.drawable.fillstar),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.secondaryContainer
+                        )
+                    }
                 }
                 Text(
                     "1811",
@@ -190,7 +206,7 @@ fun DetailBottomBar() {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { AllScreen.Comment.route }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.chat),
                         contentDescription = "Localized description",

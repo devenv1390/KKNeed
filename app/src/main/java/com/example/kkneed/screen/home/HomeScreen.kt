@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.ui.*
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -75,7 +76,7 @@ fun HomeScreen(navController: NavController) {
                 alignment = Alignment.TopCenter,
             )
             Spacer(modifier = Modifier.height(8.dp))
-            SubTitleRow()
+            SubTitleRow(navController)
 //            Row(modifier = Modifier.padding(start = 16.dp)) {
 //                HomeCommunityCard()
 //                HomeCommunityCard()
@@ -91,7 +92,7 @@ fun HomeScreen(navController: NavController) {
             }
             SubTitleRow2()
             HomeRecordCard()
-            SubTitleRow3()
+            SubTitleRow3(navController)
             Row(modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.Center) {
@@ -132,7 +133,7 @@ fun HomeScreen(navController: NavController) {
 
 //小标题栏
 @Composable
-fun SubTitleRow() {
+fun SubTitleRow(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -158,7 +159,7 @@ fun SubTitleRow() {
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(
-                onClick = {},
+                onClick = {navController.navigate(AllScreen.Community.route)},
                 modifier = Modifier.offset(x = 22.dp)
             ) {
                 androidx.compose.material3.Text(
@@ -167,7 +168,7 @@ fun SubTitleRow() {
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = { navController.navigate(AllScreen.Community.route) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.chevron_right),
                     contentDescription = "Localized description",
@@ -204,7 +205,7 @@ fun SubTitleRow2() {
 }
 
 @Composable
-fun SubTitleRow3() {
+fun SubTitleRow3(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -241,7 +242,7 @@ fun SubTitleRow3() {
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = { }) {
                 Icon(
                     painter = painterResource(id = R.drawable.chevron_right),
                     contentDescription = "Localized description",
