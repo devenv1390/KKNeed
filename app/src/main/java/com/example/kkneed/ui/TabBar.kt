@@ -141,6 +141,7 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
 fun ShopSearchTabBar() {
     val pagerState = rememberPagerState()
     val pages = listOf("综合", "评分", "价格", "销量")
+    val coroutineScope = rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -163,7 +164,11 @@ fun ShopSearchTabBar() {
                 modifier = Modifier.zIndex(4f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = { /* TODO */ },
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                },
             )
         }
     }
@@ -289,6 +294,7 @@ fun CollectTabBar() {
 fun CommunityTabBar() {
     val pagerState = rememberPagerState()
     val pages = listOf("全部", "高赞", "健康", "美食", "知识")
+    val coroutineScope = rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -311,7 +317,9 @@ fun CommunityTabBar() {
                 modifier = Modifier.zIndex(5f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = { /* TODO */ },
+                onClick = { coroutineScope.launch {
+                    pagerState.animateScrollToPage(index)
+                } },
             )
         }
     }
