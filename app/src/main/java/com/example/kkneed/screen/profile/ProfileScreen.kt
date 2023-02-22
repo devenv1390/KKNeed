@@ -254,7 +254,7 @@ fun MyHorizonList(navController: NavController) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(item.icon, null)
+                                Icon(item.icon, null, modifier = Modifier.size(24.dp))
                                 Spacer(modifier = Modifier.padding(5.dp, 0.dp))
                                 Text(item.title, style = MaterialTheme.typography.bodySmall)
                                 Spacer(modifier = Modifier.padding(100.dp, 0.dp))
@@ -275,6 +275,7 @@ fun MyHorizonList(navController: NavController) {
                     .size(360.dp, 56.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
+
                 Button(
                     onClick = {
                         navController.navigate("")
@@ -285,7 +286,7 @@ fun MyHorizonList(navController: NavController) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(Icons.Default.Settings, null)
+                        Icon(Icons.Default.Settings, null,modifier = Modifier.size(24.dp))
                         Spacer(modifier = Modifier.padding(5.dp, 0.dp))
                         Text("设置", style = MaterialTheme.typography.bodySmall)
                         Spacer(modifier = Modifier.padding(112.dp, 0.dp))

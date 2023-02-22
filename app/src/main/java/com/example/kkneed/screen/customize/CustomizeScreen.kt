@@ -161,13 +161,18 @@ fun CustomizeScreen(navController: NavController) {
                         modifier = Modifier.padding(start = 8.dp))
                 }
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        TextButton(onClick = { navController.navigate(AllScreen.Shop.route) }) {
+                        TextButton(onClick = {
+                            navController.navigate(AllScreen.Shop.route)
+                        }) {
                             Text(text = "进入商城",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.primary)
                         }
-                        Icon(Icons.Default.KeyboardArrowRight,null,modifier = Modifier.size(24.dp),
-                        tint=MaterialTheme.colorScheme.primary)
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(Icons.Default.KeyboardArrowRight,null,modifier = Modifier.size(24.dp),
+                                tint=MaterialTheme.colorScheme.primary)
+                        }
+
                     }
 
                 }

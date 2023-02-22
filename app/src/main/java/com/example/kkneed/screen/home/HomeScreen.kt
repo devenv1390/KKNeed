@@ -13,10 +13,7 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -34,7 +32,7 @@ import com.example.kkneed.ui.*
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "ResourceType")
 @Composable
 fun HomeScreen(navController: NavController) {
     Scaffold(
@@ -66,13 +64,12 @@ fun HomeScreen(navController: NavController) {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .background(MaterialTheme.colorScheme.background),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.shopcard),
+                painter = painterResource(R.drawable.banner),
                 contentDescription = "",
                 modifier = Modifier
-                    .clip(RoundedCornerShape(0))
+                    .clip(RoundedCornerShape(12.dp))
                     .height(200.dp),
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.TopCenter,
@@ -86,16 +83,18 @@ fun HomeScreen(navController: NavController) {
 //                HomeCommunityCard()
 //            }
             LazyRow(modifier = Modifier.padding(start = 16.dp)) {
-                item { HomeCommunityCard() }
-                item { HomeCommunityCard() }
-                item { HomeCommunityCard() }
-                item { HomeCommunityCard() }
-                item { HomeCommunityCard() }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
+                item { HomeCommunityCard(R.drawable.guominyuan,"过敏食物分享","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
+                item { HomeCommunityCard(R.drawable.tangniaobing,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
             }
             SubTitleRow2()
             HomeRecordCard()
             SubTitleRow3()
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.Center) {
                 Column {
                     HomeFoodCard()
                     HomeFoodCard()
@@ -140,20 +139,19 @@ fun SubTitleRow() {
             .height(48.dp)
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        IconButton(onClick = { }) {
-            Icon(
-                painter = painterResource(id = R.drawable.forum),
-                contentDescription = "Localized description",
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(24.dp)
-            )
+
+        Row(verticalAlignment = Alignment.CenterVertically,
+            ){
+            Icon(painter = painterResource(id = R.drawable.forum),
+                null,modifier=Modifier.size(24.dp))
+            Text(text = "康康社区",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(start = 8.dp))
         }
-        androidx.compose.material3.Text(
-            "康康社区",
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
@@ -166,14 +164,14 @@ fun SubTitleRow() {
                 androidx.compose.material3.Text(
                     "查看更多",
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.outline,
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
             IconButton(onClick = { /* doSomething() */ }) {
                 Icon(
                     painter = painterResource(id = R.drawable.chevron_right),
                     contentDescription = "Localized description",
-                    tint = MaterialTheme.colorScheme.outline
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -189,19 +187,19 @@ fun SubTitleRow2() {
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(onClick = { }) {
+        Row(verticalAlignment = Alignment.CenterVertically,
+        ){
             Icon(
                 painter = painterResource(id = R.drawable.visibility),
                 contentDescription = "Localized description",
                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.size(24.dp)
             )
+            Text(text = "我的记录",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(start = 8.dp))
         }
-        androidx.compose.material3.Text(
-            "我的记录",
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurface
-        )
     }
 }
 
@@ -213,20 +211,21 @@ fun SubTitleRow3() {
             .height(48.dp)
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
+
     ) {
-        IconButton(onClick = { }) {
+        Row(verticalAlignment = Alignment.CenterVertically,
+        ){
             Icon(
                 painter = painterResource(id = R.drawable.recommend),
                 contentDescription = "Localized description",
                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.size(24.dp)
             )
+            Text(text = "推荐食品",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(start = 8.dp))
         }
-        androidx.compose.material3.Text(
-            "推荐食品",
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurface
-        )
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
@@ -239,14 +238,14 @@ fun SubTitleRow3() {
                 androidx.compose.material3.Text(
                     "进入商城",
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.outline,
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
             IconButton(onClick = { /* doSomething() */ }) {
                 Icon(
                     painter = painterResource(id = R.drawable.chevron_right),
                     contentDescription = "Localized description",
-                    tint = MaterialTheme.colorScheme.outline
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

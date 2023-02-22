@@ -107,7 +107,8 @@ fun NoteDetailScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 //图片部分
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth()
+                , horizontalArrangement = Arrangement.Center) {
                     Image(
                         painter = painterResource(R.drawable.head),
                         contentDescription = "",
@@ -129,7 +130,7 @@ fun NoteDetailScreen(navController: NavController) {
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                     Image(
                         painter = painterResource(R.drawable.head),
                         contentDescription = "",

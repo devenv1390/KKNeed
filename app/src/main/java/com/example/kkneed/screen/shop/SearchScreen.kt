@@ -50,17 +50,17 @@ fun SearchScreen(navController: NavController) {
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("可口可乐") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("鸡胸肉") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("轻零食") }
                     )
                 }
             }
@@ -77,17 +77,17 @@ fun SearchScreen(navController: NavController) {
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("饼干") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("脱脂牛奶") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("低卡饮品") }
                     )
                 }
             }

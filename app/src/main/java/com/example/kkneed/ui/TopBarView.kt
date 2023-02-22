@@ -169,7 +169,7 @@ fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Default.Call, null)
+                Icon(painter = painterResource(id = R.drawable.service), null)
             }
         }
     }
@@ -258,7 +258,7 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
             ) {
                 Icon(Icons.Outlined.ArrowBack,null)
             }
-            SearchBar()
+            ShopSearchBar(navController)
             TextButton(onClick = {}) {
                 Text("搜索")
             }
@@ -337,7 +337,7 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
                 onClick = {}
             ) {
             }
-            Text("首页")
+            Text("康康Need")
             IconButton(
                 onClick = {}
             ) {

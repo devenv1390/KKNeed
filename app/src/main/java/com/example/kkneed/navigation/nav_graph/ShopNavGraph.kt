@@ -7,6 +7,7 @@ import androidx.navigation.navigation
 import com.example.kkneed.screen.ShopScreen
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.SHOP_ROUTE
+import com.example.kkneed.screen.shop.SearchScreen
 
 fun NavGraphBuilder.ShopNavGraph(navController: NavController){
     navigation(
@@ -15,6 +16,9 @@ fun NavGraphBuilder.ShopNavGraph(navController: NavController){
     ){
         composable(AllScreen.Shop.route){
             ShopScreen(navController)
+        }
+        composable(AllScreen.Search.route){
+            SearchScreen(navController)
         }
     }
 }
