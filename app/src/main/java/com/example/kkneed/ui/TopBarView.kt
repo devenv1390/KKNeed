@@ -4,10 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
 @Composable
@@ -29,10 +30,10 @@ fun MyTopAppBar(content: @Composable () -> Unit) {
     //标题栏高度
     val appBarHeight = 56.dp
     //状态栏颜色读取
-//    val systemUiController = rememberSystemUiController()
-//    LaunchedEffect(key1 = Unit) {
-//        systemUiController.setStatusBarColor(Color.Transparent)
-//    }
+    val systemUiController = rememberSystemUiController()
+    LaunchedEffect(key1 = Unit) {
+        systemUiController.setStatusBarColor(Color.Transparent,true)
+    }
     //状态栏高度
     val statusBarHeightDp = LocalDensity.current.run {
         WindowInsets.statusBars.getTop(this).toDp()
@@ -81,6 +82,10 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
     val statusBarHeightDp = LocalDensity.current.run {
         WindowInsets.statusBars.getTop(this).toDp()
     }
+    val systemUiController = rememberSystemUiController()
+    LaunchedEffect(key1 = Unit) {
+        systemUiController.setStatusBarColor(Color.Transparent,true)
+    }
     Row(
         modifier = Modifier
             .background(
@@ -106,6 +111,10 @@ fun NormalTopAppBar2(appBarHeight: Dp, content: @Composable () -> Unit) {
     //状态栏高度
     val statusBarHeightDp = LocalDensity.current.run {
         WindowInsets.statusBars.getTop(this).toDp()
+    }
+    val systemUiController = rememberSystemUiController()
+    LaunchedEffect(key1 = Unit) {
+        systemUiController.setStatusBarColor(Color.Transparent,false)
     }
     Row(
         modifier = Modifier
