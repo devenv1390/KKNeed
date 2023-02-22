@@ -58,8 +58,8 @@ fun ChoseScreen(
                 val product = products[auxIndex]
                 HistoryCard(
                     navController = navController,
-                    productName = product.product_name,
-                    productImage = product.image_url,
+                    productName = product.productName,
+                    productImage = product.imageUrl,
                     productCode = product.code
                 )
             }

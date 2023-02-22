@@ -161,7 +161,7 @@ private fun ScannerScreen(
                         var flag:Boolean = false
                         try {
                             val product = viewModel.queryProduct(it.displayValue)
-                            Log.d("RES",product.product_name)
+                            Log.d("RES",product.productName)
                         }catch (_:Exception){
                             flag = true
                         }

@@ -115,8 +115,8 @@ fun ScanHistoryScreen(
                     // ”前景“ 显示的内容
                     HistoryCard(
                         navController = navController,
-                        productName = product.product_name,
-                        productImage = product.image_url,
+                        productName = product.productName,
+                        productImage = product.imageUrl,
                         productCode = product.code
                     )
                 }

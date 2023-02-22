@@ -53,9 +53,9 @@ fun ScanResultScreen(
             ) {
                 item {
                     DetailList(
-                        title = tempProduct.product_name,
+                        title = tempProduct.productName,
                         company = tempProduct.brands,
-                        tempProduct.image_url
+                        tempProduct.imageUrl
                     )
                 }
                 item {

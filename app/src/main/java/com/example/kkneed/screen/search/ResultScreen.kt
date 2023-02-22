@@ -48,9 +48,9 @@ fun ResultScreen(
         ) {
             item {
                     DetailList(
-                        title = product.product_name,
+                        title = product.productName,
                         company = product.brands,
-                        product.image_url
+                        product.imageUrl
                     )
             }
             item {

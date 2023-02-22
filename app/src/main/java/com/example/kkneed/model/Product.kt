@@ -6,9 +6,10 @@ import androidx.room.*
 @Entity(tableName = "product")
 data class Product(
     @ColumnInfo(name = "code") val code: String,
-    @ColumnInfo(name = "product_name") val product_name: String,
-    @ColumnInfo(name = "image") val image_url: String,
+    @ColumnInfo(name = "name") val productName: String,
+    @ColumnInfo(name = "image") val imageUrl: String,
     @ColumnInfo(name = "brands") val brands: String,
+    @ColumnInfo(name = "nutriscore")val nutriScoreGrade:String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
 @Dao
