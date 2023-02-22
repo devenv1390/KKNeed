@@ -67,31 +67,34 @@ fun ShopScreen(navController: NavController) {
             }
         }
     ) {
-        Box(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.background)
-                .fillMaxSize()
-                .padding(top=8.dp),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            Column(
+        Column(modifier = Modifier.fillMaxSize()){
+            Box(
                 modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .background(MaterialTheme.colorScheme.background)
+                    .fillMaxWidth()
+                    .padding(top=8.dp),
+                contentAlignment = Alignment.TopCenter
             ) {
-                Image(
-                    painter = painterResource(R.drawable.shopcard),
-                    contentDescription = "",
+                Column(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp))
-                        .height(200.dp),
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.TopCenter,
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                ShopIconGroupCompose(listState)
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.shopcard),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(12.dp))
+                            .height(200.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.TopCenter,
+                    )
+
+                }
             }
+            ShopIconGroupCompose(listState)
         }
+
     }
 }
 

@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     private val productRepo: ProductRepository
-) : ViewModel() {
+):ViewModel() {
 
     private val _isLoading: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
@@ -24,28 +24,26 @@ class ProductViewModel @Inject constructor(
         productRepo.getAllProduct()
     }
 
-    val nowProduct: LiveData<Product> by lazy {
+    val product:LiveData<Product> by lazy {
         productRepo.getOneAllProduct()
     }
 
-    fun queryProduct(barcode: String):Product{
-        return productRepo.queryProductCode(barcode)
-    }
-
-    var barcode: String = ""
+    val result = products
 
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    fun addProduct(barcode: String) {
-        if (_isLoading.value == false)
+    fun addProduct(barcode:String): Product {
+        var product = Product("code", "name", "https://images.openfoodfacts.net/images/products/301/762/401/0701/front_en.54.100.jpg", "brands")
+        if (_isLoading.value==false)
             viewModelScope.launch(Dispatchers.IO) {
                 _isLoading.postValue(true)
-                productRepo.getNewProduct(barcode)
+                product = productRepo.getNewProduct(barcode)
                 _isLoading.postValue(false)
             }
+        return product
     }
 
-    fun deleteProduct(toDelete: Product) {
+    fun deleteProduct(toDelete: Product){
         viewModelScope.launch(Dispatchers.IO) {
             productRepo.deleteProduct(toDelete)
         }

@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.kkneed.data.fake.fakeProduct
 import com.example.kkneed.model.Product
 import com.example.kkneed.ui.DetailAppBar
 import com.example.kkneed.ui.DetailBottomBar
@@ -31,11 +30,14 @@ import com.example.kkneed.viewmodel.ProductViewModel
 @Composable
 fun ScanResultScreen(
     navController: NavController,
+    code: String,
+    codeType: String,
     viewModel: ProductViewModel = hiltViewModel(),
-    ) {
-    val tempProduct: Product by viewModel.nowProduct.observeAsState(fakeProduct)
-    val productState = viewModel.nowProduct.observeAsState()
-    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
+
+) {
+    val tempProduct:Product by viewModel.product.observeAsState(Product("code", "name", "https://images.openfoodfacts.net/images/products/301/762/401/0701/front_en.54.100.jpg", "brands"))
+    val productState = viewModel.product.observeAsState()
+    val isLoading:Boolean by viewModel.isLoading.observeAsState(false)
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController)
@@ -52,11 +54,7 @@ fun ScanResultScreen(
                     .background(color = MaterialTheme.colorScheme.onPrimary)
             ) {
                 item {
-                    DetailList(
-                        title = tempProduct.product_name,
-                        company = tempProduct.brands,
-                        tempProduct.image_url
-                    )
+                    DetailList(title = tempProduct.product_name, company = tempProduct.brands, tempProduct.image_url)
                 }
                 item {
                     DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
@@ -69,6 +67,7 @@ fun ScanResultScreen(
                 }
             }
         }
+
     }
 }
 
