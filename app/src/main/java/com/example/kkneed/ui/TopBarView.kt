@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 
@@ -169,7 +170,7 @@ fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Default.Call, null)
+                Icon(painter = painterResource(id = R.drawable.service), null)
             }
         }
     }
@@ -258,7 +259,7 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
             ) {
                 Icon(Icons.Outlined.ArrowBack,null)
             }
-            SearchBar()
+            ShopSearchBar(navController)
             TextButton(onClick = {}) {
                 Text("搜索")
             }
@@ -280,7 +281,7 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.White),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { navController.popBackStack() }) {
                     Icon(Icons.Outlined.ArrowBack,null)
                 }
             }
@@ -290,12 +291,10 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.White),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { navController.navigate(AllScreen.ScanHistory.route) }) {
                     Icon(painter = painterResource(id = R.drawable.history),null)
                 }
             }
-
-
         }
     }
 }
@@ -339,7 +338,32 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
                 onClick = {}
             ) {
             }
-            Text("首页")
+            Text("康康Need")
+            IconButton(
+                onClick = {}
+            ) {
+            }
+        }
+    }
+}
+//首页（只有文字部分）
+@Composable
+fun CustomizeTopAppBar(appBarHeight: Dp, navController: NavController){
+    NotNormalTopAppBar(appBarHeight) {
+        Row(
+            modifier= Modifier
+                .size(412.dp, 64.dp)
+                .padding(start = 4.dp, end = 4.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+//            BackButton(navController)
+            IconButton(
+                onClick = {}
+            ) {
+            }
+            Text("定制")
             IconButton(
                 onClick = {}
             ) {
@@ -363,9 +387,9 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
             ) {
                 Icon(Icons.Outlined.ArrowBack,null)
             }
-            SearchBar()
+            CommunitySearchBar(navController)
             IconButton(
-                onClick = {}
+                onClick = {navController.navigate(AllScreen.EditNote.route)}
             ) {
                 Icon(Icons.Outlined.Edit,null)
             }
@@ -401,6 +425,6 @@ fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
 fun PreviewTopAppBar() {
     KKNeedTheme {
         val navController= rememberNavController()
-        NoteTopAppBar(64.dp,navController)
+        ScanTopAppBar(64.dp,navController)
     }
 }

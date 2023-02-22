@@ -50,17 +50,17 @@ fun SearchCommunityScreen(navController: NavController) {
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("糖尿病") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("高血压") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("过敏") }
                     )
                 }
             }
@@ -77,17 +77,17 @@ fun SearchCommunityScreen(navController: NavController) {
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("减肥好物") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("哺乳期") }
                     )
                     AssistChip(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("添加糖") }
                     )
                 }
             }

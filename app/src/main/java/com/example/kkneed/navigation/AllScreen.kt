@@ -4,9 +4,9 @@ package com.example.kkneed.navigation
 const val WELCOME_ROUTE = "welcome"
 const val HOME_ROUTE = "home"
 const val SHOP_ROUTE = "shop"
-const val DATA_ROUTE = "data"
 const val PROFILE_ROUTE = "profile"
 const val SCANNER_ROUTE = "scanner"
+const val CUSTOMIZE_ROUTE = "customize"
 const val ROOT_ROUTE = "root"
 sealed class AllScreen(val route: String){
     object Welcome:AllScreen("welcome_screen")
@@ -31,7 +31,7 @@ sealed class AllScreen(val route: String){
     object Scanner:AllScreen("scanner_screen")
     object Comment:AllScreen("comment_screen")
     object Detail:AllScreen("detail_screen")
-    object ScannerCom:AllScreen("scannercom_screen")
+    object Customize:AllScreen("customize_screen")
     object Compare:AllScreen("compare_screen")
     object Chose:AllScreen("chose_screen")
     object ScanHistory:AllScreen("scanhistory_screen")
@@ -39,5 +39,13 @@ sealed class AllScreen(val route: String){
     object EditProduct:AllScreen("editproduct_screen")
     object Collect:AllScreen("collect_screen")
     object RecordDetail:AllScreen("recorddetail_screen")
+    object Search:AllScreen("search_screen")
+    object SearchResult:AllScreen("searchresult_screen")
+    object Community:AllScreen("community_screen")
+    object EditNote:AllScreen("editnote_screen")
+    object NoteDetail:AllScreen("notedetail_screen")
+    object SearchCommunity:AllScreen("searchcommunity_screen")
+    object Create:AllScreen("create_screen")
     object ScanResult:AllScreen(ScannerDirection.route)
+    object Result:AllScreen("result_screen")
 }

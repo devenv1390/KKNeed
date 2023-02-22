@@ -9,5 +9,7 @@ data class ProductX(
     @SerializedName("image_url")
     val imageUrl: String,
     @SerializedName("product_name")
-    val productName: String
+    val productName: String,
+    @SerializedName("brands")
+    val brands: String,
 )

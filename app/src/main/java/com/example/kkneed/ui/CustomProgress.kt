@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
-import com.example.kkneed.model.GuideScreenItemData
+import com.example.kkneed.data.GuideScreenItemData
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 @Composable

@@ -1,5 +1,6 @@
 package com.example.kkneed.navigation.nav_graph
 
+import android.app.appsearch.SearchResult
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -7,6 +8,8 @@ import androidx.navigation.navigation
 import com.example.kkneed.screen.ShopScreen
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.SHOP_ROUTE
+import com.example.kkneed.screen.shop.SearchResultScreen
+import com.example.kkneed.screen.shop.SearchScreen
 
 fun NavGraphBuilder.ShopNavGraph(navController: NavController){
     navigation(
@@ -15,6 +18,12 @@ fun NavGraphBuilder.ShopNavGraph(navController: NavController){
     ){
         composable(AllScreen.Shop.route){
             ShopScreen(navController)
+        }
+        composable(AllScreen.Search.route){
+            SearchScreen(navController)
+        }
+        composable(AllScreen.SearchResult.route){
+            SearchResultScreen(navController)
         }
     }
 }

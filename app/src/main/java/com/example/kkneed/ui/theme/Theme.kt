@@ -1,10 +1,13 @@
 package com.example.kkneed.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 //private val DarkColorPalette = darkColors(
 //    primary = Purple200,
@@ -91,6 +94,20 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+object NoRippleTheme : RippleTheme {
+
+    @Composable
+    override fun defaultColor(): Color {
+        return Color.Transparent
+    }
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha {
+        return RippleAlpha(0f, 0f, 0f, 0f)
+    }
+
+}
+
 @Composable
 fun KKNeedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
@@ -99,8 +116,9 @@ fun KKNeedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
         LightColors
     }
 
+
     MaterialTheme(
         colorScheme = colors,
-        content = content,
+        content = content
     )
 }

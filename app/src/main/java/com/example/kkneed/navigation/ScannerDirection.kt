@@ -1,14 +1,16 @@
 package com.example.kkneed.navigation
 
+import androidx.annotation.StringRes
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.example.kkneed.R
 
 class ScannerDirection {
     data class ScannerComposeArgs(
         val code:String,
-        val codeType:String
+        val codeType:String,
     )
 
     companion object{
@@ -23,7 +25,7 @@ class ScannerDirection {
                 navArgument("codeType"){
                     type = NavType.StringType
                     defaultValue = "BC"
-                }
+                },
             )
         fun parseArguments(backStackEntry: NavBackStackEntry):ScannerComposeArgs{
             return ScannerComposeArgs(

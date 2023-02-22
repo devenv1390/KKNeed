@@ -35,7 +35,7 @@ fun CommunityScreen(navController: NavController) {
             Column(
                 horizontalAlignment = Alignment.Start,
             ) {
-                CommunityTabBar()
+                CommunityTabBar(navController)
             }
         }
     }

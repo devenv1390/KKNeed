@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.ShopSearchTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 
@@ -48,19 +49,19 @@ fun SearchScreen(navController: NavController) {
                         .padding(top = 8.dp)
                 ) {
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("可口可乐") }
                     )
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("鸡胸肉") }
                     )
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("轻零食") }
                     )
                 }
             }
@@ -75,19 +76,19 @@ fun SearchScreen(navController: NavController) {
                         .padding(top = 8.dp)
                 ) {
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("饼干") }
                     )
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("脱脂牛奶") }
                     )
                     AssistChip(
-                        onClick = {},
+                        onClick = {AllScreen.SearchResult.route},
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        label = { Text("test") }
+                        label = { Text("低卡饮品") }
                     )
                 }
             }

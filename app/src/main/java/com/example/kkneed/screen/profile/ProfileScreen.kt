@@ -2,7 +2,6 @@ package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -26,11 +25,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
-import com.example.kkneed.model.ButtonItemData
+import com.example.kkneed.data.ButtonItemData
 import com.example.kkneed.navigation.AllScreen
-import com.example.kkneed.ui.ChangeBottomSheet
+import com.example.kkneed.navigation.SCANNER_ROUTE
+import com.example.kkneed.ui.ChangePhotoBottomSheet
+import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
+import com.example.kkneed.ui.theme.md_theme_dark_primary
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -40,42 +42,66 @@ import kotlinx.coroutines.launch
 fun ProfileScreen(navController: NavController) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    Scaffold(
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-        topBar = {
-            MyTopAppBar {}
+    ModalBottomSheetLayout(
+        sheetElevation = 16.dp,
+        sheetState = state,
+        sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        sheetContent = {
+            ChangePhotoBottomSheet(state, scope)
         }
     ) {
-        ChangeBottomSheet(state,scope)
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.TopCenter
+        Scaffold(
+            backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+            topBar = {
+                MyTopAppBar {}
+            },
+            bottomBar = {
+                MyBottomNavigation(navController = navController,3)
+            },
+            isFloatingActionButtonDocked = true,
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(SCANNER_ROUTE)
+                    },
+                    backgroundColor = md_theme_dark_primary
+                ) {
+                    Icon(painter = painterResource(id =R.drawable.barcode_scanner), null, tint = Color.White,
+                    modifier = Modifier.height(24.dp))
+                }
+            },
         ) {
-            Column(
-                horizontalAlignment = Alignment.Start
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.TopCenter
             ) {
-                MyAccInfo(navController,state,scope)
-                Spacer(Modifier.size(0.dp, 24.dp))
-                MyVerticalList(navController)
-                Spacer(Modifier.size(0.dp, 24.dp))
-                MyHorizonList(navController)
-            }
-        }
+                Column(
+                    horizontalAlignment = Alignment.Start
+                ) {
 
+                    MyAccInfo(navController, state, scope)
+                    Spacer(Modifier.size(0.dp, 24.dp))
+                    MyVerticalList(navController)
+                    Spacer(Modifier.size(0.dp, 24.dp))
+                    MyHorizonList(navController)
+                }
+            }
+
+        }
     }
+
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: CoroutineScope) {
+fun MyAccInfo(navController: NavController, state: ModalBottomSheetState, scope: CoroutineScope) {
     Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
         Row(modifier = Modifier.padding(top = 40.dp)) {
-            Box(modifier = Modifier.size(110.dp)
-                .clickable{scope.launch { state.show() }}
-            ) {
+            Box(modifier = Modifier.size(110.dp)) {
                 Image(
-                    painter = painterResource(R.drawable.head),
+                    painter = painterResource(R.drawable.profile),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(24.dp))
@@ -84,7 +110,7 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     alignment = Alignment.TopCenter,
                 )
                 androidx.compose.material3.IconButton(
-                    onClick = {},
+                    onClick = { scope.launch { state.show() } },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                 ) {
@@ -102,7 +128,6 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     }
                 }
             }
-
             Column {
                 Text(
                     text = "康康NEED",
@@ -119,7 +144,7 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(
-                        onClick = {navController.navigate(AllScreen.Watch.route)},
+                        onClick = { navController.navigate(AllScreen.Watch.route) },
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -129,8 +154,9 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
                         }
                     }
                     TextButton(
-                        onClick = {navController.navigate(AllScreen.Fan.route)
-                            },
+                        onClick = {
+                            navController.navigate(AllScreen.Fan.route)
+                        },
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
@@ -158,9 +184,9 @@ fun MyAccInfo(navController: NavController,state:ModalBottomSheetState,scope: Co
 @Composable
 fun MyVerticalList(navController: NavController) {
     val buttonItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "我的记录", AllScreen.Record.route),
-        ButtonItemData(Icons.Default.Menu, "我的订单", AllScreen.Order.route),
-        ButtonItemData(Icons.Default.Favorite, "我的收藏", "")
+        ButtonItemData(painterResource(id = R.drawable.record), "我的记录", AllScreen.Record.route),
+        ButtonItemData(painterResource(id = R.drawable.shop), "我的订单", AllScreen.Order.route),
+        ButtonItemData(painterResource(id = R.drawable.collect), "我的收藏", AllScreen.Collect.route)
     )
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -182,8 +208,8 @@ fun MyVerticalList(navController: NavController) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(item.image, null)
-                            Spacer(modifier = Modifier.padding(vertical = 2.dp))
+                            Icon(item.icon, null, modifier = Modifier.size(24.dp))
+                            Spacer(modifier = Modifier.padding(vertical =4.dp))
                             Text(item.title, style = MaterialTheme.typography.bodySmall)
                         }
                     }
@@ -196,10 +222,10 @@ fun MyVerticalList(navController: NavController) {
 @Composable
 fun MyHorizonList(navController: NavController) {
     val buttomItems = listOf<ButtonItemData>(
-        ButtonItemData(Icons.Default.CheckCircle, "个人信息", AllScreen.PersonInfo.route),
-        ButtonItemData(Icons.Default.Menu, "我的创作", ""),
-        ButtonItemData(Icons.Default.Favorite, "我的足迹", AllScreen.History.route),
-        ButtonItemData(Icons.Default.Phone, "联系客服", "")
+        ButtonItemData(painterResource(id = R.drawable.person_circle), "个人信息", AllScreen.PersonInfo.route),
+        ButtonItemData(painterResource(id = R.drawable.write), "我的创作", AllScreen.Create.route),
+        ButtonItemData(painterResource(id = R.drawable.history), "我的足迹", AllScreen.History.route),
+        ButtonItemData(painterResource(id = R.drawable.service), "联系客服", "")
     )
     val buttonColor = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
@@ -228,7 +254,7 @@ fun MyHorizonList(navController: NavController) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(item.image, null)
+                                Icon(item.icon, null, modifier = Modifier.size(24.dp))
                                 Spacer(modifier = Modifier.padding(5.dp, 0.dp))
                                 Text(item.title, style = MaterialTheme.typography.bodySmall)
                                 Spacer(modifier = Modifier.padding(100.dp, 0.dp))
@@ -249,6 +275,7 @@ fun MyHorizonList(navController: NavController) {
                     .size(360.dp, 56.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
+
                 Button(
                     onClick = {
                         navController.navigate("")
@@ -259,7 +286,7 @@ fun MyHorizonList(navController: NavController) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(Icons.Default.Settings, null)
+                        Icon(Icons.Default.Settings, null,modifier = Modifier.size(24.dp))
                         Spacer(modifier = Modifier.padding(5.dp, 0.dp))
                         Text("设置", style = MaterialTheme.typography.bodySmall)
                         Spacer(modifier = Modifier.padding(112.dp, 0.dp))

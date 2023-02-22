@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.screen.login.SignInScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -73,20 +74,93 @@ fun TabBar() {
         count = pages.size,
         state = pagerState,
     ) { page ->
-        Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
-            LazyColumn(
-                Modifier
-                    .fillMaxSize()
-                    .padding(top = 8.dp)
-            )
+        when(page){
+            0->
             {
-                item { OrderInfoCard("12345678910111213", "待支付") }
-                item { Spacer(modifier = Modifier.height(8.dp)) }
-                item { OrderInfoCard("12345678910111213", "待支付") }
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    )
+                    {
+                        item { OrderInfoCard("12345678910111213", "待支付") }
+
+                        item { OrderInfoCard1("12345678910111213", "运输中") }
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item { OrderInfoCard3("12345678910111213", "待发货") }
 
 
+                    }
+                }
+            }
+            1->{
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    )
+                    {
+                        item { OrderInfoCard("12345678910111213", "待支付") }
+                        item { OrderInfoCard("12345678910111213", "待支付") }
+                        item { OrderInfoCard("12345678910111213", "待支付") }
+                    }
+                }
+            }
+            2->{
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    )
+                    {
+                        item { OrderInfoCard3("12345678910111213", "待发货") }
+                        item { OrderInfoCard3("12345678910111213", "待发货") }
+                        item { OrderInfoCard3("12345678910111213", "待发货") }
+                        item { OrderInfoCard3("12345678910111213", "待发货") }
+                    }
+                }
+            }
+            3->{
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    )
+                    {
+                        item { OrderInfoCard1("12345678910111213", "运输中") }
+                        item { OrderInfoCard1("12345678910111213", "运输中") }
+                        item { OrderInfoCard1("12345678910111213", "运输中") }
+
+                    }
+                }
+            }
+            4->{
+                Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    )
+                    {
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item { OrderInfoCard2("12345678910111213", "已完成") }
+                    }
+                }
             }
         }
+
 
     }
 }
@@ -126,7 +200,7 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
             .width(indicatorEnd - indicatorStart)
             .padding(2.dp)
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.primary, RoundedCornerShape(50))
+            .background(color = MaterialTheme.colorScheme.inversePrimary, RoundedCornerShape(50))
             .border(
                 BorderStroke(2.dp, color = MaterialTheme.colorScheme.secondaryContainer),
                 RoundedCornerShape(50)
@@ -286,7 +360,7 @@ fun CollectTabBar() {
 //社区的
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CommunityTabBar() {
+fun CommunityTabBar(navController: NavController) {
     val pagerState = rememberPagerState()
     val pages = listOf("全部", "高赞", "健康", "美食", "知识")
     val defaultIndicator = @Composable { tabPositions: List<TabPosition> ->
@@ -335,13 +409,13 @@ fun CommunityTabBar() {
                             .padding(top = 8.dp)
                     )
                     {
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
+                        item { CommunityCard(navController  ) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -352,13 +426,13 @@ fun CommunityTabBar() {
                             .padding(top = 8.dp)
                     )
                     {
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
-                        item { CommunityCard() }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
+                        item { CommunityCard(navController) }
                     }
                 }
             }
@@ -371,6 +445,5 @@ fun CommunityTabBar() {
 @Preview
 fun SignUpScreenPreview() {
     KKNeedTheme {
-        CommunityTabBar()
     }
 }

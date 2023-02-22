@@ -5,37 +5,30 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.TextField
 import androidx.compose.material3.*
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.validation.MainViewModel
+import com.example.kkneed.viewmodel.MainViewModel
 import com.example.kkneed.validation.event.RegistrationFormEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -214,12 +207,12 @@ fun SignInScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Row(){
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.weixin),null)
+                Icon(painterResource(id = R.drawable.weixin),null,tint = Color.Unspecified)
 
             }
             Spacer(modifier = Modifier.width(52.dp))
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.qq),null)
+                Icon(painterResource(id = R.drawable.qq),null,tint = Color.Unspecified)
             }
         }
         Spacer(modifier = Modifier.height(25.dp))

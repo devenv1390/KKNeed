@@ -59,7 +59,7 @@ fun RecordScreen(navController: NavController) {
                 style=MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = 0.dp)
             )
             Box(
             ){
@@ -105,10 +105,10 @@ fun RecordScreen(navController: NavController) {
                 )
             }
             RecordList("A", LevelA,navController,AllScreen.RecordDetail.route)
-            RecordList("B", LevelB,navController,"")
-            RecordList("C", LevelC,navController,"")
-            RecordList("D", LevelD,navController,"")
-            RecordList("E", LevelE,navController,"")
+            RecordList("B", LevelB,navController,AllScreen.RecordDetail.route)
+            RecordList("C", LevelC,navController,AllScreen.RecordDetail.route)
+            RecordList("D", LevelD,navController,AllScreen.RecordDetail.route)
+            RecordList("E", LevelE,navController,AllScreen.RecordDetail.route)
             Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start){
                 Text(

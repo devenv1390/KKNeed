@@ -1,12 +1,9 @@
 package com.example.kkneed.navigation.nav_graph
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.SCANNER_ROUTE
-import com.example.kkneed.navigation.ScannerDirection
 import com.example.kkneed.screen.search.*
 
 fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
@@ -17,21 +14,14 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Scanner.route) {
             BCScannerScreen(navController)
         }
-        composable(
-            AllScreen.ScanResult.route,
-            arguments = ScannerDirection.argumentsList
-        ) {
-            val (code,codeType) = ScannerDirection.parseArguments(it)
-            ScanResultScreen(navController,code,codeType)
+        composable(AllScreen.ScanResult.route,) {
+            ScanResultScreen(navController)
         }
         composable(AllScreen.Comment.route) {
-            com.example.kkneed.screen.search.CommentScreen(navController)
+            CommentScreen(navController)
         }
         composable(AllScreen.Detail.route) {
             DetailScreen(navController)
-        }
-        composable(AllScreen.ScannerCom.route) {
-            ScannerComScreen(navController)
         }
         composable(AllScreen.Compare.route) {
             CompareScreen(navController)
@@ -46,7 +36,19 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
             EditScreen(navController )
         }
         composable(AllScreen.EditProduct.route) {
-            EditProductScreen(navController )
+            EditProductScreen(navController)
+        }
+        composable(
+            AllScreen.Result.route+"/{code}",
+            arguments = listOf(
+                navArgument("code"){
+                    type = NavType.StringType
+                    defaultValue = ""
+                }
+            )
+        ){
+            val code = it.arguments?.getString("code") ?:""
+            ResultScreen(navController,code)
         }
     }
 }

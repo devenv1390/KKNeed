@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.ui.FanList
+import com.example.kkneed.ui.FanList2
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 
@@ -31,16 +32,16 @@ fun FanScreen(navController: NavController) {
         ){
             LazyColumn {
                 item { FanList() }
+                item { FanList2() }
                 item { FanList() }
                 item { FanList() }
+                item { FanList2() }
                 item { FanList() }
                 item { FanList() }
+                item { FanList2() }
                 item { FanList() }
                 item { FanList() }
-                item { FanList() }
-                item { FanList() }
-                item { FanList() }
-                item { FanList() }
+                item { FanList2() }
 
             }
         }

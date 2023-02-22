@@ -7,6 +7,10 @@ import androidx.navigation.navigation
 import com.example.kkneed.screen.HomeScreen
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.navigation.HOME_ROUTE
+import com.example.kkneed.screen.home.CommunityScreen
+import com.example.kkneed.screen.home.EditNoteScreen
+import com.example.kkneed.screen.home.NoteDetailScreen
+import com.example.kkneed.screen.home.SearchCommunityScreen
 
 
 fun NavGraphBuilder.HomeNavGraph(navController: NavController){
@@ -16,6 +20,18 @@ fun NavGraphBuilder.HomeNavGraph(navController: NavController){
     ){
         composable(AllScreen.Home.route){
             HomeScreen(navController)
+        }
+        composable(AllScreen.Community.route){
+            CommunityScreen(navController)
+        }
+        composable(AllScreen.EditNote.route){
+            EditNoteScreen(navController)
+        }
+        composable(AllScreen.SearchCommunity.route){
+            SearchCommunityScreen(navController)
+        }
+        composable(AllScreen.NoteDetail.route){
+            NoteDetailScreen(navController)
         }
     }
 }

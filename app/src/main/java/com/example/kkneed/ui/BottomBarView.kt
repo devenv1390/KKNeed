@@ -1,26 +1,22 @@
 package com.example.kkneed.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -306,72 +302,6 @@ fun OrderBottomBar() {
         }
     )
 }
-
-//客服
-@Composable
-fun ServiceBottomBar() {
-    var text by remember { mutableStateOf("") }
-    Column(modifier = Modifier.height(80.dp)) {
-        Spacer(modifier = Modifier
-            .height(16.dp)
-            .background(androidx.compose.material.MaterialTheme.colors.background))
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            BasicTextField(
-                value = text,
-                onValueChange = { text = it },
-                decorationBox = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    ) {
-                        Icon(imageVector = Icons.Filled.Add, contentDescription = "")
-                        Box(
-//                        modifier = Modifier
-//                            .weight(1f),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            if (text.isEmpty()) {
-                                Text(
-                                    text = "编辑消息~",
-                                    style = TextStyle(Color(0, 0, 0, 128))
-                                )
-                            }
-                            it()
-                        }
-                        if (text.isNotEmpty()) {
-                            androidx.compose.material.IconButton(onClick = { text = "" }, modifier = Modifier.size(16.dp)) {
-                                Icon(imageVector = Icons.Filled.Close, contentDescription = "")
-                            }
-                        }
-                    }
-                },
-                modifier = Modifier
-                    .background(
-                        MaterialTheme.colorScheme.secondaryContainer,
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .size(328.dp, 44.dp)
-            )
-            androidx.compose.material3.IconButton(onClick = { }) {
-                androidx.compose.material3.Icon(
-                    painter = painterResource(id = R.drawable.telegram3),
-                    contentDescription = "Localized description",
-                    tint = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
-    }
-
-}
-
 @Preview
 @Composable
 fun BottomBarScreen() {
