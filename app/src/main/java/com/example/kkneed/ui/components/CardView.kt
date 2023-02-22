@@ -676,7 +676,7 @@ fun CommentCard() {
             .padding(start = 16.dp, end = 16.dp)
             .size(380.dp, 98.dp)
             .clickable { },
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
         elevation = 1.dp,
         shape = RoundedCornerShape(12.dp)
     ) {
@@ -947,7 +947,7 @@ fun DetailShopCard() {
 
         elevation = 0.dp, // 设置阴影
         onClick = {},
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {
         Row(
@@ -1028,7 +1028,7 @@ fun ProductCard(title: String) {
         modifier = Modifier
             .clip(RoundedCornerShape(12.dp))
             .size(148.dp, 170.dp),
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
         border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
         elevation = 0.dp,
         shape = RoundedCornerShape(12.dp)
