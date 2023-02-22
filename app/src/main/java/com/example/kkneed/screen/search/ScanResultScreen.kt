@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.kkneed.data.fake.fakeProduct
 import com.example.kkneed.model.Product
 import com.example.kkneed.ui.DetailAppBar
 import com.example.kkneed.ui.DetailBottomBar
@@ -32,14 +33,7 @@ fun ScanResultScreen(
     navController: NavController,
     viewModel: ProductViewModel = hiltViewModel(),
     ) {
-    val tempProduct: Product by viewModel.nowProduct.observeAsState(
-        Product(
-            "code",
-            "name",
-            "https://images.openfoodfacts.net/images/products/301/762/401/0701/front_en.54.100.jpg",
-            "brands"
-        )
-    )
+    val tempProduct: Product by viewModel.nowProduct.observeAsState(fakeProduct)
     val productState = viewModel.nowProduct.observeAsState()
     val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
     Scaffold(
