@@ -12,11 +12,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,10 +33,16 @@ import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.OrderBottomBar
 import com.example.kkneed.ui.theme.KKNeedTheme
 
+
 @OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ConfirmScreen(navController: NavController) {
+
+    val checkedState = remember {
+        mutableStateOf(true)
+    }
+
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -54,7 +59,7 @@ fun ConfirmScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 80.dp)
         ) {
             //第一张卡
             Card(
@@ -213,7 +218,7 @@ fun ConfirmScreen(navController: NavController) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(513.dp),
+                    .height(80.dp),
                 shape = RoundedCornerShape(12.dp),
                 onClick = {},
                 backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
@@ -224,22 +229,134 @@ fun ConfirmScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 16.dp),
                 ) {
-                    IconButton(onClick = { }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.edit), null,
-                            modifier = Modifier.size(24.dp),
-                            tint = MaterialTheme.colorScheme.outline,
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        "分享你的想法到康康社区~\n" +
-                                "大家一起选择健康生活！",
-                        style = MaterialTheme.typography.bodyMedium,
+                        "给康康留言：",
+                        style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            //文字
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(26.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                androidx.compose.material.Text(
+                    "共2件商品 总计：",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.labelSmall
+                )
+                androidx.compose.material.Text(
+                    "￥34.6",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.labelSmall
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider(color = MaterialTheme.colorScheme.outline, thickness = 1.dp)
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(26.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                androidx.compose.material.Text(
+                    "支付方式",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.labelSmall
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.wechat),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clip(RoundedCornerShape(0.dp)),
+                        contentScale = ContentScale.Fit,
+                        alignment = Alignment.TopCenter,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    androidx.compose.material.Text(
+                        "微信支付",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+                Checkbox(
+                    checked = checkedState.value,
+                    onCheckedChange = { checkedState.value = it },
+                    modifier = Modifier.padding(0.dp),
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.zhifubao),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clip(RoundedCornerShape(0.dp)),
+                        contentScale = ContentScale.Fit,
+                        alignment = Alignment.TopCenter,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    androidx.compose.material.Text(
+                        "微信支付",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+                Checkbox(
+                    checked = checkedState.value,
+                    onCheckedChange = { checkedState.value = it },
+                    modifier = Modifier.padding(0.dp),
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider(color = MaterialTheme.colorScheme.outline, thickness = 1.dp)
+            Spacer(modifier = Modifier.height(8.dp))
+            androidx.compose.material.Text(
+                "订单说明",
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.labelSmall
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            androidx.compose.material.Text(
+                "订单说明详情内容订单说明详情内容订单说明详情",
+                color = MaterialTheme.colorScheme.outline,
+                style = MaterialTheme.typography.labelSmall
+            )
+            Spacer(modifier = Modifier.height(88.dp))
         }
     }
 }
