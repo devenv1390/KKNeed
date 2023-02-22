@@ -161,7 +161,11 @@ fun BCScannerScreen(
     }
 
     LaunchedEffect(key1 = lifecycleOwner) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             viewModel.onEvent(ScannerEvent.CreatePreviewView(lifecycleOwner))
         } else {
             permissionLauncher.launch(Manifest.permission.CAMERA)
@@ -193,7 +197,7 @@ fun BCScannerScreen(
         bottomSheetState = bottomSheetState,
         uiState = uiState,
         context = context,
-        navController = navController
+        navController = navController,
     )
 }
 
@@ -204,7 +208,7 @@ private fun ScannerScreen(
     uiState: ScannerUiState,
     context: Context,
     navController: NavController,
-    viewModel: ProductViewModel = hiltViewModel()
+    viewModel: ProductViewModel = hiltViewModel(),
 ) {
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
@@ -233,7 +237,7 @@ private fun ScannerScreen(
                         clipboardManager.setText(AnnotatedString(it.displayValue))
                         Toast.makeText(context, context.getText(R.string.scan_value_copied), Toast.LENGTH_SHORT).show()
                         viewModel.addProduct(it.displayValue)
-                        navController.navigate(ScannerDirection.actionScanToResult(it.displayValue,"BC"))
+                        navController.navigate(ScannerDirection.actionScanToResult(it.displayValue, "BC"))
                     },
                     onWebClicked = {
                         uriHandler.openUri(it.displayValue)

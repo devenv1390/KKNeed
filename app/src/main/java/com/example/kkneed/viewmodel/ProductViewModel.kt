@@ -24,15 +24,23 @@ class ProductViewModel @Inject constructor(
         productRepo.getAllProduct()
     }
 
+    val product:LiveData<Product> by lazy {
+        productRepo.getOneAllProduct()
+    }
+
+    val result = products
+
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    fun addProduct(barcode:String){
+    fun addProduct(barcode:String): Product {
+        var product = Product("code", "name", "https://images.openfoodfacts.net/images/products/301/762/401/0701/front_en.54.100.jpg", "brands")
         if (_isLoading.value==false)
             viewModelScope.launch(Dispatchers.IO) {
                 _isLoading.postValue(true)
-                productRepo.getNewProduct(barcode)
+                product = productRepo.getNewProduct(barcode)
                 _isLoading.postValue(false)
             }
+        return product
     }
 
     fun deleteProduct(toDelete: Product){
@@ -41,3 +49,4 @@ class ProductViewModel @Inject constructor(
         }
     }
 }
+

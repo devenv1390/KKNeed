@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import com.example.kkneed.datasource.OFFDataSource
 import com.example.kkneed.model.Product
 import com.example.kkneed.model.ProductDao
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 interface ProductRepository {
     suspend fun getNewProduct(barcode: String): Product
     suspend fun deleteProduct(toDelete: Product)
     fun getAllProduct(): LiveData<List<Product>>
+    fun getOneAllProduct(): LiveData<Product>
 }
 
 class ProductRepositoryImp @Inject constructor(
@@ -19,7 +19,6 @@ class ProductRepositoryImp @Inject constructor(
 ) : ProductRepository {
 
     override suspend fun getNewProduct(barcode: String): Product {
-        delay(5000)
         val code = dataSource.getProduct(barcode).code
         val name = dataSource.getProduct(barcode).product.productName
         val picture = dataSource.getProduct(barcode).product.imageUrl
@@ -32,4 +31,5 @@ class ProductRepositoryImp @Inject constructor(
     override suspend fun deleteProduct(toDelete: Product) = productDao.delete(toDelete)
 
     override fun getAllProduct(): LiveData<List<Product>> = productDao.getAll()
+    override fun getOneAllProduct(): LiveData<Product> = productDao.getOne()
 }

@@ -20,6 +20,9 @@ interface ProductDao {
     @Query("SELECT * FROM product ORDER BY id DESC")
     fun getAll(): LiveData<List<Product>>
 
+    @Query("SELECT * FROM product ORDER BY id DESC LIMIT 1")
+    fun getOne(): LiveData<Product>
+
     @Delete
     fun delete(product: Product)
 }

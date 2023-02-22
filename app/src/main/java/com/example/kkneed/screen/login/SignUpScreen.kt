@@ -22,14 +22,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.validation.MainViewModel
+import com.example.kkneed.viewmodel.MainViewModel
 import com.example.kkneed.validation.event.RegistrationFormEvent
 
 @OptIn(ExperimentalMaterial3Api::class)

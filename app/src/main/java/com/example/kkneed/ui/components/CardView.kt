@@ -13,10 +13,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Star
@@ -39,14 +36,18 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.example.kkneed.R
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
+import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -1635,22 +1636,19 @@ fun ComponentCompareCard() {
 }
 
 //搜索记录卡片
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
-fun HistoryCard() {
+fun HistoryCard(
+    productName: String,
+    productImage: String
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
-            .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(136.dp),
-
-        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
-        // 将无法显示波纹效果
-
         elevation = 2.dp, // 设置阴影
-        onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {
@@ -1660,7 +1658,13 @@ fun HistoryCard() {
         )
         {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = rememberImagePainter(
+                    data = productImage,
+                    builder = {
+                        placeholder(R.drawable.ic_launcher_foreground)
+                        error(R.drawable.ic_launcher_foreground)
+                    },
+                ),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1675,7 +1679,7 @@ fun HistoryCard() {
                     .fillMaxHeight()
             ) {
                 androidx.compose.material3.Text(
-                    "麦维他全麦粗粮酥性消化饼原味400g",
+                    text = productName,
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -1713,8 +1717,8 @@ fun HistoryCard() {
                     alignment = Alignment.TopCenter,
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Default.KeyboardArrowRight, null)
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.ArrowRight,"info")
             }
 
         }
@@ -2249,179 +2253,191 @@ fun CustmizeCard() {
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surface,
     ) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 20.dp),
-        verticalArrangement = Arrangement.SpaceBetween) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 20.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
 
-                Row(
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .height(50.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                       Text(
-                            "营养诉求",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                        Text(
-                            "健身",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        )
-                    }
-                    Column(
-                        modifier = Modifier
-                            .height(50.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "疾病分类",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                        Text(
-                            "过敏体质",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        )
-                    }
-                    Column(
-                        modifier = Modifier
-                            .height(50.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "女性关键期",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                        Text(
-                            "备孕",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        )
-                    }
-                    Column(
-                        modifier = Modifier
-                            .height(50.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "其他诉求",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                        Text(
-                            "肠道健康",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        )
-                    }
+                    Text(
+                        "营养诉求",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "健身",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
                 }
-            AnimatedVisibility(visible=visible){
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "疾病分类",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "过敏体质",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "女性关键期",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "备孕",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "其他诉求",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "肠道健康",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+            }
+            AnimatedVisibility(visible = visible) {
                 Card(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top=8.dp),
+                        .padding(top = 8.dp),
                     backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth()
-                        .padding(vertical =8.dp, horizontal = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Column(modifier=Modifier.fillMaxWidth()){
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Column(modifier = Modifier.fillMaxWidth()) {
                             Text(
                                 "营养诉求",
                                 style = MaterialTheme.typography.titleSmall,
                                 color = MaterialTheme.colorScheme.primary,
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"减肥")
-                                CustomizeInfoChip(true,"健身")
-                                CustomizeInfoChip(false,"增肌")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "减肥")
+                                CustomizeInfoChip(true, "健身")
+                                CustomizeInfoChip(false, "增肌")
                             }
                         }
-                        Column(modifier=Modifier.fillMaxWidth()){
+                        Column(modifier = Modifier.fillMaxWidth()) {
                             Text(
                                 "疾病分类",
                                 style = MaterialTheme.typography.titleSmall,
                                 color = MaterialTheme.colorScheme.primary,
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"糖尿病")
-                                CustomizeInfoChip(true,"高血压")
-                                CustomizeInfoChip(false,"血脂异常")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "糖尿病")
+                                CustomizeInfoChip(true, "高血压")
+                                CustomizeInfoChip(false, "血脂异常")
                             }
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"痛风")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "痛风")
                             }
                         }
-                        Column(modifier=Modifier.fillMaxWidth()){
+                        Column(modifier = Modifier.fillMaxWidth()) {
                             Text(
                                 "女性关键期",
                                 style = MaterialTheme.typography.titleSmall,
                                 color = MaterialTheme.colorScheme.primary,
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"备孕")
-                                CustomizeInfoChip(true,"孕期")
-                                CustomizeInfoChip(false,"哺乳期")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "备孕")
+                                CustomizeInfoChip(true, "孕期")
+                                CustomizeInfoChip(false, "哺乳期")
                             }
                         }
-                        Column(modifier=Modifier.fillMaxWidth()){
+                        Column(modifier = Modifier.fillMaxWidth()) {
                             Text(
                                 "关注成分",
                                 style = MaterialTheme.typography.titleSmall,
                                 color = MaterialTheme.colorScheme.primary,
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"乳制品")
-                                CustomizeInfoChip(false,"麸质")
-                                CustomizeInfoChip(false,"坚果")
-                                CustomizeInfoChip(false,"花生")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "乳制品")
+                                CustomizeInfoChip(false, "麸质")
+                                CustomizeInfoChip(false, "坚果")
+                                CustomizeInfoChip(false, "花生")
                             }
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"二氧化硫")
-                                CustomizeInfoChip(false,"亚硫酸盐")
-                                CustomizeInfoChip(false,"大豆类制品")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "二氧化硫")
+                                CustomizeInfoChip(false, "亚硫酸盐")
+                                CustomizeInfoChip(false, "大豆类制品")
                             }
-                            Row(modifier=Modifier.fillMaxWidth()
-                                , horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                                CustomizeInfoChip(false,"芥末")
-                                CustomizeInfoChip(false,"芝麻")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "芥末")
+                                CustomizeInfoChip(false, "芝麻")
 
                             }
                         }
                     }
                 }
             }
-            Row(modifier = Modifier.fillMaxWidth()
-                .padding(top=8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-                ,verticalAlignment = Alignment.CenterVertically){
-                GradientButton(modifier = Modifier.size(247.dp,40.dp),
-                    textId = if(visible) "保存编辑" else "编辑标签", onClick = {
-                        visible=!visible
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
+            ) {
+                GradientButton(modifier = Modifier.size(247.dp, 40.dp),
+                    textId = if (visible) "保存编辑" else "编辑标签", onClick = {
+                        visible = !visible
                     })
                 TextButton(onClick = { /*TODO*/ }) {
                     Text(
@@ -2435,11 +2451,18 @@ fun CustmizeCard() {
         }
     }
 }
+
 //定制页健康记录
 @SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HealthCard(title: String,@StringRes iconId:Int,@StringRes imageId:Int,description: String,description2: String) {
+fun HealthCard(
+    title: String,
+    @StringRes iconId: Int,
+    @StringRes imageId: Int,
+    description: String,
+    description2: String
+) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
@@ -2454,27 +2477,32 @@ fun HealthCard(title: String,@StringRes iconId:Int,@StringRes imageId:Int,descri
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically){
-            Column(modifier = Modifier.fillMaxHeight()
-                ,verticalArrangement = Arrangement.SpaceBetween) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
 
                 Row(
                 ) {
-                    Icon(painter = painterResource(iconId),
+                    Icon(
+                        painter = painterResource(iconId),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.primary)
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                     Text(
                         title,
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
-                Row(verticalAlignment = Alignment.CenterVertically){
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         description,
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
@@ -2488,16 +2516,19 @@ fun HealthCard(title: String,@StringRes iconId:Int,@StringRes imageId:Int,descri
                     )
                 }
             }
-            Icon(painter = painterResource(id =imageId ),
-                null,modifier=Modifier.size(52.dp),tint=Color.Unspecified)
-            }
+            Icon(
+                painter = painterResource(id = imageId),
+                null, modifier = Modifier.size(52.dp), tint = Color.Unspecified
+            )
         }
     }
+}
+
 //不带右侧图定制页健康记录
 @SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HealthCard2(title: String,@StringRes iconId:Int,description: String,description2: String) {
+fun HealthCard2(title: String, @StringRes iconId: Int, description: String, description2: String) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
@@ -2511,27 +2542,32 @@ fun HealthCard2(title: String,@StringRes iconId:Int,description: String,descript
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically){
-            Column(modifier = Modifier.fillMaxHeight()
-                ,verticalArrangement = Arrangement.SpaceBetween) {
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
 
                 Row(
                 ) {
-                    Icon(painter = painterResource(iconId),
+                    Icon(
+                        painter = painterResource(iconId),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.primary)
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                     Text(
                         title,
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
-                Row(verticalAlignment = Alignment.CenterVertically){
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         description,
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
@@ -2549,11 +2585,12 @@ fun HealthCard2(title: String,@StringRes iconId:Int,description: String,descript
         }
     }
 }
+
 //身体测量健康记录
 @SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HealthCard3(title: String,@StringRes iconId:Int,description: String,description2: String) {
+fun HealthCard3(title: String, @StringRes iconId: Int, description: String, description2: String) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
@@ -2567,27 +2604,32 @@ fun HealthCard3(title: String,@StringRes iconId:Int,description: String,descript
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically){
-            Column(modifier = Modifier.fillMaxHeight()
-                ,verticalArrangement = Arrangement.SpaceBetween) {
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
 
                 Row(
                 ) {
-                    Icon(painter = painterResource(iconId),
+                    Icon(
+                        painter = painterResource(iconId),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.primary)
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                     Text(
                         title,
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
-                Row(verticalAlignment = Alignment.CenterVertically){
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         description,
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
@@ -2617,6 +2659,7 @@ fun HealthCard3(title: String,@StringRes iconId:Int,description: String,descript
         }
     }
 }
+
 @SuppressLint("ResourceType")
 @Preview
 @Composable

@@ -1,6 +1,5 @@
 package com.example.kkneed.ui
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,32 +22,33 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
 import com.example.kkneed.R
 import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.ui.theme.LevelA
-import com.example.kkneed.ui.theme.LevelE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 //关注列表
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun WatchList(){
-    Column (){
+fun WatchList() {
+    Column() {
         ListItem(
-            headlineText = { Text(
-                "康康",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            headlineText = {
+                Text(
+                    "康康",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             },
-            supportingText = { Text(
-                "30000粉丝 3w+赞",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.outline
-            ) },
+            supportingText = {
+                Text(
+                    "30000粉丝 3w+赞",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.outline
+                )
+            },
             trailingContent = {
                 //取消关注按钮
                 Button(
@@ -58,58 +58,8 @@ fun WatchList(){
                     ),
                 ) {
 
-                    Text("取消关注",
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            },
-            leadingContent = {
-                Image(
-                    painter = painterResource(R.drawable.head),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp))
-                        .size(32.dp),
-                    contentScale = ContentScale.Crop
-                )
-            },
-
-            )
-        Divider()
-}
-}
-
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
-@Composable
-fun FanList(){
-    Column (){
-        ListItem(
-            headlineText = { Text(
-                "康康",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            },
-            supportingText = { Text(
-                "30000粉丝 3w+赞",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.outline
-            ) },
-            trailingContent = {
-                Button(
-                    onClick = { /* Do something! */ },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.inversePrimary
-                    ),
-                ) {
-                    Icon(
-                    Icons.Filled.Add,
-                    contentDescription = "",
-                    modifier = Modifier.size(ButtonDefaults.IconSize)
-                )
-                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-
-                    Text("关注",
+                    Text(
+                        "取消关注",
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
@@ -129,10 +79,66 @@ fun FanList(){
         Divider()
     }
 }
+
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@Composable
+fun FanList() {
+    Column() {
+        ListItem(
+            headlineText = {
+                Text(
+                    "康康",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            },
+            supportingText = {
+                Text(
+                    "30000粉丝 3w+赞",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.outline
+                )
+            },
+            trailingContent = {
+                Button(
+                    onClick = { /* Do something! */ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.inversePrimary
+                    ),
+                ) {
+                    Icon(
+                        Icons.Filled.Add,
+                        contentDescription = "",
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+
+                    Text(
+                        "关注",
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            },
+            leadingContent = {
+                Image(
+                    painter = painterResource(R.drawable.head),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .size(32.dp),
+                    contentScale = ContentScale.Crop
+                )
+            },
+
+            )
+        Divider()
+    }
+}
+
 //详情页顶部列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailList(title:String,company:String,@StringRes imageId:Int){
+fun DetailList(title: String, company: String, productImage: String) {
     ListItem(
         headlineText = {
             androidx.compose.material3.Text(
@@ -140,16 +146,20 @@ fun DetailList(title:String,company:String,@StringRes imageId:Int){
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
             )
         },
-        supportingText = { androidx.compose.material3.Text(company,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.outline) },
+        supportingText = {
+            androidx.compose.material3.Text(
+                company,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.outline
+            )
+        },
         trailingContent = {
-            Row(){
+            Row() {
                 Image(
                     painter = painterResource(R.drawable.alevel),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(80.dp,50.dp),
+                        .size(80.dp, 50.dp),
                     contentScale = ContentScale.Fit
                 )
                 DetailDialog()
@@ -159,7 +169,13 @@ fun DetailList(title:String,company:String,@StringRes imageId:Int){
         },
         leadingContent = {
             Image(
-                painter = painterResource(R.drawable.cola),
+                painter = rememberImagePainter(
+                    data = productImage,
+                    builder = {
+                        placeholder(R.drawable.ic_launcher_foreground)
+                        error(R.drawable.ic_launcher_foreground)
+                    },
+                ),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp))
@@ -169,10 +185,11 @@ fun DetailList(title:String,company:String,@StringRes imageId:Int){
         }
     )
 }
+
 //搜索页顶部列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScanTopList(title:String,company:String){
+fun ScanTopList(title: String, company: String) {
     ListItem(
         headlineText = {
             androidx.compose.material3.Text(
@@ -180,16 +197,20 @@ fun ScanTopList(title:String,company:String){
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
             )
         },
-        supportingText = { androidx.compose.material3.Text(company,
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.outline) },
+        supportingText = {
+            androidx.compose.material3.Text(
+                company,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.outline
+            )
+        },
         trailingContent = {
-            Row(){
+            Row() {
                 Image(
                     painter = painterResource(R.drawable.alevel),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(80.dp,50.dp),
+                        .size(80.dp, 50.dp),
                     contentScale = ContentScale.Fit
                 )
 
@@ -208,19 +229,26 @@ fun ScanTopList(title:String,company:String){
         }
     )
 }
+
 //详情页优缺点列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VantageList(title:String,color:Color,navController: NavController,route:String){
+fun VantageList(title: String, color: Color, navController: NavController, route: String) {
     ListItem(
-        headlineText = { Text(title,
-            style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onBackground) },
+        headlineText = {
+            Text(
+                title,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
         leadingContent = {
-                         Box(modifier = Modifier
-                             .clip(CircleShape)
-                             .background(color)
-                             .size(40.dp)){}
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(color)
+                    .size(40.dp)
+            ) {}
         },
         trailingContent = {
             IconButton(onClick = { navController.navigate(route) }) {
@@ -234,30 +262,42 @@ fun VantageList(title:String,color:Color,navController: NavController,route:Stri
         },
     )
 }
+
 //点击优缺点后详情页顶部列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailList(title:String,color:Color){
+fun DetailList(title: String, color: Color) {
     ListItem(
-        headlineText = { Text(title,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground) },
+        headlineText = {
+            Text(
+                title,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
         leadingContent = {
-            Box(modifier = Modifier
-                .clip(CircleShape)
-                .background(color)
-                .size(40.dp)){}
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(color)
+                    .size(40.dp)
+            ) {}
         }
     )
 }
+
 //详情页优缺点展开列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VantageList2(title:String){
+fun VantageList2(title: String) {
     ListItem(
-        headlineText = { Text(title,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground) },
+        headlineText = {
+            Text(
+                title,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
 
         trailingContent = {
             Icon(
@@ -268,37 +308,46 @@ fun VantageList2(title:String){
         },
     )
 }
+
 //我的记录列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecordList(title:String,color:Color,navController: NavController,route:String){
+fun RecordList(title: String, color: Color, navController: NavController, route: String) {
     ListItem(
         colors = ListItemDefaults.colors(
-        containerColor = MaterialTheme.colorScheme.secondaryContainer
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
         headlineText = {
-                Text(title+"等级食品",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary)
-                       },
+            Text(
+                title + "等级食品",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+        },
         leadingContent = {
-            Box(modifier = Modifier
-                .clip(CircleShape)
-                .background(color)
-                .size(40.dp)){
-                Text(title,
-                    modifier=Modifier.align(Alignment.Center),
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(color)
+                    .size(40.dp)
+            ) {
+                Text(
+                    title,
+                    modifier = Modifier.align(Alignment.Center),
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimary)
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         },
 
         trailingContent = {
-            Row(){
-                Text("21",
+            Row() {
+                Text(
+                    "21",
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.outline)
-                IconButton(onClick = { navController.navigate(route)}) {
+                    color = MaterialTheme.colorScheme.outline
+                )
+                IconButton(onClick = { navController.navigate(route) }) {
                     Icon(
                         Icons.Filled.KeyboardArrowRight,
                         contentDescription = null,
@@ -310,21 +359,24 @@ fun RecordList(title:String,color:Color,navController: NavController,route:Strin
         }
     )
 }
+
 //记录详情页列表
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun RecordDetailList(title:String,state:ModalBottomSheetState,scope: CoroutineScope){
+fun RecordDetailList(title: String, state: ModalBottomSheetState, scope: CoroutineScope) {
     ListItem(
         colors = ListItemDefaults.colors(
             containerColor = MaterialTheme.colorScheme.onPrimary
         ),
         headlineText = {
-            Column(){
-                Text(title,
+            Column() {
+                Text(
+                    title,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground)
+                    color = MaterialTheme.colorScheme.onBackground
+                )
                 Spacer(modifier = Modifier.height(4.dp))
-                Row(){
+                Row() {
                     androidx.compose.material.Icon(
                         painter = painterResource(id = R.drawable.fillstar), null,
                         tint = MaterialTheme.colorScheme.primary,
@@ -366,16 +418,17 @@ fun RecordDetailList(title:String,state:ModalBottomSheetState,scope: CoroutineSc
         },
 
         trailingContent = {
-                IconButton(onClick = {scope.launch { state.show() } }) {
-                    Icon(
-                        Icons.Filled.MoreVert,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                    )
+            IconButton(onClick = { scope.launch { state.show() } }) {
+                Icon(
+                    Icons.Filled.MoreVert,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                )
             }
         },
     )
 }
+
 @Preview
 @Composable
 fun ChipScreen() {

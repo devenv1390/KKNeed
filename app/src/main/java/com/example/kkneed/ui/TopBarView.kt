@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 
 
@@ -290,7 +291,7 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
                         containerColor = Color.White),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { navController.navigate(AllScreen.ScanHistory.route) }) {
                     Icon(painter = painterResource(id = R.drawable.history),null)
                 }
             }
