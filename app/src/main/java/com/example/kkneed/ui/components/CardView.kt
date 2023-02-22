@@ -3083,6 +3083,56 @@ fun HealthCard3(title: String, @StringRes iconId: Int, description: String, desc
         }
     }
 }
+//地址列表卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ADListCard() {
+    val checkedState = remember {
+        mutableStateOf(true)
+    }
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
+            .clickable { }
+            .clip(RoundedCornerShape(12.dp))
+            .height(80.dp)
+            .fillMaxWidth(),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 4.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column() {
+                androidx.compose.material3.Text(
+                    "收件人：康康  12312345678",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                androidx.compose.material3.Text(
+                    "收件地址：广州 番禺区 康康家",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            }
+            Checkbox(
+                checked = checkedState.value,
+                onCheckedChange = { checkedState.value = it },
+                modifier = Modifier.padding(0.dp),
+            )
+        }
+    }
+}
 
 @SuppressLint("ResourceType")
 @Preview
