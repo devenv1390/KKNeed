@@ -1,137 +1,209 @@
 package com.example.kkneed.model
 
 
+import androidx.room.ColumnInfo
+import androidx.room.TypeConverters
+import com.example.kkneed.data.ProductConverters
 import com.google.gson.annotations.SerializedName
 
+@TypeConverters(ProductConverters::class)
 data class Nutriments(
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "nutriments_id")
+//    var nutrimentsId: Int = 0,
+
     @SerializedName("alcohol")
-    val alcohol: Double,
+    @ColumnInfo(name = "nutriments_alcohol") val alcohol: Double,
+
     @SerializedName("alcohol_100g")
-    val alcohol100g: Double,
+    @ColumnInfo(name = "nutriments_alcohol100g") val alcohol100g: Double,
+
     @SerializedName("alcohol_serving")
-    val alcoholServing: Double,
+    @ColumnInfo(name = "nutriments_alcoholServing") val alcoholServing: Double,
+
     @SerializedName("alcohol_unit")
-    val alcoholUnit: String,
+    @ColumnInfo(name = "nutriments_alcoholUnit") val alcoholUnit: String,
+
     @SerializedName("alcohol_value")
-    val alcoholValue: Double,
+    @ColumnInfo(name = "nutriments_alcoholValue") val alcoholValue: Double,
+
     @SerializedName("calcium")
-    val calcium: Double,
+    @ColumnInfo(name = "nutriments_calcium") val calcium: Double,
+
     @SerializedName("calcium_100g")
-    val calcium100g: Double,
+    @ColumnInfo(name = "nutriments_calcium100g") val calcium100g: Double,
+
     @SerializedName("calcium_serving")
-    val calciumServing: Double,
+    @ColumnInfo(name = "nutriments_calciumServing") val calciumServing: Double,
+
     @SerializedName("calcium_unit")
-    val calciumUnit: String,
+    @ColumnInfo(name = "nutriments_calciumUnit") val calciumUnit: String,
+
     @SerializedName("calcium_value")
-    val calciumValue: Double,
+    @ColumnInfo(name = "nutriments_calciumValue") val calciumValue: Double,
+
     @SerializedName("carbohydrates")
-    val carbohydrates: Double,
+    @ColumnInfo(name = "nutriments_carbohydrates") val carbohydrates: Double,
+
     @SerializedName("carbohydrates_100g")
-    val carbohydrates100g: Double,
+    @ColumnInfo(name = "nutriments_carbohydrates100g") val carbohydrates100g: Double,
+
     @SerializedName("carbohydrates_serving")
-    val carbohydratesServing: Double,
+    @ColumnInfo(name = "nutriments_carbohydratesServing") val carbohydratesServing: Double,
+
     @SerializedName("carbohydrates_unit")
-    val carbohydratesUnit: String,
+    @ColumnInfo(name = "nutriments_carbohydratesUnit") val carbohydratesUnit: String,
+
     @SerializedName("carbohydrates_value")
-    val carbohydratesValue: Double,
+    @ColumnInfo(name = "nutriments_carbohydratesValue") val carbohydratesValue: Double,
+
     @SerializedName("energy")
-    val energy: Double,
+    @ColumnInfo(name = "nutriments_energy") val energy: Double,
+
     @SerializedName("energy_100g")
-    val energy100g: Double,
+    @ColumnInfo(name = "nutriments_energy100g") val energy100g: Double,
+
     @SerializedName("energy-kj")
-    val energyKj: Double,
+    @ColumnInfo(name = "nutriments_energyKj") val energyKj: Double,
+
     @SerializedName("energy-kj_100g")
-    val energyKj100g: Double,
+    @ColumnInfo(name = "nutriments_energyKj100g") val energyKj100g: Double,
+
     @SerializedName("energy-kj_serving")
-    val energyKjServing: Double,
+    @ColumnInfo(name = "nutriments_energyKjServing") val energyKjServing: Double,
+
     @SerializedName("energy-kj_unit")
-    val energyKjUnit: String,
+    @ColumnInfo(name = "nutriments_energyKjUnit") val energyKjUnit: String,
+
     @SerializedName("energy-kj_value")
-    val energyKjValue: Double,
+    @ColumnInfo(name = "nutriments_energyKjValue") val energyKjValue: Double,
+
     @SerializedName("energy-kj_value_computed")
-    val energyKjValueComputed: Double,
+    @ColumnInfo(name = "nutriments_energyKjValueComputed") val energyKjValueComputed: Double,
+
     @SerializedName("energy_serving")
-    val energyServing: Double,
+    @ColumnInfo(name = "nutriments_energyServing") val energyServing: Double,
+
     @SerializedName("energy_unit")
-    val energyUnit: String,
+    @ColumnInfo(name = "nutriments_energyUnit") val energyUnit: String,
+
     @SerializedName("energy_value")
-    val energyValue: Double,
+    @ColumnInfo(name = "nutriments_energyValue") val energyValue: Double,
+
     @SerializedName("fat")
-    val fat: Double,
+    @ColumnInfo(name = "nutriments_fat") val fat: Double,
+
     @SerializedName("fat_100g")
-    val fat100g: Double,
+    @ColumnInfo(name = "nutriments_fat100g") val fat100g: Double,
+
     @SerializedName("fat_serving")
-    val fatServing: Double,
+    @ColumnInfo(name = "nutriments_fatServing") val fatServing: Double,
+
     @SerializedName("fat_unit")
-    val fatUnit: String,
+    @ColumnInfo(name = "nutriments_fatUnit") val fatUnit: String,
+
     @SerializedName("fat_value")
-    val fatValue: Double,
+    @ColumnInfo(name = "nutriments_fatValue") val fatValue: Double,
+
     @SerializedName("fiber")
-    val fiber: Double,
+    @ColumnInfo(name = "nutriments_fiber") val fiber: Double,
+
     @SerializedName("fiber_100g")
-    val fiber100g: Double,
+    @ColumnInfo(name = "nutriments_fiber100g") val fiber100g: Double,
+
     @SerializedName("fiber_serving")
-    val fiberServing: Double,
+    @ColumnInfo(name = "nutriments_fiberServing") val fiberServing: Double,
+
     @SerializedName("fiber_unit")
-    val fiberUnit: String,
+    @ColumnInfo(name = "nutriments_fiberUnit") val fiberUnit: String,
+
     @SerializedName("fiber_value")
-    val fiberValue: Double,
+    @ColumnInfo(name = "nutriments_fiberValue") val fiberValue: Double,
+
     @SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g")
-    val fruitsVegetablesNutsEstimateFromIngredients100g: Double,
+    @ColumnInfo(name = "nutriments_fruitsVegetablesNutsEstimateFromIngredients100g") val fruitsVegetablesNutsEstimateFromIngredients100g: Double,
+
     @SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_serving")
-    val fruitsVegetablesNutsEstimateFromIngredientsServing: Double,
+    @ColumnInfo(name = "nutriments_fruitsVegetablesNutsEstimateFromIngredientsServing") val fruitsVegetablesNutsEstimateFromIngredientsServing: Double,
+
     @SerializedName("nutrition-score-fr")
-    val nutritionScoreFr: Double,
+    @ColumnInfo(name = "nutriments_nutritionScoreFr") val nutritionScoreFr: Double,
+
     @SerializedName("nutrition-score-fr_100g")
-    val nutritionScoreFr100g: Double,
+    @ColumnInfo(name = "nutriments_nutritionScoreFr100g") val nutritionScoreFr100g: Double,
+
     @SerializedName("proteins")
-    val proteins: Double,
+    @ColumnInfo(name = "nutriments_proteins") val proteins: Double,
+
     @SerializedName("proteins_100g")
-    val proteins100g: Double,
+    @ColumnInfo(name = "nutriments_proteins100g") val proteins100g: Double,
+
     @SerializedName("proteins_serving")
-    val proteinsServing: Double,
+    @ColumnInfo(name = "nutriments_proteinsServing") val proteinsServing: Double,
+
     @SerializedName("proteins_unit")
-    val proteinsUnit: String,
+    @ColumnInfo(name = "nutriments_proteinsUnit") val proteinsUnit: String,
+
     @SerializedName("proteins_value")
-    val proteinsValue: Double,
+    @ColumnInfo(name = "nutriments_proteinsValue") val proteinsValue: Double,
+
     @SerializedName("salt")
-    val salt: Double,
+    @ColumnInfo(name = "nutriments_salt") val salt: Double,
+
     @SerializedName("salt_100g")
-    val salt100g: Double,
+    @ColumnInfo(name = "nutriments_salt100g") val salt100g: Double,
+
     @SerializedName("salt_serving")
-    val saltServing: Double,
+    @ColumnInfo(name = "nutriments_saltServing") val saltServing: Double,
+
     @SerializedName("salt_unit")
-    val saltUnit: String,
+    @ColumnInfo(name = "nutriments_saltUnit") val saltUnit: String,
+
     @SerializedName("salt_value")
-    val saltValue: Double,
+    @ColumnInfo(name = "nutriments_saltValue") val saltValue: Double,
+
     @SerializedName("saturated-fat")
-    val saturatedFat: Double,
+    @ColumnInfo(name = "nutriments_saturatedFat") val saturatedFat: Double,
+
     @SerializedName("saturated-fat_100g")
-    val saturatedFat100g: Double,
+    @ColumnInfo(name = "nutriments_saturatedFat100g") val saturatedFat100g: Double,
+
     @SerializedName("saturated-fat_serving")
-    val saturatedFatServing: Double,
+    @ColumnInfo(name = "nutriments_saturatedFatServing") val saturatedFatServing: Double,
+
     @SerializedName("saturated-fat_unit")
-    val saturatedFatUnit: String,
+    @ColumnInfo(name = "nutriments_saturatedFatUnit") val saturatedFatUnit: String,
+
     @SerializedName("saturated-fat_value")
-    val saturatedFatValue: Double,
+    @ColumnInfo(name = "nutriments_saturatedFatValue") val saturatedFatValue: Double,
+
     @SerializedName("sodium")
-    val sodium: Double,
+    @ColumnInfo(name = "nutriments_sodium") val sodium: Double,
+
     @SerializedName("sodium_100g")
-    val sodium100g: Double,
+    @ColumnInfo(name = "nutriments_sodium100g") val sodium100g: Double,
+
     @SerializedName("sodium_serving")
-    val sodiumServing: Double,
+    @ColumnInfo(name = "nutriments_sodiumServing") val sodiumServing: Double,
+
     @SerializedName("sodium_unit")
-    val sodiumUnit: String,
+    @ColumnInfo(name = "nutriments_sodiumUnit") val sodiumUnit: String,
+
     @SerializedName("sodium_value")
-    val sodiumValue: Double,
+    @ColumnInfo(name = "nutriments_sodiumValue") val sodiumValue: Double,
+
     @SerializedName("sugars")
-    val sugars: Double,
+    @ColumnInfo(name = "nutriments_sugars") val sugars: Double,
+
     @SerializedName("sugars_100g")
-    val sugars100g: Double,
+    @ColumnInfo(name = "nutriments_sugars100g") val sugars100g: Double,
+
     @SerializedName("sugars_serving")
-    val sugarsServing: Double,
+    @ColumnInfo(name = "nutriments_sugarsServing") val sugarsServing: Double,
+
     @SerializedName("sugars_unit")
-    val sugarsUnit: String,
+    @ColumnInfo(name = "nutriments_sugarsUnit") val sugarsUnit: String,
+
     @SerializedName("sugars_value")
-    val sugarsValue: Double
+    @ColumnInfo(name = "nutriments_sugarsValue") val sugarsValue: Double
 )

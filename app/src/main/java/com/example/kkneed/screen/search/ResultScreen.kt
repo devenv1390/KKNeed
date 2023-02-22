@@ -1,7 +1,6 @@
 package com.example.kkneed.screen.search
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +29,6 @@ fun ResultScreen(
     viewModel: ProductViewModel = hiltViewModel(),
 ) {
     viewModel.barcode = code
-    Log.d("CODE",code)
     val product = viewModel.queryProduct(code)
     Scaffold(
         topBar = {
@@ -51,7 +49,7 @@ fun ResultScreen(
                         product.productName,
                         product.brands,
                         product.imageUrl,
-                        product.nutriScoreGrade,
+                        product.scoreGrade,
                     )
             }
             item {

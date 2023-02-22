@@ -25,7 +25,23 @@ class ProductRepositoryImp @Inject constructor(
         val picture = dataSource.getProduct(barcode).product.imageUrl
         val brands = dataSource.getProduct(barcode).product.brands
         val score = dataSource.getProduct(barcode).product.nutriScoreGrade
-        val product = Product(code, name, picture, brands, score)
+        val ingredient = dataSource.getProduct(barcode).product.ingredients
+        val keywords = dataSource.getProduct(barcode).product.keywords
+        val nutrientLevels = dataSource.getProduct(barcode).product.nutrientLevels
+        val nutriments = dataSource.getProduct(barcode).product.nutriments
+        val tracesTags = dataSource.getProduct(barcode).product.tracesTags
+        val product = Product(
+            code = code,
+            productName = name,
+            imageUrl = picture,
+            brands = brands,
+            scoreGrade = score,
+            ingredients = ingredient,
+            keywords = keywords,
+            nutrientLevels = nutrientLevels,
+            nutriments = nutriments,
+            tracesTags = tracesTags,
+        )
         productDao.insert(product)
         return product
     }

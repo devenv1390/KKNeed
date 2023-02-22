@@ -224,7 +224,7 @@ fun CustomizeScreen(
                         productName = product.productName,
                         productImage = product.imageUrl,
                         productCode = product.code,
-                        productScore = product.nutriScoreGrade,
+                        productScore = product.scoreGrade,
                     )
                 }
                 item {

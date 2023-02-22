@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -23,10 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
-import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
-import com.example.kkneed.screen.shop.SearchResultScreen
 import com.example.kkneed.ui.CommentCard
 import com.example.kkneed.ui.ImageCommentCard
 import com.example.kkneed.ui.ShopScreenMainCard
@@ -95,8 +91,6 @@ fun CustomizeChip(title: String,modifier: Modifier){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailChip(state:Boolean,title:List<String>){
-
-
     Row(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)
         .fillMaxWidth(),

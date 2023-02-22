@@ -12,6 +12,8 @@ data class ProductX(
     val code: String,
     @SerializedName("image_url")
     val imageUrl: String,
+    @SerializedName("ingredients")
+    val ingredients: List<Ingredient>,
     @SerializedName("_keywords")
     val keywords: List<String>,
     @SerializedName("nutrient_levels")

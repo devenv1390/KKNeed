@@ -56,7 +56,7 @@ fun ScanResultScreen(
                         title = tempProduct.productName,
                         company = tempProduct.brands,
                         productImage = tempProduct.imageUrl,
-                        score = tempProduct.nutriScoreGrade,
+                        score = tempProduct.scoreGrade,
                     )
                 }
                 item {
