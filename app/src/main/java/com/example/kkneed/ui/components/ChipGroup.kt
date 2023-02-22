@@ -120,7 +120,7 @@ fun CustomizeInfoChip(state:Boolean,title:String){
     FilterChip(
         selected = selected,
         onClick = { selected = !selected },
-        label = { Text(title,
+        label = { Text(title,style = MaterialTheme.typography.bodySmall,
             color=if(selected) MaterialTheme.colorScheme.onBackground else
                 MaterialTheme.colorScheme.onSurfaceVariant) },
         colors = FilterChipDefaults.filterChipColors(
@@ -166,7 +166,7 @@ fun ChipGroupCompose(state:LazyListState) {
 
     Row(
         modifier = Modifier
-            .padding(start = 16.dp,top=8.dp, bottom = 8.dp)
+            .padding(start = 8.dp,top=8.dp, bottom = 8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -213,6 +213,7 @@ fun ChipGroupCompose(state:LazyListState) {
                         item { ImageCommentCard() }
                         item { ImageCommentCard()}
                         item { CommentCard() }
+
                     }
                 }
             }
@@ -290,16 +291,12 @@ fun ShopIconGroupCompose(state:LazyListState) {
                 label={},
                 leadingIcon ={
                     Column(horizontalAlignment = Alignment.CenterHorizontally){
-                        IconButton(
-                            onClick = {},
-                            modifier = Modifier.size(48.dp),
-                        ) {
                             Icon(
                                 painter = painterResource(imageIdList[index]), null,
                                 modifier = Modifier.size(36.dp),
                                 tint=MaterialTheme.colorScheme.primary
                             )
-                        }
+
                         androidx.compose.material3.Text(
                             it,
                             style = MaterialTheme.typography.labelMedium,
@@ -329,6 +326,7 @@ fun ShopIconGroupCompose(state:LazyListState) {
             .padding(top = 12.dp),
         count = 5,
         state = pagerState,
+        userScrollEnabled = true,
     ) { page ->
         androidx.compose.material.Surface(color = MaterialTheme.colorScheme.background) {
             LazyColumn(
@@ -348,6 +346,7 @@ fun ShopIconGroupCompose(state:LazyListState) {
                 item { ShopScreenMainCard() }
                 item { ShopScreenMainCard() }
                 item { ShopScreenMainCard() }
+                item{Spacer(modifier = Modifier.height(88.dp))}
             }
         }
 

@@ -3,6 +3,7 @@ package com.example.kkneed.ui
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.example.kkneed.R
 import com.example.kkneed.model.Scan
 import com.example.kkneed.model.ScanType
+import com.example.kkneed.ui.components.CustomizeChip
 import com.example.kkneed.ui.components.CustomizeInfoChip
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.*
@@ -56,7 +59,7 @@ fun ScanBottomSheet(state: ModalBottomSheetState, scope: CoroutineScope) {
 fun ScanSheet(
     scan: Scan,
     onShareClicked: () -> Unit,
-    onInfoClicked: () -> Unit,
+    onCopyClicked: () -> Unit,
     onWebClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -108,7 +111,7 @@ fun ScanSheet(
                 )
             }
             FloatingActionButton(
-                onClick = onInfoClicked,
+                onClick = onCopyClicked,
                 contentColor = Color.White,
                 modifier = Modifier.requiredSize(48.dp)
             ) {
@@ -188,6 +191,7 @@ fun ChangePhotoBottomSheet(state: ModalBottomSheetState, scope: CoroutineScope) 
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 //编辑产品底部栏
@@ -237,6 +241,7 @@ fun EditProductBottomSheet(state: ModalBottomSheetState, scope: CoroutineScope) 
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 //编辑健康档案底部栏

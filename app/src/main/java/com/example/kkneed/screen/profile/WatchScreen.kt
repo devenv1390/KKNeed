@@ -1,9 +1,7 @@
 package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -43,6 +41,7 @@ fun WatchScreen(navController: NavController) {
                 item { WatchList() }
                 item { WatchList() }
                 item { WatchList() }
+                item{ Spacer(modifier = Modifier.height(16.dp)) }
             }
         }
 

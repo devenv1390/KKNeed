@@ -2,9 +2,6 @@ package com.example.kkneed.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.kkneed.data.ProductConverters
-import com.example.kkneed.data.fake.fakeNutrientLevels
-import com.example.kkneed.data.fake.fakeNutriments
 
 @TypeConverters(ProductConverters::class)
 @Entity(tableName = "product")

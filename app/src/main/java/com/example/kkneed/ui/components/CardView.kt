@@ -44,6 +44,7 @@ import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
+import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -1064,7 +1065,7 @@ fun CommentCard() {
             .padding(start = 16.dp, end = 16.dp)
             .size(380.dp, 98.dp)
             .clickable { },
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
         elevation = 1.dp,
         shape = RoundedCornerShape(12.dp)
     ) {
@@ -1335,7 +1336,7 @@ fun DetailShopCard() {
 
         elevation = 0.dp, // 设置阴影
         onClick = {},
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {
         Row(
@@ -1416,7 +1417,7 @@ fun ProductCard(title: String) {
         modifier = Modifier
             .clip(RoundedCornerShape(12.dp))
             .size(148.dp, 170.dp),
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
         border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
         elevation = 0.dp,
         shape = RoundedCornerShape(12.dp)
@@ -2137,7 +2138,7 @@ fun HistoryCard(
             }
             IconButton(
                 onClick = {
-                    navController.navigate(AllScreen.Result.route + "/${productCode}")
+                    navController.navigate(AllScreen.Result.route+"/${productCode}")
                 }
             ) {
                 Icon(Icons.Default.ArrowRight, "info")
@@ -2311,7 +2312,7 @@ fun ShopCartCard() {
 @SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: String) {
+fun HomeCommunityCard(@StringRes imageId : Int,title: String,description: String,navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
@@ -2324,7 +2325,7 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
         // 将无法显示波纹效果
 
         elevation = 1.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column() {
@@ -2445,7 +2446,7 @@ fun HomeFoodCard() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 alignment = Alignment.TopCenter,
             )
             Column(
@@ -2493,11 +2494,10 @@ fun HomeFoodCard() {
 //首页我的记录饼图卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeRecordCard() {
+fun HomeRecordCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp) // 外边距
-            .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(409.dp)
             .width(380.dp),
@@ -2506,7 +2506,7 @@ fun HomeRecordCard() {
         // 将无法显示波纹效果
 
         elevation = 4.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.Record.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(
@@ -2567,7 +2567,7 @@ fun HomeRecordCard() {
                         .height(40.dp)
                         .width(105.dp),
                     textId = "查看详情",
-                    onClick = { }
+                    onClick = { navController.navigate(AllScreen.Record.route)}
                 )
             }
         }
@@ -2582,7 +2582,6 @@ fun CommunityCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
-            .clickable { navController.navigate(AllScreen.NoteDetail.route) }
             .clip(RoundedCornerShape(12.dp))
             .height(250.dp)
             .width(186.dp),
@@ -2591,7 +2590,7 @@ fun CommunityCard(navController: NavController) {
         // 将无法显示波纹效果
 
         elevation = 4.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -2701,7 +2700,7 @@ fun CustmizeCard() {
                     )
                     Text(
                         "健身",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
@@ -2718,7 +2717,7 @@ fun CustmizeCard() {
                     )
                     Text(
                         "过敏体质",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
@@ -2735,7 +2734,7 @@ fun CustmizeCard() {
                     )
                     Text(
                         "备孕",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
@@ -2752,7 +2751,7 @@ fun CustmizeCard() {
                     )
                     Text(
                         "肠道健康",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
@@ -2767,7 +2766,7 @@ fun CustmizeCard() {
                 ) {
                     Column(
                         modifier = Modifier
-                            .fillMaxWidth()
+                        .fillMaxWidth()
                             .padding(vertical = 8.dp, horizontal = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
@@ -2856,7 +2855,7 @@ fun CustmizeCard() {
             }
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
+                .fillMaxWidth()
                     .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
             ) {
