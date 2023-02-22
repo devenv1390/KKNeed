@@ -1,5 +1,7 @@
 package com.example.kkneed.ui.components
 
+import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
+import com.example.kkneed.R
 import com.example.kkneed.screen.shop.SearchResultScreen
 import com.example.kkneed.ui.CommentCard
 import com.example.kkneed.ui.ImageCommentCard
@@ -256,7 +260,105 @@ fun ChipGroupCompose(state:LazyListState) {
     }
 }
 
+@SuppressLint("ResourceType", "SupportAnnotationUsage")
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
+@Composable
+fun ShopIconGroupCompose(state:LazyListState) {
+    val pagerState = rememberPagerState()
+    val coroutineScope= rememberCoroutineScope()
+    val chipList: List<String> = listOf(
+        "健身餐",
+        "面包",
+        "饮品",
+        "烹饪",
+        "零食"
+    )
+    @StringRes val imageIdList:List<Int> = listOf(
+        R.drawable.meal,
+        R.drawable.bakery,
+        R.drawable.cafe,
+        R.drawable.soup,
+        R.drawable.pizza
+    )
 
+    var selected by remember { mutableStateOf(true) }
+
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp,top=8.dp, bottom = 8.dp, end = 16.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        chipList.forEachIndexed() { index,it ->
+            FilterChip(selected = pagerState.currentPage == index,
+                modifier=Modifier.size(64.dp,72.dp)
+                    .padding(vertical = 4.dp),
+                label={},
+                leadingIcon ={
+                    Column(horizontalAlignment = Alignment.CenterHorizontally){
+                        IconButton(
+                            onClick = {},
+                            modifier = Modifier.size(48.dp),
+                        ) {
+                            Icon(
+                                painter = painterResource(imageIdList[index]), null,
+                                modifier = Modifier.size(36.dp),
+                                tint=MaterialTheme.colorScheme.primary
+                            )
+                        }
+                        androidx.compose.material3.Text(
+                            it,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    },
+                colors = FilterChipDefaults.filterChipColors(
+                    containerColor = Color.Transparent,
+                    selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                ),
+                border = FilterChipDefaults.filterChipBorder(borderColor = Color.Transparent,
+                    selectedBorderColor = Color.Transparent),
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                }
+            )
+
+        }
+
+    }
+    HorizontalPager(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp),
+        count = 5,
+        state = pagerState,
+    ) { page ->
+        androidx.compose.material.Surface(color = MaterialTheme.colorScheme.background) {
+            LazyColumn(
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),state = state
+            )
+            {
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard() }
+            }
+        }
+
+    }
+}
 
 
 @Composable

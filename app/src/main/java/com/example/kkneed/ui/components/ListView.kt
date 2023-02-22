@@ -314,6 +314,7 @@ fun VantageList2(title: String) {
 @Composable
 fun RecordList(title: String, color: Color, navController: NavController, route: String) {
     ListItem(
+        modifier = Modifier.height(56.dp),
         colors = ListItemDefaults.colors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
@@ -341,7 +342,7 @@ fun RecordList(title: String, color: Color, navController: NavController, route:
         },
 
         trailingContent = {
-            Row() {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "21",
                     style = MaterialTheme.typography.titleMedium,

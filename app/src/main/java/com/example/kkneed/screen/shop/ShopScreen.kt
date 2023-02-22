@@ -1,10 +1,12 @@
 package com.example.kkneed.screen
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
@@ -31,12 +33,14 @@ import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.ui.MyBottomNavigation
 import com.example.kkneed.ui.ShopScreenMainCard
 import com.example.kkneed.ui.ShopTopAppBar
+import com.example.kkneed.ui.components.ShopIconGroupCompose
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.md_theme_dark_primary
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "ResourceType")
 @Composable
 fun ShopScreen(navController: NavController) {
+    val listState = rememberLazyListState()
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -66,7 +70,8 @@ fun ShopScreen(navController: NavController) {
         Box(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(top=8.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             Column(
@@ -78,86 +83,18 @@ fun ShopScreen(navController: NavController) {
                     painter = painterResource(R.drawable.shopcard),
                     contentDescription = "",
                     modifier = Modifier
-                        .clip(RoundedCornerShape(0))
+                        .clip(RoundedCornerShape(12.dp))
                         .height(200.dp),
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.TopCenter,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier
-                        .height(64.dp)
-                        .fillMaxWidth(),
-                ) {
-                    QuickClassifyButton()
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn() {
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                    item { ShopScreenMainCard() }
-                }
+                ShopIconGroupCompose(listState)
             }
         }
     }
 }
 
-@Composable
-fun QuickClassifyButton() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .width(364.dp),
-        horizontalArrangement = Arrangement.Center,
-    ) {
-        QuickClassifyInSide("健身")
-        Spacer(modifier = Modifier.width(30.dp))
-        QuickClassifyInSide("面包")
-        Spacer(modifier = Modifier.width(30.dp))
-        QuickClassifyInSide("饮品")
-        Spacer(modifier = Modifier.width(30.dp))
-        QuickClassifyInSide("烹饪")
-        Spacer(modifier = Modifier.width(30.dp))
-        QuickClassifyInSide("零食")
-    }
-}
-
-@Composable
-fun QuickClassifyInSide(strIconName: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .height(64.dp)
-            .width(48.dp),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        IconButton(
-            onClick = {},
-            modifier = Modifier.size(48.dp),
-
-            ) {
-            Icon(
-                Icons.Outlined.Face, null,
-                modifier = Modifier.size(48.dp),
-
-                )
-        }
-        androidx.compose.material3.Text(
-            strIconName,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-    }
-}
 @Preview
 @Composable
 fun PreviewShopScreen() {

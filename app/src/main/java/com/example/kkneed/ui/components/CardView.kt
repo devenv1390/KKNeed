@@ -184,7 +184,7 @@ fun OrderInfoCard(
                     modifier = Modifier.size(24.dp),
                     onClick = { /*TODO*/ }
                 ) {
-                    Icon(Icons.Default.MoreVert, null)
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
                 }
             }
             Row(
@@ -223,7 +223,7 @@ fun OrderInfoCard(
                         )
                         Button(
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.9f)
+                                containerColor = Color(0xFFFF897D)
                             ),
                             onClick = { /*TODO*/ }) {
                             Text(
@@ -447,7 +447,7 @@ fun ShopScreenMainCard() {
         )
         {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(R.drawable.product),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1886,9 +1886,10 @@ fun ShopCartCard() {
 }
 
 //首页社区卡片
+@SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeCommunityCard() {
+fun HomeCommunityCard(@StringRes imageId : Int,title: String,description: String) {
     Card(
         modifier = Modifier
             .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
@@ -1906,7 +1907,7 @@ fun HomeCommunityCard() {
     ) {
         Column() {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(imageId),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1926,13 +1927,13 @@ fun HomeCommunityCard() {
                     .fillMaxSize()
             ) {
                 androidx.compose.material3.Text(
-                    "健康食品知多少？",
+                    title,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 androidx.compose.material3.Text(
-                    "你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",
+                    description,
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
@@ -2007,7 +2008,7 @@ fun HomeFoodCard() {
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(200.dp)
-            .width(188.dp),
+            .width(180.dp),
         elevation = 1.dp, // 设置阴影
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
@@ -2017,7 +2018,7 @@ fun HomeFoodCard() {
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(R.drawable.product),
                 contentDescription = "",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -2093,32 +2094,32 @@ fun HomeRecordCard() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            PieChart(
+            PieChart2(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(269.dp),
                 input = listOf(
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelA,
                         value = 29,
                         description = "A等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelB,
                         value = 21,
                         description = "B等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelC,
                         value = 32,
                         description = "C等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelD,
                         value = 18,
                         description = "D等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelE,
                         value = 37,
                         description = "E等级食品"
@@ -2343,7 +2344,8 @@ fun CustmizeCard() {
                     backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                        .fillMaxWidth()
                             .padding(vertical = 8.dp, horizontal = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
@@ -2431,7 +2433,8 @@ fun CustmizeCard() {
                 }
             }
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                .fillMaxWidth()
                     .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
             ) {
