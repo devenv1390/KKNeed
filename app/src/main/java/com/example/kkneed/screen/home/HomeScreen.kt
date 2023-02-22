@@ -64,13 +64,14 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .background(MaterialTheme.colorScheme.background),
+                .background(MaterialTheme.colorScheme.background)
+                .padding(horizontal = 2.dp),
         ) {
             Image(
                 painter = painterResource(R.drawable.banner),
                 contentDescription = "",
                 modifier = Modifier
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(0))
                     .height(200.dp),
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.TopCenter,
@@ -84,19 +85,19 @@ fun HomeScreen(navController: NavController) {
 //                HomeCommunityCard()
 //            }
             LazyRow(modifier = Modifier.padding(start = 16.dp)) {
-                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
-                item { HomeCommunityCard(R.drawable.guominyuan,"过敏食物分享","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
-                item { HomeCommunityCard(R.drawable.tangniaobing,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
-                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
-                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？") }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",navController) }
+                item { HomeCommunityCard(R.drawable.guominyuan,"过敏食物分享","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",navController) }
+                item { HomeCommunityCard(R.drawable.tangniaobing,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",navController) }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",navController) }
+                item { HomeCommunityCard(R.drawable.community1,"健康食品知多少？","你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",navController) }
             }
             SubTitleRow2()
-            HomeRecordCard()
+            HomeRecordCard(navController)
             SubTitleRow3(navController)
             Row(modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.Center) {
-                Column {
+                Column(verticalArrangement =Arrangement.spacedBy(8.dp)) {
                     HomeFoodCard()
                     HomeFoodCard()
                     HomeFoodCard()
@@ -111,7 +112,7 @@ fun HomeScreen(navController: NavController) {
 //                    item { HomeFoodCard() }
 //                }
                 Spacer(modifier = Modifier.width(8.dp))
-                Column {
+                Column(verticalArrangement =Arrangement.spacedBy(8.dp)) {
                     HomeFoodCard()
                     HomeFoodCard()
                     HomeFoodCard()
@@ -126,7 +127,10 @@ fun HomeScreen(navController: NavController) {
 //                    item { HomeFoodCard() }
 //                }
             }
+            Spacer(modifier = Modifier.height(88.dp))
+
         }
+
     }
 }
 
@@ -163,16 +167,9 @@ fun SubTitleRow(navController: NavController) {
                 modifier = Modifier.offset(x = 22.dp)
             ) {
                 androidx.compose.material3.Text(
-                    "查看更多",
+                    "查看更多 > ",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary,
-                )
-            }
-            IconButton(onClick = { navController.navigate(AllScreen.Community.route) }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.chevron_right),
-                    contentDescription = "Localized description",
-                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -226,29 +223,6 @@ fun SubTitleRow3(navController: NavController) {
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.padding(start = 8.dp))
-        }
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.End
-        ) {
-            TextButton(
-                onClick = {},
-                modifier = Modifier.offset(x = 22.dp)
-            ) {
-                androidx.compose.material3.Text(
-                    "进入商城",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
-            IconButton(onClick = { }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.chevron_right),
-                    contentDescription = "Localized description",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
         }
     }
 }

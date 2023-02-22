@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -29,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.kkneed.R
 import com.example.kkneed.data.ScannerEvent
-import com.example.kkneed.navigation.AllScreen
+import com.example.kkneed.navigation.ScannerDirection
 import com.example.kkneed.ui.ScanSheet
 import com.example.kkneed.ui.ScanTopAppBar
 import com.example.kkneed.ui.dialogs.CameraRequiredDialog
@@ -41,6 +40,85 @@ import com.example.kkneed.viewmodel.ProductViewModel
 import com.example.kkneed.viewmodel.ScannerUiState
 import com.example.kkneed.viewmodel.ScannerViewModel
 import kotlinx.coroutines.launch
+
+//@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+//@OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterialApi::class)
+//@Composable
+//fun BCScannerScreen(navController: NavController) {
+//    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+//    val scope = rememberCoroutineScope()
+//    ModalBottomSheetLayout(
+//        sheetState = state,
+//        sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+//        sheetContent = {
+//            ScanBottomSheet(state, scope)
+//        }
+//    ){
+//        Scaffold(
+//            backgroundColor = Color.Transparent,
+//        ) {
+//            Column(
+//                modifier = Modifier
+//                    .fillMaxSize()
+//            )
+//            {
+////            CameraPreview(navController)
+//                Box(
+//                    modifier = Modifier.fillMaxWidth(),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Image(
+//                        painter = painterResource(R.drawable.scan),
+//                        contentDescription = "",
+//                        modifier = Modifier
+//                            .size(379.dp, 182.dp),
+//                        contentScale = ContentScale.Fit
+//                    )
+//                    androidx.compose.material3.IconButton(
+//                        onClick = { /*TODO*/ },
+//                        modifier = Modifier
+//                            .align(Alignment.BottomEnd)
+//                            .padding(bottom = 16.dp, end = 20.dp)
+//                    ) {
+//                        androidx.compose.material3.Icon(
+//                            painter = painterResource(id = R.drawable.flashon),
+//                            null,
+//                            modifier = Modifier.size(24.dp),
+//                            tint = Color.White
+//                        )
+//                    }
+//                }
+//                Spacer(modifier = Modifier.height(100.dp))
+//                Box(modifier = Modifier.fillMaxWidth()) {
+//                    Column(
+//                        modifier = Modifier.fillMaxWidth(),
+//                        horizontalAlignment = Alignment.CenterHorizontally,
+//                        verticalArrangement = Arrangement.spacedBy(20.dp)
+//                    ) {
+//                        Image(
+//                            painter = painterResource(R.drawable.dog),
+//                            contentDescription = "",
+//                            modifier = Modifier
+//                                .size(56.dp),
+//                            contentScale = ContentScale.Fit
+//                        )
+//                        Text(
+//                            "欢迎使用康康Need",
+//                            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
+//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
+//                        )
+//                        Text(
+//                            "搜索产品名或扫描产品包装的条形码",
+//                            style = androidx.compose.material3.MaterialTheme.typography.titleSmall,
+//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary.copy(0.8f)
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -134,13 +212,13 @@ private fun ScannerScreen(
 ) {
     val clipboardManager = LocalClipboardManager.current
     val uriHandler = LocalUriHandler.current
+
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetShape = BottomSheetShape,
         scrimColor = Color.Transparent,
         sheetContent = {
             uiState.scan?.let {
-                viewModel.barcode=it.displayValue
                 ScanSheet(
                     scan = it,
                     onShareClicked = {
@@ -155,26 +233,11 @@ private fun ScannerScreen(
                             )
                         )
                     },
-                    onInfoClicked = {
+                    onCopyClicked = {
                         clipboardManager.setText(AnnotatedString(it.displayValue))
-//                        Toast.makeText(context, context.getText(R.string.scan_value_copied), Toast.LENGTH_SHORT).show()
-                        var flag:Boolean = false
-                        try {
-                            val product = viewModel.queryProduct(it.displayValue)
-                            Log.d("RES",product.product_name)
-                        }catch (_:Exception){
-                            flag = true
-                        }
-                        if(flag){
-                            try {
-                                viewModel.addProduct(it.displayValue)
-                                navController.navigate(AllScreen.ScanResult.route)
-                            }catch (e:Exception){
-                                Toast.makeText(context, "不存在此商品", Toast.LENGTH_SHORT).show()
-                            }
-                        }else{
-                            navController.navigate(AllScreen.Result.route+"/${it.displayValue}")
-                        }
+                        Toast.makeText(context, context.getText(R.string.scan_value_copied), Toast.LENGTH_SHORT).show()
+                        viewModel.addProduct(it.displayValue)
+                        navController.navigate(ScannerDirection.actionScanToResult(it.displayValue, "BC"))
                     },
                     onWebClicked = {
                         uriHandler.openUri(it.displayValue)
@@ -217,32 +280,6 @@ private fun ScannerScreen(
                 )
             }
             ScanTopAppBar(56.dp, navController)
-//                Spacer(modifier = Modifier.height(100.dp))
-//                Box(modifier = Modifier.fillMaxWidth()) {
-//                    Column(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        verticalArrangement = Arrangement.spacedBy(20.dp)
-//                    ) {
-//                        Image(
-//                            painter = painterResource(R.drawable.dog),
-//                            contentDescription = "",
-//                            modifier = Modifier
-//                                .size(56.dp),
-//                            contentScale = ContentScale.Fit
-//                        )
-//                        Text(
-//                            "欢迎使用康康Need",
-//                            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
-//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
-//                        )
-//                        Text(
-//                            "搜索产品名或扫描产品包装的条形码",
-//                            style = androidx.compose.material3.MaterialTheme.typography.titleSmall,
-//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary.copy(0.8f)
-//                        )
-//                    }
-//                }
         }
     }
 }

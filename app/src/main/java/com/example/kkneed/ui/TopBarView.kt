@@ -229,7 +229,7 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            SearchBar()
+            ShopSearchBar(navController)
             IconButton(
                 onClick = {}
             ) {
@@ -254,11 +254,7 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            IconButton(
-                onClick = {}
-            ) {
-                Icon(Icons.Outlined.ArrowBack,null)
-            }
+            BackButton(navController)
             ShopSearchBar(navController)
             TextButton(onClick = {}) {
                 Text("搜索")

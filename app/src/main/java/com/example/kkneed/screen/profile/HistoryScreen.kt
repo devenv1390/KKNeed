@@ -43,6 +43,7 @@ fun HistoryScreen(navController: NavController) {
                 item { SmallInfoCard() }
                 item { SmallInfoCard() }
                 item { SmallInfoCard() }
+                item{Spacer(modifier = Modifier.height(16.dp))}
             }
         }
     }

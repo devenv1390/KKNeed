@@ -17,7 +17,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.model.Product
-import com.example.kkneed.screen.LoadingAnimation
 import com.example.kkneed.ui.HistoryCard
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -51,16 +50,14 @@ fun ChoseScreen(
                 var auxIndex = index
                 if (isLoading) {
                     if (auxIndex == 0) {
-                        return@items LoadingAnimation()
+//                        return@items LoadingCard()
                     }
                     auxIndex--
                 }
                 val product = products[auxIndex]
                 HistoryCard(
-                    navController = navController,
                     productName = product.product_name,
-                    productImage = product.image_url,
-                    productCode = product.code
+                    productImage = product.image_url
                 )
             }
         }

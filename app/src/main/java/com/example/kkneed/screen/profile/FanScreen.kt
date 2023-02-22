@@ -2,7 +2,9 @@ package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -42,6 +44,7 @@ fun FanScreen(navController: NavController) {
                 item { FanList() }
                 item { FanList() }
                 item { FanList2() }
+                item{Spacer(modifier = Modifier.height(16.dp))}
 
             }
         }

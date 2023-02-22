@@ -90,6 +90,7 @@ fun TabBar() {
                         item { OrderInfoCard1("12345678910111213", "运输中") }
                         item { OrderInfoCard2("12345678910111213", "已完成") }
                         item { OrderInfoCard3("12345678910111213", "待发货") }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
 
 
                     }
@@ -107,6 +108,7 @@ fun TabBar() {
                         item { OrderInfoCard("12345678910111213", "待支付") }
                         item { OrderInfoCard("12345678910111213", "待支付") }
                         item { OrderInfoCard("12345678910111213", "待支付") }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -123,6 +125,7 @@ fun TabBar() {
                         item { OrderInfoCard3("12345678910111213", "待发货") }
                         item { OrderInfoCard3("12345678910111213", "待发货") }
                         item { OrderInfoCard3("12345678910111213", "待发货") }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -138,6 +141,7 @@ fun TabBar() {
                         item { OrderInfoCard1("12345678910111213", "运输中") }
                         item { OrderInfoCard1("12345678910111213", "运输中") }
                         item { OrderInfoCard1("12345678910111213", "运输中") }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
 
                     }
                 }
@@ -156,6 +160,7 @@ fun TabBar() {
                         item { OrderInfoCard2("12345678910111213", "已完成") }
                         item { OrderInfoCard2("12345678910111213", "已完成") }
                         item { OrderInfoCard2("12345678910111213", "已完成") }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -262,6 +267,7 @@ fun ShopSearchTabBar() {
                 item { ShopScreenMainCard() }
                 item { ShopScreenMainCard() }
                 item { ShopScreenMainCard() }
+                item{Spacer(modifier = Modifier.height(16.dp))}
             }
         }
 
@@ -327,6 +333,7 @@ fun CollectTabBar() {
                         item { ShopScreenMainCard() }
                         item { ShopScreenMainCard() }
                         item { ShopScreenMainCard() }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -348,6 +355,7 @@ fun CollectTabBar() {
                         item { SmallInfoCard() }
                         item { SmallInfoCard() }
                         item { SmallInfoCard() }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -368,6 +376,7 @@ fun CommunityTabBar(navController: NavController) {
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
         )
     }
+    val coroutineScope = rememberCoroutineScope()
     val indicator = @Composable { tabPositions: List<TabPosition> ->
         CustomIndicator(tabPositions, pagerState)
     }
@@ -385,7 +394,9 @@ fun CommunityTabBar(navController: NavController) {
                 modifier = Modifier.zIndex(5f),
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
-                onClick = { /* TODO */ },
+                onClick = { coroutineScope.launch {
+                    pagerState.animateScrollToPage(index)
+                } },
             )
         }
     }
@@ -416,6 +427,7 @@ fun CommunityTabBar(navController: NavController) {
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -433,6 +445,8 @@ fun CommunityTabBar(navController: NavController) {
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
                         item { CommunityCard(navController) }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
+
                     }
                 }
             }

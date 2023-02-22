@@ -1,25 +1,30 @@
 package com.example.kkneed.ui
 
+import android.annotation.SuppressLint
+import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.Card
-import androidx.compose.material.FilterChip
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,16 +36,20 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.screen.login.RandomPosition
-import com.example.kkneed.ui.components.PieChart
-import com.example.kkneed.ui.components.PieChartInput
-import com.example.kkneed.ui.components.QuestionChip
+import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
+import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -177,7 +186,7 @@ fun OrderInfoCard(
                     modifier = Modifier.size(24.dp),
                     onClick = { /*TODO*/ }
                 ) {
-                    Icon(Icons.Default.MoreVert, null)
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
                 }
             }
             Row(
@@ -216,7 +225,7 @@ fun OrderInfoCard(
                         )
                         Button(
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.9f)
+                                containerColor = Color(0xFFFF897D)
                             ),
                             onClick = { /*TODO*/ }) {
                             Text(
@@ -236,6 +245,388 @@ fun OrderInfoCard(
     }
 }
 
+
+//订单状态运输中卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard1(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "确认收货",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
+//订单状态已完成卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard2(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "评价",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
+//订单状态已完成卡片
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun OrderInfoCard3(
+    orderNumber: String,
+    state: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .height(392.dp)
+            .clickable { },
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.background,
+        elevation = 0.dp // 设置阴影
+    ) {
+        Column() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .size(380.dp, 39.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+
+                    ) {
+                    Text(
+                        "订单号：$orderNumber",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.CenterEnd
+
+                ) {
+                    Text(
+                        text = state,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.inversePrimary
+                    )
+                }
+            }
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            SmallOrderInfoCard("可口可乐", 3, "规格:250ml", "￥3.50")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    modifier = Modifier.size(24.dp),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.more_horiz), null)
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Divider(modifier = Modifier.size(320.dp, 1.dp))
+            }
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        text = "共4件商品",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "小计：￥100.00",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "查看物流",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onBackground,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            onClick = { /*TODO*/ }) {
+                            Text(
+                                "催发货",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
 //商品小卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -440,7 +831,7 @@ fun ShopScreenMainCard() {
         )
         {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(R.drawable.product),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1629,22 +2020,19 @@ fun ComponentCompareCard() {
 }
 
 //搜索记录卡片
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
-fun HistoryCard() {
+fun HistoryCard(
+    productName: String,
+    productImage: String
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp) // 外边距
-            .clickable { }
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
             .clip(RoundedCornerShape(12.dp))
             .height(136.dp),
-
-        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
-        // 将无法显示波纹效果
-
         elevation = 2.dp, // 设置阴影
-        onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {
@@ -1654,7 +2042,13 @@ fun HistoryCard() {
         )
         {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = rememberImagePainter(
+                    data = productImage,
+                    builder = {
+                        placeholder(R.drawable.ic_launcher_foreground)
+                        error(R.drawable.ic_launcher_foreground)
+                    },
+                ),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1669,7 +2063,7 @@ fun HistoryCard() {
                     .fillMaxHeight()
             ) {
                 androidx.compose.material3.Text(
-                    "麦维他全麦粗粮酥性消化饼原味400g",
+                    text = productName,
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -1707,8 +2101,8 @@ fun HistoryCard() {
                     alignment = Alignment.TopCenter,
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Default.KeyboardArrowRight, null)
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.ArrowRight,"info")
             }
 
         }
@@ -1876,9 +2270,10 @@ fun ShopCartCard() {
 }
 
 //首页社区卡片
+@SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeCommunityCard() {
+fun HomeCommunityCard(@StringRes imageId : Int,title: String,description: String,navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
@@ -1891,12 +2286,12 @@ fun HomeCommunityCard() {
         // 将无法显示波纹效果
 
         elevation = 1.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column() {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(imageId),
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(12))
@@ -1916,13 +2311,13 @@ fun HomeCommunityCard() {
                     .fillMaxSize()
             ) {
                 androidx.compose.material3.Text(
-                    "健康食品知多少？",
+                    title,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 androidx.compose.material3.Text(
-                    "你真的了解健康食品吗？你知道怎样的包装食品才算是真健康吗？",
+                    description,
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
@@ -1997,7 +2392,7 @@ fun HomeFoodCard() {
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(200.dp)
-            .width(188.dp),
+            .width(180.dp),
         elevation = 1.dp, // 设置阴影
         onClick = {},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
@@ -2007,12 +2402,12 @@ fun HomeFoodCard() {
                 .fillMaxSize()
         ) {
             Image(
-                painter = painterResource(R.drawable.head),
+                painter = painterResource(R.drawable.product),
                 contentDescription = "",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 alignment = Alignment.TopCenter,
             )
             Column(
@@ -2060,11 +2455,10 @@ fun HomeFoodCard() {
 //首页我的记录饼图卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeRecordCard() {
+fun HomeRecordCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp) // 外边距
-            .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(409.dp)
             .width(380.dp),
@@ -2073,7 +2467,7 @@ fun HomeRecordCard() {
         // 将无法显示波纹效果
 
         elevation = 4.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.Record.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(
@@ -2083,32 +2477,32 @@ fun HomeRecordCard() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            PieChart(
+            PieChart2(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(269.dp),
                 input = listOf(
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelA,
                         value = 29,
                         description = "A等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelB,
                         value = 21,
                         description = "B等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelC,
                         value = 32,
                         description = "C等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelD,
                         value = 18,
                         description = "D等级食品"
                     ),
-                    PieChartInput(
+                    PieChartInput2(
                         color = LevelE,
                         value = 37,
                         description = "E等级食品"
@@ -2134,7 +2528,7 @@ fun HomeRecordCard() {
                         .height(40.dp)
                         .width(105.dp),
                     textId = "查看详情",
-                    onClick = { }
+                    onClick = { navController.navigate(AllScreen.Record.route)}
                 )
             }
         }
@@ -2145,11 +2539,10 @@ fun HomeRecordCard() {
 //社区卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommunityCard() {
+fun CommunityCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
-            .clickable { }
             .clip(RoundedCornerShape(12.dp))
             .height(250.dp)
             .width(186.dp),
@@ -2158,7 +2551,7 @@ fun CommunityCard() {
         // 将无法显示波纹效果
 
         elevation = 4.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -2224,62 +2617,440 @@ fun CommunityCard() {
     }
 }
 
-//地址列表卡片
+//定制页标签卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ADListCard() {
-    val checkedState = remember {
-        mutableStateOf(true)
-    }
+fun CustmizeCard() {
+    var visible by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
             .clickable { }
             .clip(RoundedCornerShape(12.dp))
-            .height(80.dp)
-            .fillMaxWidth(),
+            .width(380.dp),
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
 
-        elevation = 4.dp, // 设置阴影
+        elevation = 0.dp, // 设置阴影
         onClick = {},
-        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+        backgroundColor = MaterialTheme.colorScheme.surface,
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 20.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "营养诉求",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "健身",
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "疾病分类",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "过敏体质",
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "女性关键期",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "备孕",
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .height(50.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        "其他诉求",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                    Text(
+                        "肠道健康",
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+                }
+            }
+            AnimatedVisibility(visible = visible) {
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+                ) {
+                    Column(
+                        modifier = Modifier
+                        .fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            Text(
+                                "营养诉求",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "减肥")
+                                CustomizeInfoChip(true, "健身")
+                                CustomizeInfoChip(false, "增肌")
+                            }
+                        }
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            Text(
+                                "疾病分类",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "糖尿病")
+                                CustomizeInfoChip(true, "高血压")
+                                CustomizeInfoChip(false, "血脂异常")
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "痛风")
+                            }
+                        }
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            Text(
+                                "女性关键期",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "备孕")
+                                CustomizeInfoChip(true, "孕期")
+                                CustomizeInfoChip(false, "哺乳期")
+                            }
+                        }
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            Text(
+                                "关注成分",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "乳制品")
+                                CustomizeInfoChip(false, "麸质")
+                                CustomizeInfoChip(false, "坚果")
+                                CustomizeInfoChip(false, "花生")
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "二氧化硫")
+                                CustomizeInfoChip(false, "亚硫酸盐")
+                                CustomizeInfoChip(false, "大豆类制品")
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CustomizeInfoChip(false, "芥末")
+                                CustomizeInfoChip(false, "芝麻")
+
+                            }
+                        }
+                    }
+                }
+            }
+            Row(
+                modifier = Modifier
+                .fillMaxWidth()
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
+            ) {
+                GradientButton(modifier = Modifier.size(247.dp, 40.dp),
+                    textId = if (visible) "保存编辑" else "编辑标签", onClick = {
+                        visible = !visible
+                    })
+                TextButton(onClick = { /*TODO*/ }) {
+                    Text(
+                        "重置全部",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+
+        }
+    }
+}
+
+//定制页健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard(
+    title: String,
+    @StringRes iconId: Int,
+    @StringRes imageId: Int,
+    description: String,
+    description2: String
+) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 16.dp),
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column() {
-                androidx.compose.material3.Text(
-                    "收件人：康康  12312345678",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                androidx.compose.material3.Text(
-                    "收件地址：广州 番禺区 康康家",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Row(
+                ) {
+                    Icon(
+                        painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
             }
-            Checkbox(
-                checked = checkedState.value,
-                onCheckedChange = { checkedState.value = it },
-                modifier = Modifier.padding(0.dp),
+            Icon(
+                painter = painterResource(id = imageId),
+                null, modifier = Modifier.size(52.dp), tint = Color.Unspecified
             )
         }
     }
 }
 
+//不带右侧图定制页健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard2(title: String, @StringRes iconId: Int, description: String, description2: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Row(
+                ) {
+                    Icon(
+                        painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+
+        }
+    }
+}
+
+//身体测量健康记录
+@SuppressLint("ResourceType")
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HealthCard3(title: String, @StringRes iconId: Int, description: String, description2: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 4.dp) // 外边距
+            .clip(RoundedCornerShape(12.dp))
+            .size(380.dp, 74.dp),
+
+        // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
+        // 将无法显示波纹效果
+
+        elevation = 0.dp, // 设置阴影
+        onClick = {},
+        backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Row(
+                ) {
+                    Icon(
+                        painter = painterResource(iconId),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        description,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        "厘米",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        description2,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                        "公斤",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+
+        }
+    }
+}
+
+@SuppressLint("ResourceType")
 @Preview
 @Composable
 fun CardScreen() {
     KKNeedTheme {
-        CommunityCard()
+        CustmizeCard()
     }
 }
 

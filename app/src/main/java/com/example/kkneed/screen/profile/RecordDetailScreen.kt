@@ -1,10 +1,7 @@
 package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -63,6 +60,7 @@ fun RecordDetailScreen(navController: NavController) {
                 item{ RecordDetailList("麦维他纤维饼干",state,scope) }
                 item{ RecordDetailList("麦维他纤维饼干",state,scope) }
                 item{ RecordDetailList("麦维他纤维饼干",state,scope) }
+                item{ Spacer(modifier = Modifier.height(16.dp)) }
             }
         }
     }
