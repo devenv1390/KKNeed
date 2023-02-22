@@ -54,7 +54,12 @@ fun ShopScreen(navController: NavController) {
                 },
                 backgroundColor = md_theme_dark_primary
             ) {
-                androidx.compose.material.Icon(Icons.Default.Build, null, tint = Color.White)
+                androidx.compose.material.Icon(
+                    painter = painterResource(id = R.drawable.barcode_scanner),
+                    null,
+                    tint = Color.White,
+                    modifier = Modifier.height(24.dp)
+                )
             }
         }
     ) {

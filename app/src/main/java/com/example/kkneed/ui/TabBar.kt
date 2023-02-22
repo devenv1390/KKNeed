@@ -126,7 +126,7 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
             .width(indicatorEnd - indicatorStart)
             .padding(2.dp)
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.primary, RoundedCornerShape(50))
+            .background(color = MaterialTheme.colorScheme.inversePrimary, RoundedCornerShape(50))
             .border(
                 BorderStroke(2.dp, color = MaterialTheme.colorScheme.secondaryContainer),
                 RoundedCornerShape(50)
