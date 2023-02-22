@@ -47,4 +47,5 @@ sealed class AllScreen(val route: String){
     object SearchCommunity:AllScreen("searchcommunity_screen")
     object Create:AllScreen("create_screen")
     object ScanResult:AllScreen(ScannerDirection.route)
+    object Result:AllScreen("result_screen")
 }

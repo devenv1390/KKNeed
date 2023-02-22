@@ -32,6 +32,7 @@ import com.example.kkneed.R
 import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.SCANNER_ROUTE
 import com.example.kkneed.navigation.SHOP_ROUTE
+import com.example.kkneed.screen.LoadingAnimation
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.*
 import com.example.kkneed.ui.components.CustomizeChip
@@ -45,158 +46,184 @@ import kotlinx.coroutines.launch
 @Composable
 fun CustomizeScreen(
     navController: NavController,
-    viewModel:ProductViewModel = hiltViewModel()
-    ) {
+    viewModel: ProductViewModel = hiltViewModel()
+) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    val products:List<Product> by viewModel.products.observeAsState(arrayListOf())
-    val isLoading:Boolean by viewModel.isLoading.observeAsState(false)
+    val products: List<Product> by viewModel.products.observeAsState(arrayListOf())
+    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
     ModalBottomSheetLayout(
         sheetElevation = 16.dp,
         sheetState = state,
         sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
         sheetContent = {
-            ChoseBottomSheet(state,scope)
+            ChoseBottomSheet(state, scope)
         }
     ) {
-    Scaffold(
-        backgroundColor = MaterialTheme.colorScheme.background,
-        topBar = { CustomizeTopAppBar(64.dp, navController) },
-        bottomBar = {
-            MyBottomNavigation(navController = navController,2)
-        },
-        isFloatingActionButtonDocked = true,
-        floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(SCANNER_ROUTE)
-                },
-                backgroundColor = md_theme_dark_primary
-            ) {
-                androidx.compose.material.Icon(
-                    painter = painterResource(id = R.drawable.barcode_scanner),
-                    null,
-                    tint = Color.White,
-                    modifier = Modifier.height(24.dp)
-                )
-            }
-        }
-    ) {
-        ChoseBottomSheet(state,scope)
-        LazyColumn(
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.onPrimary)
-        ) {
-            item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(240.dp)
+        Scaffold(
+            backgroundColor = MaterialTheme.colorScheme.background,
+            topBar = { CustomizeTopAppBar(64.dp, navController) },
+            bottomBar = {
+                MyBottomNavigation(navController = navController, 2)
+            },
+            isFloatingActionButtonDocked = true,
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(SCANNER_ROUTE)
+                    },
+                    backgroundColor = md_theme_dark_primary
                 ) {
-                    CustomizeChip(title = "可可代脂肪",
-                        modifier = Modifier.RandomPosition(120, 30)
-                    )
-
-                    CustomizeChip( title = "饱和脂肪",
-                        modifier = Modifier.RandomPosition(800, 150)
-                    )
-                    CustomizeChip(title = "乳糖",
-                        modifier = Modifier.RandomPosition(80, 300)
-                    )
-                    CustomizeChip( title = "添加糖",
-                        modifier = Modifier.RandomPosition(200, 500)
-                    )
-                    CustomizeChip(title = "钠",
-                        modifier = Modifier.RandomPosition(800, 400)
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.human),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(160.dp, 210.dp),
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.TopCenter,
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = R.drawable.barcode_scanner),
+                        null,
+                        tint = Color.White,
+                        modifier = Modifier.height(24.dp)
                     )
                 }
             }
-
-//            LazyColumn(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//            ) {
+        ) {
+            ChoseBottomSheet(state, scope)
+            LazyColumn(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.onPrimary)
+            ) {
                 item {
-                    Row(verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)){
-                        Icon(painter = painterResource(id = R.drawable.centerfocus),
-                            null)
-                        Text(text = "关注标签",
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(240.dp)
+                    ) {
+                        CustomizeChip(
+                            title = "可可代脂肪",
+                            modifier = Modifier.RandomPosition(120, 30)
+                        )
+
+                        CustomizeChip(
+                            title = "饱和脂肪",
+                            modifier = Modifier.RandomPosition(800, 150)
+                        )
+                        CustomizeChip(
+                            title = "乳糖",
+                            modifier = Modifier.RandomPosition(80, 300)
+                        )
+                        CustomizeChip(
+                            title = "添加糖",
+                            modifier = Modifier.RandomPosition(200, 500)
+                        )
+                        CustomizeChip(
+                            title = "钠",
+                            modifier = Modifier.RandomPosition(800, 400)
+                        )
+                        Image(
+                            painter = painterResource(R.drawable.human),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(160.dp, 210.dp),
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.TopCenter,
+                        )
+                    }
+                }
+                item {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.centerfocus),
+                            null
+                        )
+                        Text(
+                            text = "关注标签",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.onBackground,
-                            modifier = Modifier.padding(start = 8.dp))
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     }
                     CustmizeCard()
-                    Row(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween){
-                        Row(verticalAlignment = Alignment.CenterVertically){
-                            Icon(painter = painterResource(id = R.drawable.info),null,
-                                modifier = Modifier.size(48.dp))
-                            Text(text = "健康档案",style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.info), null,
+                                modifier = Modifier.size(48.dp)
+                            )
+                            Text(
+                                text = "健康档案",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.padding(start = 8.dp))
+                                modifier = Modifier.padding(start = 8.dp)
+                            )
                         }
                         IconButton(onClick = { scope.launch { state.show() } }) {
-                            Icon(painter = painterResource(id = R.drawable.edit),
+                            Icon(
+                                painter = painterResource(id = R.drawable.edit),
                                 contentDescription = null,
-                                modifier = Modifier.size(24.dp))
+                                modifier = Modifier.size(24.dp)
+                            )
                         }
                     }
-                    HealthCard("健身记录",R.drawable.fire,R.drawable.sportpie,"177","千卡")
-                    HealthCard2("腹部绞痛",R.drawable.fire,"出现/轻微","")
-                    HealthCard("经期跟踪",R.drawable.fire,R.drawable.open,"月经量","三天前")
-                    Row(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp),
+                    HealthCard("健身记录", R.drawable.fire, R.drawable.sportpie, "177", "千卡")
+                    HealthCard2("腹部绞痛", R.drawable.fire, "出现/轻微", "")
+                    HealthCard("经期跟踪", R.drawable.fire, R.drawable.open, "月经量", "三天前")
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically){
-                        Row(verticalAlignment = Alignment.CenterVertically){
-                            Icon(painter = painterResource(id = R.drawable.centerfocus),null)
-                            Text(text = "推荐食品",style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(painter = painterResource(id = R.drawable.centerfocus), null)
+                            Text(
+                                text = "推荐食品",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.padding(start = 8.dp))
+                                modifier = Modifier.padding(start = 8.dp)
+                            )
                         }
-                        Row(verticalAlignment = Alignment.CenterVertically){
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             TextButton(onClick = { navController.navigate(SHOP_ROUTE) }) {
-                                Text(text = "进入商城",
+                                Text(
+                                    text = "进入商城",
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.primary)
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                             }
-                            Icon(Icons.Default.KeyboardArrowRight,null,modifier = Modifier.size(24.dp),
-                                tint=MaterialTheme.colorScheme.primary)
+                            Icon(
+                                Icons.Default.KeyboardArrowRight, null, modifier = Modifier.size(24.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         }
 
                     }
                 }
                 var itemCount = products.size
-                if(isLoading) itemCount++
+                if (isLoading) itemCount++
 
-                items(count = itemCount){index ->
+                items(count = itemCount) { index ->
                     var auxIndex = index
-                    if(isLoading){
-                        if (auxIndex == 0){
-//                        return@items LoadingCard()
+                    if (isLoading) {
+                        if (auxIndex == 0) {
+                            return@items LoadingAnimation()
                         }
                         auxIndex--
                     }
                     val product = products[auxIndex]
                     HistoryCard(
+                        navController = navController,
                         productName = product.product_name,
-                        productImage = product.image_url
+                        productImage = product.image_url,
+                        productCode = product.code
                     )
                 }
                 item {
@@ -206,8 +233,7 @@ fun CustomizeScreen(
 
         }
     }
-    }
-//    }
+}
 
 
 @Preview

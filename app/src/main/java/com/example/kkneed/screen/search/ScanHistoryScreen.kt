@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.model.Product
+import com.example.kkneed.screen.LoadingAnimation
 import com.example.kkneed.ui.HistoryCard
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -23,37 +24,43 @@ import com.example.kkneed.viewmodel.ProductViewModel
 @Composable
 fun ScanHistoryScreen(
     navController: NavController,
-    viewModel:ProductViewModel = hiltViewModel()
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
-    val products:List<Product> by viewModel.products.observeAsState(arrayListOf())
-    val isLoading:Boolean by viewModel.isLoading.observeAsState(false)
+    val products: List<Product> by viewModel.products.observeAsState(arrayListOf())
+    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
     Scaffold(
         topBar = {
-            MostUseTopAppBar(appBarHeight = 64.dp, navController =navController, "搜索记录") },
+            MostUseTopAppBar(appBarHeight = 64.dp, navController = navController, "搜索记录")
+        },
     )
     {
-        LazyColumn(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)){
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             var itemCount = products.size
-            if(isLoading) itemCount++
+            if (isLoading) itemCount++
 
-            items(count = itemCount){index ->
+            items(count = itemCount) { index ->
                 var auxIndex = index
-                if(isLoading){
-                    if (auxIndex == 0){
-//                        return@items LoadingCard()
+                if (isLoading) {
+                    if (auxIndex == 0) {
+                        return@items LoadingAnimation()
                     }
                     auxIndex--
                 }
                 val product = products[auxIndex]
                 HistoryCard(
+                    navController = navController,
                     productName = product.product_name,
-                    productImage = product.image_url
+                    productImage = product.image_url,
+                    productCode = product.code
                 )
             }
         }
     }
 }
+
 @Preview
 @Composable
 fun PreviewScanScreen() {

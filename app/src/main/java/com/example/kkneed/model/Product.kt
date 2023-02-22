@@ -11,7 +11,6 @@ data class Product(
     @ColumnInfo(name = "brands") val brands: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
-
 @Dao
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,6 +21,9 @@ interface ProductDao {
 
     @Query("SELECT * FROM product ORDER BY id DESC LIMIT 1")
     fun getOne(): LiveData<Product>
+
+    @Query("SELECT * FROM product WHERE code=:code")
+    fun queryProductCode(code: String): Product
 
     @Delete
     fun delete(product: Product)

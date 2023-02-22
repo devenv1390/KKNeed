@@ -93,6 +93,7 @@ private val DarkColors = darkColorScheme(
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
 )
+
 object NoRippleTheme : RippleTheme {
 
     @Composable
@@ -106,6 +107,7 @@ object NoRippleTheme : RippleTheme {
     }
 
 }
+
 @Composable
 fun KKNeedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
@@ -114,8 +116,9 @@ fun KKNeedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
         LightColors
     }
 
+
     MaterialTheme(
         colorScheme = colors,
-        content = content,
+        content = content
     )
 }

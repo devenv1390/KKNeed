@@ -41,7 +41,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
@@ -49,6 +51,7 @@ import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
+import com.example.kkneed.viewmodel.ProductViewModel
 import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -342,7 +345,7 @@ fun OrderInfoCard1(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "查看物流",
@@ -355,7 +358,7 @@ fun OrderInfoCard1(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "确认收货",
@@ -373,6 +376,7 @@ fun OrderInfoCard1(
 
     }
 }
+
 //订单状态已完成卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -469,7 +473,7 @@ fun OrderInfoCard2(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "查看物流",
@@ -482,7 +486,7 @@ fun OrderInfoCard2(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "评价",
@@ -500,6 +504,7 @@ fun OrderInfoCard2(
 
     }
 }
+
 //订单状态已完成卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -596,7 +601,7 @@ fun OrderInfoCard3(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.onBackground),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "查看物流",
@@ -609,7 +614,7 @@ fun OrderInfoCard3(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color.Transparent
                             ),
-                            border= BorderStroke(1.dp,MaterialTheme.colorScheme.primary),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
                             onClick = { /*TODO*/ }) {
                             Text(
                                 "催发货",
@@ -627,6 +632,7 @@ fun OrderInfoCard3(
 
     }
 }
+
 //商品小卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -2023,8 +2029,11 @@ fun ComponentCompareCard() {
 @OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
 fun HistoryCard(
+    navController: NavController,
     productName: String,
-    productImage: String
+    productImage: String,
+    productCode: String,
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
     Card(
         modifier = Modifier
@@ -2101,8 +2110,12 @@ fun HistoryCard(
                     alignment = Alignment.TopCenter,
                 )
             }
-            IconButton(onClick = {  }) {
-                Icon(Icons.Default.ArrowRight,"info")
+            IconButton(
+                onClick = {
+                    navController.navigate(AllScreen.Result.route+"/${productCode}")
+                }
+            ) {
+                Icon(Icons.Default.ArrowRight, "info")
             }
 
         }
@@ -2273,7 +2286,7 @@ fun ShopCartCard() {
 @SuppressLint("ResourceType")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeCommunityCard(@StringRes imageId : Int,title: String,description: String) {
+fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: String) {
     Card(
         modifier = Modifier
             .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
@@ -2544,7 +2557,7 @@ fun CommunityCard(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
-            .clickable {navController.navigate(AllScreen.NoteDetail.route) }
+            .clickable { navController.navigate(AllScreen.NoteDetail.route) }
             .clip(RoundedCornerShape(12.dp))
             .height(250.dp)
             .width(186.dp),
@@ -2729,7 +2742,7 @@ fun CustmizeCard() {
                 ) {
                     Column(
                         modifier = Modifier
-                        .fillMaxWidth()
+                            .fillMaxWidth()
                             .padding(vertical = 8.dp, horizontal = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
@@ -2818,7 +2831,7 @@ fun CustmizeCard() {
             }
             Row(
                 modifier = Modifier
-                .fillMaxWidth()
+                    .fillMaxWidth()
                     .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
             ) {

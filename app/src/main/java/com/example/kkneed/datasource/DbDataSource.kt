@@ -7,6 +7,5 @@ import com.example.kkneed.model.ProductDao
 
 @Database(entities = [Product::class], version = 1, exportSchema = false)
 abstract class DbDataSource : RoomDatabase() {
-
     abstract fun productDao(): ProductDao
 }

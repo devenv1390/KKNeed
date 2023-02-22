@@ -11,11 +11,12 @@ interface ProductRepository {
     suspend fun deleteProduct(toDelete: Product)
     fun getAllProduct(): LiveData<List<Product>>
     fun getOneAllProduct(): LiveData<Product>
+    fun queryProductCode(barcode: String): Product
 }
 
 class ProductRepositoryImp @Inject constructor(
     private val dataSource: OFFDataSource,
-    private val productDao: ProductDao
+    private val productDao: ProductDao,
 ) : ProductRepository {
 
     override suspend fun getNewProduct(barcode: String): Product {
@@ -32,4 +33,7 @@ class ProductRepositoryImp @Inject constructor(
 
     override fun getAllProduct(): LiveData<List<Product>> = productDao.getAll()
     override fun getOneAllProduct(): LiveData<Product> = productDao.getOne()
+    override fun queryProductCode(barcode: String): Product {
+        return productDao.queryProductCode(barcode)
+    }
 }

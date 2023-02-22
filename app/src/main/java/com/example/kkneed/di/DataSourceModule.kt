@@ -42,6 +42,7 @@ class DataSourceModule {
     @Provides
     fun dbDataSource(@ApplicationContext context: Context): DbDataSource {
         return Room.databaseBuilder(context, DbDataSource::class.java, "product_database")
+            .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
     }
