@@ -188,7 +188,15 @@ fun FanList2() {
 //详情页顶部列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailList(title: String, company: String, productImage: String) {
+fun DetailList(title: String, company: String, productImage: String, score:String) {
+    var gradeImage: Int = R.drawable.alevel
+    when (score) {
+        "a" -> gradeImage = R.drawable.alevel
+        "b" -> gradeImage = R.drawable.blevel
+        "c" -> gradeImage = R.drawable.clevel
+        "d" -> gradeImage = R.drawable.dlevel
+        "e" -> gradeImage = R.drawable.elevel
+    }
     ListItem(
         headlineText = {
             androidx.compose.material3.Text(
@@ -206,7 +214,7 @@ fun DetailList(title: String, company: String, productImage: String) {
         trailingContent = {
             Row() {
                 Image(
-                    painter = painterResource(R.drawable.alevel),
+                    painter = painterResource(gradeImage),
                     contentDescription = "",
                     modifier = Modifier
                         .size(80.dp, 50.dp),

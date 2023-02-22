@@ -10,13 +10,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,23 +33,17 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
-import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.components.*
 import com.example.kkneed.ui.theme.*
-import com.example.kkneed.viewmodel.ProductViewModel
-import com.valentinilk.shimmer.shimmer
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -2033,8 +2024,42 @@ fun HistoryCard(
     productName: String,
     productImage: String,
     productCode: String,
-    viewModel: ProductViewModel = hiltViewModel()
+    productScore: String,
 ) {
+    var gradeImage: Int = R.drawable.alevel
+    var matchText: String = "健康匹配度高"
+    var matchColor: Color = LevelA
+    when (productScore) {
+        "a" -> {
+            gradeImage = R.drawable.alevel
+            matchText = "健康匹配度高"
+            matchColor = LevelA
+        }
+
+        "b" -> {
+            gradeImage = R.drawable.blevel
+            matchText = "健康匹配度较高"
+            matchColor = LevelB
+        }
+
+        "c" -> {
+            gradeImage = R.drawable.clevel
+            matchText = "健康匹配度一般"
+            matchColor = LevelC
+        }
+
+        "d" -> {
+            gradeImage = R.drawable.dlevel
+            matchText = "健康匹配度较低"
+            matchColor = LevelD
+        }
+
+        "e" -> {
+            gradeImage = R.drawable.elevel
+            matchText = "健康匹配度低"
+            matchColor = LevelE
+        }
+    }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -2089,18 +2114,18 @@ fun HistoryCard(
                     Box(
                         modifier = Modifier
                             .clip(CircleShape)
-                            .background(LevelA)
+                            .background(matchColor)
                             .size(20.dp)
                     )
                     androidx.compose.material3.Text(
-                        "健康匹配度高",
+                        text = matchText,
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
                 Spacer(Modifier.height(8.dp))
                 Image(
-                    painter = painterResource(R.drawable.alevel),
+                    painter = painterResource(gradeImage),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12))
@@ -2112,7 +2137,7 @@ fun HistoryCard(
             }
             IconButton(
                 onClick = {
-                    navController.navigate(AllScreen.Result.route+"/${productCode}")
+                    navController.navigate(AllScreen.Result.route + "/${productCode}")
                 }
             ) {
                 Icon(Icons.Default.ArrowRight, "info")

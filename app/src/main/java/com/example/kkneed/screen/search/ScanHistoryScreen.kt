@@ -41,7 +41,6 @@ fun ScanHistoryScreen(
 ) {
     val products: List<Product> by viewModel.products.observeAsState(arrayListOf())
     val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
-    var productList = products
     Scaffold(
         topBar = {
             MostUseTopAppBar(appBarHeight = 64.dp, navController = navController, "搜索记录")
@@ -117,7 +116,8 @@ fun ScanHistoryScreen(
                         navController = navController,
                         productName = product.productName,
                         productImage = product.imageUrl,
-                        productCode = product.code
+                        productCode = product.code,
+                        productScore = product.nutriScoreGrade,
                     )
                 }
 

@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Nutriments(
     @SerializedName("alcohol")
-    val alcohol: Int,
+    val alcohol: Double,
     @SerializedName("alcohol_100g")
-    val alcohol100g: Int,
+    val alcohol100g: Double,
     @SerializedName("alcohol_serving")
-    val alcoholServing: Int,
+    val alcoholServing: Double,
     @SerializedName("alcohol_unit")
     val alcoholUnit: String,
     @SerializedName("alcohol_value")
-    val alcoholValue: Int,
+    val alcoholValue: Double,
     @SerializedName("calcium")
     val calcium: Double,
     @SerializedName("calcium_100g")
@@ -23,67 +23,67 @@ data class Nutriments(
     @SerializedName("calcium_unit")
     val calciumUnit: String,
     @SerializedName("calcium_value")
-    val calciumValue: Int,
+    val calciumValue: Double,
     @SerializedName("carbohydrates")
-    val carbohydrates: Int,
+    val carbohydrates: Double,
     @SerializedName("carbohydrates_100g")
-    val carbohydrates100g: Int,
+    val carbohydrates100g: Double,
     @SerializedName("carbohydrates_serving")
-    val carbohydratesServing: Int,
+    val carbohydratesServing: Double,
     @SerializedName("carbohydrates_unit")
     val carbohydratesUnit: String,
     @SerializedName("carbohydrates_value")
-    val carbohydratesValue: Int,
+    val carbohydratesValue: Double,
     @SerializedName("energy")
-    val energy: Int,
+    val energy: Double,
     @SerializedName("energy_100g")
-    val energy100g: Int,
+    val energy100g: Double,
     @SerializedName("energy-kj")
-    val energyKj: Int,
+    val energyKj: Double,
     @SerializedName("energy-kj_100g")
-    val energyKj100g: Int,
+    val energyKj100g: Double,
     @SerializedName("energy-kj_serving")
-    val energyKjServing: Int,
+    val energyKjServing: Double,
     @SerializedName("energy-kj_unit")
     val energyKjUnit: String,
     @SerializedName("energy-kj_value")
-    val energyKjValue: Int,
+    val energyKjValue: Double,
     @SerializedName("energy-kj_value_computed")
     val energyKjValueComputed: Double,
     @SerializedName("energy_serving")
-    val energyServing: Int,
+    val energyServing: Double,
     @SerializedName("energy_unit")
     val energyUnit: String,
     @SerializedName("energy_value")
-    val energyValue: Int,
+    val energyValue: Double,
     @SerializedName("fat")
-    val fat: Int,
+    val fat: Double,
     @SerializedName("fat_100g")
-    val fat100g: Int,
+    val fat100g: Double,
     @SerializedName("fat_serving")
-    val fatServing: Int,
+    val fatServing: Double,
     @SerializedName("fat_unit")
     val fatUnit: String,
     @SerializedName("fat_value")
-    val fatValue: Int,
+    val fatValue: Double,
     @SerializedName("fiber")
-    val fiber: Int,
+    val fiber: Double,
     @SerializedName("fiber_100g")
-    val fiber100g: Int,
+    val fiber100g: Double,
     @SerializedName("fiber_serving")
-    val fiberServing: Int,
+    val fiberServing: Double,
     @SerializedName("fiber_unit")
     val fiberUnit: String,
     @SerializedName("fiber_value")
-    val fiberValue: Int,
+    val fiberValue: Double,
     @SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g")
-    val fruitsVegetablesNutsEstimateFromIngredients100g: Int,
+    val fruitsVegetablesNutsEstimateFromIngredients100g: Double,
     @SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_serving")
-    val fruitsVegetablesNutsEstimateFromIngredientsServing: Int,
+    val fruitsVegetablesNutsEstimateFromIngredientsServing: Double,
     @SerializedName("nutrition-score-fr")
-    val nutritionScoreFr: Int,
+    val nutritionScoreFr: Double,
     @SerializedName("nutrition-score-fr_100g")
-    val nutritionScoreFr100g: Int,
+    val nutritionScoreFr100g: Double,
     @SerializedName("proteins")
     val proteins: Double,
     @SerializedName("proteins_100g")
@@ -103,17 +103,17 @@ data class Nutriments(
     @SerializedName("salt_unit")
     val saltUnit: String,
     @SerializedName("salt_value")
-    val saltValue: Int,
+    val saltValue: Double,
     @SerializedName("saturated-fat")
-    val saturatedFat: Int,
+    val saturatedFat: Double,
     @SerializedName("saturated-fat_100g")
-    val saturatedFat100g: Int,
+    val saturatedFat100g: Double,
     @SerializedName("saturated-fat_serving")
-    val saturatedFatServing: Int,
+    val saturatedFatServing: Double,
     @SerializedName("saturated-fat_unit")
     val saturatedFatUnit: String,
     @SerializedName("saturated-fat_value")
-    val saturatedFatValue: Int,
+    val saturatedFatValue: Double,
     @SerializedName("sodium")
     val sodium: Double,
     @SerializedName("sodium_100g")
@@ -125,13 +125,13 @@ data class Nutriments(
     @SerializedName("sodium_value")
     val sodiumValue: Double,
     @SerializedName("sugars")
-    val sugars: Int,
+    val sugars: Double,
     @SerializedName("sugars_100g")
-    val sugars100g: Int,
+    val sugars100g: Double,
     @SerializedName("sugars_serving")
-    val sugarsServing: Int,
+    val sugarsServing: Double,
     @SerializedName("sugars_unit")
     val sugarsUnit: String,
     @SerializedName("sugars_value")
-    val sugarsValue: Int
+    val sugarsValue: Double
 )

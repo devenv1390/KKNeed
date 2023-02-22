@@ -15,5 +15,6 @@ val fakeProduct = Product(
     "code",
     "name",
     "https://images.openfoodfacts.net/images/products/301/762/401/0701/front_en.54.100.jpg",
-    "brands"
+    "brands",
+    "a",
 )

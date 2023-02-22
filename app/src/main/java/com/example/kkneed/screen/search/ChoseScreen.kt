@@ -60,7 +60,8 @@ fun ChoseScreen(
                     navController = navController,
                     productName = product.productName,
                     productImage = product.imageUrl,
-                    productCode = product.code
+                    productCode = product.code,
+                    productScore = product.nutriScoreGrade,
                 )
             }
         }
