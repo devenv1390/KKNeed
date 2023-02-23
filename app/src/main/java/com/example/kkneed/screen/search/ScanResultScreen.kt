@@ -10,16 +10,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.kkneed.data.fake.fakeProduct
-import com.example.kkneed.model.Product
 import com.example.kkneed.ui.DetailAppBar
 import com.example.kkneed.ui.DetailBottomBar
 import com.example.kkneed.ui.DetailList
@@ -32,46 +29,38 @@ import com.example.kkneed.viewmodel.ProductViewModel
 @Composable
 fun ScanResultScreen(
     navController: NavController,
+    barcode: String,
     viewModel: ProductViewModel = hiltViewModel(),
-    ) {
-    val tempProduct: Product by viewModel.nowProduct.observeAsState(fakeProduct)
-    val productState = viewModel.nowProduct.observeAsState()
-    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
+) {
+    viewModel.barcode = barcode
+    val context = LocalContext.current
+    val tempProduct = viewModel.queryProduct(barcode)
     Scaffold(
         topBar = {
-            DetailAppBar(appBarHeight = 64.dp, navController = navController)
+            DetailAppBar(appBarHeight = 64.dp, navController = navController, context, barcode)
         },
         bottomBar = {
-            DetailBottomBar(navController,"6901939691601")
+            DetailBottomBar(navController, barcode)
         }
     ) {
-        productState.value?.let {
-            LazyColumn(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.onPrimary)
-            ) {
-                item {
-                    DetailList(
-                        title = tempProduct.productName,
-                        company = tempProduct.brands,
-                        productImage = tempProduct.imageUrl,
-                        score = tempProduct.scoreGrade,
-                    )
-                }
-                item {
-                    DetailChip(state = false, title = tempProduct.tracesTags)
-                }
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-                item {
-                    DetailTabBar(product = tempProduct)
-                }
-                item{
-                    Spacer(modifier = Modifier.size(40.dp))
-                }
+        LazyColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            item {
+
+                DetailList(
+                    title = tempProduct.productName,
+                    company = tempProduct.brands,
+                    productImage = tempProduct.imageUrl,
+                    score = tempProduct.scoreGrade,
+                )
+                DetailChip(state = false, title = tempProduct.tracesTags)
+                Spacer(modifier = Modifier.height(12.dp))
+                DetailTabBar(product = tempProduct)
+                Spacer(modifier = Modifier.size(40.dp))
             }
         }
     }

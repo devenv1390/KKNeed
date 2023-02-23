@@ -1,5 +1,7 @@
 package com.example.kkneed.ui
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,7 +34,7 @@ fun MyTopAppBar(content: @Composable () -> Unit) {
     //状态栏颜色读取
     val systemUiController = rememberSystemUiController()
     LaunchedEffect(key1 = Unit) {
-        systemUiController.setStatusBarColor(Color.Transparent,true)
+        systemUiController.setStatusBarColor(Color.Transparent, true)
     }
     //状态栏高度
     val statusBarHeightDp = LocalDensity.current.run {
@@ -52,6 +54,7 @@ fun MyTopAppBar(content: @Composable () -> Unit) {
         content()
     }
 }
+
 @Composable
 fun MyTopAppBar2(content: @Composable () -> Unit) {
     //标题栏高度
@@ -59,7 +62,7 @@ fun MyTopAppBar2(content: @Composable () -> Unit) {
     //状态栏颜色读取
     val systemUiController = rememberSystemUiController()
     LaunchedEffect(key1 = Unit) {
-        systemUiController.setStatusBarColor(Color.Transparent,true)
+        systemUiController.setStatusBarColor(Color.Transparent, true)
     }
     //状态栏高度
     val statusBarHeightDp = LocalDensity.current.run {
@@ -82,7 +85,7 @@ fun MyTopAppBar2(content: @Composable () -> Unit) {
 
 @Composable
 fun NormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
-                    //标题栏高度
+    //标题栏高度
     Row(
         modifier = Modifier
             .background(
@@ -111,7 +114,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
     }
     val systemUiController = rememberSystemUiController()
     LaunchedEffect(key1 = Unit) {
-        systemUiController.setStatusBarColor(Color.Transparent,true)
+        systemUiController.setStatusBarColor(Color.Transparent, true)
     }
     Row(
         modifier = Modifier
@@ -132,6 +135,7 @@ fun NotNormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
         content()
     }
 }
+
 @Composable
 fun NormalTopAppBar2(appBarHeight: Dp, content: @Composable () -> Unit) {
     //标题栏高度
@@ -141,7 +145,7 @@ fun NormalTopAppBar2(appBarHeight: Dp, content: @Composable () -> Unit) {
     }
     val systemUiController = rememberSystemUiController()
     LaunchedEffect(key1 = Unit) {
-        systemUiController.setStatusBarColor(Color.Transparent,false)
+        systemUiController.setStatusBarColor(Color.Transparent, false)
     }
     Row(
         modifier = Modifier
@@ -176,7 +180,8 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
             Row(
 
                 modifier = Modifier.padding(bottom = 20.dp),
-                verticalAlignment = Alignment.CenterVertically) {
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     "今天",
                     style = MaterialTheme.typography.titleLarge,
@@ -191,6 +196,7 @@ fun MyHistoryTopAppBar(appBarHeight: Dp, navController: NavController) {
         }
     }
 }
+
 //订单页顶部栏
 @Composable
 fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
@@ -211,12 +217,13 @@ fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
         }
     }
 }
+
 //我的记录顶部栏
 @Composable
-fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
+fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -233,11 +240,12 @@ fun SecondRecordTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+
 @Composable
-fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String){
+fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController, title: String) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -257,7 +265,7 @@ fun MostUseTopAppBar(appBarHeight: Dp, navController: NavController,title:String
 
 //商城的顶部栏
 @Composable
-fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
+fun ShopTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -267,14 +275,14 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
         ) {
             ShopSearchBar(navController)
             IconButton(
-                onClick = {navController.navigate(AllScreen.ShoppingCart.route)}
+                onClick = { navController.navigate(AllScreen.ShoppingCart.route) }
             ) {
-                Icon(Icons.Outlined.ShoppingCart,null)
+                Icon(Icons.Outlined.ShoppingCart, null)
             }
             IconButton(
-                onClick = {navController.navigate(AllScreen.Service.route)}
+                onClick = { navController.navigate(AllScreen.Service.route) }
             ) {
-                Icon(painter = painterResource(id = R.drawable.support_agent),null, modifier = Modifier.size(24.dp))
+                Icon(painter = painterResource(id = R.drawable.support_agent), null, modifier = Modifier.size(24.dp))
             }
         }
     }
@@ -282,7 +290,7 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
 
 //商城搜索顶部
 @Composable
-fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
+fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -298,9 +306,10 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+
 //搜索页面顶部栏
 @Composable
-fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
+fun ScanTopAppBar(appBarHeight: Dp, navController: NavController) {
     NormalTopAppBar2(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -308,33 +317,40 @@ fun ScanTopAppBar(appBarHeight: Dp, navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Surface(shape = RoundedCornerShape(12),
-                modifier = Modifier.size(40.dp)) {
+            Surface(
+                shape = RoundedCornerShape(12),
+                modifier = Modifier.size(40.dp)
+            ) {
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color.White),
+                        containerColor = Color.White
+                    ),
                     onClick = { navController.popBackStack() }) {
-                    Icon(Icons.Outlined.ArrowBack,null)
+                    Icon(Icons.Outlined.ArrowBack, null)
                 }
             }
             SearchBar()
-            Surface(shape = RoundedCornerShape(12.dp),
-                modifier = Modifier.size(40.dp)) {
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.size(40.dp)
+            ) {
                 IconButton(
                     colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color.White),
+                        containerColor = Color.White
+                    ),
                     onClick = { navController.navigate(AllScreen.ScanHistory.route) }) {
-                    Icon(painter = painterResource(id = R.drawable.history),null)
+                    Icon(painter = painterResource(id = R.drawable.history), null)
                 }
             }
         }
     }
 }
+
 @Composable
-fun DetailAppBar(appBarHeight: Dp, navController: NavController){
+fun DetailAppBar(appBarHeight: Dp, navController: NavController, context: Context, barcode:String) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -344,9 +360,20 @@ fun DetailAppBar(appBarHeight: Dp, navController: NavController){
             BackButton(navController)
             Text("")
             IconButton(
-                onClick = {}
+                onClick = {
+                    context.startActivity(
+                        Intent.createChooser(
+                            Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, barcode)
+                                type = "text/plain"
+                            },
+                            context.getString(R.string.scan_share_value)
+                        )
+                    )
+                }
             ) {
-                Icon(painter = painterResource(R.drawable.share),null)
+                Icon(painter = painterResource(R.drawable.share), null)
 
             }
         }
@@ -355,10 +382,10 @@ fun DetailAppBar(appBarHeight: Dp, navController: NavController){
 
 //首页（只有文字部分）
 @Composable
-fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
+fun HomeTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -378,12 +405,13 @@ fun HomeTopAppBar(appBarHeight: Dp, navController: NavController){
         }
     }
 }
+
 //首页（只有文字部分）
 @Composable
-fun CustomizeTopAppBar(appBarHeight: Dp, navController: NavController){
+fun CustomizeTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -406,7 +434,7 @@ fun CustomizeTopAppBar(appBarHeight: Dp, navController: NavController){
 
 //社区顶部
 @Composable
-fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
+fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -417,9 +445,9 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
             BackButton(navController)
             CommunitySearchBar(navController)
             IconButton(
-                onClick = {navController.navigate(AllScreen.EditNote.route)}
+                onClick = { navController.navigate(AllScreen.EditNote.route) }
             ) {
-                Icon(Icons.Outlined.Edit,null)
+                Icon(Icons.Outlined.Edit, null)
             }
         }
     }
@@ -427,10 +455,10 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
 
 //帖子顶部
 @Composable
-fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
+fun NoteTopAppBar(appBarHeight: Dp, navController: NavController) {
     NotNormalTopAppBar(appBarHeight) {
         Row(
-            modifier= Modifier
+            modifier = Modifier
                 .size(412.dp, 64.dp)
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth(),
@@ -442,7 +470,7 @@ fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Outlined.Share,null)
+                Icon(Icons.Outlined.Share, null)
             }
         }
     }
@@ -452,7 +480,7 @@ fun NoteTopAppBar(appBarHeight: Dp, navController: NavController){
 @Composable
 fun PreviewTopAppBar() {
     KKNeedTheme {
-        val navController= rememberNavController()
-        ScanTopAppBar(64.dp,navController)
+        val navController = rememberNavController()
+        ScanTopAppBar(64.dp, navController)
     }
 }

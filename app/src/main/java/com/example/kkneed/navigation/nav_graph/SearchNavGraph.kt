@@ -14,8 +14,17 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Scanner.route) {
             BCScannerScreen(navController)
         }
-        composable(AllScreen.ScanResult.route) {
-            ScanResultScreen(navController)
+        composable(
+            AllScreen.ScanResult.route + "/{code}",
+            arguments = listOf(
+                navArgument("code") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                }
+            )
+        ) {
+            val code = it.arguments?.getString("code") ?: ""
+            ScanResultScreen(navController, code)
         }
         composable(AllScreen.Comment.route) {
             CommentScreen(navController)
@@ -24,40 +33,40 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
             DetailScreen(navController)
         }
         composable(
-            AllScreen.Compare.route+"/{code}",
+            AllScreen.Compare.route + "/{code}",
             arguments = listOf(
-                navArgument("code"){
+                navArgument("code") {
                     type = NavType.StringType
                     defaultValue = ""
                 }
             )
         ) {
-            val code = it.arguments?.getString("code") ?:""
-            CompareScreen(navController,code)
+            val code = it.arguments?.getString("code") ?: ""
+            CompareScreen(navController, code)
         }
         composable(AllScreen.ScanHistory.route) {
             ScanHistoryScreen(navController)
         }
         composable(AllScreen.Chose.route) {
-            ChoseScreen(navController )
+            ChoseScreen(navController)
         }
         composable(AllScreen.Edit.route) {
-            EditScreen(navController )
+            EditScreen(navController)
         }
         composable(AllScreen.EditProduct.route) {
             EditProductScreen(navController)
         }
         composable(
-            AllScreen.Result.route+"/{code}",
+            AllScreen.SCLoading.route + "/{code}",
             arguments = listOf(
-                navArgument("code"){
+                navArgument("code") {
                     type = NavType.StringType
                     defaultValue = ""
                 }
             )
         ){
-            val code = it.arguments?.getString("code") ?:""
-            ResultScreen(navController,code)
+            val code = it.arguments?.getString("code") ?: ""
+            ScanLoadingScreen(navController,code)
         }
     }
 }

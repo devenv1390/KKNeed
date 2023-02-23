@@ -56,26 +56,7 @@ fun MyBottomNavigation(
         backgroundColor = themeString.background,
         modifier = Modifier.navigationBarsPadding()
     ) {
-//        navItems.forEachIndexed { index, item ->
-//            BottomNavigationItem(
-//                selected = selectedItem == index,
-//                onClick = {
-//                    selectedItem = index
-//                    navController.navigate(navItems[index].route) {
-//                        popUpTo(navController.graph.findStartDestination().id) {
-//                            saveState = true
-//                        }
-//                        launchSingleTop = true
-//                        restoreState = true
-//                    }
-//                },
-//                icon = { Icon(item.icon, null) },
-//                alwaysShowLabel = false,
-//                selectedContentColor = MaterialTheme.colorScheme.primary,
-//                unselectedContentColor = MaterialTheme.colorScheme.secondaryContainer,
-//                label = { Text(item.title) },
-//            )
-//        }//不能采用遍历的方式创建导航选项卡，因为选项卡需要单独设置间隔值
+       //不能采用遍历的方式创建导航选项卡，因为选项卡需要单独设置间隔值
         BottomNavigationItem(
             selected = selectedItem == 0,
             onClick = {

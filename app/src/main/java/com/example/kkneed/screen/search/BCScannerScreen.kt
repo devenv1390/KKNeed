@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -29,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.kkneed.R
 import com.example.kkneed.data.ScannerEvent
+import com.example.kkneed.data.ScannerUiState
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.ScanSheet
 import com.example.kkneed.ui.ScanTopAppBar
@@ -38,7 +38,6 @@ import com.example.kkneed.ui.theme.Black200
 import com.example.kkneed.ui.theme.Black700
 import com.example.kkneed.ui.theme.BottomSheetShape
 import com.example.kkneed.viewmodel.ProductViewModel
-import com.example.kkneed.data.ScannerUiState
 import com.example.kkneed.viewmodel.ScannerViewModel
 import kotlinx.coroutines.launch
 
@@ -157,7 +156,7 @@ private fun ScannerScreen(
                         )
                     },
                     onInfoClicked = {
-                        clipboardManager.setText(AnnotatedString(it.displayValue))
+//                        clipboardManager.setText(AnnotatedString(it.displayValue))
 //                        Toast.makeText(context, context.getText(R.string.scan_value_copied), Toast.LENGTH_SHORT).show()
                         var flag:Boolean = false
                         try {
@@ -168,13 +167,12 @@ private fun ScannerScreen(
                         }
                         if(flag){
                             try {
-                                viewModel.addProduct(it.displayValue)
-                                navController.navigate(AllScreen.ScanResult.route)
+                                navController.navigate(AllScreen.SCLoading.route+"/${it.displayValue}")
                             }catch (e:Exception){
                                 Toast.makeText(context, "不存在此商品", Toast.LENGTH_SHORT).show()
                             }
                         }else{
-                            navController.navigate(AllScreen.Result.route+"/${it.displayValue}")
+                            navController.navigate(AllScreen.ScanResult.route+"/${it.displayValue}")
                         }
                     },
                     onWebClicked = {

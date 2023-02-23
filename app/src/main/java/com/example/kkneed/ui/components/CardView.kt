@@ -2249,7 +2249,7 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
 }
 
 //搜索记录卡片
-@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun HistoryCard(
     navController: NavController,
@@ -2336,7 +2336,7 @@ fun HistoryCard(
             }
             IconButton(
                 onClick = {
-                    navController.navigate(AllScreen.Result.route + "/${productCode}")
+                    navController.navigate(AllScreen.ScanResult.route + "/${productCode}")
                 }
             ) {
                 Icon(Icons.Default.ArrowRight, "info")
@@ -3332,13 +3332,4 @@ fun ADListCard() {
         }
     }
 }
-
-//@SuppressLint("ResourceType")
-//@Preview
-//@Composable
-//fun CardScreen() {
-//    KKNeedTheme {
-//        NutritionCard()
-//    }
-//}
 
