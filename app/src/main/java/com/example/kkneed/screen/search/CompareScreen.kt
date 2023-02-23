@@ -22,8 +22,7 @@ import com.example.kkneed.viewmodel.ProductViewModel
 @Composable
 fun CompareScreen(navController: NavController, barcode: String, viewModel: ProductViewModel = hiltViewModel()) {
     val productLeft = viewModel.queryProductCode(barcode)
-//    Log.d("m",productLeft.nutriments.energyKj100g!!.toFloat().toString())
-    val productRight = viewModel.nowProduct.value
+    val productRight = viewModel.queryProductScore("b")
     Scaffold(
         topBar = {
             MostUseTopAppBar(appBarHeight = 64.dp, navController = navController, "产品对比")
@@ -50,15 +49,15 @@ fun CompareScreen(navController: NavController, barcode: String, viewModel: Prod
                         )
                         CompareCard(
                             navController,
-                            productRight?.productName ?: productLeft.productName,
-                            productRight?.productName ?: productLeft.imageUrl,
-                            productRight?.productName ?: productLeft.scoreGrade,
+                            productRight[0].productName ?: productLeft.productName,
+                            productRight[0].imageUrl ?: productLeft.imageUrl,
+                            productRight[0].scoreGrade ?: productLeft.scoreGrade,
                         )
                     }
                     Spacer(modifier = Modifier.size(12.dp))
-                    NutriCompareCard(productLeft, productRight ?: productLeft)
+                    NutriCompareCard(productLeft, productRight[0] ?: productLeft)
                     Spacer(modifier = Modifier.size(12.dp))
-                    ComponentCompareCard(productLeft,productRight ?: productLeft)
+                    ComponentCompareCard(productLeft,productRight[0] ?: productLeft)
                 }
             }
             item {

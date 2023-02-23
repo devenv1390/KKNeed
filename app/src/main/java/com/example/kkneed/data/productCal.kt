@@ -3,6 +3,7 @@ package com.example.kkneed.data
 import androidx.compose.runtime.Composable
 import com.example.kkneed.R
 import com.example.kkneed.data.fake.fakeLevel
+import com.example.kkneed.model.Product
 import com.example.kkneed.ui.theme.*
 
 @Composable
@@ -56,3 +57,24 @@ fun ingredientAnalyser(item: DetailItemData, mutableList: MutableList<DetailItem
     return mutableList
 }
 
+@Composable
+fun ingredientAnalyserSugar(product: Product, check: Int): Int {
+    var state = check
+    for (item in product.ingredients) {
+        if (item.text.equals("糖")) {
+            state = R.drawable.ture
+        }
+    }
+    return state
+}
+
+@Composable
+fun ingredientAnalyserSaFat(product: Product, check: Int): Int {
+    var state = check
+    if (product.nutriments.saturatedFat100g != null) {
+        if(product.nutriments.saturatedFat100g > 0) {
+            state = R.drawable.ture
+        }
+    }
+    return state
+}

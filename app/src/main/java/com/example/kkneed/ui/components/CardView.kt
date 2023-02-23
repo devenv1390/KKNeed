@@ -44,6 +44,8 @@ import coil.compose.rememberImagePainter
 import com.example.kkneed.R
 import com.example.kkneed.data.fake.fakeProduct
 import com.example.kkneed.data.findLevel
+import com.example.kkneed.data.ingredientAnalyserSaFat
+import com.example.kkneed.data.ingredientAnalyserSugar
 import com.example.kkneed.data.productCalculator
 import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.AllScreen
@@ -1846,10 +1848,15 @@ fun NutriCompareCard(productLeft: Product, productRight: Product) {
 //成分表对比卡片
 @Composable
 fun ComponentCompareCard(productLeft: Product, productRight: Product) {
+    val isSugarLeft = ingredientAnalyserSugar(productLeft, R.drawable.checkfalse)
+    val isSaFatLeft = ingredientAnalyserSaFat(productLeft, R.drawable.checkfalse)
+    val isSugarRight = ingredientAnalyserSugar(productRight, R.drawable.checkfalse)
+    val isSaFatRight = ingredientAnalyserSaFat(productRight, R.drawable.checkfalse)
+
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
-            .size(380.dp, 394.dp),
+            .size(380.dp, 220.dp),
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
         elevation = 1.dp,
         shape = RoundedCornerShape(12.dp),
@@ -1893,7 +1900,7 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    "20种",
+                    productLeft.ingredients.size.toString(),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -1903,30 +1910,7 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(
-                    "20种",
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-            Divider()
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    "20种",
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Text(
-                    "添加剂数量",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Text(
-                    "20种",
+                    productRight.ingredients.size.toString(),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -1940,7 +1924,8 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ture), null
+                    painter = painterResource(id = isSugarLeft),
+                    null
                 )
                 Text(
                     "是否含添加糖",
@@ -1948,7 +1933,7 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.checkfalse),
+                    painter = painterResource(id = isSugarRight),
                     null
                 )
             }
@@ -1961,55 +1946,15 @@ fun ComponentCompareCard(productLeft: Product, productRight: Product) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ture), null
+                    painter = painterResource(id = isSaFatLeft), null
                 )
                 Text(
-                    "是否有反式脂肪可能来源",
+                    "是否有饱和脂肪",
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ture), null
-                )
-            }
-            Divider()
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ture), null
-                )
-                Text(
-                    "是否含色素",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.checkfalse), null
-                )
-            }
-            Divider()
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ture), null
-                )
-                Text(
-                    "是否含过敏原",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.checkfalse), null
+                    painter = painterResource(id = isSaFatRight), null
                 )
             }
         }
@@ -2371,13 +2316,13 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                         color = MaterialTheme.colorScheme.outline,
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    var change by remember{ mutableStateOf(false) }
-                    var flag by remember{ mutableStateOf(false) }
+                    var change by remember { mutableStateOf(false) }
+                    var flag by remember { mutableStateOf(false) }
 
                     val buttonSize by animateDpAsState(
-                        targetValue = if(change) 32.dp else 24.dp
+                        targetValue = if (change) 32.dp else 24.dp
                     )
-                    if(buttonSize == 32.dp) {
+                    if (buttonSize == 32.dp) {
                         change = false
                     }
                     IconButton(
@@ -2575,82 +2520,84 @@ fun CommunityCard(navController: NavController) {
         onClick = { navController.navigate(AllScreen.NoteDetail.route) },
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
-        Column(modifier=Modifier.fillMaxSize()){Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Box(modifier = Modifier.height(175.dp)) {
-                var change by remember{ mutableStateOf(false) }
-                var flag by remember{ mutableStateOf(false) }
-
-                val buttonSize by animateDpAsState(
-                    targetValue = if(change) 32.dp else 24.dp
-                )
-                if(buttonSize == 32.dp) {
-                    change = false
-                }
-                IconButton(
-                    onClick = {
-                        change = true
-                        flag = !flag
-                    }
-                ) {
-                    androidx.compose.material3.Icon(
-                        Icons.Rounded.Favorite,
-                        contentDescription = null,
-                        modifier = Modifier.size(buttonSize),
-                        tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
-                    )
-                }
-                Image(
-                    painter = painterResource(R.drawable.tiezi),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(12))
-                        .height(130.dp)
-                        .fillMaxWidth(),
-                    contentScale = ContentScale.Fit,
-                    alignment = Alignment.TopCenter,
-                )
-
-            }
-            androidx.compose.material3.Text(
-                "健康食品知多少",
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
+        Column(modifier = Modifier.fillMaxSize()) {
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .padding(8.dp)
             ) {
-                Row(
-                    modifier = Modifier
-                        .width(126.dp)
-                        .height(24.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
+                Box(modifier = Modifier.height(175.dp)) {
+                    var change by remember { mutableStateOf(false) }
+                    var flag by remember { mutableStateOf(false) }
+
+                    val buttonSize by animateDpAsState(
+                        targetValue = if (change) 32.dp else 24.dp
+                    )
+                    if (buttonSize == 32.dp) {
+                        change = false
+                    }
+                    IconButton(
+                        onClick = {
+                            change = true
+                            flag = !flag
+                        }
+                    ) {
+                        androidx.compose.material3.Icon(
+                            Icons.Rounded.Favorite,
+                            contentDescription = null,
+                            modifier = Modifier.size(buttonSize),
+                            tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
+                        )
+                    }
                     Image(
-                        painter = painterResource(R.drawable.profile),
+                        painter = painterResource(R.drawable.tiezi),
                         contentDescription = "",
                         modifier = Modifier
-                            .clip(CircleShape)
-                            .size(24.dp),
-                        contentScale = ContentScale.Crop,
+                            .clip(RoundedCornerShape(12))
+                            .height(130.dp)
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Fit,
                         alignment = Alignment.TopCenter,
                     )
-                    androidx.compose.material3.Text(
-                        "康康Need小顾问",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.outline,
-                    )
+
+                }
+                androidx.compose.material3.Text(
+                    "健康食品知多少",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .width(126.dp)
+                            .height(24.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.profile),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(24.dp),
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.TopCenter,
+                        )
+                        androidx.compose.material3.Text(
+                            "康康Need小顾问",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.outline,
+                        )
+                    }
                 }
             }
-        }}
+        }
 
     }
 }
