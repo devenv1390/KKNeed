@@ -220,32 +220,6 @@ private fun ScannerScreen(
                 )
             }
             ScanTopAppBar(56.dp, navController)
-//                Spacer(modifier = Modifier.height(100.dp))
-//                Box(modifier = Modifier.fillMaxWidth()) {
-//                    Column(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        verticalArrangement = Arrangement.spacedBy(20.dp)
-//                    ) {
-//                        Image(
-//                            painter = painterResource(R.drawable.dog),
-//                            contentDescription = "",
-//                            modifier = Modifier
-//                                .size(56.dp),
-//                            contentScale = ContentScale.Fit
-//                        )
-//                        Text(
-//                            "欢迎使用康康Need",
-//                            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
-//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary
-//                        )
-//                        Text(
-//                            "搜索产品名或扫描产品包装的条形码",
-//                            style = androidx.compose.material3.MaterialTheme.typography.titleSmall,
-//                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary.copy(0.8f)
-//                        )
-//                    }
-//                }
         }
     }
 }

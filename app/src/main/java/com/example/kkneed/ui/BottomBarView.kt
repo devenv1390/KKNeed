@@ -141,7 +141,7 @@ fun DetailBottomBar(navController: NavController, barcode: String) {
         contentPadding = PaddingValues(start = 8.dp),
         actions = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { navController.navigate(AllScreen.Detail.route) }) {
+                IconButton(onClick = { navController.navigate(AllScreen.EditProduct.route) }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.editnote),
                         contentDescription = "Localized description",
