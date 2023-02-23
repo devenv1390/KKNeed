@@ -49,3 +49,10 @@ fun productCalculator(productLeft: Double, productRight: Double): ProductValue {
     val right = productRight / total
     return ProductValue(left, right)
 }
+
+@Composable
+fun ingredientAnalyser(item: DetailItemData, mutableList: MutableList<DetailItemData>): MutableList<DetailItemData> {
+    mutableList.add(0, item)
+    return mutableList
+}
+

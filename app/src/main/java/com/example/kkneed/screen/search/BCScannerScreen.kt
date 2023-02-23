@@ -158,7 +158,7 @@ private fun ScannerScreen(
                     onInfoClicked = {
                         var flag = false
                         try {
-                            val product = viewModel.queryProduct(it.displayValue)
+                            val product = viewModel.queryProductCode(it.displayValue)
                             Log.d("RES", product.productName)
                         } catch (e: Exception) {
                             flag = true

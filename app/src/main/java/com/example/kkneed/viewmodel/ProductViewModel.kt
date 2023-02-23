@@ -15,7 +15,7 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     private val productRepo: ProductRepository
 ) : ViewModel() {
-
+    //livedata相关
     private val _isLoading: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
     }
@@ -27,15 +27,10 @@ class ProductViewModel @Inject constructor(
     val nowProduct: LiveData<Product> by lazy {
         productRepo.getOneAllProduct()
     }
-
-    fun queryProduct(barcode: String):Product{
-        return productRepo.queryProductCode(barcode)
-    }
-
+    val isLoading: LiveData<Boolean> get() = _isLoading
     var barcode: String = ""
 
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
+    //食品数据库相关操作
     fun addProduct(barcode: String) {
         if (_isLoading.value == false)
             viewModelScope.launch(Dispatchers.IO) {
@@ -44,7 +39,12 @@ class ProductViewModel @Inject constructor(
                 _isLoading.postValue(false)
             }
     }
-
+    fun queryProductCode(barcode: String):Product{
+        return productRepo.queryProductCode(barcode)
+    }
+    fun queryProductScore(score:String):Product{
+        return productRepo.queryProductScore(score)
+    }
     fun deleteProduct(toDelete: Product) {
         viewModelScope.launch(Dispatchers.IO) {
             productRepo.deleteProduct(toDelete)

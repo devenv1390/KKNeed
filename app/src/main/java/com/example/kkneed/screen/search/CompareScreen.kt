@@ -21,7 +21,7 @@ import com.example.kkneed.viewmodel.ProductViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CompareScreen(navController: NavController, barcode: String, viewModel: ProductViewModel = hiltViewModel()) {
-    val productLeft = viewModel.queryProduct(barcode)
+    val productLeft = viewModel.queryProductCode(barcode)
 //    Log.d("m",productLeft.nutriments.energyKj100g!!.toFloat().toString())
     val productRight = viewModel.nowProduct.value
     Scaffold(

@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.data.fake.fakeProduct
 import com.example.kkneed.data.findLevel
 import com.example.kkneed.data.productCalculator
 import com.example.kkneed.model.Product
@@ -1473,167 +1474,8 @@ fun ProductCard(title: String) {
 
 //营养成分卡片
 @Composable
-fun NutritionCard(viewModel: ProductViewModel = hiltViewModel()) {
-    val product = viewModel.queryProduct(viewModel.barcode)
-    Card(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp)
-            .size(360.dp, 260.dp),
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-        elevation = 1.dp,
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, top = 12.dp, end = 16.dp),
-            horizontalAlignment = Alignment.Start,
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.balance), null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .align(Alignment.Center)
-                    )
-
-                }
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    "营养成分",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column() {
-                    Text(
-                        "营养成分",
-                        color = MaterialTheme.colorScheme.outline,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        "能量",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "蛋白质",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "碳水化合物",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "脂肪",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "钠",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-
-                }
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        "100g",
-                        color = MaterialTheme.colorScheme.outline,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        product.nutriments.energyKj100g.toString() + product.nutriments.energyKjUnit,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        product.nutriments.proteins100g.toString(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        product.nutriments.carbohydrates100g.toString(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        product.nutriments.fat100g.toString(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        product.nutriments.sodium100g.toString(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        "与同类产品比较",
-                        color = MaterialTheme.colorScheme.outline,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        "-1.3%",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "+2%",
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "-5%",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "-100%",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "-100%",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun NutritionCard(product: Product) {
+fun NutritionCard(product: Product, viewModel: ProductViewModel = hiltViewModel()) {
+    val compareProduct = viewModel.queryProductScore(product.scoreGrade) ?: fakeProduct
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -1792,87 +1634,16 @@ fun NutritionCard(product: Product) {
 
 //全成分表卡片
 @Composable
-fun ComponentCard(viewModel: ProductViewModel = hiltViewModel()) {
-    val product = viewModel.queryProduct(viewModel.barcode)
-    Card(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp)
-            .size(360.dp, 204.dp),
-        backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-        elevation = 1.dp,
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, top = 12.dp, end = 16.dp),
-            horizontalAlignment = Alignment.Start,
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.reference), null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .align(Alignment.Center)
-                    )
-
-                }
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    "全成分表（共${product.ingredients.size}种成分）",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Column {
-                Text(
-                    product.categories,
-                    color = MaterialTheme.colorScheme.outline,
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(88.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(color = MaterialTheme.colorScheme.inverseOnSurface)
-                ) {
-                    Column(modifier = Modifier.padding(start = 16.dp, top = 12.dp)) {
-                        Text(
-                            "结论",
-                            color = MaterialTheme.colorScheme.onBackground,
-                            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            "含有3种添加剂、含有添加糖",
-                            color = MaterialTheme.colorScheme.error,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            "不含有反式脂肪酸可能来源、不含有色素",
-                            color = MaterialTheme.colorScheme.primary,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
 fun ComponentCard(product: Product) {
+    var ingredientText: String = ""
+    for (ingredient in product.ingredients) {
+        ingredientText = ingredientText + ingredient.text + ","
+    }
+    ingredientText = ingredientText.dropLast(1)
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
-            .size(360.dp, 204.dp),
+            .size(360.dp, 260.dp),
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
         elevation = 1.dp,
         shape = RoundedCornerShape(12.dp)
@@ -1906,7 +1677,7 @@ fun ComponentCard(product: Product) {
             Spacer(modifier = Modifier.height(8.dp))
             Column {
                 Text(
-                    product.categories,
+                    ingredientText,
                     color = MaterialTheme.colorScheme.outline,
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -1914,24 +1685,18 @@ fun ComponentCard(product: Product) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(88.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .background(color = MaterialTheme.colorScheme.inverseOnSurface)
                 ) {
                     Column(modifier = Modifier.padding(start = 16.dp, top = 12.dp)) {
                         Text(
-                            "结论",
+                            "主要类别",
                             color = MaterialTheme.colorScheme.onBackground,
                             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            "含有3种添加剂、含有添加糖",
-                            color = MaterialTheme.colorScheme.error,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            "不含有反式脂肪酸可能来源、不含有色素",
+                            product.categories,
                             color = MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.bodyMedium
                         )
@@ -2018,7 +1783,8 @@ fun NutriCompareCard(productLeft: Product, productRight: Product) {
     val fat = productCalculator(productLeft.nutriments.fat100g!!, productRight.nutriments.fat100g!!)
     val sodium = productCalculator(productLeft.nutriments.sodium100g!!, productRight.nutriments.sodium100g!!)
     val energy = productCalculator(productLeft.nutriments.energyKj100g!!, productRight.nutriments.energyKj100g!!)
-    val carbohydrates = productCalculator(productLeft.nutriments.carbohydrates100g!!, productRight.nutriments.carbohydrates100g!!)
+    val carbohydrates =
+        productCalculator(productLeft.nutriments.carbohydrates100g!!, productRight.nutriments.carbohydrates100g!!)
     val proteins = productCalculator(productLeft.nutriments.proteins100g!!, productRight.nutriments.proteins100g!!)
     Card(
         modifier = Modifier

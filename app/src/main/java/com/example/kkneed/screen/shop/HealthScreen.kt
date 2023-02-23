@@ -1,7 +1,6 @@
 package com.example.kkneed.screen.shop
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.kkneed.R
+import com.example.kkneed.data.fake.fakeProduct
 import com.example.kkneed.ui.DetailList
 import com.example.kkneed.ui.DetailTabBar
 import com.example.kkneed.ui.MostUseTopAppBar
@@ -50,8 +49,7 @@ fun HealthScreen(navController: NavController) {
             DetailList(title = "可口可乐300ml", MaterialTheme.colorScheme.background)
             DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
             Spacer(modifier = Modifier.height(12.dp))
-            DetailTabBar()
-
+            DetailTabBar(fakeProduct,navController)
         }
     }
 }

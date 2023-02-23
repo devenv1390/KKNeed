@@ -14,8 +14,9 @@ data class ButtonItemData(
     val route: String,
 )
 data class DetailItemData(
-    val title: String,
-    val color: Color,
+    var title: String,
+    var value: String,
+    var color: Color,
 )
 data class LevelItem(
     var gradeImage:Int,

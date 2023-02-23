@@ -12,6 +12,7 @@ interface ProductRepository {
     fun getAllProduct(): LiveData<List<Product>>
     fun getOneAllProduct(): LiveData<Product>
     fun queryProductCode(barcode: String): Product
+    fun queryProductScore(score:String):Product
 }
 
 class ProductRepositoryImp @Inject constructor(
@@ -49,10 +50,12 @@ class ProductRepositoryImp @Inject constructor(
     }
 
     override suspend fun deleteProduct(toDelete: Product) = productDao.delete(toDelete)
-
     override fun getAllProduct(): LiveData<List<Product>> = productDao.getAll()
-    override fun getOneAllProduct(): LiveData<Product> = productDao.getOne()
+    override fun getOneAllProduct(): LiveData<Product> = productDao.getLastOne()
     override fun queryProductCode(barcode: String): Product {
         return productDao.queryProductCode(barcode)
+    }
+    override fun queryProductScore(score: String): Product {
+        return productDao.queryProductScore(score)
     }
 }

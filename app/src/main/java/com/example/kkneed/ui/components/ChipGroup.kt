@@ -7,7 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -28,10 +27,8 @@ import com.example.kkneed.ui.CommentCard
 import com.example.kkneed.ui.ImageCommentCard
 import com.example.kkneed.ui.ShopScreenMainCard
 import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.ui.theme.LevelE
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
@@ -39,32 +36,18 @@ import kotlinx.coroutines.launch
 //第二个问卷页chip
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SmallChip(state:Boolean,title: String,modifier: Modifier){
+fun SmallChip(state: Boolean, title: String, modifier: Modifier) {
     var selected by remember { mutableStateOf(state) }
     FilterChip(
-        modifier=modifier,
+        modifier = modifier,
         selected = selected,
         onClick = { selected = !selected },
-        label = { Text(title,
-            color=if(selected) Color.White else Color.Black) },
-        colors = FilterChipDefaults.filterChipColors(
-            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-            selectedContainerColor = MaterialTheme.colorScheme.primary,
-            ),
-        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-    )
-}
-//过敏原chip
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AllergicChip(state:Boolean,title: String,modifier: Modifier,onClick: () -> Unit){
-    var selected by remember { mutableStateOf(state) }
-    FilterChip(
-        modifier=modifier,
-        selected = selected,
-        onClick = { selected = !selected },
-        label = { Text(title,
-            color=if(selected) Color.White else Color.Black) },
+        label = {
+            Text(
+                title,
+                color = if (selected) Color.White else Color.Black
+            )
+        },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
             selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -72,59 +55,96 @@ fun AllergicChip(state:Boolean,title: String,modifier: Modifier,onClick: () -> U
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+
+//过敏原chip
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AllergicChip(state: Boolean, title: String, modifier: Modifier, onClick: () -> Unit) {
+    var selected by remember { mutableStateOf(state) }
+    FilterChip(
+        modifier = modifier,
+        selected = selected,
+        onClick = { selected = !selected },
+        label = {
+            Text(
+                title,
+                color = if (selected) Color.White else Color.Black
+            )
+        },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
+            selectedContainerColor = MaterialTheme.colorScheme.primary,
+        ),
+        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+    )
+}
+
 //定制页chip
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomizeChip(title: String,modifier: Modifier){
+fun CustomizeChip(title: String, modifier: Modifier) {
 
     FilterChip(
-        modifier=modifier,
+        modifier = modifier,
         selected = true,
         onClick = {},
-        label = { Text(title,
-            color=MaterialTheme.colorScheme.onBackground) },
+        label = {
+            Text(
+                title,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         ),
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+
 //产品详情chip组
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailChip(state:Boolean,title:List<String>){
-    Row(modifier = Modifier
-        .padding(start = 16.dp, end = 16.dp)
-        .fillMaxWidth(),
+fun DetailChip(state: Boolean, title: List<String>) {
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
-    ){
-    title.forEach{ item->
-        FilterChip(
-            selected = state,
-            onClick = {  },
-            label = { Text(item,
-                color=Color.White) },
-            colors = FilterChipDefaults.filterChipColors(
-                containerColor = LevelE
-            ),
-            border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-        )
-    }
-
+    ) {
+        title.forEach { item ->
+            FilterChip(
+                selected = state,
+                onClick = { },
+                label = {
+                    Text(
+                        item,
+                        color = Color.White
+                    )
+                },
+                colors = FilterChipDefaults.filterChipColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+                border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+            )
+        }
     }
 }
+
 //定制页chip组
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomizeInfoChip(state:Boolean,title:String){
-
+fun CustomizeInfoChip(state: Boolean, title: String) {
     var selected by remember { mutableStateOf(state) }
     FilterChip(
         selected = selected,
         onClick = { selected = !selected },
-        label = { Text(title,style = MaterialTheme.typography.bodySmall,
-            color=if(selected) MaterialTheme.colorScheme.onBackground else
-                MaterialTheme.colorScheme.onSurfaceVariant) },
+        label = {
+            Text(
+                title, style = MaterialTheme.typography.bodySmall,
+                color = if (selected) MaterialTheme.colorScheme.onBackground else
+                    MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = Color.White,
             selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -132,15 +152,20 @@ fun CustomizeInfoChip(state:Boolean,title:String){
         border = FilterChipDefaults.filterChipBorder(borderWidth = 1.dp, selectedBorderWidth = 0.dp),
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuestionChip(state:Boolean,title: String){
+fun QuestionChip(state: Boolean, title: String) {
     var selected by remember { mutableStateOf(state) }
     FilterChip(
         selected = selected,
         onClick = { selected = !selected },
-        label = { Text(title,
-            color=if(selected) Color.White else Color.Black) },
+        label = {
+            Text(
+                title,
+                color = if (selected) Color.White else Color.Black
+            )
+        },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
             selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -150,12 +175,12 @@ fun QuestionChip(state:Boolean,title: String){
         border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
 fun ChipGroupCompose() {
     val pagerState = rememberPagerState()
-    val coroutineScope= rememberCoroutineScope()
-
+    val coroutineScope = rememberCoroutineScope()
 
 
     val chipList: List<String> = listOf(
@@ -168,18 +193,22 @@ fun ChipGroupCompose() {
 
     Row(
         modifier = Modifier
-            .padding(start = 8.dp,top=8.dp, bottom = 8.dp)
+            .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        chipList.forEachIndexed() { index,it ->
+        chipList.forEachIndexed() { index, it ->
             FilterChip(selected = pagerState.currentPage == index,
-                label ={ Text(it,
-                    color=if(selected) Color.White else Color.Black)},
+                label = {
+                    Text(
+                        it,
+                        color = if (selected) Color.White else Color.Black
+                    )
+                },
                 colors = FilterChipDefaults.filterChipColors(
                     containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
                     selectedContainerColor = MaterialTheme.colorScheme.primary,
-                    ),
+                ),
                 border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
                 onClick = {
                     coroutineScope.launch {
@@ -190,7 +219,7 @@ fun ChipGroupCompose() {
 
         }
 
-        }
+    }
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
@@ -198,8 +227,8 @@ fun ChipGroupCompose() {
         count = 3,
         state = pagerState,
     ) { page ->
-        when(page){
-            0->{
+        when (page) {
+            0 -> {
                 androidx.compose.material.Surface(color = MaterialTheme.colorScheme.background) {
                     LazyColumn(
                         Modifier
@@ -213,13 +242,14 @@ fun ChipGroupCompose() {
                         item { ImageCommentCard() }
                         item { CommentCard() }
                         item { ImageCommentCard() }
-                        item { ImageCommentCard()}
+                        item { ImageCommentCard() }
                         item { CommentCard() }
 
                     }
                 }
             }
-            1->{
+
+            1 -> {
                 androidx.compose.material.Surface(color = MaterialTheme.colorScheme.background) {
                     LazyColumn(
                         Modifier
@@ -236,7 +266,8 @@ fun ChipGroupCompose() {
                     }
                 }
             }
-            2->{
+
+            2 -> {
                 androidx.compose.material.Surface(color = MaterialTheme.colorScheme.background) {
                     LazyColumn(
                         Modifier
@@ -245,10 +276,10 @@ fun ChipGroupCompose() {
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     )
                     {
-                        item { ImageCommentCard()}
                         item { ImageCommentCard() }
                         item { ImageCommentCard() }
-                        item { ImageCommentCard()}
+                        item { ImageCommentCard() }
+                        item { ImageCommentCard() }
                     }
                 }
             }
@@ -262,7 +293,7 @@ fun ChipGroupCompose() {
 @Composable
 fun ShopIconGroupCompose(navController: NavController) {
     val pagerState = rememberPagerState()
-    val coroutineScope= rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     val chipList: List<String> = listOf(
         "健身餐",
         "面包",
@@ -270,7 +301,7 @@ fun ShopIconGroupCompose(navController: NavController) {
         "烹饪",
         "零食"
     )
-    @StringRes val imageIdList:List<Int> = listOf(
+    @StringRes val imageIdList: List<Int> = listOf(
         R.drawable.meal,
         R.drawable.bakery,
         R.drawable.cafe,
@@ -282,24 +313,26 @@ fun ShopIconGroupCompose(navController: NavController) {
 
     Row(
         modifier = Modifier
-            .padding(start = 16.dp,top=8.dp, bottom = 8.dp, end = 16.dp)
+            .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        chipList.forEachIndexed() { index,it ->
+        chipList.forEachIndexed() { index, it ->
             FilterChip(selected = pagerState.currentPage == index,
-                modifier=Modifier.size(64.dp,72.dp)
+                modifier = Modifier.size(64.dp, 72.dp)
                     .padding(vertical = 4.dp),
-                label={},
-                leadingIcon ={
-                    Column(horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center){
-                            Icon(
-                                painter = painterResource(imageIdList[index]), null,
-                                modifier = Modifier.size(36.dp),
-                                tint=MaterialTheme.colorScheme.primary
-                            )
+                label = {},
+                leadingIcon = {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(imageIdList[index]), null,
+                            modifier = Modifier.size(36.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
 
                         androidx.compose.material3.Text(
                             it,
@@ -307,13 +340,15 @@ fun ShopIconGroupCompose(navController: NavController) {
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    },
+                },
                 colors = FilterChipDefaults.filterChipColors(
                     containerColor = Color.Transparent,
                     selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 ),
-                border = FilterChipDefaults.filterChipBorder(borderColor = Color.Transparent,
-                    selectedBorderColor = Color.Transparent),
+                border = FilterChipDefaults.filterChipBorder(
+                    borderColor = Color.Transparent,
+                    selectedBorderColor = Color.Transparent
+                ),
                 onClick = {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(index)
@@ -350,7 +385,7 @@ fun ShopIconGroupCompose(navController: NavController) {
                 item { ShopScreenMainCard(navController) }
                 item { ShopScreenMainCard(navController) }
                 item { ShopScreenMainCard(navController) }
-                item{Spacer(modifier = Modifier.height(88.dp))}
+                item { Spacer(modifier = Modifier.height(88.dp)) }
             }
         }
 

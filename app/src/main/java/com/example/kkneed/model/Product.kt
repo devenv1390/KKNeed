@@ -22,8 +22,8 @@ data class Product(
     val nutriments: Nutriments,
 
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-){
-    constructor():this(
+) {
+    constructor() : this(
         "",
         "",
         "",
@@ -47,10 +47,13 @@ interface ProductDao {
     fun getAll(): LiveData<List<Product>>
 
     @Query("SELECT * FROM product ORDER BY id DESC LIMIT 1")
-    fun getOne(): LiveData<Product>
+    fun getLastOne(): LiveData<Product>
 
     @Query("SELECT * FROM product WHERE code=:code")
     fun queryProductCode(code: String): Product
+
+    @Query("SELECT * FROM product WHERE score=:score")
+    fun queryProductScore(score: String): Product
 
     @Delete
     fun delete(product: Product)

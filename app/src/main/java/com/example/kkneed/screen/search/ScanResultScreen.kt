@@ -34,7 +34,7 @@ fun ScanResultScreen(
 ) {
     viewModel.barcode = barcode
     val context = LocalContext.current
-    val tempProduct = viewModel.queryProduct(barcode)
+    val tempProduct = viewModel.queryProductCode(barcode)
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController, context, barcode)
@@ -50,7 +50,6 @@ fun ScanResultScreen(
                 .background(color = MaterialTheme.colorScheme.onPrimary)
         ) {
             item {
-
                 DetailList(
                     title = tempProduct.productName,
                     company = tempProduct.brands,
@@ -59,7 +58,7 @@ fun ScanResultScreen(
                 )
                 DetailChip(state = false, title = tempProduct.tracesTags)
                 Spacer(modifier = Modifier.height(12.dp))
-                DetailTabBar(product = tempProduct)
+                DetailTabBar(tempProduct, navController)
                 Spacer(modifier = Modifier.size(40.dp))
             }
         }
