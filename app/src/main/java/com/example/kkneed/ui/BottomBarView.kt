@@ -201,7 +201,7 @@ fun DetailBottomBar() {
                 }
                     else{
                         androidx.compose.material3.Icon(
-
+                            modifier=Modifier.size(24.dp),
                             painter = painterResource(id = R.drawable.fillstar),
                             contentDescription = "Localized description",
                             tint = MaterialTheme.colorScheme.secondaryContainer
@@ -409,14 +409,14 @@ fun ServiceBottomBar() {
 
 //商城的商品详情
 @Composable
-fun ShopDetailBottomBar() {
+fun ShopDetailBottomBar(navController: NavController) {
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
         tonalElevation = 0.dp,
         contentPadding = PaddingValues(start = 8.dp),
         actions = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { navController.navigate(AllScreen.ShoppingCart.route)  }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.shoppingcart),
                         contentDescription = "Localized description",
@@ -430,7 +430,7 @@ fun ShopDetailBottomBar() {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { navController.navigate(AllScreen.Chose.route) }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.compare),
                         contentDescription = "Localized description",
@@ -445,7 +445,7 @@ fun ShopDetailBottomBar() {
             }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { navController.navigate(AllScreen.Service.route)}) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.support_agent),
                         contentDescription = "Localized description",
@@ -469,7 +469,7 @@ fun ShopDetailBottomBar() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 androidx.compose.material3.Button(
-                    onClick = {},
+                    onClick = { },
                     colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                         md_theme_light_tertiaryContainer
                     )
@@ -489,6 +489,7 @@ fun ShopDetailBottomBar() {
                         .width(105.dp),
                     textId = "立即购买",
                     onClick = {
+                              navController.navigate(AllScreen.Confirm.route)
                     },
                 )
             }

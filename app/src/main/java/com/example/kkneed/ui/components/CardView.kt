@@ -806,7 +806,7 @@ fun TestCard() {
 //商城界面主卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ShopScreenMainCard() {
+fun ShopScreenMainCard(navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -819,7 +819,7 @@ fun ShopScreenMainCard() {
         // 将无法显示波纹效果
 
         elevation = 1.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.ShopDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {

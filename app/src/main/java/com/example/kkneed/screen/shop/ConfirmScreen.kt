@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.OrderBottomBar
@@ -97,7 +98,7 @@ fun ConfirmScreen(navController: NavController) {
                     }
 
                     IconButton(
-                        onClick = {}
+                        onClick = {navController.navigate(AllScreen.ADList.route)}
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.chevron_right), null,
@@ -131,22 +132,22 @@ fun ConfirmScreen(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.head),
+                            painter = painterResource(R.drawable.cola),
                             contentDescription = "",
                             modifier = Modifier
                                 .size(88.dp)
                                 .clip(RoundedCornerShape(12.dp)),
-                            contentScale = ContentScale.None,
+                            contentScale = ContentScale.Fit,
                             alignment = Alignment.TopCenter,
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Image(
-                            painter = painterResource(R.drawable.head),
+                            painter = painterResource(R.drawable.product),
                             contentDescription = "",
                             modifier = Modifier
                                 .size(88.dp)
                                 .clip(RoundedCornerShape(12.dp)),
-                            contentScale = ContentScale.None,
+                            contentScale = ContentScale.Fit,
                             alignment = Alignment.TopCenter,
                         )
                     }

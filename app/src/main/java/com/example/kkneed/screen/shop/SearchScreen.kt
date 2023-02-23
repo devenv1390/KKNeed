@@ -49,17 +49,17 @@ fun SearchScreen(navController: NavController) {
                         .padding(top = 8.dp)
                 ) {
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)},
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("可口可乐") }
                     )
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)},
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("鸡胸肉") }
                     )
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)},
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("轻零食") }
                     )
@@ -76,17 +76,18 @@ fun SearchScreen(navController: NavController) {
                         .padding(top = 8.dp)
                 ) {
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)
+                            },
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("饼干") }
                     )
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)},
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("脱脂牛奶") }
                     )
                     AssistChip(
-                        onClick = {AllScreen.SearchResult.route},
+                        onClick = {navController.navigate(AllScreen.SearchResult.route)},
                         modifier = Modifier.padding(horizontal = 8.dp),
                         label = { Text("低卡饮品") }
                     )

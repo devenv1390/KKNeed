@@ -209,7 +209,7 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
 //商城搜索结果界面的
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ShopSearchTabBar() {
+fun ShopSearchTabBar(navController: NavController) {
     val pagerState = rememberPagerState()
     val pages = listOf("综合", "评分", "价格", "销量")
     val coroutineScope = rememberCoroutineScope()
@@ -257,13 +257,13 @@ fun ShopSearchTabBar() {
                     .padding(top = 8.dp)
             )
             {
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard(navController ) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
                 item{Spacer(modifier = Modifier.height(16.dp))}
             }
         }
@@ -274,7 +274,7 @@ fun ShopSearchTabBar() {
 //我的收藏tab栏
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CollectTabBar() {
+fun CollectTabBar(navController: NavController) {
     val pagerState = rememberPagerState()
     val pages = listOf("产品", "帖子")
     val coroutineScope = rememberCoroutineScope()
@@ -324,12 +324,12 @@ fun CollectTabBar() {
                             .padding(top = 8.dp)
                     )
                     {
-                        item { ShopScreenMainCard() }
-                        item { ShopScreenMainCard() }
-                        item { ShopScreenMainCard() }
-                        item { ShopScreenMainCard() }
-                        item { ShopScreenMainCard() }
-                        item { ShopScreenMainCard() }
+                        item { ShopScreenMainCard(navController) }
+                        item { ShopScreenMainCard(navController) }
+                        item { ShopScreenMainCard(navController) }
+                        item { ShopScreenMainCard(navController) }
+                        item { ShopScreenMainCard(navController) }
+                        item { ShopScreenMainCard(navController) }
                         item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
