@@ -11,5 +11,6 @@ sealed class RegistrationFormEvent {
     data class AcceptTerms(val isAccepted: Boolean) : RegistrationFormEvent()
 
     object Submit: RegistrationFormEvent()
+    object SubmitSignIn : RegistrationFormEvent()
 }
 

@@ -1,6 +1,7 @@
 package com.example.kkneed.screen.profile
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -42,6 +44,7 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PersonInfoScreen(navController: NavController) {
+    val context= LocalContext.current
     Scaffold(
         topBar = {
             MostUseTopAppBar(appBarHeight = 64.dp, navController =navController, "我的信息")
@@ -54,6 +57,11 @@ fun PersonInfoScreen(navController: NavController) {
                         .height(56.dp)
                         .fillMaxWidth(0.8f),
                         textId = "更新信息", onClick = {
+                            Toast.makeText(
+                                context,
+                                "更新信息成功！",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     )
                 }

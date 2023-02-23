@@ -152,7 +152,9 @@ fun ShopDetailScreen(navController: NavController) {
                             contentScale = ContentScale.Fit,
                             alignment = Alignment.TopStart
                         )
-                        TextButton(onClick = { navController.navigate(AllScreen.Health.route) }) {
+                        TextButton(onClick = {
+                            //navController.navigate(AllScreen.Health.route)
+                        }) {
                             Text(
                                 "查看康康卡片 >>",
                                 modifier = Modifier.padding(end = 16.dp),
@@ -212,15 +214,6 @@ fun ShopDetailScreen(navController: NavController) {
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onBackground
                 )
-
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text(
-                        "进入商城 >>",
-                        modifier = Modifier.padding(end = 16.dp),
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
 
             }
             DetailShopCard()

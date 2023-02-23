@@ -33,9 +33,9 @@ fun NavGraphBuilder.ShopNavGraph(navController: NavController){
         composable(AllScreen.ADList.route){
             ADListScreen(navController)
         }
-        composable(AllScreen.Health.route){
-            HealthScreen(navController)
-        }
+        //composable(AllScreen.Health.route){
+            //HealthScreen(navController)
+        //}
         composable(AllScreen.Service.route){
             ServiceScreen(navController)
         }
