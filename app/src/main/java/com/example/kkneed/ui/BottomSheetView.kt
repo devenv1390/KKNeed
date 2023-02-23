@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.MaterialTheme
@@ -73,7 +73,7 @@ fun ScanSheet(
                 .align(Alignment.CenterHorizontally)
         )
         Text(
-            text = stringResource(id = scan.scanFormatId),
+            text = "您扫描到的条码类型为：" + stringResource(id = scan.scanFormatId),
             style = androidx.compose.material.MaterialTheme.typography.h6,
             fontWeight = FontWeight.Bold
         )
@@ -100,7 +100,8 @@ fun ScanSheet(
             FloatingActionButton(
                 onClick = onShareClicked,
                 contentColor = Color.White,
-                modifier = Modifier.requiredSize(48.dp)
+                modifier = Modifier.requiredSize(48.dp),
+                backgroundColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
                     imageVector = Icons.Default.Share,
@@ -110,16 +111,18 @@ fun ScanSheet(
             FloatingActionButton(
                 onClick = onInfoClicked,
                 contentColor = Color.White,
-                modifier = Modifier.requiredSize(48.dp)
+                modifier = Modifier.requiredSize(48.dp),
+                backgroundColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
-                    imageVector = Icons.Default.ContentCopy,
+                    imageVector = Icons.Default.ArrowForward,
                     contentDescription = null
                 )
             }
             if (scan.scanType == ScanType.Url) {
                 ExtendedFloatingActionButton(
                     contentColor = Color.White,
+                    backgroundColor = MaterialTheme.colorScheme.primary,
                     icon = {
                         Icon(
                             imageVector = Icons.Default.Public,
@@ -137,7 +140,7 @@ fun ScanSheet(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(30.dp))
     }
 }
 

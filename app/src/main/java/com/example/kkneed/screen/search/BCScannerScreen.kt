@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -140,7 +141,6 @@ private fun ScannerScreen(
         scrimColor = Color.Transparent,
         sheetContent = {
             uiState.scan?.let {
-                viewModel.barcode=it.displayValue
                 ScanSheet(
                     scan = it,
                     onShareClicked = {
@@ -156,23 +156,27 @@ private fun ScannerScreen(
                         )
                     },
                     onInfoClicked = {
-//                        clipboardManager.setText(AnnotatedString(it.displayValue))
-//                        Toast.makeText(context, context.getText(R.string.scan_value_copied), Toast.LENGTH_SHORT).show()
-                        var flag:Boolean = false
+                        var flag = false
                         try {
                             val product = viewModel.queryProduct(it.displayValue)
-                            Log.d("RES",product.productName)
-                        }catch (_:Exception){
+                            Log.d("RES", product.productName)
+                        } catch (e: Exception) {
                             flag = true
                         }
-                        if(flag){
-                            try {
-                                navController.navigate(AllScreen.SCLoading.route+"/${it.displayValue}")
-                            }catch (e:Exception){
-                                Toast.makeText(context, "不存在此商品", Toast.LENGTH_SHORT).show()
+                        if (flag) {
+                            if (it.scanFormatId == R.string.scan_format_ean_13) {
+                                try {
+                                    navController.navigate(AllScreen.SCLoading.route + "/${it.displayValue}")
+                                } catch (e: Exception) {
+                                    Toast.makeText(context, "不存在此商品", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                clipboardManager.setText(AnnotatedString(it.displayValue))
+                                Toast.makeText(context, context.getText(R.string.scan_value_next_step), Toast.LENGTH_SHORT)
+                                    .show()
                             }
-                        }else{
-                            navController.navigate(AllScreen.ScanResult.route+"/${it.displayValue}")
+                        } else {
+                            navController.navigate(AllScreen.ScanResult.route + "/${it.displayValue}")
                         }
                     },
                     onWebClicked = {
