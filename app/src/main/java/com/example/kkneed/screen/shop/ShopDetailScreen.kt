@@ -109,13 +109,13 @@ fun ShopDetailScreen(navController: NavController) {
                         AssistChip(
                             onClick = {},
                             modifier = Modifier.padding(horizontal = 8.dp),
-                            label = { androidx.compose.material.Text("test") }
+                            label = { androidx.compose.material.Text("含有过敏原") }
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         AssistChip(
                             onClick = {},
                             modifier = Modifier.padding(horizontal = 8.dp),
-                            label = { androidx.compose.material.Text("test") }
+                            label = { androidx.compose.material.Text("糖尿病友好") }
                         )
                     }
                 }

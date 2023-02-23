@@ -420,35 +420,35 @@ fun CommunityTabBar(navController: NavController) {
                      }
                 item {
                     Row(modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween){
                         CommunityCard(navController)
                         CommunityCard(navController) }
                 }
                 item {
                     Row(modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween){
                         CommunityCard(navController)
                         CommunityCard(navController) }
                 }
                 item {
                     Row(modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween){
                         CommunityCard(navController)
                         CommunityCard(navController) }
                 }
                 item {
                     Row(modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween){
                         CommunityCard(navController)
                         CommunityCard(navController) }
                 }
                 item {
                     Row(modifier = Modifier.fillMaxSize()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween){
                         CommunityCard(navController)
                         CommunityCard(navController) }
