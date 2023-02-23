@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.data.DetailItemData
+import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.*
 import com.google.accompanist.pager.*
@@ -29,10 +30,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun DetailTabBar() {
+fun DetailTabBar(product: Product) {
     val pagerState = rememberPagerState()
-    val pages = listOf("产品概览","成分详情")
-    val coroutineScope= rememberCoroutineScope()
+    val pages = listOf("产品概览", "成分详情")
+    val coroutineScope = rememberCoroutineScope()
     val defaultIndicator = @Composable { tabPositions: List<androidx.compose.material.TabPosition> ->
         TabRowDefaults.Indicator(
             Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -70,79 +71,100 @@ fun DetailTabBar() {
         count = pages.size,
         state = pagerState,
     ) { page ->
-        when(page){
-            0->{
+        when (page) {
+            0 -> {
                 Surface(color = MaterialTheme.colorScheme.onPrimary) {
                     Column(horizontalAlignment = Alignment.Start)
                     {
                         DisadContent()
                         AdContent()
-                        Row(modifier = Modifier.fillMaxWidth(),
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically){
-                            Row(verticalAlignment = Alignment.CenterVertically){
-                                Text("用户评价",
-                                    modifier = Modifier.padding(start=16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    "用户评价",
+                                    modifier = Modifier.padding(start = 16.dp),
                                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.onBackground)
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text("4.37分",
+                                Text(
+                                    "4.37分",
                                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.primary)
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text("1024条",
+                                Text(
+                                    "1024条",
                                     style = MaterialTheme.typography.titleSmall,
-                                    color = MaterialTheme.colorScheme.primary)
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                             }
                             TextButton(onClick = { /*TODO*/ }) {
-                                Text("全部评论 >>",
-                                    modifier = Modifier.padding(end=16.dp),
+                                Text(
+                                    "全部评论 >>",
+                                    modifier = Modifier.padding(end = 16.dp),
                                     style = MaterialTheme.typography.titleSmall,
-                                    color = MaterialTheme.colorScheme.primary)
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                             }
                         }
                         CommentCard()
-                        Row(modifier = Modifier.fillMaxWidth(),
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween){
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
 
-                                Text("康康商城",
-                                    modifier = Modifier.padding(start=16.dp),
-                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.onBackground)
+                            Text(
+                                "康康商城",
+                                modifier = Modifier.padding(start = 16.dp),
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
 
                             TextButton(onClick = { /*TODO*/ }) {
-                                Text("进入商城 >>",
-                                    modifier = Modifier.padding(end=16.dp),
+                                Text(
+                                    "进入商城 >>",
+                                    modifier = Modifier.padding(end = 16.dp),
                                     style = MaterialTheme.typography.titleSmall,
-                                    color = MaterialTheme.colorScheme.primary)
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                             }
 
                         }
                         DetailShopCard()
                         Spacer(modifier = Modifier.height(12.dp))
-                        Row(modifier = Modifier.fillMaxWidth(),
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween){
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
 
-                            Text("同类优选商品",
-                                modifier = Modifier.padding(start=16.dp),
+                            Text(
+                                "同类优选商品",
+                                modifier = Modifier.padding(start = 16.dp),
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                color = MaterialTheme.colorScheme.onBackground)
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
                         }
                         Spacer(modifier = Modifier.height(12.dp))
-                        LazyRow(modifier = Modifier.padding(start=16.dp)
-                        ){
+                        LazyRow(
+                            modifier = Modifier.padding(start = 16.dp)
+                        ) {
 
-                            item{ProductCard("百事无糖可乐")}
+                            item { ProductCard("百事无糖可乐") }
                             item { Spacer(modifier = Modifier.width(8.dp)) }
-                            item{ProductCard("百事无糖可乐")}
+                            item { ProductCard("百事无糖可乐") }
                             item { Spacer(modifier = Modifier.width(8.dp)) }
-                            item{ProductCard("百事无糖可乐")}
+                            item { ProductCard("百事无糖可乐") }
                             item { Spacer(modifier = Modifier.width(8.dp)) }
-                            item{ProductCard("百事无糖可乐")}
+                            item { ProductCard("百事无糖可乐") }
                             item { Spacer(modifier = Modifier.width(8.dp)) }
-                            item{ProductCard("百事无糖可乐")}
+                            item { ProductCard("百事无糖可乐") }
                         }
                         Spacer(modifier = Modifier.height(80.dp))
 
@@ -150,46 +172,205 @@ fun DetailTabBar() {
                 }
 
             }
-            1->{Surface(color = MaterialTheme.colorScheme.onPrimary){
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    NutritionCard()
-                    Spacer(modifier = Modifier.height(12.dp))
-                    ComponentCard()
+
+            1 -> {
+                Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        NutritionCard(product)
+                        Spacer(modifier = Modifier.height(12.dp))
+                        ComponentCard(product)
+                    }
                 }
             }
-
-
-
-            }
         }
-
-
     }
 }
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun DetailTabBar() {
+    val pagerState = rememberPagerState()
+    val pages = listOf("产品概览", "成分详情")
+    val coroutineScope = rememberCoroutineScope()
+    val defaultIndicator = @Composable { tabPositions: List<androidx.compose.material.TabPosition> ->
+        TabRowDefaults.Indicator(
+            Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+        )
+    }
+    val indicator = @Composable { tabPositions: List<androidx.compose.material.TabPosition> ->
+        CustomIndicator(tabPositions, pagerState)
+    }
+
+    androidx.compose.material.TabRow(
+        modifier = Modifier
+            .height(50.dp)
+            .padding(top = 0.dp),
+        backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        selectedTabIndex = pagerState.currentPage,
+        indicator = indicator
+    ) {
+        pages.forEachIndexed { index, title ->
+            androidx.compose.material.Tab(
+                modifier = Modifier.zIndex(2f),
+                text = { androidx.compose.material.Text(text = title) },
+                selected = pagerState.currentPage == index,
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                },
+            )
+        }
+    }
+
+    //设置页面内容
+    HorizontalPager(
+        modifier = Modifier.fillMaxWidth(),
+        count = pages.size,
+        state = pagerState,
+    ) { page ->
+        when (page) {
+            0 -> {
+                Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                    Column(horizontalAlignment = Alignment.Start)
+                    {
+                        DisadContent()
+                        AdContent()
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    "用户评价",
+                                    modifier = Modifier.padding(start = 16.dp),
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    "4.37分",
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    "1024条",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                            TextButton(onClick = { /*TODO*/ }) {
+                                Text(
+                                    "全部评论 >>",
+                                    modifier = Modifier.padding(end = 16.dp),
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                        CommentCard()
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+
+                            Text(
+                                "康康商城",
+                                modifier = Modifier.padding(start = 16.dp),
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+
+                            TextButton(onClick = { /*TODO*/ }) {
+                                Text(
+                                    "进入商城 >>",
+                                    modifier = Modifier.padding(end = 16.dp),
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+
+                        }
+                        DetailShopCard()
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+
+                            Text(
+                                "同类优选商品",
+                                modifier = Modifier.padding(start = 16.dp),
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        LazyRow(
+                            modifier = Modifier.padding(start = 16.dp)
+                        ) {
+
+                            item { ProductCard("百事无糖可乐") }
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item { ProductCard("百事无糖可乐") }
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item { ProductCard("百事无糖可乐") }
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item { ProductCard("百事无糖可乐") }
+                            item { Spacer(modifier = Modifier.width(8.dp)) }
+                            item { ProductCard("百事无糖可乐") }
+                        }
+                        Spacer(modifier = Modifier.height(80.dp))
+
+                    }
+                }
+
+            }
+
+            1 -> {
+                Surface(color = MaterialTheme.colorScheme.onPrimary) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        NutritionCard()
+                        Spacer(modifier = Modifier.height(12.dp))
+                        ComponentCard()
+                    }
+                }
+            }
+        }
+    }
+}
+
 //缺点内容
 @Composable
-fun DisadContent(){
+fun DisadContent() {
     val navController = rememberNavController()
-    val DisadItems = listOf<DetailItemData>(
-        DetailItemData(AllScreen.Detail.route, "脂肪含量偏高 10.6%",  LevelE),
+    val disAdItems = listOf<DetailItemData>(
+        DetailItemData(AllScreen.Detail.route, "脂肪含量偏高 10.6%", LevelE),
         DetailItemData("", "糖含量10.6%", LevelD),
         DetailItemData("", "中升糖指数（63）", LevelC)
     )
     Spacer(modifier = Modifier.height(12.dp))
-    Text(text="缺点",
-        modifier = Modifier.padding(start=16.dp),
+    Text(
+        text = "缺点",
+        modifier = Modifier.padding(start = 16.dp),
         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-        color = MaterialTheme.colorScheme.onBackground)
-    DisadItems.forEachIndexed { index, item ->
-        VantageList(item.title, item.color,navController,item.route)
+        color = MaterialTheme.colorScheme.onBackground
+    )
+    disAdItems.forEachIndexed { index, item ->
+        VantageList(item.title, item.color, navController, item.route)
     }
 
     VantageList2("查看剩余3缺点")
 }
+
 //优点内容
 @Composable
-fun AdContent(){
+fun AdContent() {
     val navController = rememberNavController()
     val DisadItems = listOf<DetailItemData>(
         DetailItemData("", "不含脂肪或饱和脂肪", LevelA),
@@ -197,12 +378,14 @@ fun AdContent(){
         DetailItemData("", "2种添加剂", LevelB)
     )
     Spacer(modifier = Modifier.height(12.dp))
-    Text(text="优点",
-        modifier = Modifier.padding(start=16.dp),
+    Text(
+        text = "优点",
+        modifier = Modifier.padding(start = 16.dp),
         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-        color = MaterialTheme.colorScheme.onBackground)
+        color = MaterialTheme.colorScheme.onBackground
+    )
     DisadItems.forEachIndexed { index, item ->
-        VantageList(item.title, item.color,navController,item.route)
+        VantageList(item.title, item.color, navController, item.route)
     }
     VantageList2("查看剩余2优点")
 }
@@ -250,8 +433,6 @@ private fun CustomIndicator(tabPositions: List<androidx.compose.material.TabPosi
             .zIndex(1f)
     )
 }
-
-
 
 
 @Composable

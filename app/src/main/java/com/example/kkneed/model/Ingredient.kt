@@ -8,9 +8,6 @@ import com.google.gson.annotations.SerializedName
 
 @TypeConverters(ProductConverters::class)
 data class Ingredient(
-//    @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo(name = "ingredient_id")
-//    var ingredientId: Int = 0,
 
     @SerializedName("id")
     @ColumnInfo(name = "ingredient_name") val name: String,

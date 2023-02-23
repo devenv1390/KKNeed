@@ -30,6 +30,7 @@ fun ResultScreen(
 ) {
     viewModel.barcode = code
     val product = viewModel.queryProduct(code)
+    val key = "database"
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController)

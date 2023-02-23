@@ -14,15 +14,17 @@ data class Product(
     @ColumnInfo(name = "image") val imageUrl: String,
     @ColumnInfo(name = "brands") val brands: String,
     @ColumnInfo(name = "score") val scoreGrade: String,
+    @ColumnInfo(name = "categories") val categories: String,
     val keywords: List<String>,
     val tracesTags: List<String>,
     val ingredients: List<Ingredient>,
     val nutrientLevels: NutrientLevels,
     val nutriments: Nutriments,
 
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
 ){
     constructor():this(
+        "",
         "",
         "",
         "",

@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
-import com.example.kkneed.ui.CardScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.theme.KKNeedTheme

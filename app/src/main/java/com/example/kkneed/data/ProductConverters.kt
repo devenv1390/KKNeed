@@ -1,5 +1,6 @@
 package com.example.kkneed.data
 
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.example.kkneed.model.Ingredient
 import com.example.kkneed.model.NutrientLevels
@@ -19,6 +20,7 @@ class ProductConverters {
     fun nutrientLevelsToString(nutrientLevels: NutrientLevels): String {
         val gson = Gson()
         return gson.toJson(nutrientLevels)
+
     }
 
     @TypeConverter
@@ -45,6 +47,12 @@ class ProductConverters {
         val listType = object : TypeToken<List<Ingredient>>() {
         }.type
         return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun objectToIngredient(list: List<Ingredient>): String {
+        val gson = Gson()
+        return gson.toJson(list)
     }
 
     @TypeConverter

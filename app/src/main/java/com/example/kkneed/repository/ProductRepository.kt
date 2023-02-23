@@ -30,6 +30,7 @@ class ProductRepositoryImp @Inject constructor(
         val nutrientLevels = dataSource.getProduct(barcode).product.nutrientLevels
         val nutriments = dataSource.getProduct(barcode).product.nutriments
         val tracesTags = dataSource.getProduct(barcode).product.tracesTags
+        val categories = dataSource.getProduct(barcode).product.categories
         val product = Product(
             code = code,
             productName = name,
@@ -41,6 +42,7 @@ class ProductRepositoryImp @Inject constructor(
             nutrientLevels = nutrientLevels,
             nutriments = nutriments,
             tracesTags = tracesTags,
+            categories = categories
         )
         productDao.insert(product)
         return product

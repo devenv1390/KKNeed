@@ -3,7 +3,6 @@ package com.example.kkneed.model
 import com.google.gson.annotations.SerializedName
 
 data class ApiResponse (
-//    val product:List<Products> = emptyList()
     @SerializedName("code")
     val code: String,
     @SerializedName("product")

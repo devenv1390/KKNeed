@@ -36,6 +36,7 @@ fun ScanResultScreen(
     val tempProduct: Product by viewModel.nowProduct.observeAsState(fakeProduct)
     val productState = viewModel.nowProduct.observeAsState()
     val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
+    val key = "scan"
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController)
@@ -60,13 +61,13 @@ fun ScanResultScreen(
                     )
                 }
                 item {
-                    DetailChip(state = false, title = listOf("超级加工食品", "减脂期适量", "糖尿病适量"))
+                    DetailChip(state = false, title = tempProduct.tracesTags)
                 }
                 item {
                     Spacer(modifier = Modifier.height(12.dp))
                 }
                 item {
-                    DetailTabBar()
+                    DetailTabBar(product = tempProduct)
                 }
             }
         }
