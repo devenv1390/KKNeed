@@ -72,9 +72,19 @@ fun ingredientAnalyserSugar(product: Product, check: Int): Int {
 fun ingredientAnalyserSaFat(product: Product, check: Int): Int {
     var state = check
     if (product.nutriments.saturatedFat100g != null) {
-        if(product.nutriments.saturatedFat100g > 0) {
+        if (product.nutriments.saturatedFat100g > 0) {
             state = R.drawable.ture
         }
     }
     return state
+}
+
+@Composable
+fun randomNumFloat(): Float {
+    var result = (0 until 10).random().toFloat()
+    result /= 10
+    if (result <= 0f || result == 1f) {
+        result = randomNumFloat()
+    }
+    return result
 }

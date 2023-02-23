@@ -42,11 +42,8 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.data.*
 import com.example.kkneed.data.fake.fakeProduct
-import com.example.kkneed.data.findLevel
-import com.example.kkneed.data.ingredientAnalyserSaFat
-import com.example.kkneed.data.ingredientAnalyserSugar
-import com.example.kkneed.data.productCalculator
 import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.components.*
@@ -1790,6 +1787,13 @@ fun NutriCompareCard(productLeft: Product, productRight: Product) {
     val carbohydrates =
         productCalculator(productLeft.nutriments.carbohydrates100g!!, productRight.nutriments.carbohydrates100g!!)
     val proteins = productCalculator(productLeft.nutriments.proteins100g!!, productRight.nutriments.proteins100g!!)
+    val list = listOf<Float>(
+        randomNumFloat(),randomNumFloat(),
+        randomNumFloat(),randomNumFloat(),
+        randomNumFloat(),randomNumFloat(),
+        randomNumFloat(),randomNumFloat(),
+        randomNumFloat(),randomNumFloat(),
+    )
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -1828,19 +1832,16 @@ fun NutriCompareCard(productLeft: Product, productRight: Product) {
                     modifier = Modifier.width(66.dp),
                     color = MaterialTheme.colorScheme.primary
                 )
-
             }
             BarChart(
                 data = mapOf(
-                    Pair(productLeft.nutriments.energyKj100g.toFloat(), 0.3f),
-                    Pair(productLeft.nutriments.fat100g.toFloat(), 0.5f),
-                    Pair(productLeft.nutriments.carbohydrates100g.toFloat(), 0.4f),
-                    Pair(productLeft.nutriments.proteins100g.toFloat(), 0.2f),
-                    Pair(productLeft.nutriments.sodium100g.toFloat(), 0.1f)
+                    Pair(list[0], list[1]),
+                    Pair(list[2], list[3]),
+                    Pair(list[4], list[5]),
+                    Pair(list[6], list[7]),
+                    Pair(list[8], list[9]),
                 )
-
             )
-
         }
     }
 }
