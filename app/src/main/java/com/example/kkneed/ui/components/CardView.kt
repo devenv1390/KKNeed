@@ -3,6 +3,7 @@ package com.example.kkneed.ui
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -73,7 +75,7 @@ fun SmallInfoCard(navController: NavController) {
                     .size(108.dp, 84.dp)
             ) {
                 Image(
-                    painter = painterResource(R.drawable.head),
+                    painter = painterResource(R.drawable.tiezi),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
@@ -102,7 +104,7 @@ fun SmallInfoCard(navController: NavController) {
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.head),
+                            painter = painterResource(R.drawable.dog),
                             contentDescription = "",
                             modifier = Modifier
                                 .clip(RoundedCornerShape(50))
@@ -2511,6 +2513,8 @@ fun ShopCartCard() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: String, navController: NavController) {
+
+
     Card(
         modifier = Modifier
             .padding(horizontal = 4.dp, vertical = 8.dp) // 外边距
@@ -2583,8 +2587,7 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(24.dp),
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
                 )
@@ -2602,11 +2605,26 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                         color = MaterialTheme.colorScheme.outline,
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    IconButton(onClick = { }) {
+                    var change by remember{ mutableStateOf(false) }
+                    var flag by remember{ mutableStateOf(false) }
+
+                    val buttonSize by animateDpAsState(
+                        targetValue = if(change) 32.dp else 24.dp
+                    )
+                    if(buttonSize == 32.dp) {
+                        change = false
+                    }
+                    IconButton(
+                        onClick = {
+                            change = true
+                            flag = !flag
+                        }
+                    ) {
                         androidx.compose.material3.Icon(
-                            painter = painterResource(id = R.drawable.heart),
-                            contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                            Icons.Rounded.Favorite,
+                            contentDescription = null,
+                            modifier = Modifier.size(buttonSize),
+                            tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
                         )
                     }
                     androidx.compose.material3.Text(
@@ -2781,8 +2799,8 @@ fun CommunityCard(navController: NavController) {
         modifier = Modifier
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
             .clip(RoundedCornerShape(12.dp))
-            .height(250.dp)
-            .width(186.dp),
+            .height(210.dp)
+            .width(170.dp),
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
@@ -2791,66 +2809,83 @@ fun CommunityCard(navController: NavController) {
         onClick = { navController.navigate(AllScreen.NoteDetail.route) },
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(R.drawable.head),
-                contentDescription = "",
-                modifier = Modifier
-                    .clip(RoundedCornerShape(12))
-                    .height(175.dp)
-                    .fillMaxWidth(),
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.TopCenter,
+        Column(modifier=Modifier.fillMaxSize()){Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Box(modifier = Modifier.height(175.dp)) {
+                var change by remember{ mutableStateOf(false) }
+                var flag by remember{ mutableStateOf(false) }
+
+                val buttonSize by animateDpAsState(
+                    targetValue = if(change) 32.dp else 24.dp
+                )
+                if(buttonSize == 32.dp) {
+                    change = false
+                }
+                IconButton(
+                    onClick = {
+                        change = true
+                        flag = !flag
+                    }
+                ) {
+                    androidx.compose.material3.Icon(
+                        Icons.Rounded.Favorite,
+                        contentDescription = null,
+                        modifier = Modifier.size(buttonSize),
+                        tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
+                    )
+                }
+                Image(
+                    painter = painterResource(R.drawable.tiezi),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12))
+                        .height(130.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.TopCenter,
+                )
+
+            }
+            androidx.compose.material3.Text(
+                "健康食品知多少",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
             )
-            Column(
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
+                    .height(20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                androidx.compose.material3.Text(
-                    "健康食品知多少",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp),
+                        .width(126.dp)
+                        .height(24.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Row(
+                    Image(
+                        painter = painterResource(R.drawable.profile),
+                        contentDescription = "",
                         modifier = Modifier
-                            .width(126.dp)
-                            .height(24.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.head),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .size(24.dp),
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopCenter,
-                        )
-                        androidx.compose.material3.Text(
-                            "康康Need小顾问",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.outline,
-                        )
-                    }
-                    IconButton(onClick = { }) {
-                        androidx.compose.material3.Icon(
-                            painter = painterResource(id = R.drawable.heart),
-                            contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.outline
-                        )
-                    }
+                            .clip(CircleShape)
+                            .size(24.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.TopCenter,
+                    )
+                    androidx.compose.material3.Text(
+                        "康康Need小顾问",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
                 }
             }
-        }
+        }}
+
     }
 }
 
@@ -2953,6 +2988,7 @@ fun CustmizeCard() {
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
+
             }
             AnimatedVisibility(visible = visible) {
                 Card(

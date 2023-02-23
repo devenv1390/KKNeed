@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.kkneed.R
+import com.example.kkneed.datastore.StoreUserLogin
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.MyTopAppBar2
@@ -56,6 +57,8 @@ fun WelcomeScreen(navController: NavController) {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Splash(alpha: Float) {
+
+
     Scaffold(backgroundColor = MaterialTheme.colorScheme.onPrimary,
         topBar = {
             MyTopAppBar2{}
@@ -85,7 +88,7 @@ fun Splash(alpha: Float) {
 
                 androidx.compose.material3.Text(
                     "KKNeed",
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.displaySmall
                 )
             }

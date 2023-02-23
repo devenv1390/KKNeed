@@ -405,47 +405,55 @@ fun CommunityTabBar(navController: NavController) {
         state = pagerState,
     ) { page ->
         Surface(color = MaterialTheme.colorScheme.background) {
-            LazyRow(
+            LazyColumn(
                 Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-            ) {
+                    .padding(top = 8.dp)
+            )
+            {
                 item {
-                    LazyColumn(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 8.dp)
-                    )
-                    {
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item{Spacer(modifier = Modifier.height(16.dp))}
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
+                     }
+                item {
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
                 }
                 item {
-                    LazyColumn(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 8.dp)
-                    )
-                    {
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item { CommunityCard(navController) }
-                        item{Spacer(modifier = Modifier.height(16.dp))}
-
-                    }
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
                 }
+                item {
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
+                }
+                item {
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
+                }
+                item {
+                    Row(modifier = Modifier.fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween){
+                        CommunityCard(navController)
+                        CommunityCard(navController) }
+                }
+                item{Spacer(modifier = Modifier.height(16.dp))}
             }
         }
     }

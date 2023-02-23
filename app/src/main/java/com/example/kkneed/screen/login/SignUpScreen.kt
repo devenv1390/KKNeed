@@ -22,15 +22,18 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.datastore.dataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.datastore.StoreUserLogin
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.viewmodel.MainViewModel
 import com.example.kkneed.validation.event.RegistrationFormEvent
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -58,6 +61,8 @@ fun SignUpScreen(navController: NavController) {
             val viewModel = viewModel<MainViewModel>()
             val state = viewModel.state
             val context = LocalContext.current
+            val scope= rememberCoroutineScope()
+            val dataStore= StoreUserLogin(context)
             LaunchedEffect(key1 = context) {
                 viewModel.validationEvents.collect { event ->
                     when (event) {
@@ -67,6 +72,9 @@ fun SignUpScreen(navController: NavController) {
                                 "Signup successful",
                                 Toast.LENGTH_LONG
                             ).show()
+                            scope.launch {
+                                dataStore.saveLogin(true)
+                            }
                             navController.navigate(AllScreen.SignInfo.route)
                         }
                     }
@@ -77,11 +85,11 @@ fun SignUpScreen(navController: NavController) {
 
             Text(text = "Hello!欢迎来到康康星球！", color = MaterialTheme.colorScheme.onBackground,
                 style =MaterialTheme.typography.titleMedium )
-            Spacer(modifier = Modifier.height(36.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = "让我们来创建一个新账号吧！",
                 color = MaterialTheme.colorScheme.onBackground,
-                style =MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(30.dp))

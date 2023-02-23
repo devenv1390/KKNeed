@@ -323,7 +323,7 @@ fun OrderBottomBar() {
 @Composable
 fun ServiceBottomBar() {
     var text by remember { mutableStateOf("") }
-    Column(modifier = Modifier.height(80.dp)) {
+    Column() {
         Spacer(
             modifier = Modifier
                 .height(16.dp)
@@ -385,6 +385,10 @@ fun ServiceBottomBar() {
                 )
             }
         }
+        Spacer(
+            modifier = Modifier
+                .height(8.dp)
+        )
     }
 }
 

@@ -50,6 +50,9 @@ open class MainViewModel @Inject constructor(
             is RegistrationFormEvent.Submit -> {
                 submitData()
             }
+            is RegistrationFormEvent.SubmitSignIn -> {
+                submitData2()
+            }
         }
     }
     private fun submitData() {
@@ -73,6 +76,28 @@ open class MainViewModel @Inject constructor(
                 passwordError = passwordResult.errorMessage,
                 repeatedPasswordError = repeatedPasswordResult.errorMessage,
                 termsError = termsResult.errorMessage
+            )
+            return
+        }
+        viewModelScope.launch {
+            validationEventChannel.send(ValidationEvent.Success)
+        }
+    }
+    private fun submitData2() {
+        val emailResult = validateEmail.execute(state.email)
+        val passwordResult = validatePassword.execute(state.password)
+
+
+        val hasError = listOf(
+            emailResult,
+            passwordResult,
+
+        ).any { !it.successful }
+
+        if(hasError) {
+            state = state.copy(
+                emailError = emailResult.errorMessage,
+                passwordError = passwordResult.errorMessage,
             )
             return
         }

@@ -47,8 +47,7 @@ fun ServiceScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(110.dp),
+                    .fillMaxWidth(),
                 verticalAlignment = Alignment.Bottom,
             ) {
                 Image(
@@ -63,9 +62,7 @@ fun ServiceScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Card(
-                    modifier = Modifier
-                        .width(296.dp)
-                        .height(110.dp),
+
                     shape = RoundedCornerShape(12.dp, 12.dp, 12.dp, 0.dp),
                     onClick = {},
                     backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.surfaceColorAtElevation(
@@ -73,20 +70,23 @@ fun ServiceScreen(navController: NavController) {
                     ),
                     elevation = 0.dp,
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
-                        androidx.compose.material3.Text(
-                            "Lina Korn",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        androidx.compose.material3.Text(
-                            "Hi @orval, thanks for contacting.\n" +
-                                    "Yes, I’m working on it. It would be released next 2 weeks. You could check the progress here",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
+                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.SpaceBetween) {
+                        Column(modifier=Modifier.padding(bottom=8.dp)){
+                            androidx.compose.material3.Text(
+                                "康康",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            androidx.compose.material3.Text(
+                                "Hi ，我是康康.\n" +
+                                        "我想知道我的东西发货了吗？",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+
                         androidx.compose.material3.Text(
                             "03:30",
                             style = androidx.compose.material3.MaterialTheme.typography.labelSmall,
@@ -99,7 +99,7 @@ fun ServiceScreen(navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(110.dp),
+                ,
                 verticalAlignment = Alignment.Bottom,
             ) {
                 Image(
@@ -114,9 +114,7 @@ fun ServiceScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Card(
-                    modifier = Modifier
-                        .width(296.dp)
-                        .height(110.dp),
+
                     shape = RoundedCornerShape(12.dp, 12.dp, 12.dp, 0.dp),
                     onClick = {},
                     backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.surfaceColorAtElevation(
@@ -124,22 +122,25 @@ fun ServiceScreen(navController: NavController) {
                     ),
                     elevation = 0.dp,
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
+                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.SpaceBetween) {
+                        Column(modifier=Modifier.padding(bottom=8.dp)){
+                            androidx.compose.material3.Text(
+                                "康康",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            androidx.compose.material3.Text(
+                                "Hi ，我是康康.\n" +
+                                        "我想知道我的东西发货了吗？",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+
                         androidx.compose.material3.Text(
-                            "Lina Korn",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        androidx.compose.material3.Text(
-                            "Hi @orval, thanks for contacting.\n" +
-                                    "Yes, I’m working on it. It would be released next 2 weeks. You could check the progress here",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        androidx.compose.material3.Text(
-                            "03:30",
+                            "03:31",
                             style = androidx.compose.material3.MaterialTheme.typography.labelSmall,
                             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                         )
@@ -150,35 +151,36 @@ fun ServiceScreen(navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(110.dp),
+                ,
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.End,
             ) {
                 Card(
-                    modifier = Modifier
-                        .width(296.dp)
-                        .height(110.dp),
+
                     shape = RoundedCornerShape(12.dp, 12.dp, 0.dp, 12.dp),
                     onClick = {},
                     backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.secondaryContainer,
                     elevation = 0.dp,
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
+                    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.SpaceBetween) {
+                        Column(modifier=Modifier.padding(bottom=8.dp)){
+                            androidx.compose.material3.Text(
+                                "客服康康",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            androidx.compose.material3.Text(
+                                "Hi ，我是康康.\n" +
+                                        "正在抓紧为您安排，请您稍等",
+                                style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+
                         androidx.compose.material3.Text(
-                            "Lina Korn",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        androidx.compose.material3.Text(
-                            "Hi @orval, thanks for contacting.\n" +
-                                    "Yes, I’m working on it. It would be released next 2 weeks. You could check the progress here",
-                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        androidx.compose.material3.Text(
-                            "03:30",
+                            "03:32",
                             style = androidx.compose.material3.MaterialTheme.typography.labelSmall,
                             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                         )
@@ -191,7 +193,7 @@ fun ServiceScreen(navController: NavController) {
                         .clip(
                             CircleShape
                         ),
-                    painter = painterResource(R.drawable.head),
+                    painter = painterResource(R.drawable.profile),
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
                 )

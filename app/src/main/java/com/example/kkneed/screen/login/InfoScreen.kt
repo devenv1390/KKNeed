@@ -122,7 +122,7 @@ fun InfoScreen(navController:NavController) {
                     style = MaterialTheme.typography.bodyMedium
                 )
                 TextButton(
-                    onClick = {  },
+                    onClick = {navController.navigate(AllScreen.Success.route)  },
                 )
                 {
                     Text("点击此处跳过",

@@ -25,12 +25,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.datastore.StoreUserLogin
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.viewmodel.MainViewModel
 import com.example.kkneed.validation.event.RegistrationFormEvent
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -65,27 +67,32 @@ fun SignInScreen(navController: NavController) {
             val viewModel = viewModel<MainViewModel>()
             val state = viewModel.state
             val context = LocalContext.current
+            val scope= rememberCoroutineScope()
+            val dataStore= StoreUserLogin(context)
             LaunchedEffect(key1 = context) {
                 viewModel.validationEvents.collect { event ->
                     when (event) {
                         is MainViewModel.ValidationEvent.Success -> {
                             Toast.makeText(
                                 context,
-                                "Signin successful",
+                                "登录成功！",
                                 Toast.LENGTH_LONG
                             ).show()
+                            scope.launch {
+                                dataStore.saveLogin(true)
+                            }
+                            navController.navigate(AllScreen.Home.route)
                         }
                     }
                 }
             }
 
 
-            Spacer(modifier = Modifier.height(30.dp))
-            Spacer(modifier = Modifier.height(36.dp))
+            Spacer(modifier = Modifier.height(56.dp))
             Text(
                 text = "欢迎回到康康星球！",
                 color = MaterialTheme.colorScheme.onBackground,
-                style =MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                style =MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -180,12 +187,12 @@ fun SignInScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(24.dp))
 
             GradientButton(modifier = Modifier
-                .height(40.dp)
+                .height(56.dp)
                 .fillMaxWidth(0.8f),
                 textId = "登录", onClick = {
-                    println("Onclick Email $email")
-                    println("Onclick Passwod $password")
-                navController.navigate(AllScreen.Home.route)}
+                    viewModel.onEvent(RegistrationFormEvent.SubmitSignIn)
+                //navController.navigate(AllScreen.Home.route)
+                    }
             )
 
 
