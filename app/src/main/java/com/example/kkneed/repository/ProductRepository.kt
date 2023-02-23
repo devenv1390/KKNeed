@@ -12,7 +12,7 @@ interface ProductRepository {
     fun getAllProduct(): LiveData<List<Product>>
     fun getOneAllProduct(): LiveData<Product>
     fun queryProductCode(barcode: String): Product
-    fun queryProductScore(score:String):Product
+    fun queryProductScore(score: String): List<Product>
 }
 
 class ProductRepositoryImp @Inject constructor(
@@ -55,7 +55,8 @@ class ProductRepositoryImp @Inject constructor(
     override fun queryProductCode(barcode: String): Product {
         return productDao.queryProductCode(barcode)
     }
-    override fun queryProductScore(score: String): Product {
+
+    override fun queryProductScore(score: String): List<Product> {
         return productDao.queryProductScore(score)
     }
 }

@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +29,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.SCANNER_ROUTE
-import com.example.kkneed.navigation.SHOP_ROUTE
 import com.example.kkneed.screen.LoadingAnimation
 import com.example.kkneed.screen.login.RandomPosition
 import com.example.kkneed.ui.*
@@ -50,7 +47,7 @@ fun CustomizeScreen(
 ) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    val products: List<Product> by viewModel.products.observeAsState(arrayListOf())
+    val products: List<Product> = viewModel.queryProductScore("a")
     val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
     ModalBottomSheetLayout(
         sheetElevation = 16.dp,
@@ -194,9 +191,7 @@ fun CustomizeScreen(
 
                     }
                 }
-                var itemCount = products.size
-                if (isLoading) itemCount++
-
+                val itemCount = products.size
                 items(count = itemCount) { index ->
                     var auxIndex = index
                     if (isLoading) {

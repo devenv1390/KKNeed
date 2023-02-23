@@ -39,12 +39,15 @@ class ProductViewModel @Inject constructor(
                 _isLoading.postValue(false)
             }
     }
-    fun queryProductCode(barcode: String):Product{
+
+    fun queryProductCode(barcode: String): Product {
         return productRepo.queryProductCode(barcode)
     }
-    fun queryProductScore(score:String):Product{
+
+    fun queryProductScore(score: String): List<Product> {
         return productRepo.queryProductScore(score)
     }
+
     fun deleteProduct(toDelete: Product) {
         viewModelScope.launch(Dispatchers.IO) {
             productRepo.deleteProduct(toDelete)

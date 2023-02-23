@@ -53,7 +53,7 @@ interface ProductDao {
     fun queryProductCode(code: String): Product
 
     @Query("SELECT * FROM product WHERE score=:score")
-    fun queryProductScore(score: String): Product
+    fun queryProductScore(score: String): List<Product>
 
     @Delete
     fun delete(product: Product)
