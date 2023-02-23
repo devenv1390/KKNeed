@@ -24,7 +24,7 @@ fun CollectScreen(navController: NavController) {
         }
     ) {
         Column(modifier = Modifier.fillMaxSize()){
-            CollectTabBar()
+            CollectTabBar(navController)
         }
     }
 }

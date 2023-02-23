@@ -225,7 +225,7 @@ fun MyHorizonList(navController: NavController) {
         ButtonItemData(painterResource(id = R.drawable.person_circle), "个人信息", AllScreen.PersonInfo.route),
         ButtonItemData(painterResource(id = R.drawable.write), "我的创作", AllScreen.Create.route),
         ButtonItemData(painterResource(id = R.drawable.history), "我的足迹", AllScreen.History.route),
-        ButtonItemData(painterResource(id = R.drawable.service), "联系客服", "")
+        ButtonItemData(painterResource(id = R.drawable.service), "联系客服", AllScreen.Service.route)
     )
     val buttonColor = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
@@ -278,7 +278,6 @@ fun MyHorizonList(navController: NavController) {
 
                 Button(
                     onClick = {
-                        navController.navigate("")
                     },
                     modifier = Modifier.fillMaxWidth(),
                     colors = buttonColor

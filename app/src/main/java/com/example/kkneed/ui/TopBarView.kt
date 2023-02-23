@@ -245,9 +245,9 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
                 Icon(Icons.Outlined.ShoppingCart,null)
             }
             IconButton(
-                onClick = {}
+                onClick = {navController.navigate(AllScreen.Service.route)}
             ) {
-                Icon(Icons.Outlined.Face,null)
+                Icon(painter = painterResource(id = R.drawable.support_agent),null)
             }
         }
     }

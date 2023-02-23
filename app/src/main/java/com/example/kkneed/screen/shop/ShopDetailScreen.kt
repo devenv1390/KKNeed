@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.*
 import com.example.kkneed.ui.components.DetailChip
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -42,7 +43,7 @@ fun ShopDetailScreen(navController: NavController) {
             )
         },
         bottomBar = {
-            ShopDetailBottomBar()
+            ShopDetailBottomBar(navController )
         }
     ) {
         Column(
@@ -151,7 +152,7 @@ fun ShopDetailScreen(navController: NavController) {
                             contentScale = ContentScale.Fit,
                             alignment = Alignment.TopStart
                         )
-                        TextButton(onClick = { /*TODO*/ }) {
+                        TextButton(onClick = { navController.navigate(AllScreen.Health.route) }) {
                             Text(
                                 "查看康康卡片 >>",
                                 modifier = Modifier.padding(end = 16.dp),
@@ -189,7 +190,7 @@ fun ShopDetailScreen(navController: NavController) {
                         color = MaterialTheme.colorScheme.primary
                     )
                 }
-                TextButton(onClick = { /*TODO*/ }) {
+                TextButton(onClick = { navController.navigate(AllScreen.Comment.route) }) {
                     Text(
                         "全部评论 >>",
                         modifier = Modifier.padding(end = 16.dp),

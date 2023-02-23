@@ -40,7 +40,7 @@ fun SearchResultScreen(navController: NavController) {
             Column(
                 horizontalAlignment = Alignment.Start,
             ) {
-                ShopSearchTabBar()
+                ShopSearchTabBar(navController)
             }
         }
     }

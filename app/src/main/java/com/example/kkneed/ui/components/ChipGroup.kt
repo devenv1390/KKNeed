@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.kkneed.R
 import com.example.kkneed.ui.CommentCard
 import com.example.kkneed.ui.ImageCommentCard
@@ -258,7 +259,7 @@ fun ChipGroupCompose(state:LazyListState) {
 @SuppressLint("ResourceType", "SupportAnnotationUsage")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun ShopIconGroupCompose(state:LazyListState) {
+fun ShopIconGroupCompose(state:LazyListState,navController: NavController) {
     val pagerState = rememberPagerState()
     val coroutineScope= rememberCoroutineScope()
     val chipList: List<String> = listOf(
@@ -336,16 +337,16 @@ fun ShopIconGroupCompose(state:LazyListState) {
                 verticalArrangement = Arrangement.spacedBy(8.dp),state = state
             )
             {
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
-                item { ShopScreenMainCard() }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
+                item { ShopScreenMainCard(navController) }
                 item{Spacer(modifier = Modifier.height(88.dp))}
             }
         }
