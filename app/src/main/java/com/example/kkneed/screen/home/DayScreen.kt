@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
+import com.example.kkneed.screen.shop.HealthScreen
 import com.example.kkneed.ui.MostUseTopAppBar
 import com.example.kkneed.ui.ShopDetailBottomBar
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -27,7 +28,7 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 @OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HealthScreen(navController: NavController) {
+fun DayScreen(navController: NavController) {
     Scaffold(
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -85,6 +86,6 @@ fun HealthScreen(navController: NavController) {
 fun PreviewHealthScreen() {
     KKNeedTheme {
         val navController = rememberNavController()
-        HealthScreen(navController)
+        DayScreen(navController)
     }
 }

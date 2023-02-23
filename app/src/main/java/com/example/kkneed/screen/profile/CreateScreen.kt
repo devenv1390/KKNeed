@@ -26,16 +26,16 @@ fun CreateScreen(navController: NavController) {
         LazyColumn(modifier = Modifier.fillMaxSize()
             .padding(top = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)){
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
-            item { SmallInfoCard() }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
+            item { SmallInfoCard(navController) }
             item{ Spacer(modifier = Modifier.height(16.dp)) }
         }
     }

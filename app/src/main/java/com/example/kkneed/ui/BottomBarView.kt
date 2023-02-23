@@ -1,5 +1,6 @@
 package com.example.kkneed.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.VerticalAlignmentLine
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -243,7 +245,7 @@ fun DetailBottomBar() {
 
 //购物车
 @Composable
-fun ShopCartBottomBar() {
+fun ShopCartBottomBar(navController: NavController) {
     val checkedState = remember {
         mutableStateOf(true)
     }
@@ -287,6 +289,7 @@ fun ShopCartBottomBar() {
                         .fillMaxWidth(0.4f),
                     textId = "结算",
                     onClick = {
+                           navController.navigate(AllScreen.Confirm.route)
                     },
                 )
             }
@@ -420,7 +423,8 @@ fun ShopDetailBottomBar(navController: NavController) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.shoppingcart),
                         contentDescription = "Localized description",
-                        tint = MaterialTheme.colorScheme.secondaryContainer
+                        tint = MaterialTheme.colorScheme.secondaryContainer,
+                        modifier = Modifier.size(24.dp)
                     )
                 }
                 Text(
@@ -434,7 +438,8 @@ fun ShopDetailBottomBar(navController: NavController) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.compare),
                         contentDescription = "Localized description",
-                        tint = MaterialTheme.colorScheme.secondaryContainer
+                        tint = MaterialTheme.colorScheme.secondaryContainer,
+                        modifier = Modifier.size(24.dp)
                     )
                 }
                 Text(
@@ -449,7 +454,8 @@ fun ShopDetailBottomBar(navController: NavController) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.support_agent),
                         contentDescription = "Localized description",
-                        tint = MaterialTheme.colorScheme.secondaryContainer
+                        tint = MaterialTheme.colorScheme.secondaryContainer,
+                        modifier = Modifier.size(24.dp)
                     )
                 }
                 Text(
@@ -468,8 +474,15 @@ fun ShopDetailBottomBar(navController: NavController) {
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val context = LocalContext.current
                 androidx.compose.material3.Button(
-                    onClick = { },
+                    onClick = {
+                        Toast.makeText(
+                            context,
+                            "成功加入购物车！",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    },
                     colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                         md_theme_light_tertiaryContainer
                     )

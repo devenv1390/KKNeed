@@ -39,7 +39,10 @@ fun LabelScreen(navController: NavController) {
                     )}
                 Spacer(modifier = Modifier.height(40.dp))
             }
-        }
+        },
+        topBar = {
+            MyTopAppBar2{}
+        },
     ){
         Column(
         horizontalAlignment = Alignment.Start,

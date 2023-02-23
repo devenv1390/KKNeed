@@ -52,6 +52,33 @@ fun MyTopAppBar(content: @Composable () -> Unit) {
         content()
     }
 }
+@Composable
+fun MyTopAppBar2(content: @Composable () -> Unit) {
+    //标题栏高度
+    val appBarHeight = 2.dp
+    //状态栏颜色读取
+    val systemUiController = rememberSystemUiController()
+    LaunchedEffect(key1 = Unit) {
+        systemUiController.setStatusBarColor(Color.Transparent,true)
+    }
+    //状态栏高度
+    val statusBarHeightDp = LocalDensity.current.run {
+        WindowInsets.statusBars.getTop(this).toDp()
+    }
+    Row(
+        modifier = Modifier
+            .background(
+                MaterialTheme.colorScheme.onPrimary
+            )
+            .fillMaxWidth()
+            .height(appBarHeight + statusBarHeightDp)
+            .padding(top = statusBarHeightDp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        content()
+    }
+}
 
 @Composable
 fun NormalTopAppBar(appBarHeight: Dp, content: @Composable () -> Unit) {
@@ -240,14 +267,14 @@ fun ShopTopAppBar(appBarHeight: Dp, navController: NavController){
         ) {
             ShopSearchBar(navController)
             IconButton(
-                onClick = {}
+                onClick = {navController.navigate(AllScreen.ShoppingCart.route)}
             ) {
                 Icon(Icons.Outlined.ShoppingCart,null)
             }
             IconButton(
                 onClick = {navController.navigate(AllScreen.Service.route)}
             ) {
-                Icon(painter = painterResource(id = R.drawable.support_agent),null)
+                Icon(painter = painterResource(id = R.drawable.support_agent),null, modifier = Modifier.size(24.dp))
             }
         }
     }
@@ -264,7 +291,7 @@ fun ShopSearchTopAppBar(appBarHeight: Dp, navController: NavController){
                 .fillMaxWidth()
         ) {
             BackButton(navController)
-            ShopSearchBar(navController)
+            SearchBar()
             TextButton(onClick = {}) {
                 Text("搜索")
             }
@@ -387,11 +414,7 @@ fun CommunityTopAppBar(appBarHeight: Dp, navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            IconButton(
-                onClick = {}
-            ) {
-                Icon(Icons.Outlined.ArrowBack,null)
-            }
+            BackButton(navController)
             CommunitySearchBar(navController)
             IconButton(
                 onClick = {navController.navigate(AllScreen.EditNote.route)}

@@ -9,7 +9,7 @@ class ValidateTerms {
         if(!acceptedTerms) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "Please accept the terms"
+                errorMessage = "请接受协议"
             )
         }
         return ValidationResult(

@@ -8,7 +8,7 @@ class ValidateRepeatedPassword {
         if(password != repeatedPassword) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "The passwords don't match"
+                errorMessage = "两次输入的密码不一致"
             )
         }
         return ValidationResult(

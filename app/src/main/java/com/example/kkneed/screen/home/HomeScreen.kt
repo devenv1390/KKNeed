@@ -1,13 +1,10 @@
 package com.example.kkneed.screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
@@ -72,7 +69,8 @@ fun HomeScreen(navController: NavController) {
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(0))
-                    .height(200.dp),
+                    .height(200.dp)
+                    .clickable { navController.navigate(AllScreen.Day.route) },
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.TopCenter,
             )
@@ -98,11 +96,11 @@ fun HomeScreen(navController: NavController) {
                 .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.Center) {
                 Column(verticalArrangement =Arrangement.spacedBy(8.dp)) {
-                    HomeFoodCard()
-                    HomeFoodCard()
-                    HomeFoodCard()
-                    HomeFoodCard()
-                    HomeFoodCard()
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
                 }
 //                LazyColumn() {
 //                    item { HomeFoodCard() }
@@ -113,10 +111,10 @@ fun HomeScreen(navController: NavController) {
 //                }
                 Spacer(modifier = Modifier.width(8.dp))
                 Column(verticalArrangement =Arrangement.spacedBy(8.dp)) {
-                    HomeFoodCard()
-                    HomeFoodCard()
-                    HomeFoodCard()
-                    HomeFoodCard()
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
+                    HomeFoodCard(navController)
 
                 }
 //                LazyColumn() {

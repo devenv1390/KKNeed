@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
 import com.example.kkneed.ui.InfoBottomSheet
+import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.components.AllergicChip
 import com.example.kkneed.ui.components.SmallChip
 import com.example.kkneed.ui.theme.KKNeedTheme
@@ -36,130 +37,135 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ChipScreen(navController: NavController){
-    val sheetState = rememberBottomSheetState(
+    Scaffold(backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        topBar = {
+            MyTopAppBar2{}
+        },){
+        val sheetState = rememberBottomSheetState(
         initialValue = BottomSheetValue.Collapsed
     )
-    val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = sheetState
-    )
-    val scope = rememberCoroutineScope()
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
-        sheetContent = {
-            InfoBottomSheet(
-                sheetState,scaffoldState,scope
-            )
-        },
-        sheetBackgroundColor = MaterialTheme.colorScheme.onPrimary,
-        sheetPeekHeight = 0.dp
-    ) {
-        Scaffold(
-            bottomBar = {
-                Column {
-                    Row(modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center){
-                        GradientButton(modifier = Modifier
-                            .height(56.dp)
-                            .fillMaxWidth(0.8f),
-                            textId = "下一步", onClick = {
-                                navController.navigate(AllScreen.Success.route)
-                            }
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(40.dp))
-                }
-            }
-        ){
-            Column(
-                horizontalAlignment = Alignment.Start,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .background(color = MaterialTheme.colorScheme.onPrimary)
-            ) {
-
-
-                Spacer(modifier = Modifier.height(50.dp))
-
-                Text(
-                    modifier = Modifier.padding(start = 16.dp),
-                    text = "您对哪些指标较为关注？",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+        val scaffoldState = rememberBottomSheetScaffoldState(
+            bottomSheetState = sheetState
+        )
+        val scope = rememberCoroutineScope()
+        BottomSheetScaffold(
+            scaffoldState = scaffoldState,
+            sheetShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+            sheetContent = {
+                InfoBottomSheet(
+                    sheetState,scaffoldState,scope
                 )
-                Spacer(modifier = Modifier.height(13.dp))
-                Text(
-                    modifier = Modifier.padding(start = 16.dp),
-                    text = "请选择一个或多个指标",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.titleMedium )
-                Spacer(modifier = Modifier.height(60.dp))
-
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(210.dp)){
-                    SmallChip(state = true, title ="热量" ,
-                        modifier =Modifier.RandomPosition(120,30))
-                    SmallChip(state = false, title ="脂肪" ,
-                        modifier =Modifier.RandomPosition(450,60))
-                    SmallChip(state = false, title ="蛋白质" ,
-                        modifier =Modifier.RandomPosition(800,0))
-                    SmallChip(state = true, title ="碳水化合物" ,
-                        modifier =Modifier.RandomPosition(80,300))
-                    SmallChip(state = false, title ="添加剂" ,
-                        modifier =Modifier.RandomPosition(430,500))
-                    SmallChip(state = false, title ="钠" ,
-                        modifier =Modifier.RandomPosition(800,400))
-                    Text(text = "营养元素",
-                        modifier=Modifier.align(Alignment.Center),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
-                }
-                Spacer(modifier = Modifier.height(80.dp))
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(210.dp)){
-                    SmallChip(state = true, title ="添加糖" ,
-                        modifier =Modifier.RandomPosition(150,80))
-                    SmallChip(state = true, title ="添加剂" ,
-                        modifier =Modifier.RandomPosition(800,300))
-                    var selected by remember { mutableStateOf(false) }
-                    androidx.compose.material3.FilterChip(
-                        modifier =Modifier.RandomPosition(650,20),
-                        selected = selected,
-                        onClick = {
-                            selected = !selected
-                            if(selected){
-                                scope.launch {
-                                if(sheetState.isCollapsed) {
-                                    sheetState.expand()
-                                } else {
-                                    sheetState.collapse()
+            },
+            sheetBackgroundColor = MaterialTheme.colorScheme.onPrimary,
+            sheetPeekHeight = 0.dp
+        ) {
+            Scaffold(
+                bottomBar = {
+                    Column {
+                        Row(modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center){
+                            GradientButton(modifier = Modifier
+                                .height(56.dp)
+                                .fillMaxWidth(0.8f),
+                                textId = "下一步", onClick = {
+                                    navController.navigate(AllScreen.Success.route)
                                 }
-                            } }
-                                  },
-                        label = {
-                            androidx.compose.material.Text(
-                                "过敏原",
-                                color = if (selected) Color.White else Color.Black
                             )
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
-                            selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        ),
-                        border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
-                    )
+                        }
+                        Spacer(modifier = Modifier.height(40.dp))
+                    }
+                }
+            ){
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .background(color = MaterialTheme.colorScheme.onPrimary)
+                ) {
 
-                    SmallChip(state = true, title ="反式脂肪可能来源" ,
-                        modifier =Modifier.RandomPosition(80,360))
-                    SmallChip(state = false, title ="色素" ,
-                        modifier =Modifier.RandomPosition(500,520))
-                    Text(text = "食品成分",
-                        modifier=Modifier.align(Alignment.Center),
+
+                    Spacer(modifier = Modifier.height(50.dp))
+
+                    Text(
+                        modifier = Modifier.padding(start = 16.dp),
+                        text = "您对哪些指标较为关注？",
                         color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                    Spacer(modifier = Modifier.height(13.dp))
+                    Text(
+                        modifier = Modifier.padding(start = 16.dp),
+                        text = "请选择一个或多个指标",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.titleMedium )
+                    Spacer(modifier = Modifier.height(60.dp))
+
+                    Box(modifier = Modifier
+                        .fillMaxWidth()
+                        .height(210.dp)){
+                        SmallChip(state = true, title ="热量" ,
+                            modifier =Modifier.RandomPosition(120,30))
+                        SmallChip(state = false, title ="脂肪" ,
+                            modifier =Modifier.RandomPosition(450,60))
+                        SmallChip(state = false, title ="蛋白质" ,
+                            modifier =Modifier.RandomPosition(800,0))
+                        SmallChip(state = true, title ="碳水化合物" ,
+                            modifier =Modifier.RandomPosition(80,300))
+                        SmallChip(state = false, title ="添加剂" ,
+                            modifier =Modifier.RandomPosition(430,500))
+                        SmallChip(state = false, title ="钠" ,
+                            modifier =Modifier.RandomPosition(800,400))
+                        Text(text = "营养元素",
+                            modifier=Modifier.align(Alignment.Center),
+                            color = MaterialTheme.colorScheme.onBackground,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+                    }
+                    Spacer(modifier = Modifier.height(80.dp))
+                    Box(modifier = Modifier
+                        .fillMaxWidth()
+                        .height(210.dp)){
+                        SmallChip(state = true, title ="添加糖" ,
+                            modifier =Modifier.RandomPosition(150,80))
+                        SmallChip(state = true, title ="添加剂" ,
+                            modifier =Modifier.RandomPosition(800,300))
+                        var selected by remember { mutableStateOf(false) }
+                        androidx.compose.material3.FilterChip(
+                            modifier =Modifier.RandomPosition(650,20),
+                            selected = selected,
+                            onClick = {
+                                selected = !selected
+                                if(selected){
+                                    scope.launch {
+                                        if(sheetState.isCollapsed) {
+                                            sheetState.expand()
+                                        } else {
+                                            sheetState.collapse()
+                                        }
+                                    } }
+                            },
+                            label = {
+                                androidx.compose.material.Text(
+                                    "过敏原",
+                                    color = if (selected) Color.White else Color.Black
+                                )
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.outline.copy(0.7f),
+                                selectedContainerColor = MaterialTheme.colorScheme.primary,
+                            ),
+                            border = FilterChipDefaults.filterChipBorder(borderWidth = 0.dp),
+                        )
+
+                        SmallChip(state = true, title ="反式脂肪可能来源" ,
+                            modifier =Modifier.RandomPosition(80,360))
+                        SmallChip(state = false, title ="色素" ,
+                            modifier =Modifier.RandomPosition(500,520))
+                        Text(text = "食品成分",
+                            modifier=Modifier.align(Alignment.Center),
+                            color = MaterialTheme.colorScheme.onBackground,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+                    }
                 }
             }
         }

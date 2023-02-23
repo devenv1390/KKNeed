@@ -9,13 +9,13 @@ class ValidateEmail {
         if(email.isBlank()) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "The email can't be blank"
+                errorMessage = "请输入您的邮箱"
             )
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "That's not a valid email"
+                errorMessage = "这不是一个合法的邮箱格式噢"
             )
         }
         return ValidationResult(

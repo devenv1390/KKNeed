@@ -33,16 +33,16 @@ fun HistoryScreen(navController: NavController) {
             contentAlignment = Alignment.TopCenter
         ) {
             LazyColumn(){
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
-                item { SmallInfoCard() }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
+                item { SmallInfoCard(navController) }
                 item{Spacer(modifier = Modifier.height(16.dp))}
             }
         }

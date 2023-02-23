@@ -253,7 +253,7 @@ fun ShopDetailScreen(navController: NavController) {
                 item { Spacer(modifier = Modifier.width(8.dp)) }
                 item { ProductCard("百事无糖可乐") }
             }
-            Spacer(modifier = Modifier.height(88.dp))
+            Spacer(modifier = Modifier.height(96.dp))
 
         }
     }

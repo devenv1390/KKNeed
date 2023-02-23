@@ -92,7 +92,7 @@ fun ShopScreen(navController: NavController) {
 
                 }
             }
-            ShopIconGroupCompose(listState,navController)
+            ShopIconGroupCompose(navController)
         }
 
     }

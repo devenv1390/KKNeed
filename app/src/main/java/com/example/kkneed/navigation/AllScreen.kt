@@ -52,6 +52,7 @@ sealed class AllScreen(val route: String){
     object Result:AllScreen("result_screen")
     object ADList:AllScreen("adlist_screen")
     object Confirm:AllScreen("confirm_screen")
+    object Day:AllScreen("dayscreen_screen")
     object ShoppingCart:AllScreen("shoppingcart_screen")
     object ADEdit:AllScreen("adedit_screen")
 }

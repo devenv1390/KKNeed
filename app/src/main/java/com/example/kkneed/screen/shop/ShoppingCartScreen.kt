@@ -34,7 +34,7 @@ fun ShoppingCartScreen(navController: NavController) {
                     title = "购物车"
                 )
             },
-            bottomBar = { ShopCartBottomBar() }
+            bottomBar = { ShopCartBottomBar(navController) }
         ) {
             Column(
                 modifier = Modifier

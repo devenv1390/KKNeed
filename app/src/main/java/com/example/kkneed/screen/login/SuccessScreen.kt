@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
+import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.theme.KKNeedTheme
 import java.util.*
 
@@ -39,12 +40,15 @@ fun SuccessScreen(navController: NavController){
                         .height(56.dp)
                         .fillMaxWidth(0.8f),
                         textId = "进入首页", onClick = {
-                            navController.navigate(AllScreen.Main.route)
+                            navController.navigate(AllScreen.Home.route)
                         }
                     )}
                 Spacer(modifier = Modifier.height(40.dp))
             }
-            }
+            },
+        topBar = {
+            MyTopAppBar2{}
+        },
     ){
         Column(
         verticalArrangement=Arrangement.Center,

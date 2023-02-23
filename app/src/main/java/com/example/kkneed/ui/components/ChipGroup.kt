@@ -31,6 +31,7 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.LevelE
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
@@ -151,7 +152,7 @@ fun QuestionChip(state:Boolean,title: String){
 }
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun ChipGroupCompose(state:LazyListState) {
+fun ChipGroupCompose() {
     val pagerState = rememberPagerState()
     val coroutineScope= rememberCoroutineScope()
 
@@ -204,7 +205,7 @@ fun ChipGroupCompose(state:LazyListState) {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     )
                     {
                         item { CommentCard() }
@@ -224,7 +225,7 @@ fun ChipGroupCompose(state:LazyListState) {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     )
                     {
                         item { CommentCard() }
@@ -241,7 +242,7 @@ fun ChipGroupCompose(state:LazyListState) {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),state = state
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     )
                     {
                         item { ImageCommentCard()}
@@ -259,7 +260,7 @@ fun ChipGroupCompose(state:LazyListState) {
 @SuppressLint("ResourceType", "SupportAnnotationUsage")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun ShopIconGroupCompose(state:LazyListState,navController: NavController) {
+fun ShopIconGroupCompose(navController: NavController) {
     val pagerState = rememberPagerState()
     val coroutineScope= rememberCoroutineScope()
     val chipList: List<String> = listOf(
@@ -283,7 +284,8 @@ fun ShopIconGroupCompose(state:LazyListState,navController: NavController) {
         modifier = Modifier
             .padding(start = 16.dp,top=8.dp, bottom = 8.dp, end = 16.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         chipList.forEachIndexed() { index,it ->
             FilterChip(selected = pagerState.currentPage == index,
@@ -291,7 +293,8 @@ fun ShopIconGroupCompose(state:LazyListState,navController: NavController) {
                     .padding(vertical = 4.dp),
                 label={},
                 leadingIcon ={
-                    Column(horizontalAlignment = Alignment.CenterHorizontally){
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center){
                             Icon(
                                 painter = painterResource(imageIdList[index]), null,
                                 modifier = Modifier.size(36.dp),
@@ -334,7 +337,7 @@ fun ShopIconGroupCompose(state:LazyListState,navController: NavController) {
                 Modifier
                     .fillMaxSize()
                     .padding(top = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),state = state
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             )
             {
                 item { ShopScreenMainCard(navController) }

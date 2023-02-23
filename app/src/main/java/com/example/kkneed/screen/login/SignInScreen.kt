@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.R
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.GradientButton
+import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.viewmodel.MainViewModel
 import com.example.kkneed.validation.event.RegistrationFormEvent
@@ -35,206 +36,214 @@ import com.example.kkneed.validation.event.RegistrationFormEvent
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(navController: NavController) {
+    androidx.compose.material.Scaffold(
+        backgroundColor = MaterialTheme.colorScheme.onPrimary,
+        topBar = {
+            MyTopAppBar2 {}
+        },
+    ){
+        var email by remember {
+            mutableStateOf("")
+        }
 
+        var passwordHidden by remember{ mutableStateOf(false)}
 
-    var email by remember {
-        mutableStateOf("")
-    }
+        var password by remember {
+            mutableStateOf("")
+        }
+        val icon=if(passwordHidden)
+            painterResource(id =R.drawable.visibility )
+        else painterResource(id =R.drawable.visibilityoff )
 
-    var passwordHidden by remember{ mutableStateOf(false)}
-
-    var password by remember {
-        mutableStateOf("")
-    }
-    val icon=if(passwordHidden)
-        painterResource(id =R.drawable.visibility )
-    else painterResource(id =R.drawable.visibilityoff )
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .background(color = MaterialTheme.colorScheme.onPrimary)
-    ) {
-        val viewModel = viewModel<MainViewModel>()
-        val state = viewModel.state
-        val context = LocalContext.current
-        LaunchedEffect(key1 = context) {
-            viewModel.validationEvents.collect { event ->
-                when (event) {
-                    is MainViewModel.ValidationEvent.Success -> {
-                        Toast.makeText(
-                            context,
-                            "Signin successful",
-                            Toast.LENGTH_LONG
-                        ).show()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .background(color = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            val viewModel = viewModel<MainViewModel>()
+            val state = viewModel.state
+            val context = LocalContext.current
+            LaunchedEffect(key1 = context) {
+                viewModel.validationEvents.collect { event ->
+                    when (event) {
+                        is MainViewModel.ValidationEvent.Success -> {
+                            Toast.makeText(
+                                context,
+                                "Signin successful",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 }
             }
-        }
 
 
-        Spacer(modifier = Modifier.height(30.dp))
-        Spacer(modifier = Modifier.height(36.dp))
-        Text(
-            text = "欢迎回到康康星球！",
-            color = MaterialTheme.colorScheme.onBackground,
-            style =MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-        )
-
-        Spacer(modifier = Modifier.height(30.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .padding(bottom = 8.dp),
-            horizontalArrangement = Arrangement.Start
-        ){
+            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(36.dp))
             Text(
-                text = "邮箱",
-                color = MaterialTheme.colorScheme.outline,
-                style =MaterialTheme.typography.titleMedium
+                text = "欢迎回到康康星球！",
+                color = MaterialTheme.colorScheme.onBackground,
+                style =MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
             )
-        }
 
-        TextField(value =state.email,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            singleLine = true,
-            modifier = Modifier
-                .height(56.dp)
-                .fillMaxWidth(0.8f),
-            colors = TextFieldDefaults.textFieldColors(
-                unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
-            isError = state.emailError != null,
-            onValueChange =
-            {
-                viewModel.onEvent(RegistrationFormEvent.EmailChanged(it))
-            })
-        if (state.emailError != null) {
-            Text(
-                text = state.emailError,
-                color = MaterialTheme.colorScheme.error,
+            Spacer(modifier = Modifier.height(30.dp))
+            Row(modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Text(
+                    text = "邮箱",
+                    color = MaterialTheme.colorScheme.outline,
+                    style =MaterialTheme.typography.titleMedium
+                )
+            }
+
+            TextField(value =state.email,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                singleLine = true,
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-            )
-        }
+                    .height(56.dp)
+                    .fillMaxWidth(0.8f),
+                colors = TextFieldDefaults.textFieldColors(
+                    unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
+                isError = state.emailError != null,
+                onValueChange =
+                {
+                    viewModel.onEvent(RegistrationFormEvent.EmailChanged(it))
+                })
+            if (state.emailError != null) {
+                Text(
+                    text = state.emailError,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                )
+            }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Row(modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .padding(bottom = 8.dp),
-            horizontalArrangement = Arrangement.Start
-        ){
-            Text(
-                text = "密码",
-                color = MaterialTheme.colorScheme.outline,
-                style =MaterialTheme.typography.titleMedium
-            )
-        }
-        TextField(value = state.password,
-            singleLine = true,
-            modifier = Modifier
-                .height(56.dp)
-                .fillMaxWidth(0.8f),
-            colors = TextFieldDefaults.textFieldColors(
-                unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
-            isError = state.passwordError != null,
-            onValueChange =
-            {
-                viewModel.onEvent(RegistrationFormEvent.PasswordChanged(it))
-            },
-            trailingIcon = {
-                IconButton(
-                    onClick = {
-                        passwordHidden = !passwordHidden
+            Row(modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Text(
+                    text = "密码",
+                    color = MaterialTheme.colorScheme.outline,
+                    style =MaterialTheme.typography.titleMedium
+                )
+            }
+            TextField(value = state.password,
+                singleLine = true,
+                modifier = Modifier
+                    .height(56.dp)
+                    .fillMaxWidth(0.8f),
+                colors = TextFieldDefaults.textFieldColors(
+                    unfocusedIndicatorColor = MaterialTheme.colorScheme.primary),
+                isError = state.passwordError != null,
+                onValueChange =
+                {
+                    viewModel.onEvent(RegistrationFormEvent.PasswordChanged(it))
+                },
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            passwordHidden = !passwordHidden
+                        }
+                    ){
+                        Icon(painter = icon, contentDescription =null )
                     }
-                ){
-                    Icon(painter = icon, contentDescription =null )
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            visualTransformation = if(passwordHidden) VisualTransformation.None else PasswordVisualTransformation()
-        )
-        if (state.passwordError != null) {
-            Text(
-                text = state.passwordError,
-                color = MaterialTheme.colorScheme.error,
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = if(passwordHidden) VisualTransformation.None else PasswordVisualTransformation()
             )
-        }
+            if (state.passwordError != null) {
+                Text(
+                    text = state.passwordError,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                )
+            }
 
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
                 "忘记密码？",
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodySmall
             )
 
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-        GradientButton(modifier = Modifier
-            .height(56.dp)
-            .fillMaxWidth(0.8f),
-            textId = "登录", onClick = {
-                println("Onclick Email $email")
-                println("Onclick Passwod $password")}
-        )
-
-
-
-        Spacer(modifier = Modifier.height(35.dp))
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically){
-            Box(modifier = Modifier
-                .size(141.dp, 1.dp)
-                .background(color = MaterialTheme.colorScheme.outline)
+            GradientButton(modifier = Modifier
+                .height(40.dp)
+                .fillMaxWidth(0.8f),
+                textId = "登录", onClick = {
+                    println("Onclick Email $email")
+                    println("Onclick Passwod $password")
+                navController.navigate(AllScreen.Home.route)}
             )
 
-            Text(
-                "Or",
-                modifier=Modifier.padding(start = 10.dp,end=10.dp),
-                color = MaterialTheme.colorScheme.outline,
-                style = MaterialTheme.typography.labelMedium
-            )
-            Box(modifier = Modifier
-                .size(141.dp, 1.dp)
-                .background(color = MaterialTheme.colorScheme.outline)
-            )
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(){
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.weixin),null,tint = Color.Unspecified)
-
-            }
-            Spacer(modifier = Modifier.width(52.dp))
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(painterResource(id = R.drawable.qq),null,tint = Color.Unspecified)
-            }
-        }
-        Spacer(modifier = Modifier.height(25.dp))
 
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(modifier = Modifier.height(35.dp))
 
-            Text(
-                "还没有账号？",
-                color = MaterialTheme.colorScheme.onBackground,
-                style = MaterialTheme.typography.bodyMedium
-            )
-            TextButton(onClick = { navController.navigate(AllScreen.SignUp.route)},
+            Row(
+                verticalAlignment = Alignment.CenterVertically){
+                Box(modifier = Modifier
+                    .size(141.dp, 1.dp)
+                    .background(color = MaterialTheme.colorScheme.outline)
                 )
-            {
-                Text("来注册一个吧！",
-                        color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium)
-            }
-        }
 
+                Text(
+                    "Or",
+                    modifier=Modifier.padding(start = 10.dp,end=10.dp),
+                    color = MaterialTheme.colorScheme.outline,
+                    style = MaterialTheme.typography.labelMedium
+                )
+                Box(modifier = Modifier
+                    .size(141.dp, 1.dp)
+                    .background(color = MaterialTheme.colorScheme.outline)
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(){
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(painterResource(id = R.drawable.weixin),null,tint = Color.Unspecified)
+
+                }
+                Spacer(modifier = Modifier.width(52.dp))
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(painterResource(id = R.drawable.qq),null,tint = Color.Unspecified)
+                }
+            }
+            Spacer(modifier = Modifier.height(25.dp))
+
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+
+                Text(
+                    "还没有账号？",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                TextButton(onClick = { navController.navigate(AllScreen.SignUp.route)},
+                )
+                {
+                    Text("来注册一个吧！",
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+
+        }
     }
+
+
 }
 
 @Composable

@@ -48,7 +48,7 @@ import com.example.kkneed.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SmallInfoCard() {
+fun SmallInfoCard(navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +58,7 @@ fun SmallInfoCard() {
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
         backgroundColor = Color.Transparent,
         elevation = 0.dp // 设置阴影
     ) {
@@ -2635,7 +2635,7 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
 //首页推荐食品卡片
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeFoodCard() {
+fun HomeFoodCard(navController: NavController) {
     Card(
         modifier = Modifier
             .clickable { }
@@ -2643,7 +2643,7 @@ fun HomeFoodCard() {
             .height(200.dp)
             .width(180.dp),
         elevation = 1.dp, // 设置阴影
-        onClick = {},
+        onClick = {navController.navigate(AllScreen.ShopDetail.route)},
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(
