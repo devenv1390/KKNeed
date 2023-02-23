@@ -1,6 +1,7 @@
 package com.example.kkneed.ui
 
 import android.widget.Toast
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -169,25 +172,28 @@ fun DetailBottomBar(navController: NavController, barcode: String) {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = {
-                    selected = !selected
-                }) {
-                    if (selected) {
-                        androidx.compose.material3.Icon(
+                var change by remember{ mutableStateOf(false) }
+                var flag by remember{ mutableStateOf(false) }
 
-                            painter = painterResource(id = R.drawable.star),
-                            contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.secondaryContainer
-                        )
-                    } else {
-                        androidx.compose.material3.Icon(
-                            modifier = Modifier.size(24.dp),
-                            painter = painterResource(id = R.drawable.fillstar),
-                            contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.secondaryContainer
-                        )
-                    }
+                val buttonSize by animateDpAsState(
+                    targetValue = if(change) 32.dp else 24.dp
+                )
+                if(buttonSize == 32.dp) {
+                    change = false
                 }
+                IconButton(
+                onClick = {
+                    change = true
+                    flag = !flag
+                }
+                ) {
+                androidx.compose.material3.Icon(
+                    painter = painterResource(id = R.drawable.fillstar),
+                    contentDescription = null,
+                    modifier = Modifier.size(buttonSize),
+                    tint = if (flag) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer
+                )
+            }
                 Text(
                     "1811",
                     style = MaterialTheme.typography.labelSmall,
@@ -333,8 +339,8 @@ fun ServiceBottomBar() {
             modifier = Modifier
                 .fillMaxSize()
 
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.Top,
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             BasicTextField(

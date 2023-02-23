@@ -244,6 +244,14 @@ fun ChipGroupCompose() {
                         item { ImageCommentCard() }
                         item { ImageCommentCard() }
                         item { CommentCard() }
+                        item { CommentCard() }
+                        item { CommentCard() }
+                        item { ImageCommentCard() }
+                        item { CommentCard() }
+                        item { ImageCommentCard() }
+                        item { ImageCommentCard()}
+                        item { CommentCard() }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
 
                     }
                 }
@@ -263,6 +271,7 @@ fun ChipGroupCompose() {
                         item { CommentCard() }
                         item { ImageCommentCard() }
                         item { CommentCard() }
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
@@ -279,7 +288,8 @@ fun ChipGroupCompose() {
                         item { ImageCommentCard() }
                         item { ImageCommentCard() }
                         item { ImageCommentCard() }
-                        item { ImageCommentCard() }
+                        item { ImageCommentCard()}
+                        item{Spacer(modifier = Modifier.height(16.dp))}
                     }
                 }
             }
