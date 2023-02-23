@@ -3,6 +3,7 @@ package com.example.kkneed.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kkneed.data.ScannerEvent
+import com.example.kkneed.data.ScannerUiState
 import com.example.kkneed.repository.ScanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

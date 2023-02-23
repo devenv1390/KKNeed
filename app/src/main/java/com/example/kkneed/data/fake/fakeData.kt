@@ -1,7 +1,9 @@
 package com.example.kkneed.data.fake
 
 import com.example.kkneed.R
+import com.example.kkneed.data.LevelItem
 import com.example.kkneed.model.*
+import com.example.kkneed.ui.theme.LevelA
 
 val fakeScan = Scan(
     displayValue = "123",
@@ -30,27 +32,11 @@ val fakeProduct = Product(
 
 val fakeNutrientLevels = NutrientLevels("", "", "", "")
 
-//val fakeNutrimentsOld = Nutriments(
-//    0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,
-//    "",0.0,0.0,0.0,0.0,"",0.0,
-//    0.0,0.0,0.0,0.0,0.0,"",0.0,0.0,
-//    0.0,"",0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,
-//    "",0.0,0.0,0.0,0.0,
-//    0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,"",
-//    0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,
-//    0.0,"",0.0,0.0,0.0,0.0,"",0.0,
-//    )
-//val fakeNutriments = Nutriments(
-//    0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,
-//    0.0,0.0,"",0.0,0.0,0.0,"",
-//    0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,
-//    0.0,"",0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,
-//    "",0.0,0.0,0.0,0.0,
-//    "",0.0,
-//)
 val fakeNutriments = Nutriments(
     0.0,"",0.0,"",0.0,"",0.0,"",
     0.0,"",0.0,"",0.0,0.0,0.0,
     "",0.0,"",0.0,"",0.0,"",0.0,
     "",
 )
+
+val fakeLevel = LevelItem(R.drawable.alevel,"", LevelA)

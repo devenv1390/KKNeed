@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.MaterialTheme
@@ -30,13 +31,12 @@ fun ResultScreen(
 ) {
     viewModel.barcode = code
     val product = viewModel.queryProduct(code)
-    val key = "database"
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController)
         },
         bottomBar = {
-            DetailBottomBar()
+            DetailBottomBar(navController, code)
         }
     ) {
         LazyColumn(
@@ -46,12 +46,12 @@ fun ResultScreen(
                 .background(color = MaterialTheme.colorScheme.onPrimary)
         ) {
             item {
-                    DetailList(
-                        product.productName,
-                        product.brands,
-                        product.imageUrl,
-                        product.scoreGrade,
-                    )
+                DetailList(
+                    product.productName,
+                    product.brands,
+                    product.imageUrl,
+                    product.scoreGrade,
+                )
             }
             item {
                 DetailChip(state = false, title = product.tracesTags)
@@ -61,6 +61,9 @@ fun ResultScreen(
             }
             item {
                 DetailTabBar()
+            }
+            item {
+                Spacer(modifier = Modifier.size(40.dp))
             }
         }
     }

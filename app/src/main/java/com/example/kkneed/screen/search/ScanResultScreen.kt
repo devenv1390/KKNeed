@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.MaterialTheme
@@ -36,13 +37,12 @@ fun ScanResultScreen(
     val tempProduct: Product by viewModel.nowProduct.observeAsState(fakeProduct)
     val productState = viewModel.nowProduct.observeAsState()
     val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
-    val key = "scan"
     Scaffold(
         topBar = {
             DetailAppBar(appBarHeight = 64.dp, navController = navController)
         },
         bottomBar = {
-            DetailBottomBar()
+            DetailBottomBar(navController,"6901939691601")
         }
     ) {
         productState.value?.let {
@@ -68,6 +68,9 @@ fun ScanResultScreen(
                 }
                 item {
                     DetailTabBar(product = tempProduct)
+                }
+                item{
+                    Spacer(modifier = Modifier.size(40.dp))
                 }
             }
         }

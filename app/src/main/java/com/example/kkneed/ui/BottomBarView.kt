@@ -19,7 +19,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -153,7 +152,7 @@ fun MyBottomNavigation(
 }
 
 @Composable
-fun DetailBottomBar() {
+fun DetailBottomBar(navController: NavController, barcode: String) {
     var selected by remember { mutableStateOf(false) }
     androidx.compose.material3.BottomAppBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
@@ -161,7 +160,7 @@ fun DetailBottomBar() {
         contentPadding = PaddingValues(start = 8.dp),
         actions = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { /* doSomething() */ }) {
+                IconButton(onClick = { navController.navigate(AllScreen.Detail.route) }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.editnote),
                         contentDescription = "Localized description",
@@ -175,7 +174,7 @@ fun DetailBottomBar() {
                 )
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { AllScreen.Compare.route }) {
+                IconButton(onClick = { navController.navigate(AllScreen.Compare.route + "/${barcode}") }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.compare),
                         contentDescription = "Localized description",
@@ -190,20 +189,18 @@ fun DetailBottomBar() {
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 IconButton(onClick = {
-                        selected=!selected
+                    selected = !selected
                 }) {
-                    if(selected)
-                {
-                    androidx.compose.material3.Icon(
-
-                        painter = painterResource(id = R.drawable.star),
-                        contentDescription = "Localized description",
-                        tint = MaterialTheme.colorScheme.secondaryContainer
-                    )
-                }
-                    else{
+                    if (selected) {
                         androidx.compose.material3.Icon(
-                            modifier=Modifier.size(24.dp),
+
+                            painter = painterResource(id = R.drawable.star),
+                            contentDescription = "Localized description",
+                            tint = MaterialTheme.colorScheme.secondaryContainer
+                        )
+                    } else {
+                        androidx.compose.material3.Icon(
+                            modifier = Modifier.size(24.dp),
                             painter = painterResource(id = R.drawable.fillstar),
                             contentDescription = "Localized description",
                             tint = MaterialTheme.colorScheme.secondaryContainer
@@ -289,7 +286,7 @@ fun ShopCartBottomBar(navController: NavController) {
                         .fillMaxWidth(0.4f),
                     textId = "结算",
                     onClick = {
-                           navController.navigate(AllScreen.Confirm.route)
+                        navController.navigate(AllScreen.Confirm.route)
                     },
                 )
             }
@@ -419,7 +416,7 @@ fun ShopDetailBottomBar(navController: NavController) {
         contentPadding = PaddingValues(start = 8.dp),
         actions = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { navController.navigate(AllScreen.ShoppingCart.route)  }) {
+                IconButton(onClick = { navController.navigate(AllScreen.ShoppingCart.route) }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.shoppingcart),
                         contentDescription = "Localized description",
@@ -450,7 +447,7 @@ fun ShopDetailBottomBar(navController: NavController) {
             }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                IconButton(onClick = { navController.navigate(AllScreen.Service.route)}) {
+                IconButton(onClick = { navController.navigate(AllScreen.Service.route) }) {
                     androidx.compose.material3.Icon(
                         painter = painterResource(id = R.drawable.support_agent),
                         contentDescription = "Localized description",
@@ -489,10 +486,10 @@ fun ShopDetailBottomBar(navController: NavController) {
                 ) {
                     Text(
                         text = "加入购物车",
-                        style = androidx.compose.material3.MaterialTheme.typography.labelLarge.copy(
+                        style = MaterialTheme.typography.labelLarge.copy(
                             fontWeight = FontWeight.Bold
                         ),
-                        color=androidx.compose.material3.MaterialTheme.colorScheme.onTertiary,
+                        color = MaterialTheme.colorScheme.onTertiary,
                     )
                 }
                 Spacer(modifier = Modifier.width(8.dp))
@@ -502,7 +499,7 @@ fun ShopDetailBottomBar(navController: NavController) {
                         .width(105.dp),
                     textId = "立即购买",
                     onClick = {
-                              navController.navigate(AllScreen.Confirm.route)
+                        navController.navigate(AllScreen.Confirm.route)
                     },
                 )
             }

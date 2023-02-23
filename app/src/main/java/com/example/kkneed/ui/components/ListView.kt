@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -291,7 +292,7 @@ fun ScanTopList(title: String, company: String) {
 //详情页优缺点列表
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VantageList(title: String, color: Color, navController: NavController, route: String) {
+fun VantageList(title: String, color: Color, navController: NavController) {
     ListItem(
         headlineText = {
             Text(
@@ -306,17 +307,18 @@ fun VantageList(title: String, color: Color, navController: NavController, route
                     .clip(CircleShape)
                     .background(color)
                     .size(40.dp)
-            ) {}
+            ) {
+
+            }
         },
         trailingContent = {
-            IconButton(onClick = { navController.navigate(route) }) {
+            IconButton(onClick = { navController.navigate(AllScreen.Detail.route) }) {
                 Icon(
                     Icons.Filled.KeyboardArrowRight,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp),
                 )
             }
-
         },
     )
 }

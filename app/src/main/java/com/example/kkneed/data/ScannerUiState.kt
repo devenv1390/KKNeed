@@ -1,4 +1,4 @@
-package com.example.kkneed.viewmodel
+package com.example.kkneed.data
 
 import androidx.camera.view.PreviewView
 import com.example.kkneed.model.Scan

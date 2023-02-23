@@ -40,6 +40,8 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.kkneed.R
+import com.example.kkneed.data.findLevel
+import com.example.kkneed.data.productCalculator
 import com.example.kkneed.model.Product
 import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.components.*
@@ -58,7 +60,7 @@ fun SmallInfoCard(navController: NavController) {
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
-        onClick = {navController.navigate(AllScreen.NoteDetail.route)},
+        onClick = { navController.navigate(AllScreen.NoteDetail.route) },
         backgroundColor = Color.Transparent,
         elevation = 0.dp // 设置阴影
     ) {
@@ -819,7 +821,7 @@ fun ShopScreenMainCard(navController: NavController) {
         // 将无法显示波纹效果
 
         elevation = 1.dp, // 设置阴影
-        onClick = {navController.navigate(AllScreen.ShopDetail.route)},
+        onClick = { navController.navigate(AllScreen.ShopDetail.route) },
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     )
     {
@@ -1864,6 +1866,7 @@ fun ComponentCard(viewModel: ProductViewModel = hiltViewModel()) {
         }
     }
 }
+
 @Composable
 fun ComponentCard(product: Product) {
     Card(
@@ -1940,10 +1943,18 @@ fun ComponentCard(product: Product) {
 }
 
 //产品对比卡片
+@OptIn(ExperimentalCoilApi::class)
 @Composable
-fun CompareCard(title: String) {
+fun CompareCard(
+    navController: NavController,
+    productName: String,
+    productImage: String,
+    productScore: String,
+) {
+    val matchLevel = findLevel(productScore)
     Card(
         modifier = Modifier
+            .clickable { }
             //.padding(start = 16.dp, end = 16.dp)
             .size(176.dp, 300.dp),
         backgroundColor = Color.White,
@@ -1957,7 +1968,13 @@ fun CompareCard(title: String) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(R.drawable.baishi),
+                painter = rememberImagePainter(
+                    data = productImage,
+                    builder = {
+                        placeholder(R.drawable.logo)
+                        error(R.drawable.logo)
+                    },
+                ),
                 contentDescription = "",
                 modifier = Modifier
                     .size(160.dp, 160.dp)
@@ -1972,19 +1989,18 @@ fun CompareCard(title: String) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    title,
+                    productName,
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                 )
             }
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth(), horizontalArrangement = Arrangement.Center
             )
             {
                 Image(
-                    painter = painterResource(R.drawable.alevel),
+                    painter = painterResource(matchLevel.gradeImage),
                     contentDescription = "",
                     modifier = Modifier
                         .size(94.dp, 53.dp),
@@ -1998,7 +2014,12 @@ fun CompareCard(title: String) {
 
 //营养元素对比卡片
 @Composable
-fun NutriCompareCard() {
+fun NutriCompareCard(productLeft: Product, productRight: Product) {
+    val fat = productCalculator(productLeft.nutriments.fat100g!!, productRight.nutriments.fat100g!!)
+    val sodium = productCalculator(productLeft.nutriments.sodium100g!!, productRight.nutriments.sodium100g!!)
+    val energy = productCalculator(productLeft.nutriments.energyKj100g!!, productRight.nutriments.energyKj100g!!)
+    val carbohydrates = productCalculator(productLeft.nutriments.carbohydrates100g!!, productRight.nutriments.carbohydrates100g!!)
+    val proteins = productCalculator(productLeft.nutriments.proteins100g!!, productRight.nutriments.proteins100g!!)
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -2041,11 +2062,11 @@ fun NutriCompareCard() {
             }
             BarChart(
                 data = mapOf(
-                    Pair(0.5f, 0.6f),
-                    Pair(0.6f, 0.6f),
-                    Pair(0.2f, 0.6f),
-                    Pair(0.7f, 0.6f),
-                    Pair(0.8f, 0.6f)
+                    Pair(productLeft.nutriments.energyKj100g.toFloat(), 0.3f),
+                    Pair(productLeft.nutriments.fat100g.toFloat(), 0.5f),
+                    Pair(productLeft.nutriments.carbohydrates100g.toFloat(), 0.4f),
+                    Pair(productLeft.nutriments.proteins100g.toFloat(), 0.2f),
+                    Pair(productLeft.nutriments.sodium100g.toFloat(), 0.1f)
                 )
 
             )
@@ -2056,7 +2077,7 @@ fun NutriCompareCard() {
 
 //成分表对比卡片
 @Composable
-fun ComponentCompareCard() {
+fun ComponentCompareCard(productLeft: Product, productRight: Product) {
     Card(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -2237,40 +2258,7 @@ fun HistoryCard(
     productCode: String,
     productScore: String,
 ) {
-    var gradeImage: Int = R.drawable.alevel
-    var matchText: String = "健康匹配度高"
-    var matchColor: Color = LevelA
-    when (productScore) {
-        "a" -> {
-            gradeImage = R.drawable.alevel
-            matchText = "健康匹配度高"
-            matchColor = LevelA
-        }
-
-        "b" -> {
-            gradeImage = R.drawable.blevel
-            matchText = "健康匹配度较高"
-            matchColor = LevelB
-        }
-
-        "c" -> {
-            gradeImage = R.drawable.clevel
-            matchText = "健康匹配度一般"
-            matchColor = LevelC
-        }
-
-        "d" -> {
-            gradeImage = R.drawable.dlevel
-            matchText = "健康匹配度较低"
-            matchColor = LevelD
-        }
-
-        "e" -> {
-            gradeImage = R.drawable.elevel
-            matchText = "健康匹配度低"
-            matchColor = LevelE
-        }
-    }
+    val matchLevel = findLevel(productScore)
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -2290,8 +2278,8 @@ fun HistoryCard(
                 painter = rememberImagePainter(
                     data = productImage,
                     builder = {
-                        placeholder(R.drawable.ic_launcher_foreground)
-                        error(R.drawable.ic_launcher_foreground)
+                        placeholder(R.drawable.logo)
+                        error(R.drawable.logo)
                     },
                 ),
                 contentDescription = "",
@@ -2325,18 +2313,18 @@ fun HistoryCard(
                     Box(
                         modifier = Modifier
                             .clip(CircleShape)
-                            .background(matchColor)
+                            .background(matchLevel.matchColor)
                             .size(20.dp)
                     )
                     androidx.compose.material3.Text(
-                        text = matchText,
+                        text = matchLevel.matchText,
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }
                 Spacer(Modifier.height(8.dp))
                 Image(
-                    painter = painterResource(gradeImage),
+                    painter = painterResource(matchLevel.gradeImage),
                     contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12))
@@ -2643,7 +2631,7 @@ fun HomeFoodCard(navController: NavController) {
             .height(200.dp)
             .width(180.dp),
         elevation = 1.dp, // 设置阴影
-        onClick = {navController.navigate(AllScreen.ShopDetail.route)},
+        onClick = { navController.navigate(AllScreen.ShopDetail.route) },
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
         Column(

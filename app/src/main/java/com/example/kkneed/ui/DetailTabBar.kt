@@ -22,7 +22,6 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.compose.rememberNavController
 import com.example.kkneed.data.DetailItemData
 import com.example.kkneed.model.Product
-import com.example.kkneed.navigation.AllScreen
 import com.example.kkneed.ui.theme.*
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
@@ -350,9 +349,9 @@ fun DetailTabBar() {
 fun DisadContent() {
     val navController = rememberNavController()
     val disAdItems = listOf<DetailItemData>(
-        DetailItemData(AllScreen.Detail.route, "脂肪含量偏高 10.6%", LevelE),
-        DetailItemData("", "糖含量10.6%", LevelD),
-        DetailItemData("", "中升糖指数（63）", LevelC)
+        DetailItemData("脂肪含量偏高 10.6%", LevelE),
+        DetailItemData("糖含量10.6%", LevelD),
+        DetailItemData("中升糖指数（63）", LevelC)
     )
     Spacer(modifier = Modifier.height(12.dp))
     Text(
@@ -362,9 +361,8 @@ fun DisadContent() {
         color = MaterialTheme.colorScheme.onBackground
     )
     disAdItems.forEachIndexed { index, item ->
-        VantageList(item.title, item.color, navController, item.route)
+        VantageList(item.title, item.color, navController)
     }
-
     VantageList2("查看剩余3缺点")
 }
 
@@ -373,9 +371,9 @@ fun DisadContent() {
 fun AdContent() {
     val navController = rememberNavController()
     val DisadItems = listOf<DetailItemData>(
-        DetailItemData("", "不含脂肪或饱和脂肪", LevelA),
-        DetailItemData("", "不含钠", LevelA),
-        DetailItemData("", "2种添加剂", LevelB)
+        DetailItemData("不含脂肪或饱和脂肪", LevelA),
+        DetailItemData( "不含钠", LevelA),
+        DetailItemData("2种添加剂", LevelB)
     )
     Spacer(modifier = Modifier.height(12.dp))
     Text(
@@ -385,7 +383,7 @@ fun AdContent() {
         color = MaterialTheme.colorScheme.onBackground
     )
     DisadItems.forEachIndexed { index, item ->
-        VantageList(item.title, item.color, navController, item.route)
+        VantageList(item.title, item.color, navController)
     }
     VantageList2("查看剩余2优点")
 }

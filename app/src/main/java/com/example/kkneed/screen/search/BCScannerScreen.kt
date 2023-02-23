@@ -38,7 +38,7 @@ import com.example.kkneed.ui.theme.Black200
 import com.example.kkneed.ui.theme.Black700
 import com.example.kkneed.ui.theme.BottomSheetShape
 import com.example.kkneed.viewmodel.ProductViewModel
-import com.example.kkneed.viewmodel.ScannerUiState
+import com.example.kkneed.data.ScannerUiState
 import com.example.kkneed.viewmodel.ScannerViewModel
 import kotlinx.coroutines.launch
 

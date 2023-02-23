@@ -14,7 +14,7 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Scanner.route) {
             BCScannerScreen(navController)
         }
-        composable(AllScreen.ScanResult.route,) {
+        composable(AllScreen.ScanResult.route) {
             ScanResultScreen(navController)
         }
         composable(AllScreen.Comment.route) {
@@ -23,8 +23,17 @@ fun NavGraphBuilder.SearchNavGraph(navController: NavController) {
         composable(AllScreen.Detail.route) {
             DetailScreen(navController)
         }
-        composable(AllScreen.Compare.route) {
-            CompareScreen(navController)
+        composable(
+            AllScreen.Compare.route+"/{code}",
+            arguments = listOf(
+                navArgument("code"){
+                    type = NavType.StringType
+                    defaultValue = ""
+                }
+            )
+        ) {
+            val code = it.arguments?.getString("code") ?:""
+            CompareScreen(navController,code)
         }
         composable(AllScreen.ScanHistory.route) {
             ScanHistoryScreen(navController)
