@@ -1,6 +1,7 @@
 package com.example.kkneed.screen.home
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,9 +15,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +35,10 @@ import com.example.kkneed.ui.theme.KKNeedTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun EditNoteScreen(navController: NavController) {
+    val context = LocalContext.current
+    val scope= rememberCoroutineScope()
     Scaffold(
+
         backgroundColor = MaterialTheme.colorScheme.background,
         topBar = {
             MostUseTopAppBar(
@@ -52,11 +58,17 @@ fun EditNoteScreen(navController: NavController) {
                     .height(40.dp)
                     .fillMaxWidth(0.8f),
                     textId = "发布", onClick = {
+                        Toast.makeText(
+                            context,
+                            "帖子发布成功！",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 )
             }
         }
     ) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()

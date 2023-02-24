@@ -37,6 +37,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
@@ -2282,7 +2283,7 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.head),
+                        painter = painterResource(R.drawable.profile),
                         contentDescription = "",
                         modifier = Modifier
                             .clip(CircleShape)
@@ -2292,6 +2293,7 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                     )
                     androidx.compose.material3.Text(
                         "康康Need小顾问",
+                        modifier=Modifier.padding(start = 4.dp),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
@@ -2304,9 +2306,10 @@ fun HomeCommunityCard(@StringRes imageId: Int, title: String, description: Strin
                     horizontalArrangement = Arrangement.End,
                 )
                 {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {navController.navigate(AllScreen.NoteDetail.route) }) {
                         androidx.compose.material3.Icon(
                             painter = painterResource(id = R.drawable.tabs),
+                            modifier = Modifier.size(24.dp),
                             contentDescription = "Localized description",
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
                         )
@@ -2406,11 +2409,26 @@ fun HomeFoodCard(navController: NavController) {
                         contentScale = ContentScale.Fit,
                         alignment = Alignment.TopCenter,
                     )
-                    IconButton(onClick = { }) {
+                    var change by remember{ mutableStateOf(false) }
+                    var flag by remember{ mutableStateOf(false) }
+
+                    val buttonSize by animateDpAsState(
+                        targetValue = if(change) 32.dp else 24.dp
+                    )
+                    if(buttonSize == 32.dp) {
+                        change = false
+                    }
+                    IconButton(
+                        onClick = {
+                            change = true
+                            flag = !flag
+                        }
+                    ) {
                         androidx.compose.material3.Icon(
-                            painter = painterResource(id = R.drawable.heart),
-                            contentDescription = "Localized description",
-                            tint = MaterialTheme.colorScheme.outline
+                            Icons.Rounded.Favorite,
+                            contentDescription = null,
+                            modifier = Modifier.size(buttonSize),
+                            tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
                         )
                     }
                 }
@@ -2512,7 +2530,7 @@ fun CommunityCard(navController: NavController) {
             .padding(horizontal = 0.dp, vertical = 4.dp) // 外边距
             .clip(RoundedCornerShape(12.dp))
             .height(210.dp)
-            .width(170.dp),
+            .width(174.dp),
 
         // 设置点击波纹效果，注意如果 CardDemo() 函数不在 MaterialTheme 下调用
         // 将无法显示波纹效果
@@ -2521,81 +2539,81 @@ fun CommunityCard(navController: NavController) {
         onClick = { navController.navigate(AllScreen.NoteDetail.route) },
         backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Column(
+        Column(modifier=Modifier.fillMaxSize()){
+            Box(modifier = Modifier.height(138.dp)) {
+                var change by remember{ mutableStateOf(false) }
+                var flag by remember{ mutableStateOf(false) }
+
+                val buttonSize by animateDpAsState(
+                    targetValue = if(change) 32.dp else 24.dp
+                )
+                if(buttonSize == 32.dp) {
+                    change = false
+                }
+                IconButton(
+                    modifier=Modifier.zIndex(3f)
+                        .align(Alignment.TopEnd),
+                    onClick = {
+                        change = true
+                        flag = !flag
+                    }
+                ) {
+                    androidx.compose.material3.Icon(
+                        Icons.Rounded.Favorite,
+                        contentDescription = null,
+                        modifier = Modifier.size(buttonSize),
+                        tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
+                    )
+                }
+                Image(
+                    painter = painterResource(R.drawable.tiezi),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12))
+                        .height(130.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.TopCenter,
+                )
+
+            }
+            androidx.compose.material3.Text(
+                "健康食品知多少",
+                modifier = Modifier
+                    .padding(start = 8.dp),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
+                    .height(24.dp)
+                    .padding(start = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Box(modifier = Modifier.height(175.dp)) {
-                    var change by remember { mutableStateOf(false) }
-                    var flag by remember { mutableStateOf(false) }
-
-                    val buttonSize by animateDpAsState(
-                        targetValue = if (change) 32.dp else 24.dp
-                    )
-                    if (buttonSize == 32.dp) {
-                        change = false
-                    }
-                    IconButton(
-                        onClick = {
-                            change = true
-                            flag = !flag
-                        }
-                    ) {
-                        androidx.compose.material3.Icon(
-                            Icons.Rounded.Favorite,
-                            contentDescription = null,
-                            modifier = Modifier.size(buttonSize),
-                            tint = if (flag) Color.Red else MaterialTheme.colorScheme.outline
-                        )
-                    }
-                    Image(
-                        painter = painterResource(R.drawable.tiezi),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(12))
-                            .height(130.dp)
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Fit,
-                        alignment = Alignment.TopCenter,
-                    )
-
-                }
-                androidx.compose.material3.Text(
-                    "健康食品知多少",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp),
+                        .width(126.dp)
+                        .height(24.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Row(
+                    Image(
+                        painter = painterResource(R.drawable.profile),
+                        contentDescription = "",
                         modifier = Modifier
-                            .width(126.dp)
-                            .height(24.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.profile),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .size(24.dp),
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopCenter,
-                        )
-                        androidx.compose.material3.Text(
-                            "康康Need小顾问",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.outline,
-                        )
-                    }
+                            .clip(CircleShape)
+                            .size(24.dp),
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.TopCenter,
+                    )
+                    androidx.compose.material3.Text(
+                        "康康Need小顾问",
+                        modifier=Modifier.padding(start = 4.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
                 }
             }
         }
