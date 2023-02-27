@@ -6,20 +6,25 @@ import com.example.kkneed.model.Product
 import com.example.kkneed.model.ProductDao
 import javax.inject.Inject
 
-interface ProductRepository {
+interface ProductRepository {//对外的操作接口
+    //获取商品信息，并存入本地数据库
     suspend fun getNewProduct(barcode: String): Product
+    //从本地数据库删除商品
     suspend fun deleteProduct(toDelete: Product)
+    //获取本地数据库的所有商品
     fun getAllProduct(): LiveData<List<Product>>
-    fun getOneAllProduct(): LiveData<Product>
+    //获取本地数据库最新的一个商品
+    fun getOneProduct(): LiveData<Product>
+    //按barcode查询本地数据库
     fun queryProductCode(barcode: String): Product
+    //按营养分数评级查询本地数据库
     fun queryProductScore(score: String): List<Product>
 }
 
 class ProductRepositoryImp @Inject constructor(
     private val dataSource: OFFDataSource,
     private val productDao: ProductDao
-) : ProductRepository {
-
+) : ProductRepository {//内部操作类
     override suspend fun getNewProduct(barcode: String): Product {
         val code = dataSource.getProduct(barcode).code
         val name = dataSource.getProduct(barcode).product.productName
@@ -33,17 +38,9 @@ class ProductRepositoryImp @Inject constructor(
         val tracesTags = dataSource.getProduct(barcode).product.tracesTags
         val categories = dataSource.getProduct(barcode).product.categories
         val product = Product(
-            code = code,
-            productName = name,
-            imageUrl = picture,
-            brands = brands,
-            scoreGrade = score,
-            ingredients = ingredient,
-            keywords = keywords,
-            nutrientLevels = nutrientLevels,
-            nutriments = nutriments,
-            tracesTags = tracesTags,
-            categories = categories
+            code = code, productName = name, imageUrl = picture, brands = brands, scoreGrade = score,
+            ingredients = ingredient, keywords = keywords, nutrientLevels = nutrientLevels,
+            nutriments = nutriments, tracesTags = tracesTags, categories = categories
         )
         productDao.insert(product)
         return product
@@ -51,11 +48,10 @@ class ProductRepositoryImp @Inject constructor(
 
     override suspend fun deleteProduct(toDelete: Product) = productDao.delete(toDelete)
     override fun getAllProduct(): LiveData<List<Product>> = productDao.getAll()
-    override fun getOneAllProduct(): LiveData<Product> = productDao.getLastOne()
+    override fun getOneProduct(): LiveData<Product> = productDao.getLastOne()
     override fun queryProductCode(barcode: String): Product {
         return productDao.queryProductCode(barcode)
     }
-
     override fun queryProductScore(score: String): List<Product> {
         return productDao.queryProductScore(score)
     }

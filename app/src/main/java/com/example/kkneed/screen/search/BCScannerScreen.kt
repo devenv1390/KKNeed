@@ -165,11 +165,7 @@ private fun ScannerScreen(
                         }
                         if (flag) {
                             if (it.scanFormatId == R.string.scan_format_ean_13) {
-                                try {
-                                    navController.navigate(AllScreen.SCLoading.route + "/${it.displayValue}")
-                                } catch (e: Exception) {
-                                    Toast.makeText(context, "不存在此商品", Toast.LENGTH_SHORT).show()
-                                }
+                                navController.navigate(AllScreen.SCLoading.route + "/${it.displayValue}")
                             } else {
                                 clipboardManager.setText(AnnotatedString(it.displayValue))
                                 Toast.makeText(context, context.getText(R.string.scan_value_next_step), Toast.LENGTH_SHORT)

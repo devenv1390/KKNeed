@@ -24,9 +24,6 @@ class ProductViewModel @Inject constructor(
         productRepo.getAllProduct()
     }
 
-    val nowProduct: LiveData<Product> by lazy {
-        productRepo.getOneAllProduct()
-    }
     val isLoading: LiveData<Boolean> get() = _isLoading
     var barcode: String = ""
 

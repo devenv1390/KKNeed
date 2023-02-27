@@ -8,7 +8,7 @@ data class Scan(
     val scanType: ScanType
 )
 
-enum class ScanType {
+enum class ScanType {//不是TEXT类型就是URL类型
     Text,
     Url
 }

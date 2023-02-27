@@ -1,4 +1,4 @@
-package com.example.kkneed.datasource
+package com.example.kkneed.di
 
 import com.example.kkneed.data.ScanLDS
 import com.example.kkneed.repository.ScanLocalDataSource
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataSourceModule {
+abstract class ScanDataSourceModule {
 
     @Binds
     @Singleton

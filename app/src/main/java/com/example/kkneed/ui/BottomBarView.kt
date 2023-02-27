@@ -13,7 +13,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,13 +26,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.kkneed.R
+import com.example.kkneed.data.BottomItemScreen
 import com.example.kkneed.navigation.AllScreen
-import com.example.kkneed.navigation.BottomItemScreen
 import com.example.kkneed.ui.theme.KKNeedTheme
 import com.example.kkneed.ui.theme.md_theme_light_tertiaryContainer
 
