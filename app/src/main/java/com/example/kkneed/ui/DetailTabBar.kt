@@ -59,7 +59,7 @@ fun DetailTabBar(product: Product, navController: NavController) {
             item.color = LevelA
             item.title = item.title + "含量低"
             if (item.value == "moderate") {
-                item.color = LevelB
+                item.color = LevelC
                 item.title = item.title + "含量适中"
             }
             ingredientAnalyser(item, advantageList)

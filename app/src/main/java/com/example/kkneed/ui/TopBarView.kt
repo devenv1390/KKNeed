@@ -210,7 +210,7 @@ fun OrderProfileTopAppBar(appBarHeight: Dp, navController: NavController) {
             BackButton(navController)
             SearchBar()
             IconButton(
-                onClick = {}
+                onClick = {navController.navigate(AllScreen.Service.route)}
             ) {
                 Icon(painter = painterResource(id = R.drawable.service), null)
             }

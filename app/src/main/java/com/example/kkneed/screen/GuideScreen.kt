@@ -82,7 +82,7 @@ fun GuideScreen(navController: NavController) {
         ) {
             FloatingActionButton(
                 onClick = {
-                          navController.navigate(AllScreen.SignUp.route)
+                          navController.navigate(AllScreen.SignInfo.route)
                 },
                 backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
                 modifier = Modifier.size(width.value)

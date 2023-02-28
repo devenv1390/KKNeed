@@ -25,8 +25,15 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "arm64-v8a", "x86_64",'mips', 'mips64'
 
-
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "23416d2b9291e5ad8e22a4c5", //极光开发平台上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -59,6 +66,7 @@ android {
     }
 }
 dependencies {
+    implementation project(':jiguang')
     //viewpage
     implementation "com.google.accompanist:accompanist-pager:0.28.0"
     //viewpage指示器

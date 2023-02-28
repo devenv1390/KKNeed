@@ -14,3 +14,4 @@ pluginManagement {
 //}
 rootProject.name = "KKNeed"
 include ':app'
+include ':jiguang'
