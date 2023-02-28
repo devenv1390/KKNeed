@@ -1,19 +1,11 @@
 package com.example.kkneed.screen
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -25,14 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.kkneed.R
-import com.example.kkneed.datastore.StoreUserLogin
 import com.example.kkneed.navigation.AllScreen
-import com.example.kkneed.ui.MyTopAppBar
 import com.example.kkneed.ui.MyTopAppBar2
 import com.example.kkneed.ui.theme.KKNeedTheme
-import com.example.kkneed.validation.event.RegistrationFormEvent
 import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -45,20 +33,17 @@ fun WelcomeScreen(navController: NavController) {
             durationMillis = 3000
         )
     )
-
     LaunchedEffect(key1 = true) {
         startAnimation = true
         delay(4000)
         navController.popBackStack()
-        navController.navigate(AllScreen.SignUp.route)
+        navController.navigate(AllScreen.Guide.route)
     }
     Splash(alpha = alphaAnim.value)
 }
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Splash(alpha: Float) {
-
-
     Scaffold(backgroundColor = MaterialTheme.colorScheme.onPrimary,
         topBar = {
             MyTopAppBar2{}
@@ -85,7 +70,6 @@ fun Splash(alpha: Float) {
                 .padding(top = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center){
-
                 androidx.compose.material3.Text(
                     "KKNeed",
                     color = MaterialTheme.colorScheme.primary,
