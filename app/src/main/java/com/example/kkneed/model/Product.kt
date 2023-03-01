@@ -24,17 +24,8 @@ data class Product(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
 ) {
     constructor() : this(
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        emptyList(),
-        emptyList(),
-        emptyList(),
-        fakeNutrientLevels,
-        fakeNutriments
+        "", "", "", "", "", "",
+        emptyList(), emptyList(), emptyList(), fakeNutrientLevels, fakeNutriments
     )
 }
 

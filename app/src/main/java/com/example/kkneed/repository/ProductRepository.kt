@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import com.example.kkneed.datasource.OFFDataSource
 import com.example.kkneed.model.Product
 import com.example.kkneed.model.ProductDao
+import com.example.kkneed.model.hasProduct
 import javax.inject.Inject
 
 interface ProductRepository {//对外的操作接口
     //获取商品信息，并存入本地数据库
     suspend fun getNewProduct(barcode: String): Product
+    //检查是否存在该商品
+    suspend fun hasProduct(barcode: String):hasProduct
     //从本地数据库删除商品
     suspend fun deleteProduct(toDelete: Product)
     //获取本地数据库的所有商品
@@ -44,6 +47,13 @@ class ProductRepositoryImp @Inject constructor(
         )
         productDao.insert(product)
         return product
+    }
+
+    override suspend fun hasProduct(barcode: String): hasProduct {
+        val status = dataSource.hasProduct(barcode).status
+        val statusVerbose = dataSource.hasProduct(barcode).statusVerbose
+        val productStatus = hasProduct(status, statusVerbose)
+        return productStatus
     }
 
     override suspend fun deleteProduct(toDelete: Product) = productDao.delete(toDelete)
